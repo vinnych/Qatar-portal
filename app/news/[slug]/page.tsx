@@ -50,11 +50,12 @@ export default async function NewsArticlePage({
 }) {
   const item = await getNewsItem(params.slug);
   if (!item) {
-    // Not in Redis or live feed — redirect to original source URL encoded in slug
+    let link: string | null = null;
     try {
-      const link = Buffer.from(params.slug, "base64url").toString();
-      if (isValidHttpUrl(link)) redirect(link);
+      const decoded = Buffer.from(params.slug, "base64url").toString();
+      if (isValidHttpUrl(decoded)) link = decoded;
     } catch { /* invalid slug */ }
+    if (link) redirect(link);
     notFound();
   }
 

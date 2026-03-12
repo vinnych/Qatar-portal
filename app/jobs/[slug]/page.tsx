@@ -50,10 +50,12 @@ export default async function JobDetailPage({
 }) {
   const job = await getJobItem(params.slug);
   if (!job) {
+    let link: string | null = null;
     try {
-      const link = Buffer.from(params.slug, "base64url").toString();
-      if (isValidHttpUrl(link)) redirect(link);
+      const decoded = Buffer.from(params.slug, "base64url").toString();
+      if (isValidHttpUrl(decoded)) link = decoded;
     } catch { /* invalid slug */ }
+    if (link) redirect(link);
     notFound();
   }
 
