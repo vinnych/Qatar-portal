@@ -3,6 +3,7 @@ import { Playfair_Display } from "next/font/google";
 import Script from "next/script";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import FooterScenery from "@/components/FooterScenery";
+import MobileNav from "@/components/MobileNav";
 import { safeJsonLd } from "@/lib/utils";
 import "./globals.css";
 
@@ -30,18 +31,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className="bg-stone-50 text-gray-900 min-h-screen">
         <header className="bg-rose-900 sticky top-0 z-10 shadow-md">
-          <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+          <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between relative">
             <a href="/" className={`${playfair.className} text-2xl tracking-widest text-amber-300 uppercase`}>
               Qatar
             </a>
-            <nav className="flex gap-6 text-sm font-medium">
+            {/* Desktop nav */}
+            <nav className="hidden sm:flex gap-5 text-sm font-medium">
               <a href="/" className="text-white hover:text-amber-300 transition-colors">Home</a>
               <a href="/prayer" className="text-white hover:text-amber-300 transition-colors">Prayer</a>
+              <a href="/weather" className="text-white hover:text-amber-300 transition-colors">Weather</a>
+              <a href="/currency" className="text-white hover:text-amber-300 transition-colors">Currency</a>
               <a href="/news" className="text-white hover:text-amber-300 transition-colors">News</a>
               <a href="/jobs" className="text-white hover:text-amber-300 transition-colors">Jobs</a>
-              <a href="/weather" className="text-white hover:text-amber-300 transition-colors hidden sm:inline">Weather</a>
-              <a href="/currency" className="text-white hover:text-amber-300 transition-colors hidden sm:inline">Currency</a>
             </nav>
+            {/* Mobile hamburger */}
+            <MobileNav />
           </div>
         </header>
         <script

@@ -33,15 +33,21 @@ export default async function WeatherWidget() {
       </div>
 
       {/* Stats row */}
-      <div className="flex gap-3 flex-wrap">
-        <span className="inline-flex items-center gap-1 bg-white/70 border border-amber-100 rounded-full px-3 py-1 text-xs text-gray-600">
-          <span>🌡️</span> Feels {weather.feelsLike}°C
+      <div className="grid grid-cols-3 gap-2">
+        <span className="flex flex-col items-center bg-white/70 border border-amber-100 rounded-xl px-2 py-2 text-xs text-gray-600 text-center">
+          <span className="text-base mb-0.5">🌡️</span>
+          <span className="font-semibold text-gray-800">{weather.feelsLike}°C</span>
+          <span className="text-gray-400">Feels like</span>
         </span>
-        <span className="inline-flex items-center gap-1 bg-white/70 border border-amber-100 rounded-full px-3 py-1 text-xs text-gray-600">
-          <span>💧</span> {weather.humidity}%
+        <span className="flex flex-col items-center bg-white/70 border border-amber-100 rounded-xl px-2 py-2 text-xs text-gray-600 text-center">
+          <span className="text-base mb-0.5">💧</span>
+          <span className="font-semibold text-gray-800">{weather.humidity}%</span>
+          <span className="text-gray-400">Humidity</span>
         </span>
-        <span className="inline-flex items-center gap-1 bg-white/70 border border-amber-100 rounded-full px-3 py-1 text-xs text-gray-600">
-          <span>💨</span> {weather.windSpeed} km/h
+        <span className="flex flex-col items-center bg-white/70 border border-amber-100 rounded-xl px-2 py-2 text-xs text-gray-600 text-center">
+          <span className="text-base mb-0.5">💨</span>
+          <span className="font-semibold text-gray-800">{weather.windSpeed}</span>
+          <span className="text-gray-400">km/h wind</span>
         </span>
       </div>
     </div>

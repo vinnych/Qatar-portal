@@ -98,18 +98,18 @@ export default async function WeatherPage() {
                 <div className="text-lg text-gray-600 mt-2">{weather.current.condition}</div>
               </div>
             </div>
-            <div className="grid grid-cols-3 gap-3">
-              <div className="bg-white/70 border border-amber-100 rounded-xl p-3 text-center">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
+              <div className="bg-white/70 border border-amber-100 rounded-xl p-2 sm:p-3 text-center">
                 <p className="text-xs text-gray-500 mb-1">Feels Like</p>
-                <p className="text-lg font-bold text-gray-900">{weather.current.feelsLike}°C</p>
+                <p className="text-base sm:text-lg font-bold text-gray-900">{weather.current.feelsLike}°C</p>
               </div>
-              <div className="bg-white/70 border border-amber-100 rounded-xl p-3 text-center">
+              <div className="bg-white/70 border border-amber-100 rounded-xl p-2 sm:p-3 text-center">
                 <p className="text-xs text-gray-500 mb-1">Humidity</p>
-                <p className="text-lg font-bold text-gray-900">{weather.current.humidity}%</p>
+                <p className="text-base sm:text-lg font-bold text-gray-900">{weather.current.humidity}%</p>
               </div>
-              <div className="bg-white/70 border border-amber-100 rounded-xl p-3 text-center">
+              <div className="bg-white/70 border border-amber-100 rounded-xl p-2 sm:p-3 text-center">
                 <p className="text-xs text-gray-500 mb-1">Wind</p>
-                <p className="text-lg font-bold text-gray-900">{weather.current.windSpeed} <span className="text-sm font-normal">km/h</span></p>
+                <p className="text-base sm:text-lg font-bold text-gray-900">{weather.current.windSpeed} <span className="text-xs sm:text-sm font-normal">km/h</span></p>
               </div>
             </div>
           </div>
@@ -117,8 +117,8 @@ export default async function WeatherPage() {
           {/* 7-day forecast */}
           <section>
             <h2 className="text-xl font-bold text-gray-900 mb-4">7-Day Forecast — Doha, Qatar</h2>
-            <div className="rounded-2xl border border-stone-200 overflow-hidden">
-              <table className="w-full text-sm">
+            <div className="rounded-2xl border border-stone-200 overflow-x-auto">
+              <table className="w-full text-sm min-w-[340px]">
                 <thead>
                   <tr className="bg-amber-700 text-white">
                     <th className="px-4 py-3 text-left font-semibold">Day</th>
