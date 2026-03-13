@@ -89,13 +89,13 @@ export default async function WeatherPage() {
           {/* Current weather card */}
           <div className="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-100 rounded-2xl p-6">
             <p className="text-xs font-semibold text-amber-700 uppercase tracking-wide mb-4">Current Conditions</p>
-            <div className="flex items-center gap-6 mb-6">
-              <span className="text-7xl">{weather.current.icon}</span>
+            <div className="flex items-center gap-4 sm:gap-6 mb-6">
+              <span className="text-5xl sm:text-7xl">{weather.current.icon}</span>
               <div>
-                <div className="text-6xl font-bold text-gray-900 leading-none">
+                <div className="text-4xl sm:text-6xl font-bold text-gray-900 leading-none">
                   {weather.current.temperature}°C
                 </div>
-                <div className="text-lg text-gray-600 mt-2">{weather.current.condition}</div>
+                <div className="text-base sm:text-lg text-gray-600 mt-2">{weather.current.condition}</div>
               </div>
             </div>
             <div className="grid grid-cols-3 gap-2 sm:gap-3">

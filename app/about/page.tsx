@@ -106,8 +106,8 @@ export default function AboutPage() {
         <p className="text-sm text-gray-500 mb-4">
           We use reputable, publicly available data sources. We do not manufacture or editorialize data.
         </p>
-        <div className="rounded-xl border border-stone-200 overflow-hidden">
-          <table className="w-full text-sm">
+        <div className="rounded-xl border border-stone-200 overflow-x-auto">
+          <table className="w-full text-sm min-w-[360px]">
             <thead>
               <tr className="bg-stone-100 text-gray-700">
                 <th className="px-4 py-3 text-left font-semibold">Feature</th>

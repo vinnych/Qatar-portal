@@ -28,7 +28,7 @@ export default async function Home() {
   } catch { /* ignore */ }
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-6 sm:space-y-10">
       {prayerJsonLd && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html: safeJsonLd(prayerJsonLd)}} />
       )}
@@ -62,7 +62,7 @@ export default async function Home() {
       </div>
 
       {/* News + Jobs side by side on large screens */}
-      <div className="grid lg:grid-cols-3 gap-8">
+      <div className="grid lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
         {/* News — takes 2/3 */}
         <section className="lg:col-span-2">
           <div className="flex items-center justify-between mb-4">

@@ -40,21 +40,30 @@ export default function NewsSearch({ items }: { items: NewsItem[] }) {
       {filtered.length === 0 ? (
         <p className="text-gray-400 text-sm text-center py-8">No articles found for &ldquo;{query}&rdquo;</p>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((item) => (
             <a
               key={item.link}
               href={`/news/${item.slug}`}
-              className="bg-sky-50 rounded-xl border border-sky-100 shadow-sm p-4 hover:shadow-md hover:border-sky-300 transition-all flex flex-col"
+              className="bg-sky-50 rounded-xl border border-sky-100 shadow-sm hover:shadow-md hover:border-sky-300 transition-all flex flex-col overflow-hidden"
             >
-              <span className="text-xs text-sky-700 font-semibold mb-2">{item.source}</span>
-              <h3 className="text-sm font-semibold text-gray-800 leading-snug mb-2 line-clamp-3">
-                {item.title}
-              </h3>
-              {item.contentSnippet && (
-                <p className="text-xs text-gray-500 line-clamp-2 mt-auto">{item.contentSnippet}</p>
+              {item.imageUrl ? (
+                <img src={item.imageUrl} alt={item.title} className="w-full h-36 object-cover" loading="lazy" />
+              ) : (
+                <div className="w-full h-36 bg-gradient-to-br from-sky-100 to-sky-200 flex items-center justify-center">
+                  <span className="text-4xl opacity-40">📰</span>
+                </div>
               )}
-              <span className="text-xs text-gray-400 mt-2">{item.pubDate}</span>
+              <div className="p-3 sm:p-4 flex flex-col flex-1">
+                <span className="text-xs text-sky-700 font-semibold mb-2">{item.source}</span>
+                <h3 className="text-sm font-semibold text-gray-800 leading-snug mb-2 line-clamp-3">
+                  {item.title}
+                </h3>
+                {item.contentSnippet && (
+                  <p className="text-xs text-gray-500 line-clamp-2 mt-auto">{item.contentSnippet}</p>
+                )}
+                <span className="text-xs text-gray-400 mt-2">{item.pubDate}</span>
+              </div>
             </a>
           ))}
         </div>

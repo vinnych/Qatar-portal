@@ -110,7 +110,7 @@ export default function PrayerSelector({
 
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-violet-900 mb-1">
+        <h1 className="text-2xl sm:text-3xl font-bold text-violet-900 mb-1">
           Prayer Times — {CITIES[selected].label}
         </h1>
         <p className="text-gray-500 text-sm">
