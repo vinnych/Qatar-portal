@@ -17,41 +17,50 @@ const FEEDS = [
   { url: "https://feeds.bbci.co.uk/news/world/middle_east/rss.xml", source: "BBC Middle East" },
 ];
 
-/** Fetch OG image from an article URL with a short timeout. Cached in Redis. */
-async function fetchOgImage(slug: string, articleUrl: string): Promise<string | undefined> {
-  // Check Redis cache first
+/** Fetch a relevant image from Pexels based on article title keywords. Cached in Redis. */
+async function fetchPexelsImage(slug: string, title: string): Promise<string | undefined> {
   if (redis) {
     try {
       const cached = await redis.get<string>(`news:ogimage:${slug}`);
-      if (cached) return cached;
+      if (cached !== null) return cached || undefined;
     } catch { /* fall through */ }
   }
 
+  const apiKey = process.env.PEXELS_API_KEY;
+  if (!apiKey) return undefined;
+
+  // Extract 2-3 keywords from title (strip common stop words)
+  const stopWords = new Set(["the","a","an","in","on","at","to","for","of","and","or","is","are","was","were","has","have","that","this","with","by","from","as","its","it","be","been","will","but","not","who","what","how","when","where","why"]);
+  const keywords = title
+    .toLowerCase()
+    .replace(/[^a-z0-9 ]/g, " ")
+    .split(/\s+/)
+    .filter((w) => w.length > 3 && !stopWords.has(w))
+    .slice(0, 3)
+    .join(" ");
+
+  if (!keywords) return undefined;
+
   try {
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 2000);
-    const res = await fetch(articleUrl, {
-      signal: controller.signal,
-      headers: { "User-Agent": "Mozilla/5.0 (compatible; Qatar-Portal/1.0)" },
-    });
+    const timer = setTimeout(() => controller.abort(), 3000);
+    const res = await fetch(
+      `https://api.pexels.com/v1/search?query=${encodeURIComponent(keywords)}&per_page=1&orientation=landscape`,
+      { signal: controller.signal, headers: { Authorization: apiKey } }
+    );
     clearTimeout(timer);
     if (!res.ok) return undefined;
 
-    const html = await res.text();
-    const ogImage =
-      html.match(/<meta[^>]+property="og:image"[^>]+content="([^"]+)"/)?.[1] ||
-      html.match(/<meta[^>]+content="([^"]+)"[^>]+property="og:image"/)?.[1];
+    const data = await res.json();
+    const imageUrl: string | undefined = data?.photos?.[0]?.src?.large;
 
-    const imageUrl = ogImage && isValidHttpUrl(ogImage) ? ogImage : undefined;
-
-    // Cache result (even undefined stored as empty string to avoid re-fetching)
     if (redis) {
       try {
         await redis.set(`news:ogimage:${slug}`, imageUrl ?? "", { ex: KV_TTL });
       } catch { /* ignore */ }
     }
 
-    return imageUrl;
+    return imageUrl && isValidHttpUrl(imageUrl) ? imageUrl : undefined;
   } catch {
     return undefined;
   }
@@ -109,13 +118,13 @@ export async function getNews(limit = 12): Promise<NewsItem[]> {
 
   const items: NewsItem[] = results.flatMap((r) => (r.status === "fulfilled" ? r.value : []));
 
-  // For items without images, fetch OG images in parallel (fire-and-forget)
+  // For items without images, fetch from Pexels in parallel (fire-and-forget)
   const itemsWithoutImage = items.filter((item) => !item.imageUrl);
   if (itemsWithoutImage.length > 0) {
     Promise.allSettled(
       itemsWithoutImage.map(async (item) => {
-        const ogImage = await fetchOgImage(item.slug, item.link);
-        if (ogImage) item.imageUrl = ogImage;
+        const img = await fetchPexelsImage(item.slug, item.title);
+        if (img) item.imageUrl = img;
       })
     ).catch(() => {});
   }
