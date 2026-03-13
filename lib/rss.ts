@@ -118,15 +118,15 @@ export async function getNews(limit = 12): Promise<NewsItem[]> {
 
   const items: NewsItem[] = results.flatMap((r) => (r.status === "fulfilled" ? r.value : []));
 
-  // For items without images, fetch from Pexels in parallel (fire-and-forget)
+  // For items without images, fetch from Pexels (awaited so images are included in response)
   const itemsWithoutImage = items.filter((item) => !item.imageUrl);
   if (itemsWithoutImage.length > 0) {
-    Promise.allSettled(
+    await Promise.allSettled(
       itemsWithoutImage.map(async (item) => {
         const img = await fetchPexelsImage(item.slug, item.title);
         if (img) item.imageUrl = img;
       })
-    ).catch(() => {});
+    );
   }
 
   // Persist to Redis (fire-and-forget, 7-day TTL)
