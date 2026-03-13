@@ -11,7 +11,7 @@ const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://qatar-portal.vercel.app"),
-  verification: { google: "dYRAzobaM59AcbgTxvgLXByM9amWhaRmqN7blVUFnio" },
+  verification: { google: "fg-taPtjNWtu89uOmajC0OB3XxlZapUPAIItSnSnBQo" },
   title: "Qatar Portal — Prayer Times, Jobs & News",
   description:
     "Your daily Qatar resource: accurate prayer times for Doha, latest job listings in Qatar, and top Gulf news headlines.",
