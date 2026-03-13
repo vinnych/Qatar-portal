@@ -8,6 +8,7 @@ export interface NewsItem {
   pubDate: string;
   contentSnippet?: string;
   source: string;
+  imageUrl?: string;
 }
 
 const FEEDS = [
@@ -38,6 +39,13 @@ export async function getNews(limit = 12): Promise<NewsItem[]> {
           const pubDate = block.match(/<pubDate>(.*?)<\/pubDate>/)?.[1] || "";
           const snippet = block.match(/<description><!\[CDATA\[(.*?)\]\]><\/description>/)?.[1] ||
             block.match(/<description>(.*?)<\/description>/)?.[1] || "";
+          const rawImage =
+            block.match(/<media:content[^>]+url="([^"]+)"/)?.[1] ||
+            block.match(/<media:thumbnail[^>]+url="([^"]+)"/)?.[1] ||
+            block.match(/<enclosure[^>]+url="([^"]+)"[^>]+type="image\//)?.[1] ||
+            block.match(/<enclosure[^>]+type="image\/[^"]*"[^>]+url="([^"]+)"/)?.[1] ||
+            snippet.match(/<img[^>]+src="([^"]+)"/)?.[1] || "";
+          const imageUrl = rawImage && isValidHttpUrl(rawImage) ? rawImage : undefined;
           const cleanLink = link.trim();
           if (title && cleanLink && isValidHttpUrl(cleanLink)) {
             feedItems.push({
@@ -47,6 +55,7 @@ export async function getNews(limit = 12): Promise<NewsItem[]> {
               pubDate: pubDate.trim(),
               contentSnippet: snippet.replace(/<[^>]+>/g, "").slice(0, 150),
               source,
+              imageUrl,
             });
           }
         }
