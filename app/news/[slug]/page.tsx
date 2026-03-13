@@ -1,6 +1,7 @@
 import { getNews, type NewsItem } from "@/lib/rss";
 import { safeJsonLd, isValidHttpUrl } from "@/lib/utils";
 import { redis } from "@/lib/redis";
+import { summarizeArticle } from "@/lib/gemini";
 import { cache } from "react";
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
@@ -62,6 +63,8 @@ export default async function NewsArticlePage({
     notFound();
   }
 
+  const summary = await summarizeArticle(slug, item.title, item.contentSnippet, item.source);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "NewsArticle",
@@ -69,7 +72,7 @@ export default async function NewsArticlePage({
     url: item.link,
     datePublished: item.pubDate,
     publisher: { "@type": "Organization", name: item.source },
-    description: item.contentSnippet,
+    description: summary ?? item.contentSnippet,
     mainEntityOfPage: `${SITE_URL}/news/${slug}`,
     ...(item.imageUrl ? { image: item.imageUrl } : {}),
   };
@@ -105,11 +108,16 @@ export default async function NewsArticlePage({
       {item.pubDate && (
         <p className="text-xs text-gray-400 mb-6">{item.pubDate}</p>
       )}
-      {item.contentSnippet && (
-        <p className="text-gray-600 mb-8 leading-relaxed text-base">
-          {item.contentSnippet}
-        </p>
-      )}
+      {summary ? (
+        <div className="mb-8">
+          <p className="text-gray-700 leading-relaxed text-base">{summary}</p>
+          <p className="text-xs text-gray-400 mt-2 flex items-center gap-1">
+            <span>✨</span> AI-generated summary · Read the full article below
+          </p>
+        </div>
+      ) : item.contentSnippet ? (
+        <p className="text-gray-600 mb-8 leading-relaxed text-base">{item.contentSnippet}</p>
+      ) : null}
       <a
         href={item.link}
         target="_blank"
