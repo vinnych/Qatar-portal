@@ -8,6 +8,7 @@ import "./globals.css";
 const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://qatar-portal.vercel.app"),
   title: "Qatar Portal — Prayer Times, Jobs & News",
   description:
     "Your daily Qatar resource: accurate prayer times for Doha, latest job listings in Qatar, and top Gulf news headlines.",
@@ -37,6 +38,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <a href="/prayer" className="text-white hover:text-amber-300 transition-colors">Prayer</a>
               <a href="/news" className="text-white hover:text-amber-300 transition-colors">News</a>
               <a href="/jobs" className="text-white hover:text-amber-300 transition-colors">Jobs</a>
+              <a href="/weather" className="text-white hover:text-amber-300 transition-colors hidden sm:inline">Weather</a>
+              <a href="/currency" className="text-white hover:text-amber-300 transition-colors hidden sm:inline">Currency</a>
             </nav>
           </div>
         </header>

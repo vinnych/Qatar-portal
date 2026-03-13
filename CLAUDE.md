@@ -13,8 +13,8 @@ Qatar Portal — a Next.js 14 website aggregating prayer times, news, and job li
 - **Styling:** Tailwind CSS
 - **Hosting:** Vercel (free tier, auto-deploys from GitHub)
 - **Prayer times:** Aladhan API (free, no auth)
-- **News:** RSS feeds (Al Jazeera, The Peninsula Qatar) parsed with regex in `lib/rss.ts`
-- **Jobs:** RSS feeds (Bayt.com, GulfTalent) parsed in `lib/jobs.ts`
+- **News:** RSS feeds (Al Jazeera, Google News Qatar, BBC Middle East) parsed with regex in `lib/rss.ts`
+- **Jobs:** Google News RSS (qatar jobs/careers queries) parsed in `lib/jobs.ts`
 - **Database:** None — all data fetched live with Next.js `fetch` caching
 
 ## Project Structure
@@ -97,4 +97,37 @@ npm run lint      # ESLint
 
 ## Deployment
 - Push to GitHub, connect repo to Vercel — auto-deploys on every push
-- No environment variables required (all APIs are public)
+- Env vars required: `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN` (set in Vercel dashboard)
+
+## External Services & Websites Used
+
+### Hosting & Infrastructure
+| Service | URL | Purpose |
+|---|---|---|
+| Vercel | https://vercel.com | Hosting + auto-deploy from GitHub |
+| GitHub | https://github.com | Source code repository (vinnych/Qatar-portal) |
+| Upstash | https://upstash.com | Serverless Redis — persists news/job articles for 7 days |
+
+### Data APIs & RSS Feeds
+| Service | URL | Purpose |
+|---|---|---|
+| Aladhan API | https://aladhan.com | Prayer times for all cities (free, no auth) |
+| Al Jazeera RSS | https://www.aljazeera.com/xml/rss/all.xml | English news feed (✅ working) |
+| Google News RSS | https://news.google.com/rss/search?q=qatar | Qatar news aggregator (✅ working) |
+| BBC Middle East RSS | https://feeds.bbci.co.uk/news/world/middle_east/rss.xml | Middle East news (✅ working) |
+| Google News Jobs RSS | https://news.google.com/rss/search?q=qatar+jobs+hiring | Qatar job news (✅ working) |
+
+### Dev Tools & Frameworks
+| Tool | URL | Purpose |
+|---|---|---|
+| Next.js | https://nextjs.org | React framework (App Router, SSR, SSG) |
+| Tailwind CSS | https://tailwindcss.com | Utility-first CSS styling |
+| TypeScript | https://www.typescriptlang.org | Type-safe JavaScript |
+| Google Fonts | https://fonts.google.com | Playfair Display font |
+
+### SEO & Analytics
+| Tool | URL | Purpose |
+|---|---|---|
+| Google Search Console | https://search.google.com/search-console | Sitemap submission + indexing |
+| Schema.org | https://schema.org | JSON-LD structured data vocabulary |
+| Vercel Speed Insights | https://vercel.com/docs/speed-insights | Core Web Vitals monitoring |

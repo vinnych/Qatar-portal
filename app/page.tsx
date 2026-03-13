@@ -2,6 +2,8 @@ import { Suspense } from "react";
 import PrayerTimes from "@/components/PrayerTimes";
 import NewsFeed from "@/components/NewsFeed";
 import JobList from "@/components/JobList";
+import WeatherWidget from "@/components/WeatherWidget";
+import CurrencyWidget from "@/components/CurrencyWidget";
 import { getPrayerTimes } from "@/lib/prayer";
 import { safeJsonLd } from "@/lib/utils";
 import type { Metadata } from "next";
@@ -37,6 +39,28 @@ export default async function Home() {
         </Suspense>
       </section>
 
+      {/* Weather + Currency */}
+      <div className="grid md:grid-cols-2 gap-6">
+        <section>
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-sm font-semibold text-amber-800"><span aria-hidden="true">🌤️</span> Weather in Doha</h2>
+            <a href="/weather" className="text-xs text-amber-700 hover:underline">7-day forecast →</a>
+          </div>
+          <Suspense fallback={<div className="bg-amber-50 rounded-2xl h-36 animate-pulse" />}>
+            <WeatherWidget />
+          </Suspense>
+        </section>
+        <section>
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-sm font-semibold text-rose-800"><span aria-hidden="true">💱</span> QAR Exchange Rates</h2>
+            <a href="/currency" className="text-xs text-rose-700 hover:underline">All rates →</a>
+          </div>
+          <Suspense fallback={<div className="bg-stone-100 rounded-2xl h-36 animate-pulse" />}>
+            <CurrencyWidget />
+          </Suspense>
+        </section>
+      </div>
+
       {/* News + Jobs side by side on large screens */}
       <div className="grid lg:grid-cols-3 gap-8">
         {/* News — takes 2/3 */}
@@ -46,7 +70,7 @@ export default async function Home() {
             <a href="/news" className="text-sm text-sky-700 hover:underline">View all →</a>
           </div>
           <Suspense fallback={<div className="grid gap-4 sm:grid-cols-2"><div className="bg-white rounded-xl h-32 animate-pulse" /><div className="bg-white rounded-xl h-32 animate-pulse" /></div>}>
-            <NewsFeed limit={6} />
+            <NewsFeed limit={12} />
           </Suspense>
         </section>
 

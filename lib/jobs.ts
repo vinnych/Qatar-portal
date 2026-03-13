@@ -11,15 +11,14 @@ export interface Job {
   source: string;
 }
 
-// Bayt.com Qatar RSS feed
 const JOB_FEEDS = [
   {
-    url: "https://www.bayt.com/en/qatar/jobs/?jobId=&rssFeed=1",
-    source: "Bayt.com",
+    url: "https://news.google.com/rss/search?q=qatar+jobs+hiring&hl=en-US&gl=US&ceid=US:en",
+    source: "Google Jobs",
   },
   {
-    url: "https://www.gulftalent.com/rss/jobs/qatar",
-    source: "GulfTalent",
+    url: "https://news.google.com/rss/search?q=qatar+careers+vacancy&hl=en-US&gl=US&ceid=US:en",
+    source: "Qatar Careers",
   },
 ];
 

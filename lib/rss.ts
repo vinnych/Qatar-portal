@@ -12,9 +12,8 @@ export interface NewsItem {
 
 const FEEDS = [
   { url: "https://www.aljazeera.com/xml/rss/all.xml", source: "Al Jazeera" },
-  { url: "https://thepeninsulaqatar.com/rss/rss.xml", source: "The Peninsula Qatar" },
-  { url: "https://www.gulf-times.com/rss/", source: "Gulf Times" },
-  { url: "https://www.qna.org.qa/en/rss.xml", source: "Qatar News Agency" },
+  { url: "https://news.google.com/rss/search?q=qatar&hl=en-US&gl=US&ceid=US:en", source: "Google News" },
+  { url: "https://feeds.bbci.co.uk/news/world/middle_east/rss.xml", source: "BBC Middle East" },
 ];
 export async function getNews(limit = 12): Promise<NewsItem[]> {
   const results = await Promise.allSettled(
@@ -29,7 +28,7 @@ export async function getNews(limit = 12): Promise<NewsItem[]> {
         const raw = await res.text();
         const text = raw.length > 5 * 1024 * 1024 ? raw.slice(0, 5 * 1024 * 1024) : raw;
         const matches = [...text.matchAll(/<item[^>]*>([\s\S]*?)<\/item>/g)];
-        for (const m of matches.slice(0, 6)) {
+        for (const m of matches.slice(0, 10)) {
           const block = m[1];
           const title = block.match(/<title><!\[CDATA\[(.*?)\]\]><\/title>/)?.[1] ||
             block.match(/<title>(.*?)<\/title>/)?.[1] || "";

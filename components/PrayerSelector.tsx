@@ -163,7 +163,7 @@ export default function PrayerSelector({
                 </tr>
               </thead>
               <tbody>
-                {calendar.map((day, i) => {
+                {calendar.slice(Math.max(0, calendar.findIndex((d) => d.date === times?.date))).map((day, i) => {
                   const isToday = day.date === times?.date;
                   return (
                     <tr
