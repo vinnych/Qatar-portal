@@ -29,17 +29,6 @@ export const metadata: Metadata = {
   },
 };
 
-const EXTRA_CURRENCIES: { code: string; flag: string; name: string }[] = [
-  { code: "NPR", flag: "🇳🇵", name: "Nepalese Rupee" },
-  { code: "LKR", flag: "🇱🇰", name: "Sri Lankan Rupee" },
-  { code: "IDR", flag: "🇮🇩", name: "Indonesian Rupiah" },
-  { code: "MYR", flag: "🇲🇾", name: "Malaysian Ringgit" },
-  { code: "AED", flag: "🇦🇪", name: "UAE Dirham" },
-  { code: "SAR", flag: "🇸🇦", name: "Saudi Riyal" },
-  { code: "KWD", flag: "🇰🇼", name: "Kuwaiti Dinar" },
-  { code: "JOD", flag: "🇯🇴", name: "Jordanian Dinar" },
-];
-
 export default async function CurrencyPage() {
   const data = await getQARRates();
 
