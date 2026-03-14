@@ -13,6 +13,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/currency`, lastModified: new Date(), changeFrequency: "hourly", priority: 0.8 },
     { url: `${SITE_URL}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
     { url: `${SITE_URL}/privacy`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.3 },
+    // Content pages
+    { url: `${SITE_URL}/qatar-visa-requirements`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE_URL}/cost-of-living-doha`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE_URL}/qatar-public-holidays`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE_URL}/emergency-numbers-qatar`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
+    // City prayer pages
+    ...["dubai", "abu-dhabi", "riyadh", "jeddah", "kuwait-city", "muscat", "manama"].map((city) => ({
+      url: `${SITE_URL}/prayer/${city}`,
+      lastModified: new Date(),
+      changeFrequency: "daily" as const,
+      priority: 0.7,
+    })),
+    // Job category pages
+    ...["engineering", "it", "healthcare", "finance", "construction"].map((cat) => ({
+      url: `${SITE_URL}/jobs-category/${cat}`,
+      lastModified: new Date(),
+      changeFrequency: "daily" as const,
+      priority: 0.7,
+    })),
   ];
 
   try {

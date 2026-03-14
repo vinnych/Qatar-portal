@@ -90,6 +90,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <a href="/currency" className="hover:text-rose-800 transition-colors">QAR Rates</a>
               <a href="/news" className="hover:text-rose-800 transition-colors">News</a>
               <a href="/jobs" className="hover:text-rose-800 transition-colors">Jobs in Qatar</a>
+              <a href="/qatar-visa-requirements" className="hover:text-rose-800 transition-colors">Qatar Visa</a>
+              <a href="/cost-of-living-doha" className="hover:text-rose-800 transition-colors">Cost of Living</a>
+              <a href="/qatar-public-holidays" className="hover:text-rose-800 transition-colors">Public Holidays</a>
+              <a href="/emergency-numbers-qatar" className="hover:text-rose-800 transition-colors">Emergency Numbers</a>
               <a href="/about" className="hover:text-rose-800 transition-colors">About</a>
               <a href="/privacy" className="hover:text-rose-800 transition-colors">Privacy Policy</a>
             </div>
