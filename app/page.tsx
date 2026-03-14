@@ -11,16 +11,28 @@ export const metadata: Metadata = {
   title: "Doha Prayer Times Today — Qatar News & Jobs | Qatar Portal",
   description: "Accurate Doha prayer times for today including Fajr, Dhuhr, Asr, Maghrib and Isha. Plus latest Qatar news and job listings.",
   alternates: { canonical: "https://qatar-portal.vercel.app" },
+  openGraph: {
+    title: "Doha Prayer Times Today — Qatar News & Jobs | Qatar Portal",
+    description: "Accurate Doha prayer times for today including Fajr, Dhuhr, Asr, Maghrib and Isha. Plus latest Qatar news and job listings.",
+    url: "https://qatar-portal.vercel.app",
+    siteName: "Qatar Portal",
+    type: "website",
+    images: [{ url: "https://qatar-portal.vercel.app/opengraph-image", width: 1200, height: 630 }],
+  },
+  twitter: { card: "summary_large_image", title: "Doha Prayer Times Today | Qatar Portal", description: "Accurate Doha prayer times for today. Plus latest Qatar news and job listings." },
 };
 
 const homeJsonLd = {
   "@context": "https://schema.org",
-  "@type": "WebPage",
+  "@type": "FAQPage",
   "name": "Doha Prayer Times Today — Qatar News & Jobs | Qatar Portal",
   "url": "https://qatar-portal.vercel.app",
-  "description": "Accurate Doha prayer times for today. Plus latest Qatar news and job listings.",
-  "inLanguage": "en",
-  "isPartOf": { "@type": "WebSite", "name": "Qatar Portal", "url": "https://qatar-portal.vercel.app" },
+  "mainEntity": [
+    { "@type": "Question", "name": "What time is Fajr in Doha today?", "acceptedAnswer": { "@type": "Answer", "text": "Fajr prayer time in Doha today can be found on Qatar Portal, updated daily from the Aladhan API using the Muslim World League calculation method." } },
+    { "@type": "Question", "name": "What time is Maghrib in Doha today?", "acceptedAnswer": { "@type": "Answer", "text": "Maghrib prayer time in Doha today is available on Qatar Portal, updated daily with accurate sunset-based calculation." } },
+    { "@type": "Question", "name": "What are today's prayer times in Qatar?", "acceptedAnswer": { "@type": "Answer", "text": "Today's prayer times in Qatar (Fajr, Dhuhr, Asr, Maghrib, Isha) are listed on Qatar Portal's homepage and prayer page, updated daily." } },
+    { "@type": "Question", "name": "Where can I find jobs in Qatar?", "acceptedAnswer": { "@type": "Answer", "text": "Qatar Portal lists the latest job vacancies in Doha and Qatar, updated daily from top Gulf job boards." } },
+  ],
 };
 
 export default async function Home() {

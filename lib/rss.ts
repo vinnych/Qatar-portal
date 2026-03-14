@@ -18,7 +18,7 @@ const FEEDS = [
 ];
 
 /** Fetch a relevant image from Pexels based on article title keywords. Cached in Redis. */
-async function fetchPexelsImage(slug: string, title: string): Promise<string | undefined> {
+export async function fetchPexelsImage(slug: string, title: string): Promise<string | undefined> {
   if (redis) {
     try {
       const cached = await redis.get<string>(`news:ogimage:${slug}`);

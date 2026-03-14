@@ -1,4 +1,4 @@
-import { getNews, type NewsItem } from "@/lib/rss";
+import { getNews, fetchPexelsImage, type NewsItem } from "@/lib/rss";
 import { safeJsonLd, isValidHttpUrl } from "@/lib/utils";
 import { redis } from "@/lib/redis";
 import { summarizeArticle } from "@/lib/groq";
@@ -61,6 +61,12 @@ export default async function NewsArticlePage({
     } catch { /* invalid slug */ }
     if (link) redirect(link);
     notFound();
+  }
+
+  // Fetch image on-demand if not already present (cached in Redis)
+  if (!item.imageUrl) {
+    const img = await fetchPexelsImage(item.slug, item.title);
+    if (img) item.imageUrl = img;
   }
 
   const summary = await summarizeArticle(slug, item.title, item.contentSnippet, item.source);
