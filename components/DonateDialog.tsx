@@ -2,16 +2,22 @@
 
 import { useState, useEffect } from "react";
 
+const PRESETS = [1, 5, 10, 100];
+
 export default function DonateDialog() {
   const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState<number>(5);
+  const [custom, setCustom] = useState("");
 
   useEffect(() => {
-    // Small delay so it doesn't pop instantly on load
     const timer = setTimeout(() => setOpen(true), 2000);
     return () => clearTimeout(timer);
   }, []);
 
   if (!open) return null;
+
+  const amount = custom || selected;
+  const paypalUrl = `https://paypal.me/qatarportal/${amount}`;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
@@ -29,16 +35,48 @@ export default function DonateDialog() {
           a small contribution to keep it running.
         </p>
 
+        {/* Preset amounts */}
+        <div className="grid grid-cols-4 gap-2">
+          {PRESETS.map((amt) => (
+            <button
+              key={amt}
+              onClick={() => { setSelected(amt); setCustom(""); }}
+              className={`py-2 rounded-xl text-sm font-bold border-2 transition-colors ${
+                !custom && selected === amt
+                  ? "bg-amber-400 border-amber-400 text-rose-900"
+                  : "bg-white border-gray-200 text-gray-700 hover:border-amber-300"
+              }`}
+            >
+              ${amt}
+            </button>
+          ))}
+        </div>
+
+        {/* Custom amount */}
+        <div className="relative">
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-medium">$</span>
+          <input
+            type="number"
+            min="1"
+            placeholder="Custom amount"
+            value={custom}
+            onChange={(e) => { setCustom(e.target.value); setSelected(0); }}
+            className="w-full pl-7 pr-4 py-2 border-2 border-gray-200 rounded-xl text-sm focus:outline-none focus:border-amber-400 text-center"
+          />
+        </div>
+
         {/* Donate button */}
         <a
-          href="https://paypal.me/qatarportal"
+          href={paypalUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="block w-full bg-amber-400 hover:bg-amber-500 text-rose-900 font-bold py-3 px-6 rounded-xl transition-colors text-sm"
           onClick={() => setOpen(false)}
         >
-          💛 Donate via PayPal
+          💛 Donate ${amount} via PayPal
         </a>
+
+        <p className="text-xs text-gray-400">PayPal accepts cards — no account needed</p>
 
         {/* Dismiss */}
         <button
