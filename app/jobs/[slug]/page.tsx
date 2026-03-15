@@ -42,7 +42,11 @@ export async function generateMetadata({
       type: "website",
       images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
     },
-    twitter: { card: "summary_large_image" },
+    twitter: {
+      card: "summary_large_image",
+      title: `${job.title} at ${job.company} — Qatar Jobs`,
+      description: `${job.title} position at ${job.company} in ${job.location}. Apply now via Qatar Portal.`,
+    },
   };
 }
 
@@ -81,6 +85,8 @@ export default async function JobDetailPage({
       },
     },
     datePosted: isoDate,
+    employmentType: "FULL_TIME",
+    validThrough: (() => { try { const d = new Date(job.pubDate); d.setDate(d.getDate() + 30); return d.toISOString().split("T")[0]; } catch { return new Date(Date.now() + 30 * 86400000).toISOString().split("T")[0]; } })(),
     mainEntityOfPage: `${SITE_URL}/jobs/${slug}`,
   };
 

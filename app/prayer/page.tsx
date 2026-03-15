@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 const SITE_URL = "https://qatar-portal.vercel.app";
 
 export const metadata: Metadata = {
-  title: "Prayer Times for Muslim Countries — Doha, Mecca, Dubai & More | Qatar Portal",
+  title: "Prayer Times — Doha, Mecca, Dubai & 35 Cities | Qatar Portal",
   description:
     "Accurate Fajr, Sunrise, Dhuhr, Asr, Maghrib and Isha prayer times for Doha and 35+ Muslim cities worldwide — today and full monthly calendar.",
   alternates: { canonical: `${SITE_URL}/prayer` },

@@ -4,7 +4,7 @@ import { safeJsonLd } from "@/lib/utils";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Qatar & Gulf Breaking News Today — Al Jazeera, The Peninsula, Gulf Times | Qatar Portal",
+  title: "Qatar & Gulf Breaking News Today | Qatar Portal",
   description: "Latest breaking news from Qatar and the Gulf — updated every 15 minutes from Al Jazeera, The Peninsula Qatar, Gulf Times, and Qatar News Agency.",
   alternates: { canonical: "https://qatar-portal.vercel.app/news" },
   keywords: ["Qatar news today", "Gulf news", "Al Jazeera Qatar", "The Peninsula Qatar", "Gulf Times", "Qatar breaking news"],

@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 const SITE_URL = "https://qatar-portal.vercel.app";
 
 export const metadata: Metadata = {
-  title: "Doha Weather Today — Qatar Temperature & 7-Day Forecast | Qatar Portal",
+  title: "Doha Weather Today — 7-Day Forecast | Qatar Portal",
   description:
     "Live Doha weather today: current temperature, humidity, wind speed and 7-day forecast for Qatar. Updated every 30 minutes from Open-Meteo.",
   alternates: { canonical: `${SITE_URL}/weather` },

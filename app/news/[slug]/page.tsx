@@ -43,6 +43,11 @@ export async function generateMetadata({
       type: "article",
       images: [{ url: item.imageUrl ?? `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
     },
+    twitter: {
+      card: "summary_large_image",
+      title: item.title,
+      description: item.contentSnippet || `Read the latest news from ${item.source} on Qatar Portal.`,
+    },
   };
 }
 
