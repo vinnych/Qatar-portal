@@ -14,12 +14,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
     { url: `${SITE_URL}/privacy`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.3 },
     // Content pages
+    { url: `${SITE_URL}/prayer`, lastModified: new Date(), changeFrequency: "daily", priority: 0.8 },
+    { url: `${SITE_URL}/hijri-calendar`, lastModified: new Date(), changeFrequency: "daily", priority: 0.7 },
+    { url: `${SITE_URL}/ramadan-2026`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE_URL}/qatar-labour-law`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE_URL}/qatar-salary-guide`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${SITE_URL}/qatar-visa-requirements`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/cost-of-living-doha`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/qatar-public-holidays`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/emergency-numbers-qatar`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
+    // News category pages
+    ...["qatar", "business", "sports", "world", "gulf"].map((cat) => ({
+      url: `${SITE_URL}/news-category/${cat}`,
+      lastModified: new Date(),
+      changeFrequency: "hourly" as const,
+      priority: 0.7,
+    })),
     // City prayer pages
-    ...["dubai", "abu-dhabi", "riyadh", "jeddah", "kuwait-city", "muscat", "manama"].map((city) => ({
+    ...["dubai", "abu-dhabi", "riyadh", "jeddah", "kuwait-city", "muscat", "manama", "cairo", "islamabad", "manila", "dhaka"].map((city) => ({
       url: `${SITE_URL}/prayer/${city}`,
       lastModified: new Date(),
       changeFrequency: "daily" as const,

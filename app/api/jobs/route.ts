@@ -1,8 +1,8 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { getJobs } from "@/lib/jobs";
 import { checkRateLimit, getClientIp } from "@/lib/rateLimit";
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   const allowed = await checkRateLimit(getClientIp(request));
   if (!allowed) {
     return NextResponse.json({ error: "Too many requests" }, { status: 429, headers: { "Retry-After": "60" } });
