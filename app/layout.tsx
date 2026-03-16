@@ -31,13 +31,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      {/* Google AdSense — replace ca-pub-7212871157824722 with your publisher ID */}
-      <Script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7212871157824722"
-        crossOrigin="anonymous"
-        strategy="lazyOnload"
-      />
+      <head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7212871157824722"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="bg-stone-50 text-gray-900 min-h-screen">
         <header className="bg-rose-900 sticky top-0 z-10 shadow-md">
           <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between relative">
