@@ -5,9 +5,9 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Qatar & Gulf Breaking News Today | Qatar Portal",
-  description: "Latest breaking news from Qatar and the Gulf — updated every 15 minutes from Al Jazeera, The Peninsula Qatar, Gulf Times, and Qatar News Agency.",
+  description: "Latest breaking news from Qatar and the Gulf — updated every 15 minutes from Al Jazeera, BBC Middle East, and Google News.",
   alternates: { canonical: "https://qatar-portal.vercel.app/news" },
-  keywords: ["Qatar news today", "Gulf news", "Al Jazeera Qatar", "The Peninsula Qatar", "Gulf Times", "Qatar breaking news"],
+  keywords: ["Qatar news today", "Gulf news", "Al Jazeera Qatar", "BBC Middle East", "Qatar breaking news", "Doha news"],
   openGraph: {
     title: "Qatar & Gulf Breaking News Today | Qatar Portal",
     description: "Latest breaking news from Qatar and the Gulf — updated every 15 minutes from Al Jazeera, BBC and Google News.",
@@ -54,6 +54,7 @@ export default async function NewsPage() {
       {jsonLd && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html: safeJsonLd(jsonLd)}} />
       )}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd({ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://qatar-portal.vercel.app" }, { "@type": "ListItem", position: 2, name: "Qatar News", item: "https://qatar-portal.vercel.app/news" }] }) }} />
       <h1 className="text-xl sm:text-2xl font-bold text-sky-900 mb-6">
         <span aria-hidden="true">📰</span> Qatar &amp; Gulf News
       </h1>

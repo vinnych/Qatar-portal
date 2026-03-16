@@ -44,7 +44,7 @@ export default async function JobCategoryPage({ params }: { params: Promise<{ ca
   const entry = CATEGORIES[slug];
   if (!entry) notFound();
 
-  const allJobs = await getJobs();
+  const allJobs = await getJobs(48);
   const filtered = allJobs.filter((job) =>
     entry.keywords.some((kw) => job.title.toLowerCase().includes(kw.toLowerCase()))
   );

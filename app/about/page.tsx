@@ -4,10 +4,10 @@ import { safeJsonLd } from "@/lib/utils";
 const SITE_URL = "https://qatar-portal.vercel.app";
 
 export const metadata: Metadata = {
-  title: "About Qatar Portal — Prayer Times, Weather, News & Jobs for Qatar",
+  title: "About Qatar Portal — Free Daily Resource for Qatar",
   description:
-    "Qatar Portal is a free daily resource for residents, expats, and visitors in Qatar. Accurate Doha prayer times, live weather, Gulf news, QAR exchange rates, and Qatar job listings.",
-  keywords: ["Qatar Portal", "about Qatar Portal", "Qatar expat resource", "Doha daily guide"],
+    "Qatar Portal: free prayer times, live weather, Gulf news, QAR rates, and jobs for Qatar residents, expats, and visitors.",
+  keywords: ["Qatar Portal", "about Qatar Portal", "Qatar expat resource", "Doha daily guide", "Qatar information site"],
   alternates: { canonical: `${SITE_URL}/about` },
   openGraph: {
     title: "About Qatar Portal",

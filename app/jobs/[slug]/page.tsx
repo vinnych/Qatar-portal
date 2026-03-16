@@ -1,5 +1,6 @@
 import { getJobs, type Job } from "@/lib/jobs";
 import { safeJsonLd, isValidHttpUrl } from "@/lib/utils";
+import ShareButton from "@/components/ShareButton";
 import { redis } from "@/lib/redis";
 import { cache } from "react";
 import type { Metadata } from "next";
@@ -33,6 +34,7 @@ export async function generateMetadata({
   return {
     title: `${job.title} at ${job.company} — Qatar Jobs | Qatar Portal`,
     description: `${job.title} position at ${job.company} in ${job.location}. Apply now via Qatar Portal.`,
+    keywords: [job.title, job.company, "Qatar jobs", `${job.location} jobs`, "jobs in Qatar", "Doha hiring"],
     alternates: { canonical: `${SITE_URL}/jobs/${slug}` },
     openGraph: {
       title: `${job.title} — ${job.company}`,
@@ -90,12 +92,20 @@ export default async function JobDetailPage({
     mainEntityOfPage: `${SITE_URL}/jobs/${slug}`,
   };
 
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Jobs in Qatar", item: `${SITE_URL}/jobs` },
+      { "@type": "ListItem", position: 3, name: job.title, item: `${SITE_URL}/jobs/${slug}` },
+    ],
+  };
+
   return (
     <div className="max-w-2xl mx-auto">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbLd) }} />
       <div className="mb-6">
         <a href="/jobs" className="text-sm text-emerald-700 hover:underline font-medium">
           ← Back to Jobs
@@ -112,14 +122,17 @@ export default async function JobDetailPage({
       {job.pubDate && (
         <p className="text-xs text-gray-400 mb-8">Posted: {job.pubDate}</p>
       )}
-      <a
-        href={job.link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-block bg-emerald-700 text-white px-4 py-2.5 sm:px-6 sm:py-3 rounded-lg text-sm sm:text-base font-medium hover:bg-emerald-800 transition-colors"
-      >
-        View & Apply on {job.source} →
-      </a>
+      <div className="flex flex-wrap items-center gap-3">
+        <a
+          href={job.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block bg-emerald-700 text-white px-4 py-2.5 sm:px-6 sm:py-3 rounded-lg text-sm sm:text-base font-medium hover:bg-emerald-800 transition-colors"
+        >
+          View & Apply on {job.source} →
+        </a>
+        <ShareButton title={job.title} url={`${SITE_URL}/jobs/${slug}`} />
+      </div>
     </div>
   );
 }

@@ -4,20 +4,20 @@ import { safeJsonLd } from "@/lib/utils";
 const SITE_URL = "https://qatar-portal.vercel.app";
 
 export const metadata: Metadata = {
-  title: "Qatar Visa Requirements 2025 — Complete Guide",
+  title: "Qatar Visa Requirements 2026 — Complete Guide",
   description:
-    "Qatar visa requirements for 2025: visa-free countries, tourist visa, work visa, family visa, fees, and how to apply online via Hayya platform.",
-  keywords: ["Qatar visa requirements", "Qatar tourist visa 2025", "Qatar work visa", "Hayya visa Qatar", "Qatar visa on arrival"],
+    "Qatar visa requirements for 2026: visa-free countries, tourist visa, work visa, family visa, fees, and how to apply online via Hayya platform.",
+  keywords: ["Qatar visa requirements", "Qatar tourist visa 2026", "Qatar work visa", "Hayya visa Qatar", "Qatar visa on arrival"],
   alternates: { canonical: `${SITE_URL}/qatar-visa-requirements` },
   openGraph: {
-    title: "Qatar Visa Requirements 2025 — Complete Guide",
+    title: "Qatar Visa Requirements 2026 — Complete Guide",
     description: "Everything you need to know about Qatar visas: tourist, work, family, fees, and how to apply.",
     url: `${SITE_URL}/qatar-visa-requirements`,
     siteName: "Qatar Portal",
     type: "website",
     images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
   },
-  twitter: { card: "summary_large_image", title: "Qatar Visa Requirements 2025 — Complete Guide", description: "Everything you need to know about Qatar visas: tourist, work, family, fees, and how to apply." },
+  twitter: { card: "summary_large_image", title: "Qatar Visa Requirements 2026 — Complete Guide", description: "Everything you need to know about Qatar visas: tourist, work, family, fees, and how to apply." },
 };
 
 export default function QatarVisaRequirementsPage() {
@@ -63,9 +63,10 @@ export default function QatarVisaRequirementsPage() {
   return (
     <div className="max-w-2xl mx-auto space-y-10">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd({ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://qatar-portal.vercel.app" }, { "@type": "ListItem", position: 2, name: "Qatar Visa Requirements", item: "https://qatar-portal.vercel.app/qatar-visa-requirements" }] }) }} />
 
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-3">Qatar Visa Requirements 2025</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-3">Qatar Visa Requirements 2026</h1>
         <p className="text-gray-600 text-base leading-relaxed">
           A complete guide to entering Qatar — whether you&apos;re visiting, working, or joining family.
         </p>

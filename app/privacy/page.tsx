@@ -4,7 +4,8 @@ const SITE_URL = "https://qatar-portal.vercel.app";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | Qatar Portal",
-  description: "Privacy Policy for Qatar Portal. Learn how we handle data, use analytics, and display advertising on qatar-portal.vercel.app.",
+  description: "Privacy Policy for Qatar Portal — how we collect data, use analytics (Vercel), display ads (AdSense), and protect your privacy.",
+  keywords: ["Qatar Portal privacy policy", "data privacy Qatar Portal", "cookies Qatar Portal"],
   alternates: { canonical: `${SITE_URL}/privacy` },
   openGraph: {
     title: "Privacy Policy | Qatar Portal",

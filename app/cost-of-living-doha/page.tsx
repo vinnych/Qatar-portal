@@ -4,20 +4,20 @@ import { safeJsonLd } from "@/lib/utils";
 const SITE_URL = "https://qatar-portal.vercel.app";
 
 export const metadata: Metadata = {
-  title: "Cost of Living in Doha, Qatar 2025 — Expat Guide",
+  title: "Cost of Living in Doha, Qatar 2026 — Expat Guide",
   description:
-    "Complete cost of living guide for Doha, Qatar in 2025. Housing, food, transport, utilities, and schooling costs for expats and new arrivals.",
-  keywords: ["cost of living Doha", "cost of living Qatar 2025", "Doha rent prices", "expat life Qatar", "Qatar living expenses"],
+    "Complete cost of living guide for Doha, Qatar in 2026. Housing, food, transport, utilities, and schooling costs for expats and new arrivals.",
+  keywords: ["cost of living Doha", "cost of living Qatar 2026", "Doha rent prices", "expat life Qatar", "Qatar living expenses"],
   alternates: { canonical: `${SITE_URL}/cost-of-living-doha` },
   openGraph: {
-    title: "Cost of Living in Doha, Qatar 2025",
+    title: "Cost of Living in Doha, Qatar 2026",
     description: "Housing, food, transport, and utilities costs for expats living in Doha, Qatar.",
     url: `${SITE_URL}/cost-of-living-doha`,
     siteName: "Qatar Portal",
     type: "website",
     images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
   },
-  twitter: { card: "summary_large_image", title: "Cost of Living in Doha, Qatar 2025", description: "Housing, food, transport, and utilities costs for expats living in Doha, Qatar." },
+  twitter: { card: "summary_large_image", title: "Cost of Living in Doha, Qatar 2026", description: "Housing, food, transport, and utilities costs for expats living in Doha, Qatar." },
 };
 
 export default function CostOfLivingDohaPage() {
@@ -63,9 +63,10 @@ export default function CostOfLivingDohaPage() {
   return (
     <div className="max-w-2xl mx-auto space-y-10">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd({ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: SITE_URL }, { "@type": "ListItem", position: 2, name: "Cost of Living in Doha", item: `${SITE_URL}/cost-of-living-doha` }] }) }} />
 
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-3">Cost of Living in Doha, Qatar 2025</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-3">Cost of Living in Doha, Qatar 2026</h1>
         <p className="text-gray-600 text-base leading-relaxed">
           A practical breakdown of monthly expenses for expats and new arrivals in Doha. All prices in Qatari Riyal (QAR). 1 USD ≈ 3.64 QAR.
         </p>

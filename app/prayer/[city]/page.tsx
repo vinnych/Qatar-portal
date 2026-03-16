@@ -14,6 +14,10 @@ const CITIES: Record<string, { city: string; country: string; label: string }> =
   "kuwait-city": { city: "Kuwait City", country: "Kuwait", label: "Kuwait City, Kuwait" },
   muscat: { city: "Muscat", country: "Oman", label: "Muscat, Oman" },
   manama: { city: "Manama", country: "Bahrain", label: "Manama, Bahrain" },
+  cairo: { city: "Cairo", country: "Egypt", label: "Cairo, Egypt" },
+  islamabad: { city: "Islamabad", country: "Pakistan", label: "Islamabad, Pakistan" },
+  manila: { city: "Manila", country: "Philippines", label: "Manila, Philippines" },
+  dhaka: { city: "Dhaka", country: "Bangladesh", label: "Dhaka, Bangladesh" },
 };
 
 export async function generateStaticParams() {

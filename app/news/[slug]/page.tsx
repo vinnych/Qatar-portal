@@ -1,5 +1,6 @@
 import { getNews, fetchPexelsImage, type NewsItem } from "@/lib/rss";
 import { safeJsonLd, isValidHttpUrl } from "@/lib/utils";
+import ShareButton from "@/components/ShareButton";
 import { redis } from "@/lib/redis";
 import { summarizeArticle } from "@/lib/groq";
 import { cache } from "react";
@@ -34,6 +35,7 @@ export async function generateMetadata({
   return {
     title: `${item.title} | Qatar Portal`,
     description: item.contentSnippet || `Read the latest news from ${item.source} on Qatar Portal.`,
+    keywords: [item.source, "Qatar news", "Gulf news", "Doha news", ...item.title.split(" ").filter(w => w.length > 4).slice(0, 4)],
     alternates: { canonical: `${SITE_URL}/news/${slug}` },
     openGraph: {
       title: item.title,
@@ -95,12 +97,20 @@ export default async function NewsArticlePage({
     image: item.imageUrl ?? `${SITE_URL}/opengraph-image`,
   };
 
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "News", item: `${SITE_URL}/news` },
+      { "@type": "ListItem", position: 3, name: item.title, item: `${SITE_URL}/news/${slug}` },
+    ],
+  };
+
   return (
     <div className="max-w-2xl mx-auto">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbLd) }} />
       <div className="mb-6">
         <a href="/news" className="text-sm text-sky-700 hover:underline font-medium">
           ← Back to News
@@ -136,14 +146,17 @@ export default async function NewsArticlePage({
       ) : item.contentSnippet ? (
         <p className="text-gray-600 mb-8 leading-relaxed text-base">{item.contentSnippet}</p>
       ) : null}
-      <a
-        href={item.link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-block bg-sky-700 text-white px-4 py-2.5 sm:px-6 sm:py-3 rounded-lg text-sm sm:text-base font-medium hover:bg-sky-800 transition-colors"
-      >
-        Read Full Article on {item.source} →
-      </a>
+      <div className="flex flex-wrap items-center gap-3">
+        <a
+          href={item.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block bg-sky-700 text-white px-4 py-2.5 sm:px-6 sm:py-3 rounded-lg text-sm sm:text-base font-medium hover:bg-sky-800 transition-colors"
+        >
+          Read Full Article on {item.source} →
+        </a>
+        <ShareButton title={item.title} url={`${SITE_URL}/news/${slug}`} />
+      </div>
     </div>
   );
 }

@@ -4,12 +4,14 @@ import NewsFeed from "@/components/NewsFeed";
 import JobList from "@/components/JobList";
 import WeatherWidget from "@/components/WeatherWidget";
 import CurrencyWidget from "@/components/CurrencyWidget";
+import DohaTime from "@/components/DohaTime";
 import { safeJsonLd } from "@/lib/utils";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Doha Prayer Times Today — Qatar News & Jobs | Qatar Portal",
   description: "Accurate Doha prayer times for today including Fajr, Dhuhr, Asr, Maghrib and Isha. Plus latest Qatar news and job listings.",
+  keywords: ["Doha prayer times today", "Fajr time Doha", "Qatar prayer times", "Qatar news today", "jobs in Qatar", "Maghrib time Doha", "Qatar Portal"],
   alternates: { canonical: "https://qatar-portal.vercel.app" },
   openGraph: {
     title: "Doha Prayer Times Today — Qatar News & Jobs | Qatar Portal",
@@ -39,7 +41,11 @@ export default async function Home() {
   return (
     <div className="space-y-6 sm:space-y-10">
       <script type="application/ld+json" dangerouslySetInnerHTML={{__html: safeJsonLd(homeJsonLd)}} />
-      <h1 className="sr-only">Qatar Portal — Doha Prayer Times, Qatar News &amp; Jobs</h1>
+      <h1 className="text-xl font-bold text-gray-900 mb-1">Qatar Portal — Doha Prayer Times, Qatar News &amp; Jobs</h1>
+      {/* Doha Live Time */}
+      <div className="flex justify-end">
+        <DohaTime />
+      </div>
       {/* Prayer Times */}
       <section>
         <Suspense fallback={<div className="bg-white rounded-2xl p-6 animate-pulse h-32" />}>

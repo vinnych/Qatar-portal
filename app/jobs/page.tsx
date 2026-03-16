@@ -7,12 +7,12 @@ const year = new Date().getFullYear();
 
 export const metadata: Metadata = {
   title: `Latest Jobs in Qatar ${year} | Qatar Portal`,
-  description: "Browse the latest job vacancies in Qatar, updated daily from Bayt.com and GulfTalent. Find jobs in Doha and across Qatar.",
+  description: "Browse the latest job vacancies in Qatar, updated daily from Google News. Find jobs in Doha and across Qatar.",
   alternates: { canonical: "https://qatar-portal.vercel.app/jobs" },
-  keywords: ["Qatar jobs", "jobs in Qatar", "Doha jobs", `Qatar vacancies ${year}`, "Gulf jobs", "Bayt Qatar", "GulfTalent Qatar"],
+  keywords: ["Qatar jobs", "jobs in Qatar", "Doha jobs", `Qatar vacancies ${year}`, "Gulf jobs", "Qatar hiring", "Qatar careers"],
   openGraph: {
     title: `Latest Jobs in Qatar ${year} | Qatar Portal`,
-    description: "Browse the latest job vacancies in Qatar, updated daily. Find jobs in Doha and across Qatar.",
+    description: "Browse the latest job vacancies in Qatar, updated daily from Google News. Find jobs in Doha and across Qatar.",
     url: "https://qatar-portal.vercel.app/jobs",
     siteName: "Qatar Portal",
     type: "website",
@@ -59,6 +59,7 @@ export default async function JobsPage() {
       {jsonLd && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html: safeJsonLd(jsonLd)}} />
       )}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd({ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://qatar-portal.vercel.app" }, { "@type": "ListItem", position: 2, name: "Jobs in Qatar", item: "https://qatar-portal.vercel.app/jobs" }] }) }} />
       <h1 className="text-xl sm:text-2xl font-bold text-emerald-900 mb-6">
         <span aria-hidden="true">💼</span> Jobs in Qatar
       </h1>

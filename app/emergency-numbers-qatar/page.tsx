@@ -4,9 +4,9 @@ import { safeJsonLd } from "@/lib/utils";
 const SITE_URL = "https://qatar-portal.vercel.app";
 
 export const metadata: Metadata = {
-  title: "Emergency Numbers Qatar & Embassies in Doha 2025",
+  title: "Emergency Numbers Qatar & Embassy Contacts Doha 2026",
   description:
-    "Essential emergency numbers in Qatar: police, ambulance, fire, and traffic. Plus embassy contacts for India, Pakistan, Philippines, UK, USA, and more in Doha.",
+    "Qatar emergency numbers: police, ambulance, fire, traffic. Embassy contacts for India, Pakistan, Philippines, UK, USA and more.",
   keywords: ["emergency numbers Qatar", "Qatar police number", "ambulance Qatar", "embassies in Doha", "Indian embassy Qatar", "Pakistan embassy Qatar"],
   alternates: { canonical: `${SITE_URL}/emergency-numbers-qatar` },
   openGraph: {
@@ -23,15 +23,48 @@ export const metadata: Metadata = {
 export default function EmergencyNumbersQatarPage() {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "WebPage",
-    name: "Emergency Numbers Qatar & Embassies in Doha",
-    url: `${SITE_URL}/emergency-numbers-qatar`,
-    description: "Essential emergency numbers and embassy contacts for Qatar residents and visitors.",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "What is the emergency number in Qatar?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "The emergency number in Qatar is 999 for police, ambulance, and fire. For the traffic police, call 96600000.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What is the Indian Embassy number in Doha, Qatar?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "The Indian Embassy in Doha, Qatar can be reached at +974 4425 5777. The embassy is located in the diplomatic area of Doha.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How do I call an ambulance in Qatar?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "To call an ambulance in Qatar, dial 999. Hamad Medical Corporation operates the national ambulance service, which is free to call.",
+        },
+      },
+    ],
+  };
+
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Emergency Numbers Qatar", item: `${SITE_URL}/emergency-numbers-qatar` },
+    ],
   };
 
   return (
     <div className="max-w-2xl mx-auto space-y-10">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbLd) }} />
 
       <div>
         <h1 className="text-3xl font-bold text-gray-900 mb-3">Emergency Numbers Qatar & Embassies in Doha</h1>
