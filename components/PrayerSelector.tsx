@@ -128,7 +128,7 @@ export default function PrayerSelector({
   const todayStr = now.toLocaleDateString("en-GB", { day: "2-digit", month: "long", year: "numeric" });
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-5">
       {/* Location selector */}
       <div className="flex flex-wrap items-center gap-3">
         <label className="text-sm font-medium text-violet-800">Location:</label>

@@ -74,7 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             }
           })}}
         />
-        <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8">{children}</main>
+        <main className="max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-5">{children}</main>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-VPREJS079K"
           strategy="afterInteractive"
@@ -90,7 +90,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SpeedInsights />
         <DonateDialog />
         <FooterScenery />
-        <footer className="bg-amber-50 border-t border-amber-200 py-8 text-sm text-gray-500">
+        <footer className="bg-amber-50 border-t border-amber-200 py-5 text-sm text-gray-500">
           <div className="max-w-6xl mx-auto px-4 space-y-4">
             <div className="flex flex-wrap justify-center gap-x-3 sm:gap-x-6 gap-y-2">
               <a href="/" className="hover:text-rose-800 transition-colors">Home</a>

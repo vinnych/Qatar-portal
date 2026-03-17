@@ -40,11 +40,10 @@ const homeJsonLd = {
 
 export default async function Home() {
   return (
-    <div className="space-y-6 sm:space-y-10">
+    <div className="space-y-4">
       <script type="application/ld+json" dangerouslySetInnerHTML={{__html: safeJsonLd(homeJsonLd)}} />
-      <h1 className="text-xl font-bold text-gray-900 mb-1">Qatar Portal — Doha Prayer Times, Qatar News &amp; Jobs</h1>
-      {/* Doha Live Time */}
-      <div className="flex justify-end">
+      <div className="flex items-center justify-between">
+        <h1 className="text-base font-bold text-gray-900">Qatar Portal — Prayer Times, News &amp; Jobs</h1>
         <DohaTime />
       </div>
       {/* Prayer Times */}
@@ -55,57 +54,57 @@ export default async function Home() {
       </section>
 
       {/* Weather + Currency */}
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid md:grid-cols-2 gap-3">
         <section>
-          <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center justify-between mb-2">
             <h2 className="text-sm font-semibold text-amber-800"><span aria-hidden="true">🌤️</span> Weather in Doha</h2>
-            <a href="/weather" className="text-xs text-amber-700 hover:underline">7-day forecast →</a>
+            <a href="/weather" className="text-xs text-amber-700 hover:underline">7-day →</a>
           </div>
-          <Suspense fallback={<div className="bg-amber-50 rounded-2xl h-36 animate-pulse" />}>
+          <Suspense fallback={<div className="bg-amber-50 rounded-2xl h-28 animate-pulse" />}>
             <WeatherWidget />
           </Suspense>
         </section>
         <section>
-          <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center justify-between mb-2">
             <h2 className="text-sm font-semibold text-rose-800"><span aria-hidden="true">💱</span> QAR Exchange Rates</h2>
             <a href="/currency" className="text-xs text-rose-700 hover:underline">All rates →</a>
           </div>
-          <Suspense fallback={<div className="bg-stone-100 rounded-2xl h-36 animate-pulse" />}>
+          <Suspense fallback={<div className="bg-stone-100 rounded-2xl h-28 animate-pulse" />}>
             <CurrencyWidget />
           </Suspense>
         </section>
       </div>
 
       {/* Ad unit between widgets and news */}
-      <AdUnit slot="REPLACE_WITH_SLOT_ID" className="my-2" />
+      <AdUnit slot="REPLACE_WITH_SLOT_ID" className="my-1" />
 
       {/* News + Jobs side by side on large screens */}
-      <div className="grid lg:grid-cols-3 gap-3 sm:gap-6 lg:gap-8">
+      <div className="grid lg:grid-cols-3 gap-3 lg:gap-5">
         {/* News — takes 2/3 */}
         <section className="lg:col-span-2">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-sky-900"><span aria-hidden="true">📰</span> Latest News</h2>
-            <a href="/news" className="text-sm text-sky-700 hover:underline">View all →</a>
+          <div className="flex items-center justify-between mb-2">
+            <h2 className="text-sm font-semibold text-sky-900"><span aria-hidden="true">📰</span> Latest News</h2>
+            <a href="/news" className="text-xs text-sky-700 hover:underline">View all →</a>
           </div>
-          <Suspense fallback={<div className="grid gap-4 sm:grid-cols-2"><div className="bg-white rounded-xl h-32 animate-pulse" /><div className="bg-white rounded-xl h-32 animate-pulse" /></div>}>
+          <Suspense fallback={<div className="grid gap-3 sm:grid-cols-2"><div className="bg-white rounded-xl h-32 animate-pulse" /><div className="bg-white rounded-xl h-32 animate-pulse" /></div>}>
             <NewsFeed limit={12} />
           </Suspense>
         </section>
 
         {/* Jobs — takes 1/3 */}
         <section>
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-emerald-900"><span aria-hidden="true">💼</span> Jobs in Qatar</h2>
-            <a href="/jobs" className="text-sm text-emerald-700 hover:underline">View all →</a>
+          <div className="flex items-center justify-between mb-2">
+            <h2 className="text-sm font-semibold text-emerald-900"><span aria-hidden="true">💼</span> Jobs in Qatar</h2>
+            <a href="/jobs" className="text-xs text-emerald-700 hover:underline">View all →</a>
           </div>
-          <Suspense fallback={<div className="space-y-3"><div className="bg-white rounded-xl h-16 animate-pulse" /><div className="bg-white rounded-xl h-16 animate-pulse" /></div>}>
+          <Suspense fallback={<div className="space-y-2"><div className="bg-white rounded-xl h-14 animate-pulse" /><div className="bg-white rounded-xl h-14 animate-pulse" /></div>}>
             <JobList limit={5} />
           </Suspense>
         </section>
       </div>
       {/* FAQ section — supports FAQPage JSON-LD for Google rich results */}
-      <section className="mt-4 border-t border-stone-200 pt-6">
-        <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">Frequently Asked Questions</h2>
+      <section className="border-t border-stone-200 pt-4">
+        <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Frequently Asked Questions</h2>
         <div className="space-y-4">
           {[
             { q: "What time is Fajr in Doha today?", a: "Today's Fajr prayer time in Doha is shown at the top of this page, updated daily using the Muslim World League calculation method." },

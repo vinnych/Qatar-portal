@@ -13,7 +13,7 @@ export default async function NewsFeed({ limit = 6 }: { limit?: number }) {
   }
 
   return (
-    <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
       {news.map((item) => (
         <a
           key={item.link}
@@ -25,23 +25,23 @@ export default async function NewsFeed({ limit = 6 }: { limit?: number }) {
             <img
               src={item.imageUrl}
               alt={item.title}
-              className="w-full h-36 sm:h-40 md:h-44 object-cover"
+              className="w-full h-32 sm:h-36 object-cover"
               loading="lazy"
             />
           ) : (
-            <div className="w-full h-36 sm:h-40 md:h-44 bg-gradient-to-br from-sky-100 to-sky-200 flex items-center justify-center">
-              <span className="text-4xl opacity-40">📰</span>
+            <div className="w-full h-32 sm:h-36 bg-gradient-to-br from-sky-100 to-sky-200 flex items-center justify-center">
+              <span className="text-3xl opacity-40">📰</span>
             </div>
           )}
-          <div className="p-3 sm:p-4 flex flex-col flex-1">
-            <span className="text-xs text-sky-700 font-semibold mb-2">{item.source}</span>
-            <h3 className="text-sm sm:text-base font-semibold text-gray-800 leading-snug mb-2 line-clamp-3">
+          <div className="p-2.5 flex flex-col flex-1">
+            <span className="text-xs text-sky-700 font-semibold mb-1">{item.source}</span>
+            <h3 className="text-sm font-semibold text-gray-800 leading-snug mb-1 line-clamp-3">
               {item.title}
             </h3>
             {item.contentSnippet && (
               <p className="text-xs text-gray-500 line-clamp-2 mt-auto">{item.contentSnippet}</p>
             )}
-            <span className="text-xs text-gray-400 mt-2">{item.pubDate}</span>
+            <span className="text-xs text-gray-400 mt-1">{item.pubDate}</span>
           </div>
         </a>
       ))}
