@@ -114,8 +114,8 @@ export default async function Home() {
             { q: "What are today's prayer times in Qatar?", a: "All five daily prayer times for Qatar (Fajr, Dhuhr, Asr, Maghrib, Isha) are shown above, updated daily." },
             { q: "Where can I find jobs in Qatar?", a: "Browse the latest job vacancies in Doha and Qatar in the Jobs section above, updated daily from top Gulf job boards." },
           ].map(({ q, a }) => (
-            <details key={q} className="group">
-              <summary className="cursor-pointer text-sm font-medium text-gray-700 hover:text-rose-800 transition-colors">{q}</summary>
+            <details key={q} className="group border-b border-stone-100 last:border-0">
+              <summary className="cursor-pointer text-sm font-medium text-gray-700 hover:text-rose-800 transition-colors py-3 block">{q}</summary>
               <p className="text-sm text-gray-500 mt-1 pl-2">{a}</p>
             </details>
           ))}

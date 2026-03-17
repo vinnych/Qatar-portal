@@ -130,12 +130,12 @@ export default function PrayerSelector({
   return (
     <div className="space-y-5">
       {/* Location selector */}
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
         <label className="text-sm font-medium text-violet-800">Location:</label>
         <select
           value={selected}
           onChange={(e) => { setUsingGeo(false); setGeoLabel(""); setSelected(Number(e.target.value)); }}
-          className="rounded-xl border border-violet-200 bg-white px-3 py-2 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-violet-300 shadow-sm"
+          className="rounded-xl border border-violet-200 bg-white px-3 py-2.5 sm:py-2 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-violet-300 shadow-sm"
         >
           {CITIES.map((c, i) => (
             <option key={i} value={i}>{c.label}</option>
@@ -144,7 +144,7 @@ export default function PrayerSelector({
         <button
           onClick={detectLocation}
           disabled={loading}
-          className="flex items-center gap-1.5 px-3 py-2 rounded-xl border border-violet-300 bg-violet-50 text-violet-800 text-sm font-medium hover:bg-violet-100 transition-colors disabled:opacity-50"
+          className="flex items-center gap-1.5 px-4 py-2.5 sm:py-2 rounded-xl border border-violet-300 bg-violet-50 text-violet-800 text-sm font-medium hover:bg-violet-100 transition-colors disabled:opacity-50"
         >
           📍 Use my location
         </button>
@@ -199,7 +199,7 @@ export default function PrayerSelector({
                   <th className="px-2 py-2.5 text-left font-semibold">Date</th>
                   <th className="px-2 py-2.5 text-left font-semibold hidden sm:table-cell">Hijri</th>
                   <th className="px-2 py-2.5 text-center font-semibold">Fajr</th>
-                  <th className="px-2 py-2.5 text-center font-semibold hidden md:table-cell">Sunrise</th>
+                  <th className="px-2 py-2.5 text-center font-semibold hidden sm:table-cell">Sunrise</th>
                   <th className="px-2 py-2.5 text-center font-semibold">Dhuhr</th>
                   <th className="px-2 py-2.5 text-center font-semibold">Asr</th>
                   <th className="px-2 py-2.5 text-center font-semibold">Maghrib</th>
@@ -227,7 +227,7 @@ export default function PrayerSelector({
                       </td>
                       <td className="px-3 py-2.5 text-xs text-gray-400 hidden sm:table-cell">{day.hijriDate}</td>
                       <td className="px-3 py-2.5 text-center text-gray-700">{day.Fajr}</td>
-                      <td className="px-3 py-2.5 text-center text-gray-400 hidden md:table-cell">{day.Sunrise}</td>
+                      <td className="px-3 py-2.5 text-center text-gray-400 hidden sm:table-cell">{day.Sunrise}</td>
                       <td className="px-3 py-2.5 text-center text-gray-700">{day.Dhuhr}</td>
                       <td className="px-3 py-2.5 text-center text-gray-700">{day.Asr}</td>
                       <td className="px-3 py-2.5 text-center text-gray-700">{day.Maghrib}</td>
