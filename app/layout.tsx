@@ -31,13 +31,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <head>
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7212871157824722"
-          crossOrigin="anonymous"
-        />
-      </head>
+      <head />
       <body className="bg-stone-50 text-gray-900 min-h-screen">
         <header className="bg-rose-900 sticky top-0 z-10 shadow-md">
           <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between relative">
@@ -75,6 +69,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           })}}
         />
         <main className="max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-5">{children}</main>
+        <Script
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7212871157824722"
+          strategy="afterInteractive"
+          crossOrigin="anonymous"
+        />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-VPREJS079K"
           strategy="afterInteractive"
