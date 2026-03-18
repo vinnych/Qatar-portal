@@ -18,15 +18,15 @@ export default async function JobList({ limit = 6 }: { limit?: number }) {
         <a
           key={job.link}
           href={`/jobs/${job.slug}`}
-          className="bg-white rounded-lg border border-stone-200 hover:border-emerald-300 hover:shadow-sm transition-all p-2.5 flex items-start justify-between gap-2"
+          className="bg-white rounded-xl border border-stone-200 hover:border-stone-300 hover:shadow-md transition-all duration-200 p-3 flex items-center justify-between gap-3 group"
         >
           <div className="flex-1 min-w-0">
-            <h3 className="text-xs font-semibold text-gray-800 leading-snug truncate">{job.title}</h3>
+            <h3 className="text-xs font-semibold text-gray-800 leading-snug truncate group-hover:text-gray-900">{job.title}</h3>
             <p className="text-[10px] text-gray-400 mt-0.5 truncate">
               {job.company}{job.location ? ` · ${job.location}` : ""}
             </p>
           </div>
-          <span className="shrink-0 text-[10px] font-medium text-emerald-700 bg-emerald-50 border border-emerald-100 px-1.5 py-0.5 rounded-full">
+          <span className="shrink-0 text-[9px] font-bold text-emerald-700 uppercase tracking-wide">
             {job.source}
           </span>
         </a>

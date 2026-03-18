@@ -28,10 +28,8 @@ export default function DohaTime() {
   if (!time) return null;
 
   return (
-    <div className="inline-flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-xl px-4 py-2 text-sm">
-      <span className="text-amber-600">🕐</span>
-      <span className="font-mono font-semibold text-amber-900">{time}</span>
-      <span className="text-xs text-amber-500">Doha</span>
-    </div>
+    <span className="text-[11px] font-mono text-gray-400 tabular-nums tracking-wide select-none">
+      {time}
+    </span>
   );
 }

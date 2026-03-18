@@ -40,7 +40,10 @@ const homeJsonLd = {
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">{children}</p>
+    <div className="flex items-center gap-3 mb-2">
+      <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest whitespace-nowrap">{children}</span>
+      <div className="flex-1 h-px bg-stone-200" />
+    </div>
   );
 }
 
@@ -50,8 +53,8 @@ export default async function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{__html: safeJsonLd(homeJsonLd)}} />
 
       {/* Title row */}
-      <div className="flex items-center justify-between">
-        <h1 className="text-xs font-medium text-gray-400 tracking-wide uppercase">Prayer · News · Jobs · Doha</h1>
+      <div className="flex items-center justify-between border-b border-stone-200 pb-2.5">
+        <h1 className="text-[11px] font-bold text-gray-400 tracking-widest uppercase">Prayer · News · Jobs · Doha</h1>
         <DohaTime />
       </div>
 
@@ -108,8 +111,8 @@ export default async function Home() {
       </div>
 
       {/* FAQ */}
-      <section className="border-t border-stone-200 pt-3">
-        <h2 className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-2">FAQ</h2>
+      <section>
+        <SectionLabel>FAQ</SectionLabel>
         <div className="divide-y divide-stone-100">
           {[
             { q: "What time is Fajr in Doha today?", a: "Today's Fajr prayer time in Doha is shown at the top of this page, updated daily using the Muslim World League calculation method." },
@@ -118,8 +121,11 @@ export default async function Home() {
             { q: "Where can I find jobs in Qatar?", a: "Browse the latest job vacancies in Doha and Qatar in the Jobs section above, updated daily from top Gulf job boards." },
           ].map(({ q, a }) => (
             <details key={q} className="group">
-              <summary className="cursor-pointer text-xs font-medium text-gray-600 hover:text-rose-800 transition-colors py-2">{q}</summary>
-              <p className="text-xs text-gray-400 pb-2 pl-2">{a}</p>
+              <summary className="cursor-pointer list-none flex items-center justify-between text-xs font-medium text-gray-600 hover:text-rose-800 transition-colors py-3 min-h-[44px]">
+                <span>{q}</span>
+                <span className="text-gray-300 group-open:rotate-180 transition-transform text-[10px] ml-3 shrink-0">▼</span>
+              </summary>
+              <p className="text-xs text-gray-400 pb-3 leading-relaxed">{a}</p>
             </details>
           ))}
         </div>

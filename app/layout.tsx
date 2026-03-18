@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display } from "next/font/google";
+import { Playfair_Display, Inter } from "next/font/google";
 import Script from "next/script";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import FooterScenery from "@/components/FooterScenery";
@@ -9,6 +9,7 @@ import { safeJsonLd } from "@/lib/utils";
 import "./globals.css";
 
 const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700"] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://qatar-portal.vercel.app"),
@@ -32,22 +33,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head />
-      <body className="bg-stone-50 text-gray-900 min-h-screen">
-        <header className="bg-rose-900/95 backdrop-blur-sm sticky top-0 z-10 border-b border-rose-800/50">
-          <div className="max-w-6xl mx-auto px-4 py-2 flex items-center justify-between relative">
-            <a href="/" className={`${playfair.className} text-xl tracking-widest text-amber-300 uppercase`}>
+      <body className={`${inter.className} bg-stone-50 text-gray-900 min-h-screen`}>
+        <header className="bg-rose-900 sticky top-0 z-10 border-b border-rose-950/40">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 h-11 flex items-center justify-between">
+            <a href="/" className={`${playfair.className} text-lg tracking-widest text-amber-300 uppercase leading-none`}>
               Qatar
             </a>
             {/* Desktop nav */}
-            <nav className="hidden sm:flex gap-4 text-xs font-medium tracking-wide">
-              <a href="/" className="text-white/80 hover:text-amber-300 transition-colors">Home</a>
-              <a href="/prayer" className="text-white/80 hover:text-amber-300 transition-colors">Prayer</a>
-              <a href="/weather" className="text-white/80 hover:text-amber-300 transition-colors">Weather</a>
-              <a href="/currency" className="text-white/80 hover:text-amber-300 transition-colors">Currency</a>
-              <a href="/news" className="text-white/80 hover:text-amber-300 transition-colors">News</a>
-              <a href="/jobs" className="text-white/80 hover:text-amber-300 transition-colors">Jobs</a>
-              <a href="/hijri-calendar" className="text-white/80 hover:text-amber-300 transition-colors">Hijri</a>
-              <a href="/ramadan-2026" className="text-white/80 hover:text-amber-300 transition-colors">Ramadan</a>
+            <nav className="hidden sm:flex items-center gap-5 text-[11px] font-semibold tracking-wide">
+              <a href="/" className="text-white/70 hover:text-white transition-colors duration-150">Home</a>
+              <a href="/prayer" className="text-white/70 hover:text-white transition-colors duration-150">Prayer</a>
+              <a href="/weather" className="text-white/70 hover:text-white transition-colors duration-150">Weather</a>
+              <a href="/currency" className="text-white/70 hover:text-white transition-colors duration-150">Currency</a>
+              <a href="/news" className="text-white/70 hover:text-white transition-colors duration-150">News</a>
+              <a href="/jobs" className="text-white/70 hover:text-white transition-colors duration-150">Jobs</a>
+              <a href="/hijri-calendar" className="text-white/70 hover:text-white transition-colors duration-150">Hijri</a>
+              <a href="/ramadan-2026" className="text-white/70 hover:text-white transition-colors duration-150">Ramadan</a>
             </nav>
             {/* Mobile hamburger */}
             <MobileNav />
@@ -89,25 +90,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SpeedInsights />
         <DonateDialog />
         <FooterScenery />
-        <footer className="bg-rose-900/5 border-t border-stone-200 py-4 text-xs text-gray-400">
-          <div className="max-w-6xl mx-auto px-4 space-y-3">
-            <div className="flex flex-wrap justify-center gap-x-4 gap-y-1.5">
-              <a href="/" className="hover:text-rose-800 transition-colors">Home</a>
-              <a href="/prayer" className="hover:text-rose-800 transition-colors">Prayer Times</a>
-              <a href="/hijri-calendar" className="hover:text-rose-800 transition-colors">Hijri Calendar</a>
-              <a href="/ramadan-2026" className="hover:text-rose-800 transition-colors">Ramadan 2026</a>
-              <a href="/weather" className="hover:text-rose-800 transition-colors">Weather</a>
-              <a href="/currency" className="hover:text-rose-800 transition-colors">Currency</a>
-              <a href="/news" className="hover:text-rose-800 transition-colors">News</a>
-              <a href="/jobs" className="hover:text-rose-800 transition-colors">Jobs</a>
-              <a href="/work-in-qatar" className="hover:text-rose-800 transition-colors">Work in Qatar</a>
-              <a href="/qatar-visa-requirements" className="hover:text-rose-800 transition-colors">Qatar Visa</a>
-              <a href="/cost-of-living-doha" className="hover:text-rose-800 transition-colors">Cost of Living</a>
-              <a href="/qatar-salary-guide" className="hover:text-rose-800 transition-colors">Salary Guide</a>
-              <a href="/about" className="hover:text-rose-800 transition-colors">About</a>
-              <a href="/privacy" className="hover:text-rose-800 transition-colors">Privacy</a>
+        <footer className="border-t border-stone-200 py-6 text-[11px] text-gray-400">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="grid grid-cols-2 sm:flex sm:flex-wrap sm:justify-center gap-x-5 gap-y-2 mb-4">
+              <a href="/" className="hover:text-gray-600 transition-colors duration-150">Home</a>
+              <a href="/prayer" className="hover:text-gray-600 transition-colors duration-150">Prayer Times</a>
+              <a href="/hijri-calendar" className="hover:text-gray-600 transition-colors duration-150">Hijri Calendar</a>
+              <a href="/ramadan-2026" className="hover:text-gray-600 transition-colors duration-150">Ramadan 2026</a>
+              <a href="/weather" className="hover:text-gray-600 transition-colors duration-150">Weather</a>
+              <a href="/currency" className="hover:text-gray-600 transition-colors duration-150">Currency</a>
+              <a href="/news" className="hover:text-gray-600 transition-colors duration-150">News</a>
+              <a href="/jobs" className="hover:text-gray-600 transition-colors duration-150">Jobs</a>
+              <a href="/work-in-qatar" className="hover:text-gray-600 transition-colors duration-150">Work in Qatar</a>
+              <a href="/qatar-visa-requirements" className="hover:text-gray-600 transition-colors duration-150">Qatar Visa</a>
+              <a href="/cost-of-living-doha" className="hover:text-gray-600 transition-colors duration-150">Cost of Living</a>
+              <a href="/qatar-salary-guide" className="hover:text-gray-600 transition-colors duration-150">Salary Guide</a>
+              <a href="/about" className="hover:text-gray-600 transition-colors duration-150">About</a>
+              <a href="/privacy" className="hover:text-gray-600 transition-colors duration-150">Privacy</a>
             </div>
-            <p className="text-center text-gray-400/70">© {new Date().getFullYear()} Qatar Portal · Aladhan · Open-Meteo · ExchangeRate-API</p>
+            <p className="text-center text-gray-300">© {new Date().getFullYear()} Qatar Portal · Aladhan · Open-Meteo · ExchangeRate-API</p>
           </div>
         </footer>
       </body>
