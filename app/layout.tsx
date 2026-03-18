@@ -33,21 +33,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head />
       <body className="bg-stone-50 text-gray-900 min-h-screen">
-        <header className="bg-rose-900 sticky top-0 z-10 shadow-md">
-          <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between relative">
-            <a href="/" className={`${playfair.className} text-2xl tracking-widest text-amber-300 uppercase`}>
+        <header className="bg-rose-900/95 backdrop-blur-sm sticky top-0 z-10 border-b border-rose-800/50">
+          <div className="max-w-6xl mx-auto px-4 py-2 flex items-center justify-between relative">
+            <a href="/" className={`${playfair.className} text-xl tracking-widest text-amber-300 uppercase`}>
               Qatar
             </a>
             {/* Desktop nav */}
-            <nav className="hidden sm:flex gap-5 text-sm font-medium">
-              <a href="/" className="text-white hover:text-amber-300 transition-colors">Home</a>
-              <a href="/prayer" className="text-white hover:text-amber-300 transition-colors">Prayer</a>
-              <a href="/weather" className="text-white hover:text-amber-300 transition-colors">Weather</a>
-              <a href="/currency" className="text-white hover:text-amber-300 transition-colors">Currency</a>
-              <a href="/news" className="text-white hover:text-amber-300 transition-colors">News</a>
-              <a href="/jobs" className="text-white hover:text-amber-300 transition-colors">Jobs</a>
-              <a href="/hijri-calendar" className="text-white hover:text-amber-300 transition-colors">Hijri</a>
-              <a href="/ramadan-2026" className="text-white hover:text-amber-300 transition-colors">Ramadan</a>
+            <nav className="hidden sm:flex gap-4 text-xs font-medium tracking-wide">
+              <a href="/" className="text-white/80 hover:text-amber-300 transition-colors">Home</a>
+              <a href="/prayer" className="text-white/80 hover:text-amber-300 transition-colors">Prayer</a>
+              <a href="/weather" className="text-white/80 hover:text-amber-300 transition-colors">Weather</a>
+              <a href="/currency" className="text-white/80 hover:text-amber-300 transition-colors">Currency</a>
+              <a href="/news" className="text-white/80 hover:text-amber-300 transition-colors">News</a>
+              <a href="/jobs" className="text-white/80 hover:text-amber-300 transition-colors">Jobs</a>
+              <a href="/hijri-calendar" className="text-white/80 hover:text-amber-300 transition-colors">Hijri</a>
+              <a href="/ramadan-2026" className="text-white/80 hover:text-amber-300 transition-colors">Ramadan</a>
             </nav>
             {/* Mobile hamburger */}
             <MobileNav />
@@ -68,7 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             }
           })}}
         />
-        <main className="max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-5">{children}</main>
+        <main className="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4">{children}</main>
         <Script
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7212871157824722"
           strategy="afterInteractive"
@@ -89,35 +89,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SpeedInsights />
         <DonateDialog />
         <FooterScenery />
-        <footer className="bg-amber-50 border-t border-amber-200 py-5 text-sm text-gray-500">
-          <div className="max-w-6xl mx-auto px-4 space-y-4">
-            <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 sm:flex sm:flex-wrap sm:justify-center sm:gap-x-5 sm:gap-y-2">
+        <footer className="bg-rose-900/5 border-t border-stone-200 py-4 text-xs text-gray-400">
+          <div className="max-w-6xl mx-auto px-4 space-y-3">
+            <div className="flex flex-wrap justify-center gap-x-4 gap-y-1.5">
               <a href="/" className="hover:text-rose-800 transition-colors">Home</a>
               <a href="/prayer" className="hover:text-rose-800 transition-colors">Prayer Times</a>
               <a href="/hijri-calendar" className="hover:text-rose-800 transition-colors">Hijri Calendar</a>
               <a href="/ramadan-2026" className="hover:text-rose-800 transition-colors">Ramadan 2026</a>
-              <a href="/weather" className="hover:text-rose-800 transition-colors">Doha Weather</a>
-              <a href="/currency" className="hover:text-rose-800 transition-colors">QAR Rates</a>
+              <a href="/weather" className="hover:text-rose-800 transition-colors">Weather</a>
+              <a href="/currency" className="hover:text-rose-800 transition-colors">Currency</a>
               <a href="/news" className="hover:text-rose-800 transition-colors">News</a>
-              <a href="/jobs" className="hover:text-rose-800 transition-colors">Jobs in Qatar</a>
+              <a href="/jobs" className="hover:text-rose-800 transition-colors">Jobs</a>
               <a href="/work-in-qatar" className="hover:text-rose-800 transition-colors">Work in Qatar</a>
-              <a href="/jobs-category/engineering" className="hover:text-rose-800 transition-colors">Engineering Jobs</a>
-              <a href="/jobs-category/it" className="hover:text-rose-800 transition-colors">IT Jobs</a>
-              <a href="/jobs-category/healthcare" className="hover:text-rose-800 transition-colors">Healthcare Jobs</a>
-              <a href="/news-category" className="hover:text-rose-800 transition-colors">News by Category</a>
               <a href="/qatar-visa-requirements" className="hover:text-rose-800 transition-colors">Qatar Visa</a>
               <a href="/cost-of-living-doha" className="hover:text-rose-800 transition-colors">Cost of Living</a>
               <a href="/qatar-salary-guide" className="hover:text-rose-800 transition-colors">Salary Guide</a>
-              <a href="/qatar-labour-law" className="hover:text-rose-800 transition-colors">Labour Law</a>
-              <a href="/qatar-public-holidays" className="hover:text-rose-800 transition-colors">Public Holidays</a>
-              <a href="/emergency-numbers-qatar" className="hover:text-rose-800 transition-colors">Emergency Numbers</a>
               <a href="/about" className="hover:text-rose-800 transition-colors">About</a>
-              <a href="/privacy" className="hover:text-rose-800 transition-colors">Privacy Policy</a>
+              <a href="/privacy" className="hover:text-rose-800 transition-colors">Privacy</a>
             </div>
-            <p className="text-center text-xs text-gray-500">
-              Data sources: Aladhan API · Open-Meteo · Al Jazeera · BBC · Google News · ExchangeRate-API
-            </p>
-            <p className="text-center">© {new Date().getFullYear()} Qatar Portal. All rights reserved.</p>
+            <p className="text-center text-gray-400/70">© {new Date().getFullYear()} Qatar Portal · Aladhan · Open-Meteo · ExchangeRate-API</p>
           </div>
         </footer>
       </body>

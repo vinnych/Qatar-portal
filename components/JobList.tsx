@@ -5,28 +5,28 @@ export default async function JobList({ limit = 6 }: { limit?: number }) {
   try {
     jobs = await getJobs(limit);
   } catch {
-    return <p className="text-red-500">Could not load jobs.</p>;
+    return <p className="text-red-400 text-xs">Could not load jobs.</p>;
   }
 
   if (jobs.length === 0) {
-    return <p className="text-gray-400">No job listings available right now.</p>;
+    return <p className="text-gray-400 text-xs">No job listings available right now.</p>;
   }
 
   return (
-    <div className="flex flex-col gap-2.5">
+    <div className="flex flex-col gap-1.5">
       {jobs.map((job) => (
         <a
           key={job.link}
           href={`/jobs/${job.slug}`}
-          className="bg-emerald-50 rounded-xl border border-emerald-100 shadow-sm p-3 hover:shadow-md hover:border-emerald-300 transition-all flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-3"
+          className="bg-white rounded-lg border border-stone-200 hover:border-emerald-300 hover:shadow-sm transition-all p-2.5 flex items-start justify-between gap-2"
         >
           <div className="flex-1 min-w-0">
-            <h3 className="text-sm font-semibold text-gray-800 leading-snug">{job.title}</h3>
-            <p className="text-xs text-gray-500 mt-1">
-              {job.company} · {job.location}
+            <h3 className="text-xs font-semibold text-gray-800 leading-snug truncate">{job.title}</h3>
+            <p className="text-[10px] text-gray-400 mt-0.5 truncate">
+              {job.company}{job.location ? ` · ${job.location}` : ""}
             </p>
           </div>
-          <span className="self-start text-xs text-emerald-800 font-medium bg-emerald-100 border border-emerald-200 px-2 py-1 rounded-full">
+          <span className="shrink-0 text-[10px] font-medium text-emerald-700 bg-emerald-50 border border-emerald-100 px-1.5 py-0.5 rounded-full">
             {job.source}
           </span>
         </a>
