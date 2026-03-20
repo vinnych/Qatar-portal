@@ -68,7 +68,7 @@ export default async function JobCategoryPage({ params }: { params: Promise<{ ca
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
 
       <div className="mb-6">
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{entry.label} Jobs in Qatar</h1>
+        <h1 className="font-newsreader text-2xl sm:text-3xl font-bold text-on-surface">{entry.label} Jobs in Qatar</h1>
         <p className="text-gray-500 text-sm mt-1">
           {filtered.length > 0 ? `${filtered.length} jobs found` : "No jobs found in this category right now"}
           {" · "}

@@ -1,160 +1,198 @@
 export default function FooterScenery() {
+  const bgCityPath = `M 0 260
+    L 15 260 L 15 170 L 30 170 L 30 260
+    L 45 260 L 45 190 L 55 180 L 70 180 L 70 260
+    L 90 260 L 90 140 L 110 140 L 110 260
+    L 140 260 L 140 200 L 160 200 L 160 260
+    L 180 260 L 180 150 L 195 150 L 195 120 L 210 120 L 210 260
+    L 230 260 L 230 180 L 260 180 L 260 260
+    L 270 260 L 270 160 L 290 160 L 290 260
+    L 310 260 L 310 190 L 330 190 L 330 260
+    L 380 260 L 380 150 L 410 150 L 410 260
+    L 430 260 L 430 170 L 460 170 L 460 260
+    L 480 260 L 480 140 L 510 140 L 510 260
+    L 530 260 L 530 180 L 550 180 L 550 260
+    L 580 260 L 580 160 L 610 160 L 610 260
+    L 630 260 L 630 190 L 650 190 L 650 260
+    L 680 260 L 680 130 L 710 130 L 710 260
+    L 730 260 L 730 170 L 760 170 L 760 260
+    L 780 260 L 780 110 L 810 110 L 810 260
+    L 830 260 L 830 180 L 860 180 L 860 260
+    L 880 260 L 880 150 L 910 150 L 910 260
+    L 930 260 L 930 200 L 960 200 L 960 260
+    L 980 260 L 980 140 L 1000 140 L 1000 260
+    L 1020 260 L 1020 180 L 1050 180 L 1050 260
+    L 1070 260 L 1070 160 L 1100 160 L 1100 260
+    L 1120 260 L 1120 130 L 1140 130 L 1140 260
+    L 1160 260 L 1160 190 L 1190 190 L 1190 260
+    L 1210 260 L 1210 150 L 1240 150 L 1240 260
+    L 1260 260 L 1260 180 L 1290 180 L 1290 260
+    L 1310 260 L 1310 160 L 1330 160 L 1330 260
+    L 1350 260 L 1350 200 L 1380 200 L 1380 260
+    L 1400 260 L 1400 170 L 1420 170 L 1420 260
+    L 1440 260 Z`
+
   return (
-    <div className="w-full overflow-hidden leading-none pointer-events-none select-none" aria-hidden="true">
+    <div
+      className="w-full overflow-hidden leading-none pointer-events-none select-none"
+      style={{ height: "220px" }}
+      aria-hidden="true"
+    >
       <svg
-        viewBox="0 0 1440 180"
         xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="xMidYMax meet"
-        className="w-full h-auto"
+        viewBox="0 0 1440 265"
+        width="100%"
+        height="100%"
+        preserveAspectRatio="xMidYMid slice"
       >
-        {/* Ground / sand dunes */}
-        <ellipse cx="720" cy="195" rx="900" ry="55" fill="#e7d5a8" />
-        <ellipse cx="300" cy="200" rx="380" ry="40" fill="#ddc990" />
-        <ellipse cx="1200" cy="200" rx="320" ry="38" fill="#ddc990" />
+        <defs>
+          {/* Sky */}
+          <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#fafaf9" />
+            <stop offset="100%" stopColor="#fafaf9" />
+          </linearGradient>
+          <radialGradient id="sunGlow" cx="10%" cy="80%" r="60%">
+            <stop offset="0%" stopColor="#ffffff" stopOpacity="0" />
+            <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+          </radialGradient>
 
-        {/* ── Far-left small palm ── */}
-        <path d="M120 180 Q124 140 118 100" stroke="#8B6914" strokeWidth="5" fill="none" strokeLinecap="round" />
-        {/* filled fronds */}
-        <path d="M118 100 Q96 78 72 90 Q92 90 118 100 Z" fill="#2d6a4f" />
-        <path d="M118 100 Q102 68 88 58 Q106 72 118 100 Z" fill="#1b4332" />
-        <path d="M118 100 Q116 68 114 52 Q120 68 118 100 Z" fill="#2d6a4f" />
-        <path d="M118 100 Q136 68 148 60 Q134 74 118 100 Z" fill="#1b4332" />
-        <path d="M118 100 Q140 78 162 88 Q142 88 118 100 Z" fill="#2d6a4f" />
-        {/* leaflet veins */}
-        <path d="M118 100 Q96 78 72 90" stroke="#40916c" strokeWidth="1.2" fill="none" />
-        <path d="M118 100 Q102 68 88 58" stroke="#40916c" strokeWidth="1.2" fill="none" />
-        <path d="M118 100 Q116 68 114 52" stroke="#40916c" strokeWidth="1.2" fill="none" />
-        <path d="M118 100 Q136 68 148 60" stroke="#40916c" strokeWidth="1.2" fill="none" />
-        <path d="M118 100 Q140 78 162 88" stroke="#40916c" strokeWidth="1.2" fill="none" />
-        {/* dates */}
-        <circle cx="118" cy="103" r="3" fill="#c77d0a" />
-        <circle cx="114" cy="107" r="2.5" fill="#b56c08" />
-        <circle cx="122" cy="106" r="2.5" fill="#c77d0a" />
+          {/* Building gradients */}
+          <linearGradient id="purpleTowerGrad" x1="0%" y1="0%" x2="20%" y2="100%">
+            <stop offset="0%" stopColor="#D163D6" />
+            <stop offset="50%" stopColor="#8F35B8" />
+            <stop offset="100%" stopColor="#3B1C63" />
+          </linearGradient>
+          <linearGradient id="goldTowerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#E8C340" />
+            <stop offset="50%" stopColor="#A5832E" />
+            <stop offset="100%" stopColor="#141E38" />
+          </linearGradient>
+          <linearGradient id="glassCyanGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#6DC5D1" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="#192A4D" stopOpacity="0.9" />
+          </linearGradient>
+          <linearGradient id="glassBlueGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#4B6A99" />
+            <stop offset="100%" stopColor="#0F1626" />
+          </linearGradient>
+          <linearGradient id="darkBuildingGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#283353" />
+            <stop offset="100%" stopColor="#090C15" />
+          </linearGradient>
+          <linearGradient id="silverTower" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#4B5878" />
+            <stop offset="30%" stopColor="#A2AECE" />
+            <stop offset="70%" stopColor="#55658A" />
+            <stop offset="100%" stopColor="#1F263A" />
+          </linearGradient>
 
-        {/* ── Left main tall palm ── */}
-        <path d="M260 182 Q268 138 255 78" stroke="#7a5c10" strokeWidth="7" fill="none" strokeLinecap="round" />
-        <path d="M263 160 Q256 158 263 155" stroke="#6b4f0e" strokeWidth="2" fill="none" />
-        <path d="M261 140 Q254 138 261 135" stroke="#6b4f0e" strokeWidth="2" fill="none" />
-        <path d="M259 118 Q252 116 259 113" stroke="#6b4f0e" strokeWidth="2" fill="none" />
-        {/* filled fronds */}
-        <path d="M255 78 Q224 48 188 62 Q218 66 255 78 Z" fill="#1b4332" />
-        <path d="M255 78 Q230 38 218 22 Q238 52 255 78 Z" fill="#2d6a4f" />
-        <path d="M255 78 Q253 34 248 14 Q256 38 255 78 Z" fill="#1b4332" />
-        <path d="M255 78 Q276 38 292 20 Q272 52 255 78 Z" fill="#2d6a4f" />
-        <path d="M255 78 Q284 48 314 58 Q284 62 255 78 Z" fill="#1b4332" />
-        <path d="M255 78 Q236 66 210 82 Q234 76 255 78 Z" fill="#40916c" opacity="0.7" />
-        {/* veins */}
-        <path d="M255 78 Q224 48 188 62" stroke="#40916c" strokeWidth="1.5" fill="none" />
-        <path d="M255 78 Q230 38 218 22" stroke="#40916c" strokeWidth="1.5" fill="none" />
-        <path d="M255 78 Q253 34 248 14" stroke="#40916c" strokeWidth="1.5" fill="none" />
-        <path d="M255 78 Q276 38 292 20" stroke="#40916c" strokeWidth="1.5" fill="none" />
-        <path d="M255 78 Q284 48 314 58" stroke="#40916c" strokeWidth="1.5" fill="none" />
-        {/* dates */}
-        <circle cx="256" cy="83" r="4" fill="#c77d0a" />
-        <circle cx="250" cy="88" r="3.5" fill="#b56c08" />
-        <circle cx="262" cy="87" r="3.5" fill="#c77d0a" />
-        <circle cx="255" cy="92" r="3" fill="#d4870b" />
+          {/* Stone-50 top fade — blends into page background */}
+          <linearGradient id="topFade" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#fafaf9" stopOpacity="1" />
+            <stop offset="100%" stopColor="#fafaf9" stopOpacity="0" />
+          </linearGradient>
 
-        {/* ── Center-left leaning palm ── */}
-        <path d="M500 182 Q510 145 530 95" stroke="#8B6914" strokeWidth="6" fill="none" strokeLinecap="round" />
-        <path d="M530 95 Q502 68 472 80 Q500 82 530 95 Z" fill="#1b4332" />
-        <path d="M530 95 Q512 60 500 48 Q520 68 530 95 Z" fill="#2d6a4f" />
-        <path d="M530 95 Q530 58 528 42 Q532 62 530 95 Z" fill="#1b4332" />
-        <path d="M530 95 Q550 60 562 50 Q544 70 530 95 Z" fill="#2d6a4f" />
-        <path d="M530 95 Q556 72 578 78 Q554 78 530 95 Z" fill="#1b4332" />
-        <path d="M530 95 Q502 68 472 80" stroke="#40916c" strokeWidth="1.5" fill="none" />
-        <path d="M530 95 Q512 60 500 48" stroke="#40916c" strokeWidth="1.5" fill="none" />
-        <path d="M530 95 Q530 58 528 42" stroke="#40916c" strokeWidth="1.5" fill="none" />
-        <path d="M530 95 Q550 60 562 50" stroke="#40916c" strokeWidth="1.5" fill="none" />
-        <path d="M530 95 Q556 72 578 78" stroke="#40916c" strokeWidth="1.5" fill="none" />
-        <circle cx="531" cy="98" r="3.5" fill="#c77d0a" />
-        <circle cx="526" cy="103" r="3" fill="#b56c08" />
-        <circle cx="536" cy="102" r="3" fill="#c77d0a" />
+          {/* Window patterns */}
+          <pattern id="windowsBlue" width="6" height="6" patternUnits="userSpaceOnUse">
+            <rect width="6" height="6" fill="#131B2D" />
+            <rect x="1" y="1" width="4" height="4" fill="#425C8F" opacity="0.6" />
+          </pattern>
+          <pattern id="windowsCyan" width="8" height="8" patternUnits="userSpaceOnUse">
+            <rect width="8" height="8" fill="#0C1322" />
+            <rect x="1" y="1" width="6" height="3" fill="#6DC5D1" opacity="0.5" />
+            <rect x="1" y="5" width="6" height="2" fill="#4B6A99" opacity="0.3" />
+          </pattern>
 
-        {/* ── Center large palm (tallest) ── */}
-        <path d="M720 183 Q730 130 718 55" stroke="#7a5c10" strokeWidth="8" fill="none" strokeLinecap="round" />
-        <path d="M722 165 Q714 162 722 158" stroke="#6b4f0e" strokeWidth="2.5" fill="none" />
-        <path d="M720 140 Q712 137 720 133" stroke="#6b4f0e" strokeWidth="2.5" fill="none" />
-        <path d="M719 112 Q711 109 719 105" stroke="#6b4f0e" strokeWidth="2.5" fill="none" />
-        {/* filled fronds — large palm gets extra wide leaves */}
-        <path d="M718 55 Q678 20 640 34 Q678 40 718 55 Z" fill="#1b4332" />
-        <path d="M718 55 Q694 10 678 -4 Q704 24 718 55 Z" fill="#2d6a4f" />
-        <path d="M718 55 Q714 8 710 -8 Q716 18 718 55 Z" fill="#1b4332" />
-        <path d="M718 55 Q742 8 758 -6 Q734 24 718 55 Z" fill="#2d6a4f" />
-        <path d="M718 55 Q750 18 778 28 Q748 38 718 55 Z" fill="#1b4332" />
-        <path d="M718 55 Q692 42 668 54 Q694 52 718 55 Z" fill="#40916c" opacity="0.7" />
-        <path d="M718 55 Q744 42 768 52 Q742 50 718 55 Z" fill="#40916c" opacity="0.7" />
-        {/* veins */}
-        <path d="M718 55 Q678 20 640 34" stroke="#52b788" strokeWidth="1.8" fill="none" />
-        <path d="M718 55 Q694 10 678 -4" stroke="#52b788" strokeWidth="1.8" fill="none" />
-        <path d="M718 55 Q714 8 710 -8" stroke="#52b788" strokeWidth="1.8" fill="none" />
-        <path d="M718 55 Q742 8 758 -6" stroke="#52b788" strokeWidth="1.8" fill="none" />
-        <path d="M718 55 Q750 18 778 28" stroke="#52b788" strokeWidth="1.8" fill="none" />
-        {/* dates */}
-        <circle cx="719" cy="62" r="5" fill="#c77d0a" />
-        <circle cx="712" cy="68" r="4" fill="#b56c08" />
-        <circle cx="726" cy="67" r="4" fill="#c77d0a" />
-        <circle cx="718" cy="73" r="3.5" fill="#d4870b" />
-        <circle cx="710" cy="75" r="3" fill="#b56c08" />
+          {/* Reusable paths */}
+          <path id="bgCityPath" d={bgCityPath} />
 
-        {/* ── Center-right leaning palm ── */}
-        <path d="M940 182 Q930 145 910 95" stroke="#8B6914" strokeWidth="6" fill="none" strokeLinecap="round" />
-        <path d="M910 95 Q882 68 852 78 Q880 80 910 95 Z" fill="#1b4332" />
-        <path d="M910 95 Q894 60 882 48 Q902 68 910 95 Z" fill="#2d6a4f" />
-        <path d="M910 95 Q908 58 906 42 Q912 62 910 95 Z" fill="#1b4332" />
-        <path d="M910 95 Q930 60 942 50 Q922 70 910 95 Z" fill="#2d6a4f" />
-        <path d="M910 95 Q936 72 960 78 Q934 78 910 95 Z" fill="#1b4332" />
-        <path d="M910 95 Q882 68 852 78" stroke="#40916c" strokeWidth="1.5" fill="none" />
-        <path d="M910 95 Q894 60 882 48" stroke="#40916c" strokeWidth="1.5" fill="none" />
-        <path d="M910 95 Q908 58 906 42" stroke="#40916c" strokeWidth="1.5" fill="none" />
-        <path d="M910 95 Q930 60 942 50" stroke="#40916c" strokeWidth="1.5" fill="none" />
-        <path d="M910 95 Q936 72 960 78" stroke="#40916c" strokeWidth="1.5" fill="none" />
-        <circle cx="910" cy="98" r="3.5" fill="#c77d0a" />
-        <circle cx="904" cy="103" r="3" fill="#b56c08" />
-        <circle cx="916" cy="102" r="3" fill="#c77d0a" />
+          <g id="cityArchitecture">
+            {/* Gold Tower (World Trade Center) */}
+            <polygon points="175,260 175,90 200,80 215,80 215,260" fill="url(#goldTowerGrad)" />
+            <polygon points="200,80 215,80 215,260 200,260" fill="#1A2238" />
+            <line x1="185" y1="100" x2="185" y2="260" stroke="#FFD1A9" strokeWidth="1.5" strokeDasharray="2 2" opacity="0.6" />
+            <line x1="192" y1="95" x2="192" y2="260" stroke="#FFD1A9" strokeWidth="1.5" strokeDasharray="2 2" opacity="0.6" />
 
-        {/* ── Right main tall palm ── */}
-        <path d="M1180 182 Q1172 138 1185 78" stroke="#7a5c10" strokeWidth="7" fill="none" strokeLinecap="round" />
-        <path d="M1177 160 Q1184 158 1177 155" stroke="#6b4f0e" strokeWidth="2" fill="none" />
-        <path d="M1179 140 Q1186 138 1179 135" stroke="#6b4f0e" strokeWidth="2" fill="none" />
-        <path d="M1181 118 Q1188 116 1181 113" stroke="#6b4f0e" strokeWidth="2" fill="none" />
-        {/* filled fronds */}
-        <path d="M1185 78 Q1218 48 1252 62 Q1220 64 1185 78 Z" fill="#1b4332" />
-        <path d="M1185 78 Q1210 38 1222 22 Q1200 52 1185 78 Z" fill="#2d6a4f" />
-        <path d="M1185 78 Q1187 34 1192 14 Q1186 38 1185 78 Z" fill="#1b4332" />
-        <path d="M1185 78 Q1164 38 1148 20 Q1168 52 1185 78 Z" fill="#2d6a4f" />
-        <path d="M1185 78 Q1158 48 1126 58 Q1158 62 1185 78 Z" fill="#1b4332" />
-        <path d="M1185 78 Q1202 66 1230 82 Q1204 74 1185 78 Z" fill="#40916c" opacity="0.7" />
-        <path d="M1185 78 Q1218 48 1252 62" stroke="#40916c" strokeWidth="1.5" fill="none" />
-        <path d="M1185 78 Q1210 38 1222 22" stroke="#40916c" strokeWidth="1.5" fill="none" />
-        <path d="M1185 78 Q1187 34 1192 14" stroke="#40916c" strokeWidth="1.5" fill="none" />
-        <path d="M1185 78 Q1164 38 1148 20" stroke="#40916c" strokeWidth="1.5" fill="none" />
-        <path d="M1185 78 Q1158 48 1126 58" stroke="#40916c" strokeWidth="1.5" fill="none" />
-        {/* dates */}
-        <circle cx="1184" cy="83" r="4" fill="#c77d0a" />
-        <circle cx="1190" cy="88" r="3.5" fill="#b56c08" />
-        <circle cx="1178" cy="87" r="3.5" fill="#c77d0a" />
-        <circle cx="1185" cy="92" r="3" fill="#d4870b" />
+            {/* Glass towers — left */}
+            <rect x="235" y="130" width="35" height="130" fill="url(#windowsCyan)" />
+            <rect x="235" y="130" width="35" height="130" fill="url(#glassCyanGrad)" opacity="0.5" />
+            <path d="M 235 130 L 252 115 L 270 130 Z" fill="#6DC5D1" opacity="0.8" />
+            <rect x="285" y="110" width="40" height="150" fill="url(#windowsBlue)" />
+            <rect x="285" y="110" width="40" height="150" fill="url(#glassBlueGrad)" opacity="0.6" />
+            <rect x="282" y="105" width="46" height="5" fill="#A88BCE" />
 
-        {/* ── Far-right small palm ── */}
-        <path d="M1320 180 Q1316 140 1322 100" stroke="#8B6914" strokeWidth="5" fill="none" strokeLinecap="round" />
-        <path d="M1322 100 Q1344 76 1368 90 Q1346 90 1322 100 Z" fill="#2d6a4f" />
-        <path d="M1322 100 Q1338 68 1352 58 Q1334 74 1322 100 Z" fill="#1b4332" />
-        <path d="M1322 100 Q1324 68 1326 52 Q1322 68 1322 100 Z" fill="#2d6a4f" />
-        <path d="M1322 100 Q1306 68 1292 60 Q1308 74 1322 100 Z" fill="#1b4332" />
-        <path d="M1322 100 Q1302 78 1278 88 Q1302 88 1322 100 Z" fill="#2d6a4f" />
-        <path d="M1322 100 Q1344 76 1368 90" stroke="#40916c" strokeWidth="1.2" fill="none" />
-        <path d="M1322 100 Q1338 68 1352 58" stroke="#40916c" strokeWidth="1.2" fill="none" />
-        <path d="M1322 100 Q1324 68 1326 52" stroke="#40916c" strokeWidth="1.2" fill="none" />
-        <path d="M1322 100 Q1306 68 1292 60" stroke="#40916c" strokeWidth="1.2" fill="none" />
-        <path d="M1322 100 Q1302 78 1278 88" stroke="#40916c" strokeWidth="1.2" fill="none" />
-        <circle cx="1322" cy="103" r="3" fill="#c77d0a" />
-        <circle cx="1318" cy="107" r="2.5" fill="#b56c08" />
-        <circle cx="1326" cy="106" r="2.5" fill="#c77d0a" />
+            {/* Center-left density */}
+            <rect x="420" y="140" width="25" height="120" fill="url(#darkBuildingGrad)" />
+            <line x1="425" y1="140" x2="425" y2="260" stroke="#8F35B8" strokeWidth="2" strokeDasharray="3 4" />
+            <line x1="438" y1="140" x2="438" y2="260" stroke="#8F35B8" strokeWidth="2" strokeDasharray="3 4" />
+            <rect x="450" y="100" width="30" height="160" fill="url(#glassBlueGrad)" />
+            <rect x="450" y="100" width="30" height="160" fill="url(#windowsBlue)" opacity="0.7" />
+            <rect x="520" y="160" width="40" height="100" fill="url(#windowsCyan)" />
+            <rect x="520" y="160" width="40" height="100" fill="url(#glassCyanGrad)" opacity="0.5" />
 
-        {/* Ground fill */}
-        <rect x="0" y="172" width="1440" height="10" fill="#e7d5a8" />
+            {/* Purple triangular spire (Al Fardan) */}
+            <polygon points="460,260 500,60 540,260" fill="url(#purpleTowerGrad)" />
+            <polygon points="500,60 540,260 500,260" fill="#1F0E3D" opacity="0.5" />
+            <line x1="500" y1="60" x2="500" y2="260" stroke="#FFFFFF" strokeWidth="1.5" opacity="0.5" />
+            <path d="M 480 160 L 520 160 M 470 210 L 530 210 M 490 110 L 510 110 M 475 260 L 500 130 L 525 260" stroke="#D163D6" strokeWidth="1" fill="none" opacity="0.4" />
+
+            {/* Center glass complex */}
+            <rect x="630" y="120" width="45" height="140" fill="url(#windowsBlue)" />
+            <rect x="630" y="120" width="45" height="140" fill="url(#darkBuildingGrad)" opacity="0.7" />
+            <polygon points="630,120 652,100 675,120" fill="#283353" />
+
+            {/* Palm Tower */}
+            <polygon points="760,110 775,90 790,110 790,260 760,260" fill="url(#glassBlueGrad)" />
+            <polygon points="775,90 790,110 790,260 775,260" fill="#0D111D" opacity="0.6" />
+            <line x1="775" y1="70" x2="775" y2="90" stroke="#A2AECE" strokeWidth="2" />
+            <rect x="760" y="110" width="30" height="150" fill="url(#windowsBlue)" opacity="0.5" />
+
+            {/* Al Bidda Tower */}
+            <path d="M 810 100 L 840 100 L 850 260 L 800 260 Z" fill="url(#silverTower)" opacity="0.9" />
+            <path d="M 825 100 L 840 100 L 850 260 L 810 260 Z" fill="#141E38" opacity="0.7" />
+            <line x1="825" y1="100" x2="810" y2="260" stroke="#6DC5D1" strokeWidth="1.5" opacity="0.8" />
+            <line x1="835" y1="100" x2="830" y2="260" stroke="#6DC5D1" strokeWidth="1.5" opacity="0.8" />
+
+            {/* Tornado Tower */}
+            <path d="M 870 260 Q 890 150 880 80 L 920 80 Q 910 150 930 260 Z" fill="url(#glassCyanGrad)" />
+            <path d="M 885 90 L 915 110 M 882 110 L 918 135 M 880 135 L 920 165 M 878 165 L 922 200 M 875 200 L 925 240 M 872 240 L 928 260" stroke="#1A223A" strokeWidth="1.5" fill="none" />
+            <path d="M 915 90 L 885 110 M 918 110 L 882 135 M 920 135 L 880 165 M 922 165 L 878 200 M 925 200 L 875 240 M 928 240 L 872 260" stroke="#1A223A" strokeWidth="1.5" fill="none" />
+
+            {/* Burj Doha (Silver Bullet) */}
+            <path d="M 950 260 L 950 140 C 950 80 1000 80 1000 140 L 1000 260 Z" fill="url(#silverTower)" />
+            <path d="M 975 85 C 990 85 1000 110 1000 140 L 1000 260 L 975 260 Z" fill="#0D111D" opacity="0.5" />
+            <path d="M 950 140 C 950 80 1000 80 1000 140" fill="none" stroke="#FFFFFF" strokeWidth="1.5" opacity="0.7" />
+            <path d="M 953 140 L 997 140 M 951 160 L 999 160 M 950 180 L 1000 180 M 950 200 L 1000 200 M 950 220 L 1000 220 M 950 240 L 1000 240" stroke="#1F263A" strokeWidth="1.5" opacity="0.6" />
+
+            {/* Right side towers */}
+            <rect x="1050" y="130" width="35" height="130" fill="url(#windowsBlue)" />
+            <rect x="1050" y="130" width="35" height="130" fill="url(#glassBlueGrad)" opacity="0.5" />
+            <rect x="1110" y="160" width="45" height="100" fill="url(#darkBuildingGrad)" />
+            <rect x="1110" y="160" width="45" height="100" fill="url(#windowsCyan)" opacity="0.6" />
+            <polygon points="1190,140 1205,120 1220,140 1220,260 1190,260" fill="url(#silverTower)" />
+            <rect x="1195" y="145" width="20" height="115" fill="#0D111D" opacity="0.8" />
+            <rect x="1270" y="150" width="40" height="110" fill="url(#windowsBlue)" />
+            <rect x="1270" y="150" width="40" height="110" fill="url(#glassCyanGrad)" opacity="0.4" />
+            <rect x="1350" y="180" width="30" height="80" fill="url(#darkBuildingGrad)" />
+            <line x1="1355" y1="180" x2="1355" y2="260" stroke="#FFD1A9" strokeWidth="2" strokeDasharray="2 3" opacity="0.7" />
+            <line x1="1375" y1="180" x2="1375" y2="260" stroke="#FFD1A9" strokeWidth="2" strokeDasharray="2 3" opacity="0.7" />
+          </g>
+        </defs>
+
+        {/* Sky */}
+        <rect x="0" y="0" width="1440" height="260" fill="url(#skyGrad)" />
+        <rect x="0" y="0" width="1440" height="260" fill="url(#sunGlow)" />
+
+
+        {/* Background cityscape silhouette */}
+        <use href="#bgCityPath" fill="#141E38" opacity="0.95" />
+
+        {/* Detailed foreground architecture */}
+        <use href="#cityArchitecture" />
+
+        {/* Stone-50 fade — seamless blend into page background */}
+        <rect x="0" y="0" width="1440" height="70" fill="url(#topFade)" />
       </svg>
     </div>
-  );
+  )
 }

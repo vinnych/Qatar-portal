@@ -86,7 +86,7 @@ export default function QatarPublicHolidaysPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd({ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://qatar-portal.vercel.app" }, { "@type": "ListItem", position: 2, name: "Qatar Public Holidays 2026", item: "https://qatar-portal.vercel.app/qatar-public-holidays" }] }) }} />
 
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-3">Qatar Public Holidays 2026</h1>
+        <h1 className="font-newsreader text-3xl font-bold text-on-surface mb-3">Qatar Public Holidays 2026</h1>
         <p className="text-gray-600 text-base leading-relaxed">
           Official government and Islamic holidays in Qatar for 2025. Islamic holiday dates are approximate — confirmed by moon sighting.
         </p>

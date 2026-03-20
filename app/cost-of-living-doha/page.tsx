@@ -66,7 +66,7 @@ export default function CostOfLivingDohaPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd({ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: SITE_URL }, { "@type": "ListItem", position: 2, name: "Cost of Living in Doha", item: `${SITE_URL}/cost-of-living-doha` }] }) }} />
 
       <div>
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">Cost of Living in Doha, Qatar 2026</h1>
+        <h1 className="font-newsreader text-2xl font-bold text-on-surface mb-2">Cost of Living in Doha, Qatar 2026</h1>
         <p className="text-gray-600 text-base leading-relaxed">
           A practical breakdown of monthly expenses for expats and new arrivals in Doha. All prices in Qatari Riyal (QAR). 1 USD ≈ 3.64 QAR.
         </p>

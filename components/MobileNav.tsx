@@ -37,14 +37,14 @@ export default function MobileNav() {
       </button>
 
       {open && (
-        <div className="absolute top-full left-0 right-0 bg-rose-950 border-t border-rose-800 shadow-lg z-50">
+        <div className="absolute top-full left-0 right-0 bg-[#640023] shadow-lg z-50">
           <nav className="max-w-6xl mx-auto px-4 py-2 flex flex-col">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="text-white hover:text-amber-300 transition-colors py-4 text-base font-medium border-b border-rose-800 last:border-0"
+                className="text-white/80 hover:text-white transition-colors py-4 text-base font-medium border-b border-white/10 last:border-0"
               >
                 {link.label}
               </a>

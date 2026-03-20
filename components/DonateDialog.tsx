@@ -25,7 +25,7 @@ export default function DonateDialog() {
   }
 
   return (
-    <div className="fixed bottom-6 right-4 z-40 w-[min(256px,calc(100vw-2rem))] bg-white rounded-2xl shadow-2xl border border-amber-100 p-4 space-y-3">
+    <div className="fixed bottom-6 right-4 z-40 w-[min(256px,calc(100vw-2rem))] bg-white rounded-2xl shadow-ambient ring-1 ring-stone-900/5 p-4 space-y-3">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -81,7 +81,7 @@ export default function DonateDialog() {
         href={DONATE_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className="block w-full bg-[#2D81F7] hover:bg-[#1a6fe0] text-white font-bold py-2 px-4 rounded-xl transition-colors text-xs text-center"
+        className="block w-full bg-primary text-white font-bold py-2 px-4 rounded-xl hover:scale-[1.02] transition-transform text-xs text-center"
       >
         💙 Donate ${amount} via Razorpay
       </a>

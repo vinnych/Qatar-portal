@@ -68,7 +68,7 @@ export default async function NewsCategoryHubPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
 
       <div className="mb-6">
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">Browse News by Category</h1>
+        <h1 className="font-newsreader text-2xl sm:text-3xl font-bold text-on-surface mb-1">Browse News by Category</h1>
         <p className="text-gray-500 text-sm">
           Qatar and Gulf news organised by topic — <a href="/news" className="text-rose-700 hover:underline">view all news →</a>
         </p>

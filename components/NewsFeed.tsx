@@ -19,7 +19,7 @@ export default async function NewsFeed({ limit = 6 }: { limit?: number }) {
       {/* Featured first article */}
       <a
         href={`/news/${featured.slug}`}
-        className="bg-white rounded-2xl border border-stone-100 shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col overflow-hidden group block"
+        className="bg-white rounded-2xl ring-1 ring-stone-900/5 shadow-ambient hover:shadow-ambient-hover transition-shadow duration-200 flex flex-col overflow-hidden group block"
       >
         {featured.imageUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -33,8 +33,8 @@ export default async function NewsFeed({ limit = 6 }: { limit?: number }) {
           <div className="w-full h-48 sm:h-56 bg-stone-100" />
         )}
         <div className="p-4 sm:p-5">
-          <span className="text-[10px] font-bold text-rose-700 uppercase tracking-widest">{featured.source}</span>
-          <h2 className="text-base font-bold text-gray-900 leading-snug mt-1.5 line-clamp-2 group-hover:text-rose-800 transition-colors">
+          <span className="text-[10px] font-bold text-primary uppercase tracking-widest">{featured.source}</span>
+          <h2 className="text-base font-bold text-gray-900 leading-snug mt-1.5 line-clamp-2 group-hover:text-primary transition-colors">
             {featured.title}
           </h2>
           <span className="text-xs text-gray-400 mt-2 block tabular-nums">{featured.pubDate}</span>
@@ -47,7 +47,7 @@ export default async function NewsFeed({ limit = 6 }: { limit?: number }) {
           <a
             key={item.link}
             href={`/news/${item.slug}`}
-            className="bg-white rounded-xl border border-stone-100 shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col overflow-hidden group"
+            className="bg-white rounded-xl ring-1 ring-stone-900/5 shadow-ambient hover:shadow-ambient-hover transition-shadow duration-200 flex flex-col overflow-hidden group"
           >
             {item.imageUrl ? (
               // eslint-disable-next-line @next/next/no-img-element
@@ -61,7 +61,7 @@ export default async function NewsFeed({ limit = 6 }: { limit?: number }) {
               <div className="w-full h-36 bg-stone-100" />
             )}
             <div className="p-3.5 flex flex-col flex-1">
-              <span className="text-[10px] font-bold text-rose-700 uppercase tracking-widest mb-1.5">{item.source}</span>
+              <span className="text-[10px] font-bold text-primary uppercase tracking-widest mb-1.5">{item.source}</span>
               <h3 className="text-sm font-semibold text-gray-800 leading-snug line-clamp-2 flex-1">
                 {item.title}
               </h3>

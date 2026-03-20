@@ -76,7 +76,7 @@ export default async function Ramadan2026Page() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd({ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://qatar-portal.vercel.app" }, { "@type": "ListItem", position: 2, name: "Ramadan 2026 Qatar", item: "https://qatar-portal.vercel.app/ramadan-2026" }] }) }} />
 
-      <h1 className="text-xl font-bold text-gray-900 mb-1">Ramadan 2026 in Qatar</h1>
+      <h1 className="font-newsreader text-xl font-bold text-on-surface mb-1">Ramadan 2026 in Qatar</h1>
       <p className="text-xs text-gray-400 mb-3">Suhoor &amp; Iftar times, fasting hours, working hours rules, and tips for living in Doha during Ramadan.</p>
 
       {/* Key dates */}

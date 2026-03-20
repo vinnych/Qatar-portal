@@ -66,7 +66,7 @@ export default function QatarVisaRequirementsPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd({ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://qatar-portal.vercel.app" }, { "@type": "ListItem", position: 2, name: "Qatar Visa Requirements", item: "https://qatar-portal.vercel.app/qatar-visa-requirements" }] }) }} />
 
       <div>
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">Qatar Visa Requirements 2026</h1>
+        <h1 className="font-newsreader text-2xl font-bold text-on-surface mb-2">Qatar Visa Requirements 2026</h1>
         <p className="text-gray-600 text-base leading-relaxed">
           A complete guide to entering Qatar — whether you&apos;re visiting, working, or joining family.
         </p>

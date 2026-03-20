@@ -82,7 +82,7 @@ export default async function CurrencyPage() {
 
       {/* Header */}
       <div>
-        <h1 className="text-xl font-bold text-gray-900 mb-1">
+        <h1 className="font-newsreader text-xl font-bold text-on-surface mb-1">
           QAR Exchange Rates Today
         </h1>
         <p className="text-xs text-gray-400 mb-3">{today} · Updated hourly</p>

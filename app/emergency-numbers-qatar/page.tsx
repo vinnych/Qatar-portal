@@ -67,7 +67,7 @@ export default function EmergencyNumbersQatarPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbLd) }} />
 
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-3">Emergency Numbers Qatar & Embassies in Doha</h1>
+        <h1 className="font-newsreader text-3xl font-bold text-on-surface mb-3">Emergency Numbers Qatar & Embassies in Doha</h1>
         <p className="text-gray-600 text-base leading-relaxed">
           Save these numbers before you need them. Essential contacts for emergencies, legal assistance, and consular services in Qatar.
         </p>

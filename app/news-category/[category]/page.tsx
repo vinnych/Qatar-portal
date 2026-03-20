@@ -86,7 +86,7 @@ export default async function NewsCategoryPage({ params }: { params: Promise<{ c
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
 
       <div className="mb-6">
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{entry.label} News</h1>
+        <h1 className="font-newsreader text-2xl sm:text-3xl font-bold text-on-surface">{entry.label} News</h1>
         <p className="text-gray-500 text-sm mt-1">
           {filtered.length > 0 ? `${filtered.length} articles found` : "No articles in this category right now"}
           {" · "}

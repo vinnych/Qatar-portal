@@ -132,11 +132,11 @@ export default function PrayerSelector({
     <div className="space-y-5">
       {/* Location selector */}
       <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
-        <label className="text-sm font-medium text-violet-800">Location:</label>
+        <label className="text-sm font-medium text-gray-700">Location:</label>
         <select
           value={selected}
           onChange={(e) => { setUsingGeo(false); setGeoLabel(""); setSelected(Number(e.target.value)); }}
-          className="rounded-xl border border-violet-200 bg-white px-3 py-2.5 sm:py-2 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-violet-300 shadow-sm"
+          className="rounded-xl bg-surface-low border-0 px-3 py-2.5 sm:py-2 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary/30"
         >
           {CITIES.map((c, i) => (
             <option key={i} value={i}>{c.label}</option>
@@ -145,23 +145,23 @@ export default function PrayerSelector({
         <button
           onClick={detectLocation}
           disabled={loading}
-          className="flex items-center gap-1.5 px-4 py-2.5 sm:py-2 rounded-xl border border-violet-300 bg-violet-50 text-violet-800 text-sm font-medium hover:bg-violet-100 transition-colors disabled:opacity-50"
+          className="flex items-center gap-1.5 px-4 py-2.5 sm:py-2 rounded-xl border border-stone-300 bg-white text-primary text-sm font-medium hover:bg-surface-low transition-colors disabled:opacity-50"
         >
           📍 Use my location
         </button>
-        {loading && <span className="text-xs text-violet-500 animate-pulse">Detecting…</span>}
+        {loading && <span className="text-xs text-gray-400 animate-pulse">Detecting…</span>}
         {error && <span className="text-xs text-red-500">Could not detect location. Try again.</span>}
       </div>
 
       {/* Header */}
       <div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-violet-900 mb-1">
+        <h1 className="font-newsreader text-xl sm:text-2xl lg:text-3xl font-bold text-on-surface mb-1">
           Prayer Times — {usingGeo ? geoLabel : CITIES[selected].label}
         </h1>
         <p className="text-gray-500 text-sm">
           {todayStr}
           {times && (
-            <span className="ml-3 text-violet-600 font-medium">
+            <span className="ml-3 text-primary font-medium">
               {times.hijriDate} {times.hijriMonth} {times.hijriYear} AH
             </span>
           )}
@@ -173,10 +173,10 @@ export default function PrayerSelector({
         {PRAYERS.map((name) => (
           <div
             key={name}
-            className="bg-violet-50 rounded-2xl border border-violet-100 shadow-sm p-4 flex flex-col items-center gap-2 hover:border-violet-300 transition-colors"
+            className="bg-white rounded-2xl ring-1 ring-stone-900/5 shadow-ambient p-4 flex flex-col items-center gap-2 hover:shadow-ambient-hover transition-shadow"
           >
             <span className="text-2xl">{PRAYER_ICONS[name]}</span>
-            <span className="text-xs font-semibold text-violet-800 uppercase tracking-wide">{name}</span>
+            <span className="text-xs font-semibold text-gray-600 uppercase tracking-wide">{name}</span>
             <span className="text-lg font-bold text-gray-900">{times?.[name] ?? "—"}</span>
           </div>
         ))}
@@ -189,14 +189,14 @@ export default function PrayerSelector({
 
       {/* Monthly Calendar */}
       <section>
-        <h2 className="text-xl font-bold text-violet-900 mb-4">
+        <h2 className="text-xl font-bold text-on-surface mb-4">
           {monthName} {year} — Full Prayer Calendar
         </h2>
         {calendar.length > 0 ? (
           <div className={`overflow-x-auto rounded-2xl border border-stone-200 shadow-sm transition-opacity ${loading ? "opacity-40" : "opacity-100"}`}>
             <table className="w-full text-sm min-w-[320px]">
               <thead>
-                <tr className="bg-violet-900 text-white">
+                <tr className="bg-[#640023] text-white">
                   <th className="px-2 py-2.5 text-left font-semibold">Date</th>
                   <th className="px-2 py-2.5 text-left font-semibold hidden sm:table-cell">Hijri</th>
                   <th className="px-2 py-2.5 text-center font-semibold">Fajr</th>
@@ -214,16 +214,16 @@ export default function PrayerSelector({
                     <tr
                       key={day.date}
                       className={`border-t border-stone-100 ${
-                        isToday ? "bg-violet-50 font-semibold" : i % 2 === 0 ? "bg-white" : "bg-stone-50"
+                        isToday ? "bg-secondary-accent/10 font-semibold" : i % 2 === 0 ? "bg-white" : "bg-[#faf9f6]"
                       }`}
                     >
                       <td className="px-3 py-2.5 whitespace-nowrap">
-                        <span className={isToday ? "text-violet-800" : "text-gray-700"}>
+                        <span className={isToday ? "text-primary" : "text-gray-700"}>
                           {day.date.split(" ")[0]} {day.date.split(" ")[1]}
                         </span>
                         <span className="block text-xs text-gray-400">{day.dayOfWeek}</span>
                         {isToday && (
-                          <span className="text-xs bg-violet-200 text-violet-900 px-1.5 py-0.5 rounded-full font-bold">Today</span>
+                          <span className="text-xs bg-secondary-accent text-[#725b00] px-1.5 py-0.5 rounded-full font-bold">Today</span>
                         )}
                       </td>
                       <td className="px-3 py-2.5 text-xs text-gray-400 hidden sm:table-cell">{day.hijriDate}</td>

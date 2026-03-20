@@ -125,7 +125,7 @@ export default async function HijriCalendarPage({
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd({ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://qatar-portal.vercel.app" }, { "@type": "ListItem", position: 2, name: "Hijri Calendar", item: "https://qatar-portal.vercel.app/hijri-calendar" }] }) }} />
 
-      <h1 className="text-xl font-bold text-gray-900 mb-1">Hijri Calendar</h1>
+      <h1 className="font-newsreader text-xl font-bold text-on-surface mb-1">Hijri Calendar</h1>
       <p className="text-xs text-gray-400 mb-3">
         Islamic (Hijri) dates alongside Gregorian — based on Doha, Qatar moon sighting method.
       </p>
@@ -160,7 +160,8 @@ export default async function HijriCalendarPage({
 
       {/* Calendar grid */}
       {days.length > 0 ? (
-        <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+        <div className="overflow-x-auto rounded-xl border border-gray-100 shadow-sm">
+        <div className="bg-white min-w-[420px]">
           {/* Day headers */}
           <div className="grid grid-cols-7 bg-gray-50 border-b border-gray-100">
             {DAYS.map((d) => (
@@ -202,6 +203,7 @@ export default async function HijriCalendarPage({
               );
             })}
           </div>
+        </div>
         </div>
       ) : (
         <p className="text-gray-500 text-center py-12">Could not load calendar. Please try again.</p>

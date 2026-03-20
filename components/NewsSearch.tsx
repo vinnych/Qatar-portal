@@ -26,7 +26,7 @@ export default function NewsSearch({ items }: { items: NewsItem[] }) {
           placeholder="Search news..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="w-full px-4 py-3 rounded-xl border border-stone-200 bg-white text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rose-200 focus:border-rose-300 transition"
+          className="w-full px-4 py-3 rounded-xl bg-surface-low border-0 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 transition"
         />
       </div>
 
@@ -39,7 +39,7 @@ export default function NewsSearch({ items }: { items: NewsItem[] }) {
             <a
               key={item.link}
               href={`/news/${item.slug}`}
-              className="bg-white rounded-xl border border-stone-100 shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col overflow-hidden group"
+              className="bg-white rounded-xl ring-1 ring-stone-900/5 shadow-ambient hover:shadow-ambient-hover transition-shadow duration-200 flex flex-col overflow-hidden group"
             >
               {item.imageUrl ? (
                 <img src={item.imageUrl} alt={item.title} className="w-full h-40 object-cover group-hover:scale-[1.02] transition-transform duration-300" loading="lazy" />
@@ -49,7 +49,7 @@ export default function NewsSearch({ items }: { items: NewsItem[] }) {
                 </div>
               )}
               <div className="p-3.5 flex flex-col flex-1">
-                <span className="text-[10px] font-bold text-rose-700 uppercase tracking-widest mb-1.5">{item.source}</span>
+                <span className="text-[11px] font-bold text-primary uppercase tracking-widest mb-1.5">{item.source}</span>
                 <h3 className="text-sm font-semibold text-gray-800 leading-snug line-clamp-2 flex-1">
                   {item.title}
                 </h3>

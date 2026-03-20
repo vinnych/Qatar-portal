@@ -5,14 +5,14 @@ export default async function CurrencyWidget() {
 
   if (!data) {
     return (
-      <div className="bg-white border border-stone-200 rounded-xl p-4 flex items-center justify-center text-xs text-gray-400">
+      <div className="bg-white ring-1 ring-stone-900/5 shadow-ambient rounded-xl p-4 flex items-center justify-center text-xs text-gray-400">
         Exchange rates unavailable
       </div>
     );
   }
 
   return (
-    <div className="bg-white border border-stone-100 shadow-sm rounded-xl p-4">
+    <div className="bg-white ring-1 ring-stone-900/5 shadow-ambient rounded-xl p-4">
       <div className="mb-3">
         <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Exchange Rates · QAR</span>
       </div>

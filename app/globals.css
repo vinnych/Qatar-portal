@@ -8,6 +8,18 @@
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
+  body {
+    color: #1a1c1a;
+  }
+}
+
+@layer utilities {
+  .shadow-ambient {
+    box-shadow: 0 20px 40px rgba(87, 65, 68, 0.06);
+  }
+  .shadow-ambient-hover {
+    box-shadow: 0 24px 48px rgba(87, 65, 68, 0.10);
+  }
 }
 
 @keyframes pulse-glow {

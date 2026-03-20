@@ -112,7 +112,7 @@ export default async function NewsArticlePage({
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbLd) }} />
       <div className="mb-4">
-        <a href="/news" className="text-xs text-gray-400 hover:text-rose-800">
+        <a href="/news" className="inline-block text-xs text-gray-400 hover:text-primary py-2">
           ← Back to News
         </a>
       </div>
@@ -127,10 +127,10 @@ export default async function NewsArticlePage({
           <span className="text-5xl opacity-30">📰</span>
         </div>
       )}
-      <span className="inline-block text-[10px] text-sky-700 font-semibold uppercase tracking-wide bg-sky-50 border border-sky-200 px-2 py-0.5 rounded-full mb-3">
+      <span className="inline-block text-[10px] text-primary font-semibold uppercase tracking-wide bg-primary/5 border border-primary/15 px-2 py-0.5 rounded-full mb-3">
         {item.source}
       </span>
-      <h1 className="text-xl font-bold text-gray-900 mt-2 mb-2 leading-snug">
+      <h1 className="font-newsreader text-xl font-bold text-on-surface mt-2 mb-2 leading-snug">
         {item.title}
       </h1>
       {item.pubDate && (
@@ -151,7 +151,7 @@ export default async function NewsArticlePage({
           href={item.link}
           target="_blank"
           rel="noopener noreferrer nofollow"
-          className="bg-rose-800 text-white rounded-xl px-5 py-2.5 text-sm font-semibold hover:bg-rose-700 transition-colors w-full sm:w-auto text-center"
+          className="bg-primary text-white rounded-xl px-5 py-2.5 text-sm font-semibold hover:scale-[1.02] transition-transform w-full sm:w-auto text-center"
         >
           Read Full Article on {item.source} →
         </a>
@@ -171,11 +171,11 @@ export default async function NewsArticlePage({
         if (related.length === 0) return null;
         return (
           <div className="mt-6 pt-6 border-t border-stone-200">
-            <h2 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Related News</h2>
+            <h2 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-2">Related News</h2>
             <div className="grid gap-3 sm:grid-cols-3">
               {related.map((r) => (
                 <a key={r.slug} href={`/news/${r.slug}`}
-                  className="bg-white rounded-lg border border-stone-200 hover:border-rose-300 shadow-sm hover:shadow-md transition-all flex flex-col overflow-hidden">
+                  className="bg-white rounded-lg ring-1 ring-stone-900/5 shadow-ambient hover:shadow-ambient-hover transition-shadow flex flex-col overflow-hidden">
                   {r.imageUrl ? (
                     <img src={r.imageUrl} alt={r.title} className="w-full h-24 object-cover" loading="lazy" />
                   ) : (
@@ -184,7 +184,7 @@ export default async function NewsArticlePage({
                     </div>
                   )}
                   <div className="p-3 flex flex-col flex-1">
-                    <span className="text-[10px] text-sky-700 font-semibold mb-1">{r.source}</span>
+                    <span className="text-[11px] text-primary font-semibold mb-1">{r.source}</span>
                     <h3 className="text-sm font-semibold text-gray-800 leading-snug line-clamp-3">{r.title}</h3>
                   </div>
                 </a>

@@ -44,7 +44,7 @@ export default function AboutPage() {
 
       {/* Header */}
       <div>
-        <h1 className="text-xl font-bold text-gray-900 mb-1">About Qatar Portal</h1>
+        <h1 className="font-newsreader text-xl font-bold text-on-surface mb-1">About Qatar Portal</h1>
         <p className="text-xs text-gray-500">
           Qatar Portal is a free, ad-supported daily resource built for the people living in, working in, and visiting Qatar and the Gulf region.
         </p>

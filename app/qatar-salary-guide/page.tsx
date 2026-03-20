@@ -123,7 +123,7 @@ export default function QatarSalaryGuidePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd({ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://qatar-portal.vercel.app" }, { "@type": "ListItem", position: 2, name: "Qatar Salary Guide 2026", item: "https://qatar-portal.vercel.app/qatar-salary-guide" }] }) }} />
 
-      <h1 className="text-xl font-bold text-gray-900 mb-1">Qatar Salary Guide 2026</h1>
+      <h1 className="font-newsreader text-xl font-bold text-on-surface mb-1">Qatar Salary Guide 2026</h1>
       <p className="text-xs text-gray-400 mb-3">
         Average monthly salaries in Qatar by job category and experience level. All figures are in QAR and are <strong>tax-free</strong> (Qatar has no personal income tax).
       </p>

@@ -107,14 +107,14 @@ export default async function JobDetailPage({
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbLd) }} />
       <div className="mb-3">
-        <a href="/jobs" className="text-xs text-gray-400 hover:text-rose-800">
+        <a href="/jobs" className="inline-block text-xs text-gray-400 hover:text-primary py-2">
           ← Back to Jobs
         </a>
       </div>
-      <span className="inline-block text-[10px] text-emerald-800 font-semibold bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full mb-3">
+      <span className="inline-block text-[10px] text-[#1a5c38] font-semibold bg-utility-chip px-2 py-0.5 rounded-full mb-3">
         {job.source}
       </span>
-      <h1 className="text-xl font-bold text-gray-900 mt-2 mb-1 leading-snug">
+      <h1 className="font-newsreader text-xl font-bold text-on-surface mt-2 mb-1 leading-snug">
         {job.title}
       </h1>
       <p className="text-sm text-gray-600 mb-1 font-medium">{job.company}</p>
@@ -127,7 +127,7 @@ export default async function JobDetailPage({
           href={job.link}
           target="_blank"
           rel="noopener noreferrer nofollow"
-          className="inline-block bg-emerald-700 text-white px-4 py-2 sm:px-6 rounded-md text-sm font-medium hover:bg-emerald-800 transition-colors"
+          className="inline-block bg-primary text-white px-4 py-2.5 sm:px-6 rounded-xl text-sm font-medium hover:scale-[1.02] transition-transform w-full sm:w-auto text-center"
         >
           View & Apply on {job.source} →
         </a>
@@ -144,10 +144,10 @@ export default async function JobDetailPage({
             { href: "/qatar-visa-requirements", icon: "🛂", title: "Qatar Visa Guide", desc: "Work visa and residency requirements" },
           ].map(({ href, icon, title, desc }) => (
             <a key={href} href={href}
-              className="bg-white border border-stone-100 shadow-sm rounded-lg p-3 hover:shadow-md hover:border-emerald-300 transition-all">
+              className="bg-white ring-1 ring-stone-900/5 shadow-ambient rounded-lg p-3 hover:shadow-ambient-hover transition-shadow">
               <span className="text-lg">{icon}</span>
               <p className="text-xs font-semibold text-gray-800 mt-1.5">{title}</p>
-              <p className="text-[10px] text-gray-500 mt-0.5">{desc}</p>
+              <p className="text-[11px] text-gray-500 mt-0.5">{desc}</p>
             </a>
           ))}
         </div>

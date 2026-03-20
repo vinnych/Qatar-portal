@@ -150,7 +150,7 @@ export default function QatarLabourLawPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd({ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://qatar-portal.vercel.app" }, { "@type": "ListItem", position: 2, name: "Qatar Labour Law 2026", item: "https://qatar-portal.vercel.app/qatar-labour-law" }] }) }} />
 
-      <h1 className="text-2xl font-bold text-gray-900 mb-2">Qatar Labour Law 2026</h1>
+      <h1 className="font-newsreader text-2xl font-bold text-on-surface mb-2">Qatar Labour Law 2026</h1>
       <p className="text-gray-500 mb-2 text-sm">
         Key rights and rules under Qatar&apos;s Labour Law (Law No. 14 of 2004) as amended — for private sector employees and expatriate workers.
       </p>

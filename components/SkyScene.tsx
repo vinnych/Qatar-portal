@@ -151,14 +151,14 @@ export default function SkyScene({ prayers, date, currentHour }: {
             const isCurrent = p.name === currentPrayer;
             return (
               <div key={p.name}
-                className={`flex flex-col items-center rounded-xl py-2.5 px-1.5 transition-all ${
+                className={`flex flex-col items-center rounded-xl py-2.5 px-1.5 backdrop-blur-sm transition-all ${
                   isCurrent
-                    ? "bg-amber-400 shadow-md border border-amber-300"
-                    : "bg-rose-800/60 border border-rose-700/50"
+                    ? "bg-white/20 border border-white/30 text-white shadow-lg ring-2 ring-secondary-accent/70"
+                    : "bg-white/10 border border-white/20"
                 }`}>
                 <span className="text-base leading-none mb-1">{p.icon}</span>
-                <span className={`text-[11px] font-semibold ${isCurrent ? "text-rose-900" : "text-rose-200"}`}>{p.name}</span>
-                <span className={`text-xs font-bold mt-0.5 tabular-nums ${isCurrent ? "text-rose-900" : "text-amber-300"}`}>{p.time}</span>
+                <span className={`text-[11px] font-semibold ${isCurrent ? "text-white" : "text-rose-100"}`}>{p.name}</span>
+                <span className={`text-xs font-bold mt-0.5 tabular-nums ${isCurrent ? "text-secondary-accent" : "text-amber-300"}`}>{p.time}</span>
               </div>
             );
           })}

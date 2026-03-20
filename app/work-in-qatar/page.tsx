@@ -121,7 +121,7 @@ export default function WorkInQatarPage() {
 
       {/* Hero */}
       <div className="mb-4">
-        <h1 className="text-xl font-bold text-gray-900 mb-1">
+        <h1 className="font-newsreader text-xl font-bold text-on-surface mb-1">
           Working in Qatar — Complete Guide 2026
         </h1>
         <p className="text-xs text-gray-400">

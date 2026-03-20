@@ -17,7 +17,7 @@ export default function NewsletterCTA() {
   }
 
   return (
-    <div className="bg-amber-50 border border-amber-200 rounded-xl px-5 py-3 flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-6">
+    <div className="bg-secondary-accent/10 rounded-xl px-5 py-3 flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-6">
       <div className="flex-1">
         <p className="font-semibold text-amber-900 text-sm">Get weekly Qatar updates — free, no spam</p>
       </div>
@@ -26,7 +26,7 @@ export default function NewsletterCTA() {
           href="https://qatarportal.substack.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-amber-700 text-white text-xs font-semibold px-4 py-2 rounded-lg hover:bg-amber-800 transition-colors"
+          className="bg-primary text-white text-xs font-semibold px-4 py-2 rounded-lg hover:scale-[1.02] transition-transform"
         >
           Subscribe free →
         </a>
