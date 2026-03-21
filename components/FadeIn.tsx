@@ -1,7 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
-
 export default function FadeIn({
   children,
   delay = 0,
@@ -12,13 +8,11 @@ export default function FadeIn({
   className?: string;
 }) {
   return (
-    <motion.div
+    <div
       className={className}
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay }}
+      style={{ animation: `fadein 0.4s ease-out ${delay}s both` }}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

@@ -195,21 +195,51 @@ export default function SkyScene({ prayers: defaultPrayers, date }: {
       transition={{ duration: 2, ease: "easeInOut" }}
       id="prayer"
     >
-      {/* Stars — fade out during the day */}
+      {/* Stars — twinkle at night, fade at dawn */}
       <motion.div
         className="absolute inset-0 pointer-events-none"
-        animate={{ opacity: isNight ? 1 : 0.08 }}
+        animate={{ opacity: isNight ? 1 : 0.06 }}
         transition={{ duration: 2 }}
       >
-        <div className="absolute top-[8%]  left-[10%] w-1   h-1   bg-white rounded-full shadow-[0_0_5px_white]" />
-        <div className="absolute top-[15%] right-[18%] w-1.5 h-1.5 bg-white rounded-full shadow-[0_0_5px_white]" />
-        <div className="absolute top-[22%] left-[32%] w-1   h-1   bg-white rounded-full shadow-[0_0_5px_white]" />
-        <div className="absolute top-[28%] right-[28%] w-2   h-2   bg-white rounded-full shadow-[0_0_8px_white] opacity-80" />
-        <div className="absolute top-[45%] left-[22%] w-1   h-1   bg-white rounded-full shadow-[0_0_5px_white]" />
-        <div className="absolute top-[12%] left-[62%] w-1.5 h-1.5 bg-white rounded-full shadow-[0_0_6px_white] opacity-60" />
-        <div className="absolute top-[35%] left-[50%] w-1   h-1   bg-white rounded-full shadow-[0_0_4px_white] opacity-70" />
-        <div className="absolute top-[5%]  right-[40%] w-1  h-1   bg-white rounded-full shadow-[0_0_4px_white]" />
+        {[
+          { top: "8%",  left: "10%",  size: "w-1 h-1",     delay: "0s",   dur: "2.1s" },
+          { top: "15%", right: "18%", size: "w-1.5 h-1.5", delay: "0.7s", dur: "3.2s" },
+          { top: "22%", left: "32%",  size: "w-1 h-1",     delay: "1.4s", dur: "2.8s" },
+          { top: "28%", right: "28%", size: "w-2 h-2",     delay: "0.3s", dur: "1.9s" },
+          { top: "45%", left: "22%",  size: "w-1 h-1",     delay: "2.1s", dur: "3.5s" },
+          { top: "12%", left: "62%",  size: "w-1.5 h-1.5", delay: "1.1s", dur: "2.4s" },
+          { top: "35%", left: "50%",  size: "w-1 h-1",     delay: "1.8s", dur: "3.0s" },
+          { top: "5%",  right: "40%", size: "w-1 h-1",     delay: "0.5s", dur: "2.6s" },
+          { top: "18%", left: "78%",  size: "w-1 h-1",     delay: "1.3s", dur: "2.2s" },
+          { top: "40%", right: "10%", size: "w-1.5 h-1.5", delay: "2.5s", dur: "3.8s" },
+          { top: "10%", left: "45%",  size: "w-1 h-1",     delay: "0.9s", dur: "2.9s" },
+          { top: "32%", left: "88%",  size: "w-1 h-1",     delay: "1.6s", dur: "2.3s" },
+        ].map((s, i) => (
+          <div
+            key={i}
+            className={`absolute ${s.size} bg-white rounded-full shadow-[0_0_5px_white] star-twinkle`}
+            style={{ top: s.top, left: (s as { left?: string }).left, right: (s as { right?: string }).right, animationDelay: s.delay, animationDuration: s.dur }}
+          />
+        ))}
       </motion.div>
+
+      {/* Clouds — drift in during day/dawn/dusk */}
+      <div
+        className="absolute inset-0 pointer-events-none transition-opacity duration-[2000ms]"
+        style={{ opacity: isNight ? 0 : 1 }}
+      >
+        <div className="absolute top-[16%] left-[6%] cloud-float" style={{ animationDuration: "9s", animationDelay: "0s" }}>
+          <div className="w-36 h-10 bg-white/25 rounded-full blur-md" />
+          <div className="w-22 h-7 bg-white/20 rounded-full blur-md -mt-5 ml-8" />
+        </div>
+        <div className="absolute top-[10%] right-[10%] cloud-float" style={{ animationDuration: "13s", animationDelay: "3s" }}>
+          <div className="w-28 h-8 bg-white/18 rounded-full blur-md" />
+          <div className="w-18 h-6 bg-white/15 rounded-full blur-md -mt-4 ml-4" />
+        </div>
+        <div className="absolute top-[30%] left-[42%] cloud-float" style={{ animationDuration: "11s", animationDelay: "6s" }}>
+          <div className="w-24 h-7 bg-white/12 rounded-full blur-md" />
+        </div>
+      </div>
 
       {/* Sun / Moon orbit */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-70">
@@ -443,6 +473,32 @@ export default function SkyScene({ prayers: defaultPrayers, date }: {
             })}
           </motion.div>
         </div>
+      </div>
+
+      {/* City silhouette — absolute bottom of hero */}
+      <div className="absolute bottom-0 left-0 right-0 pointer-events-none" aria-hidden="true">
+        <svg
+          viewBox="0 0 1440 72"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="none"
+          width="100%"
+          height="72"
+        >
+          <defs>
+            <linearGradient id="silhouetteFade" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="rgba(0,0,0,0)" />
+              <stop offset="100%" stopColor="rgba(0,0,0,0.55)" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M0 72 L0 52 L28 52 L28 44 L48 44 L48 38 L62 38 L62 30 L75 30 L75 38 L88 38 L88 52 L112 52 L112 42 L122 42 L122 34 L128 28 L131 21 L133 14 L134 8 L135 14 L137 21 L140 28 L146 34 L156 42 L168 42 L168 52 L195 52 L195 42 L208 42 L208 35 L220 35 L220 42 L232 42 L232 52 L258 52 L258 40 L270 40 L270 32 L282 32 L282 40 L295 40 L295 52 L320 52 L320 42 L332 42 L332 34 L345 34 L345 42 L358 42 L358 52 L385 52 L385 40 L398 40 L398 52 L418 52 L418 38 L430 38 L430 30 L442 30 L442 38 L455 38 L455 52 L480 52 L480 40 L492 40 L492 32 L505 32 L505 40 L518 40 L518 52 L545 52 L545 42 L558 42 L558 34 L568 30 L572 24 L574 17 L575 10 L576 4 L577 10 L579 17 L581 24 L585 30 L595 34 L605 42 L615 52 L640 52 L640 40 L652 40 L652 32 L665 32 L665 40 L678 40 L678 52 L703 52 L703 40 L715 40 L715 32 L728 32 L728 40 L740 40 L740 52 L768 52 L768 40 L780 40 L780 52 L800 52 L800 40 L812 40 L812 32 L825 32 L825 40 L838 40 L838 52 L865 52 L865 40 L878 40 L878 32 L890 32 L890 40 L902 40 L902 52 L928 52 L928 40 L942 40 L942 32 L955 32 L955 40 L968 40 L968 52 L995 52 L995 40 L1008 40 L1008 32 L1020 32 L1020 40 L1032 40 L1032 52 L1060 52 L1060 44 L1072 44 L1072 36 L1085 36 L1085 44 L1098 44 L1098 52 L1125 52 L1125 40 L1138 40 L1138 32 L1150 32 L1150 40 L1162 40 L1162 52 L1190 52 L1190 40 L1202 40 L1202 52 L1222 52 L1222 40 L1235 40 L1235 32 L1248 32 L1248 40 L1260 40 L1260 52 L1288 52 L1288 40 L1300 40 L1300 32 L1312 32 L1312 40 L1325 40 L1325 52 L1352 52 L1352 44 L1365 44 L1365 36 L1378 36 L1378 44 L1390 44 L1390 52 L1415 52 L1415 44 L1428 44 L1428 52 L1440 52 L1440 72 Z"
+            fill="url(#silhouetteFade)"
+          />
+          <path
+            d="M0 72 L0 52 L28 52 L28 44 L48 44 L48 38 L62 38 L62 30 L75 30 L75 38 L88 38 L88 52 L112 52 L112 42 L122 42 L122 34 L128 28 L131 21 L133 14 L134 8 L135 14 L137 21 L140 28 L146 34 L156 42 L168 42 L168 52 L195 52 L195 42 L208 42 L208 35 L220 35 L220 42 L232 42 L232 52 L258 52 L258 40 L270 40 L270 32 L282 32 L282 40 L295 40 L295 52 L320 52 L320 42 L332 42 L332 34 L345 34 L345 42 L358 42 L358 52 L385 52 L385 40 L398 40 L398 52 L418 52 L418 38 L430 38 L430 30 L442 30 L442 38 L455 38 L455 52 L480 52 L480 40 L492 40 L492 32 L505 32 L505 40 L518 40 L518 52 L545 52 L545 42 L558 42 L558 34 L568 30 L572 24 L574 17 L575 10 L576 4 L577 10 L579 17 L581 24 L585 30 L595 34 L605 42 L615 52 L640 52 L640 40 L652 40 L652 32 L665 32 L665 40 L678 40 L678 52 L703 52 L703 40 L715 40 L715 32 L728 32 L728 40 L740 40 L740 52 L768 52 L768 40 L780 40 L780 52 L800 52 L800 40 L812 40 L812 32 L825 32 L825 40 L838 40 L838 52 L865 52 L865 40 L878 40 L878 32 L890 32 L890 40 L902 40 L902 52 L928 52 L928 40 L942 40 L942 32 L955 32 L955 40 L968 40 L968 52 L995 52 L995 40 L1008 40 L1008 32 L1020 32 L1020 40 L1032 40 L1032 52 L1060 52 L1060 44 L1072 44 L1072 36 L1085 36 L1085 44 L1098 44 L1098 52 L1125 52 L1125 40 L1138 40 L1138 32 L1150 32 L1150 40 L1162 40 L1162 52 L1190 52 L1190 40 L1202 40 L1202 52 L1222 52 L1222 40 L1235 40 L1235 32 L1248 32 L1248 40 L1260 40 L1260 52 L1288 52 L1288 40 L1300 40 L1300 32 L1312 32 L1312 40 L1325 40 L1325 52 L1352 52 L1352 44 L1365 44 L1365 36 L1378 36 L1378 44 L1390 44 L1390 52 L1415 52 L1415 44 L1428 44 L1428 52 L1440 52 L1440 72 Z"
+            fill="rgba(5,10,25,0.45)"
+          />
+        </svg>
       </div>
     </motion.div>
   );
