@@ -1,6 +1,5 @@
 import { getNews, fetchPexelsImage, type NewsItem } from "@/lib/rss";
 import { safeJsonLd, isValidHttpUrl } from "@/lib/utils";
-import CalendarDate from "@/components/CalendarDate";
 import ShareButton from "@/components/ShareButton";
 import { redis } from "@/lib/redis";
 import { summarizeArticle } from "@/lib/groq";
@@ -135,9 +134,7 @@ export default async function NewsArticlePage({
         {item.title}
       </h1>
       {item.pubDate && (
-        <div className="mb-4">
-          <CalendarDate dateStr={item.pubDate} />
-        </div>
+        <p className="text-xs text-gray-400 mb-4 tabular-nums">{new Date(item.pubDate).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}</p>
       )}
       {summary ? (
         <div className="mb-6">

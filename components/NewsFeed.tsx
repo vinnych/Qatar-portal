@@ -1,5 +1,4 @@
 import { getNews } from "@/lib/rss";
-import CalendarDate from "@/components/CalendarDate";
 
 export default async function NewsFeed({ limit = 6 }: { limit?: number }) {
   let news;
@@ -38,7 +37,7 @@ export default async function NewsFeed({ limit = 6 }: { limit?: number }) {
           <h2 className="text-base font-bold text-gray-900 leading-snug mt-1.5 line-clamp-2 group-hover:text-primary transition-colors">
             {featured.title}
           </h2>
-          <CalendarDate dateStr={featured.pubDate} className="mt-2" />
+          {featured.pubDate && <p className="text-[11px] text-gray-400 mt-2 tabular-nums">{new Date(featured.pubDate).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}</p>}
         </div>
       </a>
 
@@ -66,7 +65,7 @@ export default async function NewsFeed({ limit = 6 }: { limit?: number }) {
               <h3 className="text-sm font-semibold text-gray-800 leading-snug line-clamp-2 flex-1">
                 {item.title}
               </h3>
-              <CalendarDate dateStr={item.pubDate} className="mt-2" />
+              {item.pubDate && <p className="text-[11px] text-gray-400 mt-2 tabular-nums">{new Date(item.pubDate).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}</p>}
             </div>
           </a>
         ))}
