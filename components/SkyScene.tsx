@@ -254,36 +254,49 @@ export default function SkyScene({ prayers: defaultPrayers }: {
           </button>
         </div>
 
-        {/* Mobile dropdown */}
+        {/* Mobile menu — fixed overlay, never shifts layout */}
         <AnimatePresence>
           {mobileMenuOpen && (
-            <motion.div
-              key="mobile-menu"
-              initial={{ opacity: 0, y: -6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.15 }}
-              className="absolute left-0 right-0 z-20 md:hidden"
-              style={{
-                background: "rgba(20,6,14,0.97)",
-                borderBottom: "1px solid rgba(255,255,255,0.1)",
-                backdropFilter: "blur(12px)",
-              }}
-            >
-              <nav className="w-full px-4 sm:px-6 lg:px-8 py-2 flex flex-col">
-                {NAV_LINKS.map(({ href, label }) => (
-                  <a
-                    key={href}
-                    href={href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="text-[11px] font-bold tracking-widest uppercase py-3.5 text-qatar-sand hover:text-white transition-colors"
-                    style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}
-                  >
-                    {label}
-                  </a>
-                ))}
-              </nav>
-            </motion.div>
+            <>
+              {/* Backdrop */}
+              <motion.div
+                key="backdrop"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
+                className="fixed inset-0 z-40 md:hidden bg-black/40"
+                onClick={() => setMobileMenuOpen(false)}
+              />
+              {/* Sheet — slides in from top-right, compact */}
+              <motion.div
+                key="sheet"
+                initial={{ opacity: 0, scale: 0.95, y: -8 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: -8 }}
+                transition={{ duration: 0.15 }}
+                className="fixed top-4 right-4 z-50 md:hidden rounded-2xl overflow-hidden shadow-2xl"
+                style={{
+                  background: "rgba(14,4,10,0.96)",
+                  border: "1px solid rgba(200,168,75,0.18)",
+                  backdropFilter: "blur(20px)",
+                  minWidth: "180px",
+                }}
+              >
+                <nav className="flex flex-col py-2">
+                  {NAV_LINKS.map(({ href, label }) => (
+                    <a
+                      key={href}
+                      href={href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="px-5 py-2.5 text-[11px] font-bold tracking-widest uppercase text-qatar-sand hover:text-white hover:bg-white/5 transition-colors"
+                    >
+                      {label}
+                    </a>
+                  ))}
+                </nav>
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
 

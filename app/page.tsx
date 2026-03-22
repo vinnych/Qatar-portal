@@ -58,10 +58,32 @@ export default async function Home() {
         </Suspense>
       </section>
 
+      {/* Quick-link shortcuts — horizontal scroll on mobile */}
+      <div className="flex gap-2 overflow-x-auto hide-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap mt-4 pb-1">
+        {[
+          { href: "/prayer",         label: "Prayer",   icon: "🕌" },
+          { href: "/news",           label: "News",     icon: "📰" },
+          { href: "/jobs",           label: "Jobs",     icon: "💼" },
+          { href: "/weather",        label: "Weather",  icon: "🌤️" },
+          { href: "/currency",       label: "Currency", icon: "💱" },
+          { href: "/hijri-calendar", label: "Hijri",    icon: "🗓️" },
+          { href: "/qatar-metro",    label: "Metro",    icon: "🚇" },
+        ].map(({ href, label, icon }) => (
+          <a
+            key={href}
+            href={href}
+            className="flex items-center gap-1.5 shrink-0 px-3 py-1.5 bg-white rounded-full border border-stone-200 text-xs font-semibold text-gray-700 hover:border-primary hover:text-primary transition-colors shadow-sm active:scale-95"
+          >
+            <span>{icon}</span>
+            <span>{label}</span>
+          </a>
+        ))}
+      </div>
+
       <div className="space-y-5 mt-5">
-        {/* Weather + Currency */}
+        {/* Weather + Currency — always 2-col, they're compact */}
         <FadeIn delay={0.1}>
-          <div className="grid md:grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-3">
             <section>
               <a href="/weather" className="block hover:opacity-90 transition-opacity">
                 <SectionLabel>Weather</SectionLabel>
@@ -72,7 +94,7 @@ export default async function Home() {
             </section>
             <section>
               <a href="/currency" className="block hover:opacity-90 transition-opacity">
-                <SectionLabel>QAR Exchange Rates</SectionLabel>
+                <SectionLabel>QAR Rates</SectionLabel>
                 <Suspense fallback={<div className="bg-stone-100 rounded-2xl h-24 animate-pulse" />}>
                   <CurrencyWidget />
                 </Suspense>
@@ -81,29 +103,30 @@ export default async function Home() {
           </div>
         </FadeIn>
 
-        {/* News + Jobs */}
+        {/* News */}
         <FadeIn delay={0.2}>
-          <div className="grid lg:grid-cols-3 gap-4 lg:gap-5">
-            <section className="lg:col-span-2">
-              <div className="flex items-center justify-between mb-2">
-                <SectionLabel>Latest News</SectionLabel>
-                <a href="/news" className="text-xs font-medium text-gray-400 hover:text-primary transition-colors">View all →</a>
-              </div>
-              <Suspense fallback={<div className="grid gap-4 sm:grid-cols-2"><div className="bg-stone-100 rounded-2xl h-40 animate-pulse" /><div className="bg-stone-100 rounded-2xl h-40 animate-pulse" /></div>}>
-                <NewsFeed limit={12} />
-              </Suspense>
-            </section>
+          <section>
+            <div className="flex items-center justify-between mb-2">
+              <SectionLabel>Latest News</SectionLabel>
+              <a href="/news" className="text-xs font-medium text-gray-400 hover:text-primary transition-colors">View all →</a>
+            </div>
+            <Suspense fallback={<div className="grid gap-4 sm:grid-cols-2"><div className="bg-stone-100 rounded-2xl h-40 animate-pulse" /><div className="bg-stone-100 rounded-2xl h-40 animate-pulse" /></div>}>
+              <NewsFeed limit={6} />
+            </Suspense>
+          </section>
+        </FadeIn>
 
-            <section>
-              <div className="flex items-center justify-between mb-2">
-                <SectionLabel>Jobs in Qatar</SectionLabel>
-                <a href="/jobs" className="text-xs font-medium text-gray-400 hover:text-primary transition-colors">View all →</a>
-              </div>
-              <Suspense fallback={<div className="space-y-2"><div className="bg-stone-100 rounded-xl h-16 animate-pulse" /><div className="bg-stone-100 rounded-xl h-16 animate-pulse" /></div>}>
-                <JobList limit={8} />
-              </Suspense>
-            </section>
-          </div>
+        {/* Jobs */}
+        <FadeIn delay={0.25}>
+          <section>
+            <div className="flex items-center justify-between mb-2">
+              <SectionLabel>Jobs in Qatar</SectionLabel>
+              <a href="/jobs" className="text-xs font-medium text-gray-400 hover:text-primary transition-colors">View all →</a>
+            </div>
+            <Suspense fallback={<div className="space-y-2"><div className="bg-stone-100 rounded-xl h-16 animate-pulse" /><div className="bg-stone-100 rounded-xl h-16 animate-pulse" /></div>}>
+              <JobList limit={5} />
+            </Suspense>
+          </section>
         </FadeIn>
 
         {/* FAQ */}
