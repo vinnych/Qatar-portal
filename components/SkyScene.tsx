@@ -44,6 +44,7 @@ export default function SkyScene({ prayers: defaultPrayers }: {
   const [locationStatus, setLocationStatus] = useState<LocationStatus>("idle");
 
   const [nextPrayer, setNextPrayer] = useState<{ name: string; time: string } | null>(null);
+  const [countdown, setCountdown] = useState<string>("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Sky state — updates every minute to keep sun/moon synced
@@ -81,7 +82,7 @@ export default function SkyScene({ prayers: defaultPrayers }: {
     isNight = false;
   }
 
-  // Recalculate next prayer whenever prayers change
+  // Recalculate next prayer + countdown whenever prayers change
   useEffect(() => {
     const tick = () => {
       const n = new Date();
@@ -90,6 +91,11 @@ export default function SkyScene({ prayers: defaultPrayers }: {
       if (nextIdx === -1) nextIdx = 0;
       const next = prayers[nextIdx];
       setNextPrayer({ name: next.name, time: next.time });
+      let diffMin = toMin(next.time) - localMin;
+      if (diffMin < 0) diffMin += 24 * 60;
+      const h = Math.floor(diffMin / 60);
+      const m = diffMin % 60;
+      setCountdown(h > 0 ? `${h}h ${m}m` : `${m}m`);
     };
     tick();
     const id = setInterval(tick, 60000);
@@ -301,58 +307,57 @@ export default function SkyScene({ prayers: defaultPrayers }: {
         </AnimatePresence>
 
         {/* Hero content */}
-        <div className="pb-8 pt-4">
-          {/* Row: location button + date/time */}
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-4">
-            <div>
-              <button
-                onClick={handleLocationClick}
-                disabled={locationStatus === "loading"}
-                className="flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full text-white transition-all text-xs md:text-sm font-medium uppercase tracking-wider group active:scale-95 shadow-sm"
-                title="Click to update location"
-              >
-                {locationStatus === "loading" ? (
-                  <Loader2 className="w-4 h-4 md:w-5 md:h-5 animate-spin" />
-                ) : locationStatus === "granted" ? (
-                  <LocateFixed className="w-4 h-4 md:w-5 md:h-5 group-hover:scale-110 transition-transform" />
-                ) : (
-                  <MapPin className="w-4 h-4 md:w-5 md:h-5 group-hover:scale-110 transition-transform" />
-                )}
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={locationName + locationStatus}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.15 }}
-                  >
-                    {locationStatus === "loading"
-                      ? "Locating..."
-                      : locationStatus === "denied"
-                      ? "Location denied"
-                      : locationName}
-                  </motion.span>
-                </AnimatePresence>
-              </button>
-            </div>
-            <div className="sm:text-right">
-              <div className="text-sm md:text-base font-medium text-white/90">
-                {now.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}
+        <div className="pb-6 pt-3">
+          {/* Row: location button + date/time — always single row */}
+          <div className="flex items-center justify-between gap-2 mb-3">
+            <button
+              onClick={handleLocationClick}
+              disabled={locationStatus === "loading"}
+              className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full text-white transition-all text-[11px] md:text-sm font-medium uppercase tracking-wider group active:scale-95 shadow-sm min-w-0 max-w-[55%]"
+              title="Click to update location"
+            >
+              {locationStatus === "loading" ? (
+                <Loader2 className="w-3.5 h-3.5 md:w-5 md:h-5 shrink-0 animate-spin" />
+              ) : locationStatus === "granted" ? (
+                <LocateFixed className="w-3.5 h-3.5 md:w-5 md:h-5 shrink-0 group-hover:scale-110 transition-transform" />
+              ) : (
+                <MapPin className="w-3.5 h-3.5 md:w-5 md:h-5 shrink-0 group-hover:scale-110 transition-transform" />
+              )}
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={locationName + locationStatus}
+                  className="truncate"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.15 }}
+                >
+                  {locationStatus === "loading"
+                    ? "Locating..."
+                    : locationStatus === "denied"
+                    ? "Location denied"
+                    : locationName}
+                </motion.span>
+              </AnimatePresence>
+            </button>
+            <div className="text-right shrink-0">
+              <div className="text-[11px] md:text-sm font-medium text-white/90 leading-tight">
+                {now.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })}
               </div>
-              <div className="text-xs text-white/75 font-mono mt-0.5 tracking-widest">{timeStr}</div>
+              <div className="text-[11px] text-white/70 font-mono tracking-widest">{timeStr}</div>
             </div>
           </div>
 
-          {/* Prayer cards — horizontal scroll on mobile, 6-col grid on sm+ */}
-          <div className="flex overflow-x-auto sm:grid sm:grid-cols-6 gap-2 md:gap-3 pb-2 snap-x snap-mandatory hide-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
+          {/* Prayer cards — 3×2 grid on mobile (all visible), 6-col on sm+ */}
+          <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 md:gap-3">
             {prayers.map((p) => {
               const isNext = nextPrayer?.name === p.name;
               return (
                 <div
                   key={p.name}
-                  className={`relative overflow-hidden p-3 rounded-xl flex flex-col items-center justify-center transition-all duration-300 min-w-[110px] sm:min-w-0 snap-center active:scale-95 border ${
+                  className={`relative overflow-hidden px-2 py-3 rounded-xl flex flex-col items-center justify-center transition-all duration-300 border ${
                     isNext
-                      ? "bg-primary/40 border-primary shadow-[0_0_20px_rgba(138,21,56,0.4)] scale-105 active:scale-100"
+                      ? "bg-primary/40 border-primary shadow-[0_0_20px_rgba(138,21,56,0.4)] sm:scale-105"
                       : "bg-white/5 backdrop-blur-md border-white/10 hover:bg-white/10"
                   }`}
                 >
@@ -360,7 +365,7 @@ export default function SkyScene({ prayers: defaultPrayers }: {
                     <div className="absolute inset-0 bg-gradient-to-b from-primary/20 to-transparent pointer-events-none" />
                   )}
                   <span
-                    className={`text-[10px] font-semibold uppercase tracking-widest mb-1 ${
+                    className={`text-[9px] sm:text-[10px] font-semibold uppercase tracking-widest mb-1 ${
                       isNext ? "text-white" : "text-white/70"
                     }`}
                   >
@@ -369,7 +374,7 @@ export default function SkyScene({ prayers: defaultPrayers }: {
                   <AnimatePresence mode="wait">
                     <motion.span
                       key={p.time}
-                      className={`font-mono text-base md:text-lg ${
+                      className={`font-mono text-sm md:text-lg leading-tight ${
                         isNext ? "font-bold text-white" : "font-medium text-white/90"
                       }`}
                       initial={{ opacity: 0 }}
@@ -380,6 +385,11 @@ export default function SkyScene({ prayers: defaultPrayers }: {
                       {p.time}
                     </motion.span>
                   </AnimatePresence>
+                  {isNext && countdown && (
+                    <span className="mt-1 text-[9px] font-mono text-white/60 sm:hidden">
+                      in {countdown}
+                    </span>
+                  )}
                 </div>
               );
             })}
