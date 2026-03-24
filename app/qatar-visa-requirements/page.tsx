@@ -169,7 +169,7 @@ export default function QatarVisaRequirementsPage() {
         <p className="font-semibold text-rose-900 mb-2">Planning to move to Qatar?</p>
         <div className="flex flex-wrap gap-3">
           <a href="/jobs" className="text-rose-700 hover:underline">→ Browse Qatar Jobs</a>
-          <a href="/prayer" className="text-rose-700 hover:underline">→ Prayer Times in Doha</a>
+          <a href="/work-in-qatar" className="text-rose-700 hover:underline">→ Work in Qatar</a>
           <a href="/cost-of-living-doha" className="text-rose-700 hover:underline">→ Cost of Living in Doha</a>
         </div>
       </section>

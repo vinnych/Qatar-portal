@@ -194,7 +194,7 @@ export default function WorkInQatarPage() {
       {/* Related links */}
       <div className="flex flex-wrap gap-3 text-xs">
         <a href="/jobs" className="text-rose-700 hover:underline">→ Browse jobs in Qatar</a>
-        <a href="/prayer" className="text-rose-700 hover:underline">→ Prayer times in Doha</a>
+        <a href="/qatar-labour-law" className="text-rose-700 hover:underline">→ Qatar Labour Law</a>
         <a href="/hijri-calendar" className="text-rose-700 hover:underline">→ Hijri Calendar</a>
         <a href="/qatar-public-holidays" className="text-rose-700 hover:underline">→ Public holidays</a>
       </div>

@@ -3,7 +3,7 @@ import { Inter, Newsreader } from "next/font/google";
 import Script from "next/script";
 import Image from "next/image";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { MapPin, Mail, Phone } from "lucide-react";
+import { MapPin } from "lucide-react";
 import Header from "@/components/Header";
 import ConditionalHeader from "@/components/ConditionalHeader";
 import BottomNav from "@/components/BottomNav";
@@ -21,6 +21,12 @@ export const metadata: Metadata = {
     "Your daily Qatar resource: accurate prayer times for Doha, latest job listings in Qatar, and top Gulf news headlines.",
   keywords: ["Qatar prayer times", "Doha prayer times today", `Qatar jobs ${new Date().getFullYear()}`, "Qatar news", "Gulf jobs", "Fajr time Doha"],
   alternates: { canonical: "https://qatar-portal.vercel.app" },
+  other: {
+    "geo.region": "QA-DA",
+    "geo.placename": "Doha, Qatar",
+    "geo.position": "25.2854;51.5310",
+    "ICBM": "25.2854, 51.5310",
+  },
   openGraph: {
     title: "Qatar Portal",
     description: "Prayer times, jobs, and news for Qatar",
@@ -66,12 +72,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "@type": "PostalAddress",
               "addressLocality": "West Bay",
               "addressRegion": "Doha",
+              "postalCode": "11111",
               "addressCountry": "QA"
             },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 25.2854,
+              "longitude": 51.5310
+            },
+            "areaServed": [
+              { "@type": "Country", "name": "Qatar" },
+              { "@type": "Country", "name": "United Arab Emirates" },
+              { "@type": "Country", "name": "Saudi Arabia" },
+              { "@type": "Country", "name": "Kuwait" },
+              { "@type": "Country", "name": "Bahrain" },
+              { "@type": "Country", "name": "Oman" }
+            ],
             "contactPoint": {
               "@type": "ContactPoint",
-              "email": "info@qatarportal.qa",
-              "contactType": "customer support"
+              "contactType": "customer support",
+              "areaServed": "GCC"
             }
           })}}
         />
@@ -152,14 +172,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   <li className="flex items-center gap-3">
                     <MapPin size={16} className="text-secondary-accent shrink-0" />
                     <span>West Bay, Doha, Qatar</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <Mail size={16} className="text-secondary-accent shrink-0" />
-                    <span>info@qatarportal.qa</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <Phone size={16} className="text-secondary-accent shrink-0" />
-                    <span>+974 4444 0000</span>
                   </li>
                 </ul>
               </div>

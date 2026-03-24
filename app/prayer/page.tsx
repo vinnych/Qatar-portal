@@ -10,6 +10,12 @@ export const metadata: Metadata = {
   description:
     "Accurate Fajr, Sunrise, Dhuhr, Asr, Maghrib and Isha prayer times for Doha and 35+ Muslim cities worldwide — today and full monthly calendar.",
   alternates: { canonical: `${SITE_URL}/prayer` },
+  other: {
+    "geo.region": "QA-DA",
+    "geo.placename": "Doha, Qatar",
+    "geo.position": "25.2854;51.5310",
+    "ICBM": "25.2854, 51.5310",
+  },
   openGraph: {
     title: "Prayer Times for Muslim Countries — Doha, Mecca, Dubai | Qatar Portal",
     description: "Accurate Fajr, Dhuhr, Asr, Maghrib and Isha prayer times for Doha and 35+ Muslim cities worldwide.",
@@ -58,6 +64,12 @@ export default async function PrayerPage() {
         description: `Fajr: ${today.Fajr}, Dhuhr: ${today.Dhuhr}, Asr: ${today.Asr}, Maghrib: ${today.Maghrib}, Isha: ${today.Isha}`,
         inLanguage: "en",
         isPartOf: { "@type": "WebSite", name: "Qatar Portal", url: SITE_URL },
+        spatialCoverage: {
+          "@type": "Place",
+          "name": "Doha, Qatar",
+          "geo": { "@type": "GeoCoordinates", "latitude": 25.2854, "longitude": 51.5310 },
+          "address": { "@type": "PostalAddress", "addressLocality": "Doha", "addressCountry": "QA" },
+        },
       }
     : null;
 

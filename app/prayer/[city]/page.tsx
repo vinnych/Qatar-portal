@@ -6,18 +6,18 @@ import { notFound } from "next/navigation";
 
 const SITE_URL = "https://qatar-portal.vercel.app";
 
-const CITIES: Record<string, { city: string; country: string; label: string }> = {
-  dubai: { city: "Dubai", country: "UAE", label: "Dubai, UAE" },
-  "abu-dhabi": { city: "Abu Dhabi", country: "UAE", label: "Abu Dhabi, UAE" },
-  riyadh: { city: "Riyadh", country: "Saudi Arabia", label: "Riyadh, Saudi Arabia" },
-  jeddah: { city: "Jeddah", country: "Saudi Arabia", label: "Jeddah, Saudi Arabia" },
-  "kuwait-city": { city: "Kuwait City", country: "Kuwait", label: "Kuwait City, Kuwait" },
-  muscat: { city: "Muscat", country: "Oman", label: "Muscat, Oman" },
-  manama: { city: "Manama", country: "Bahrain", label: "Manama, Bahrain" },
-  cairo: { city: "Cairo", country: "Egypt", label: "Cairo, Egypt" },
-  islamabad: { city: "Islamabad", country: "Pakistan", label: "Islamabad, Pakistan" },
-  manila: { city: "Manila", country: "Philippines", label: "Manila, Philippines" },
-  dhaka: { city: "Dhaka", country: "Bangladesh", label: "Dhaka, Bangladesh" },
+const CITIES: Record<string, { city: string; country: string; label: string; countryCode: string; geoRegion: string; lat: number; lng: number }> = {
+  dubai: { city: "Dubai", country: "UAE", label: "Dubai, UAE", countryCode: "AE", geoRegion: "AE-DU", lat: 25.2048, lng: 55.2708 },
+  "abu-dhabi": { city: "Abu Dhabi", country: "UAE", label: "Abu Dhabi, UAE", countryCode: "AE", geoRegion: "AE-AZ", lat: 24.4539, lng: 54.3773 },
+  riyadh: { city: "Riyadh", country: "Saudi Arabia", label: "Riyadh, Saudi Arabia", countryCode: "SA", geoRegion: "SA-01", lat: 24.7136, lng: 46.6753 },
+  jeddah: { city: "Jeddah", country: "Saudi Arabia", label: "Jeddah, Saudi Arabia", countryCode: "SA", geoRegion: "SA-02", lat: 21.4858, lng: 39.1925 },
+  "kuwait-city": { city: "Kuwait City", country: "Kuwait", label: "Kuwait City, Kuwait", countryCode: "KW", geoRegion: "KW-KU", lat: 29.3759, lng: 47.9774 },
+  muscat: { city: "Muscat", country: "Oman", label: "Muscat, Oman", countryCode: "OM", geoRegion: "OM-MA", lat: 23.5880, lng: 58.3829 },
+  manama: { city: "Manama", country: "Bahrain", label: "Manama, Bahrain", countryCode: "BH", geoRegion: "BH-13", lat: 26.2285, lng: 50.5860 },
+  cairo: { city: "Cairo", country: "Egypt", label: "Cairo, Egypt", countryCode: "EG", geoRegion: "EG-C", lat: 30.0444, lng: 31.2357 },
+  islamabad: { city: "Islamabad", country: "Pakistan", label: "Islamabad, Pakistan", countryCode: "PK", geoRegion: "PK-IS", lat: 33.6844, lng: 73.0479 },
+  manila: { city: "Manila", country: "Philippines", label: "Manila, Philippines", countryCode: "PH", geoRegion: "PH-00", lat: 14.5995, lng: 120.9842 },
+  dhaka: { city: "Dhaka", country: "Bangladesh", label: "Dhaka, Bangladesh", countryCode: "BD", geoRegion: "BD-C", lat: 23.8103, lng: 90.4125 },
 };
 
 export async function generateStaticParams() {
@@ -33,6 +33,12 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
     description: `Accurate Fajr, Dhuhr, Asr, Maghrib and Isha prayer times for ${entry.city}, ${entry.country} — today and monthly calendar.`,
     keywords: [`${entry.city} prayer times`, `prayer times ${entry.city} today`, `Fajr time ${entry.city}`, `salah times ${entry.city}`],
     alternates: { canonical: `${SITE_URL}/prayer/${slug}` },
+    other: {
+      "geo.region": entry.geoRegion,
+      "geo.placename": `${entry.city}, ${entry.country}`,
+      "geo.position": `${entry.lat};${entry.lng}`,
+      "ICBM": `${entry.lat}, ${entry.lng}`,
+    },
     openGraph: {
       title: `Prayer Times in ${entry.city} Today | Qatar Portal`,
       description: `Accurate prayer times for ${entry.city}, ${entry.country}.`,
@@ -75,6 +81,12 @@ export default async function CityPrayerPage({ params }: { params: Promise<{ cit
         description: `Fajr: ${today.Fajr}, Dhuhr: ${today.Dhuhr}, Asr: ${today.Asr}, Maghrib: ${today.Maghrib}, Isha: ${today.Isha}`,
         inLanguage: "en",
         isPartOf: { "@type": "WebSite", name: "Qatar Portal", url: SITE_URL },
+        spatialCoverage: {
+          "@type": "Place",
+          name: `${entry.city}, ${entry.country}`,
+          geo: { "@type": "GeoCoordinates", latitude: entry.lat, longitude: entry.lng },
+          address: { "@type": "PostalAddress", addressLocality: entry.city, addressCountry: entry.countryCode },
+        },
       }
     : null;
 

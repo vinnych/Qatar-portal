@@ -170,7 +170,7 @@ export default function EmergencyNumbersQatarPage() {
         <div className="flex flex-wrap gap-3">
           <a href="/qatar-visa-requirements" className="text-rose-700 hover:underline">→ Qatar Visa Requirements</a>
           <a href="/cost-of-living-doha" className="text-rose-700 hover:underline">→ Cost of Living in Doha</a>
-          <a href="/about" className="text-rose-700 hover:underline">→ About Qatar Portal</a>
+          <a href="/qatar-public-holidays" className="text-rose-700 hover:underline">→ Qatar Public Holidays</a>
         </div>
       </section>
     </div>
