@@ -26,8 +26,6 @@ export const metadata: Metadata = {
     "geo.placename": "Doha, Qatar",
     "geo.position": "25.2854;51.5310",
     "ICBM": "25.2854, 51.5310",
-    // Replace with your code from bing.com/webmasters → Add Site → Meta tag method
-    "msvalidate.01": "REPLACE_WITH_BING_CODE",
   },
   openGraph: {
     title: "Qatar Portal",
