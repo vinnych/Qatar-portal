@@ -132,8 +132,9 @@ export default function PrayerSelector({
     <div className="space-y-5">
       {/* Location selector */}
       <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
-        <label className="text-sm font-medium text-gray-700">Location:</label>
+        <label htmlFor="city-select" className="text-sm font-medium text-gray-700">Location:</label>
         <select
+          id="city-select"
           value={selected}
           onChange={(e) => { setUsingGeo(false); setGeoLabel(""); setSelected(Number(e.target.value)); }}
           className="rounded-xl bg-surface-low border-0 px-3 py-2.5 sm:py-2 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary/30"

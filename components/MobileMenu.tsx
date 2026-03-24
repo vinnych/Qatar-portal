@@ -24,6 +24,8 @@ export default function MobileMenu() {
         className="sm:hidden p-2 -mr-2 text-white/70 hover:text-white transition-colors"
         onClick={() => setOpen(true)}
         aria-label="Open menu"
+        aria-expanded={open}
+        aria-controls="mobile-nav"
       >
         <Menu size={20} />
       </button>
@@ -66,7 +68,7 @@ export default function MobileMenu() {
                   <X size={16} />
                 </button>
               </div>
-              <nav className="flex flex-col py-1">
+              <nav id="mobile-nav" className="flex flex-col py-1">
                 {NAV_LINKS.map(({ href, label }) => (
                   <a
                     key={href}

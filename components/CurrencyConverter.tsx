@@ -24,7 +24,7 @@ export default function CurrencyConverter({ rates }: { rates: CurrencyRate[] }) 
           step="any"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
-          className="flex-1 text-xl font-bold text-gray-900 bg-transparent focus:outline-none text-right min-w-0"
+          className="flex-1 text-xl font-bold text-gray-900 bg-transparent focus:outline-none focus:ring-2 focus:ring-primary/30 rounded text-right min-w-0"
           placeholder="1"
         />
         <span className="text-sm font-semibold text-rose-800">QAR</span>

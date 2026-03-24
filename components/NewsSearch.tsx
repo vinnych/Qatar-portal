@@ -22,7 +22,9 @@ export default function NewsSearch({ items }: { items: NewsItem[] }) {
     <div className="space-y-6">
       {/* Search bar */}
       <div className="relative">
+        <label htmlFor="news-search" className="sr-only">Search news</label>
         <input
+          id="news-search"
           type="search"
           placeholder="Search news..."
           value={query}

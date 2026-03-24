@@ -21,7 +21,9 @@ export default function JobSearch({ jobs }: { jobs: Job[] }) {
     <div className="space-y-4">
       {/* Search bar */}
       <div className="relative">
+        <label htmlFor="job-search" className="sr-only">Search jobs or companies</label>
         <input
+          id="job-search"
           type="search"
           placeholder="Search jobs or companies..."
           value={query}
