@@ -1,25 +1,16 @@
 import JobSearch from "@/components/JobSearch";
 import { getJobs } from "@/lib/jobs";
 import { safeJsonLd } from "@/lib/utils";
-import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 
 const year = new Date().getFullYear();
 
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: `Latest Jobs in Qatar ${year} | Qatar Portal`,
   description: "Browse the latest job vacancies in Qatar, updated daily from Google News. Find jobs in Doha and across Qatar.",
-  alternates: { canonical: "https://qatar-portal.vercel.app/jobs" },
+  path: "/jobs",
   keywords: ["Qatar jobs", "jobs in Qatar", "Doha jobs", `Qatar vacancies ${year}`, "Gulf jobs", "Qatar hiring", "Qatar careers"],
-  openGraph: {
-    title: `Latest Jobs in Qatar ${year} | Qatar Portal`,
-    description: "Browse the latest job vacancies in Qatar, updated daily from Google News. Find jobs in Doha and across Qatar.",
-    url: "https://qatar-portal.vercel.app/jobs",
-    siteName: "Qatar Portal",
-    type: "website",
-    images: [{ url: "https://qatar-portal.vercel.app/opengraph-image", width: 1200, height: 630 }],
-  },
-  twitter: { card: "summary_large_image", title: `Latest Jobs in Qatar ${year} | Qatar Portal`, description: "Browse the latest job vacancies in Qatar." },
-};
+});
 
 export default async function JobsPage() {
   let jobs: Awaited<ReturnType<typeof getJobs>> = [];

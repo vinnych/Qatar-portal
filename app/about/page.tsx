@@ -1,24 +1,14 @@
-import type { Metadata } from "next";
+import { pageMeta, SITE_URL } from "@/lib/seo";
 import { safeJsonLd } from "@/lib/utils";
 
-const SITE_URL = "https://qatar-portal.vercel.app";
-
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: "About Qatar Portal — Free Daily Resource for Qatar",
-  description:
-    "Qatar Portal: free prayer times, live weather, Gulf news, QAR rates, and jobs for Qatar residents, expats, and visitors.",
+  description: "Qatar Portal: free prayer times, live weather, Gulf news, QAR rates, and jobs for Qatar residents, expats, and visitors.",
+  path: "/about",
   keywords: ["Qatar Portal", "about Qatar Portal", "Qatar expat resource", "Doha daily guide", "Qatar information site"],
-  alternates: { canonical: `${SITE_URL}/about` },
-  openGraph: {
-    title: "About Qatar Portal",
-    description: "Your free daily resource for Qatar: prayer times, weather, news, currency rates, and jobs.",
-    url: `${SITE_URL}/about`,
-    siteName: "Qatar Portal",
-    type: "website",
-    images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
-  },
-  twitter: { card: "summary_large_image", title: "About Qatar Portal", description: "Free daily resource for Qatar: prayer times, weather, news, currency rates, and jobs." },
-};
+  ogTitle: "About Qatar Portal",
+  ogDescription: "Your free daily resource for Qatar: prayer times, weather, news, currency rates, and jobs.",
+});
 
 export default function AboutPage() {
   const jsonLd = {

@@ -1,23 +1,13 @@
-import type { Metadata } from "next";
+import { pageMeta, SITE_URL } from "@/lib/seo";
 import { safeJsonLd } from "@/lib/utils";
 
-const SITE_URL = "https://qatar-portal.vercel.app";
-
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: "Qatar Labour Law 2026 — Employee Rights & Work Rules",
   description: "Complete guide to Qatar Labour Law 2026: working hours, minimum wage, annual leave, end of service, overtime, notice period, and worker rights.",
+  path: "/qatar-labour-law",
   keywords: ["Qatar labour law 2026", "Qatar employment law", "Qatar working hours", "Qatar minimum wage", "Qatar end of service", "Qatar overtime pay", "Qatar annual leave"],
-  alternates: { canonical: `${SITE_URL}/qatar-labour-law` },
-  openGraph: {
-    title: "Qatar Labour Law 2026 — Employee Rights & Work Rules",
-    description: "Qatar Labour Law guide: working hours, minimum wage, annual leave, end of service, and worker rights for expats.",
-    url: `${SITE_URL}/qatar-labour-law`,
-    siteName: "Qatar Portal",
-    type: "website",
-    images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
-  },
-  twitter: { card: "summary_large_image", title: "Qatar Labour Law 2026 — Employee Rights", description: "Qatar Labour Law: working hours, minimum wage, annual leave, end of service, and overtime rules." },
-};
+  ogDescription: "Qatar Labour Law guide: working hours, minimum wage, annual leave, end of service, and worker rights for expats.",
+});
 
 const SECTIONS = [
   {

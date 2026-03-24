@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { Inter, Newsreader } from "next/font/google";
-import Script from "next/script";
 import Image from "next/image";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { MapPin } from "lucide-react";
 import Header from "@/components/Header";
 import ConditionalHeader from "@/components/ConditionalHeader";
 import BottomNav from "@/components/BottomNav";
+import CookieConsent from "@/components/CookieConsent";
 import { safeJsonLd } from "@/lib/utils";
 import "./globals.css";
 
@@ -26,6 +26,8 @@ export const metadata: Metadata = {
     "geo.placename": "Doha, Qatar",
     "geo.position": "25.2854;51.5310",
     "ICBM": "25.2854, 51.5310",
+    // Replace with your code from bing.com/webmasters → Add Site → Meta tag method
+    "msvalidate.01": "REPLACE_WITH_BING_CODE",
   },
   openGraph: {
     title: "Qatar Portal",
@@ -96,23 +98,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           })}}
         />
         <main className="flex-grow w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-5 pb-20 md:pb-5">{children}</main>
-        <Script
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7212871157824722"
-          strategy="afterInteractive"
-          crossOrigin="anonymous"
-        />
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-VPREJS079K"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-VPREJS079K');
-          `}
-        </Script>
+        <CookieConsent />
         <SpeedInsights />
         {/* Rich footer */}
         <footer className="relative mt-auto bg-primary-dark text-white overflow-hidden pb-20 md:pb-0">
@@ -167,6 +153,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   <li><a href="/qatar-public-holidays" className="hover:text-secondary-accent transition-colors">Public Holidays</a></li>
                   <li><a href="/emergency-numbers-qatar" className="hover:text-secondary-accent transition-colors">Emergency Numbers</a></li>
                   <li><a href="/privacy" className="hover:text-secondary-accent transition-colors">Privacy</a></li>
+                  <li><a href="/terms" className="hover:text-secondary-accent transition-colors">Terms of Service</a></li>
                 </ul>
                 <ul className="space-y-3 text-sm text-white/80">
                   <li className="flex items-center gap-3">

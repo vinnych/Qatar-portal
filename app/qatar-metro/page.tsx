@@ -1,23 +1,14 @@
-import type { Metadata } from "next";
+import { pageMeta, SITE_URL } from "@/lib/seo";
 import { safeJsonLd } from "@/lib/utils";
 
-const SITE_URL = "https://qatar-portal.vercel.app";
-
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: "Qatar Metro Guide — Doha Metro Lines, Stations & Fares",
   description: "Complete guide to the Doha Metro: Red, Green, and Gold lines, station map, ticket prices, operating hours, and tips for riding the Qatar Metro.",
+  path: "/qatar-metro",
   keywords: ["Qatar Metro", "Doha Metro", "Doha Metro stations", "Qatar Metro map", "Doha Metro fare", "Qatar Metro lines", "Gold line Doha", "Red line Doha Metro"],
-  alternates: { canonical: `${SITE_URL}/qatar-metro` },
-  openGraph: {
-    title: "Qatar Metro Guide — Lines, Stations & Fares",
-    description: "Everything you need to know about the Doha Metro: lines, stations, fares, and operating hours.",
-    url: `${SITE_URL}/qatar-metro`,
-    siteName: "Qatar Portal",
-    type: "website",
-    images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
-  },
-  twitter: { card: "summary_large_image", title: "Qatar Metro Guide — Doha Metro Lines & Stations", description: "Doha Metro lines, stations, fares and operating hours — complete guide." },
-};
+  ogTitle: "Qatar Metro Guide — Lines, Stations & Fares",
+  ogDescription: "Everything you need to know about the Doha Metro: lines, stations, fares, and operating hours.",
+});
 
 const LINES = [
   {

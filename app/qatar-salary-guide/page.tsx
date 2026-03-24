@@ -1,23 +1,13 @@
-import type { Metadata } from "next";
+import { pageMeta, SITE_URL } from "@/lib/seo";
 import { safeJsonLd } from "@/lib/utils";
 
-const SITE_URL = "https://qatar-portal.vercel.app";
-
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: "Qatar Salary Guide 2026 — Average Salaries in Doha",
   description: "Average salaries in Qatar by job category and experience level. Tax-free income guide for expats in Doha 2026.",
+  path: "/qatar-salary-guide",
   keywords: ["Qatar salary guide 2026", "average salary Qatar", "Doha salary", "Qatar salary by job", "expat salary Qatar", "IT salary Qatar", "engineering salary Qatar"],
-  alternates: { canonical: `${SITE_URL}/qatar-salary-guide` },
-  openGraph: {
-    title: "Qatar Salary Guide 2026 — Average Salaries in Doha",
-    description: "Average salaries in Qatar by job category, experience level, and sector. Tax-free income guide for expats.",
-    url: `${SITE_URL}/qatar-salary-guide`,
-    siteName: "Qatar Portal",
-    type: "website",
-    images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
-  },
-  twitter: { card: "summary_large_image", title: "Qatar Salary Guide 2026 — Average Salaries in Doha", description: "Average salaries in Qatar by job and experience. Tax-free expat income guide." },
-};
+  ogDescription: "Average salaries in Qatar by job category, experience level, and sector. Tax-free income guide for expats.",
+});
 
 const SALARY_CATEGORIES = [
   {

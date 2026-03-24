@@ -1,24 +1,14 @@
-import type { Metadata } from "next";
+import { pageMeta, SITE_URL } from "@/lib/seo";
 import { safeJsonLd } from "@/lib/utils";
 
-const SITE_URL = "https://qatar-portal.vercel.app";
-
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: "Qatar Public Holidays 2026 — Official Government & Islamic Holidays",
-  description:
-    "Complete list of Qatar public holidays for 2026 including National Day, Sports Day, Eid Al-Fitr, Eid Al-Adha, and all official government holidays.",
+  description: "Complete list of Qatar public holidays for 2026 including National Day, Sports Day, Eid Al-Fitr, Eid Al-Adha, and all official government holidays.",
+  path: "/qatar-public-holidays",
   keywords: ["Qatar public holidays 2026", "Qatar national day", "Eid holidays Qatar", "Qatar Sports Day", "Qatar government holidays", "Qatar holiday calendar"],
-  alternates: { canonical: `${SITE_URL}/qatar-public-holidays` },
-  openGraph: {
-    title: "Qatar Public Holidays 2026",
-    description: "Official Qatar public holidays 2026: National Day, Sports Day, Eid Al-Fitr, Eid Al-Adha, and all government holidays.",
-    url: `${SITE_URL}/qatar-public-holidays`,
-    siteName: "Qatar Portal",
-    type: "website",
-    images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
-  },
-  twitter: { card: "summary_large_image", title: "Qatar Public Holidays 2026", description: "Official Qatar public holidays 2026: National Day, Sports Day, Eid Al-Fitr, Eid Al-Adha, and all government holidays." },
-};
+  ogTitle: "Qatar Public Holidays 2026",
+  ogDescription: "Official Qatar public holidays 2026: National Day, Sports Day, Eid Al-Fitr, Eid Al-Adha, and all government holidays.",
+});
 
 const HOLIDAYS_2026 = [
   { date: "1 Jan 2026", name: "New Year's Day", type: "International" },

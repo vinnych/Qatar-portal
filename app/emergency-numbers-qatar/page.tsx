@@ -1,24 +1,14 @@
-import type { Metadata } from "next";
+import { pageMeta, SITE_URL } from "@/lib/seo";
 import { safeJsonLd } from "@/lib/utils";
 
-const SITE_URL = "https://qatar-portal.vercel.app";
-
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: "Emergency Numbers Qatar & Embassy Contacts Doha 2026",
-  description:
-    "Qatar emergency numbers: police, ambulance, fire, traffic. Embassy contacts for India, Pakistan, Philippines, UK, USA and more.",
+  description: "Qatar emergency numbers: police, ambulance, fire, traffic. Embassy contacts for India, Pakistan, Philippines, UK, USA and more.",
+  path: "/emergency-numbers-qatar",
   keywords: ["emergency numbers Qatar", "Qatar police number", "ambulance Qatar", "embassies in Doha", "Indian embassy Qatar", "Pakistan embassy Qatar"],
-  alternates: { canonical: `${SITE_URL}/emergency-numbers-qatar` },
-  openGraph: {
-    title: "Emergency Numbers Qatar & Embassies in Doha",
-    description: "Qatar emergency contacts and embassy phone numbers for major nationalities in Doha.",
-    url: `${SITE_URL}/emergency-numbers-qatar`,
-    siteName: "Qatar Portal",
-    type: "website",
-    images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
-  },
-  twitter: { card: "summary_large_image", title: "Emergency Numbers Qatar & Embassies in Doha", description: "Qatar emergency contacts and embassy phone numbers for major nationalities in Doha." },
-};
+  ogTitle: "Emergency Numbers Qatar & Embassies in Doha",
+  ogDescription: "Qatar emergency contacts and embassy phone numbers for major nationalities in Doha.",
+});
 
 export default function EmergencyNumbersQatarPage() {
   const jsonLd = {

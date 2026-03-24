@@ -6,23 +6,16 @@ import WeatherWidget from "@/components/WeatherWidget";
 import CurrencyWidget from "@/components/CurrencyWidget";
 import FadeIn from "@/components/FadeIn";
 import { safeJsonLd } from "@/lib/utils";
-import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: "Doha Prayer Times Today — Qatar News & Jobs | Qatar Portal",
   description: "Accurate Doha prayer times for today including Fajr, Dhuhr, Asr, Maghrib and Isha. Plus latest Qatar news and job listings.",
+  path: "/",
   keywords: ["Doha prayer times today", "Fajr time Doha", "Qatar prayer times", "Qatar news today", "jobs in Qatar", "Maghrib time Doha", "Qatar Portal"],
-  alternates: { canonical: "https://qatar-portal.vercel.app" },
-  openGraph: {
-    title: "Doha Prayer Times Today — Qatar News & Jobs | Qatar Portal",
-    description: "Accurate Doha prayer times for today including Fajr, Dhuhr, Asr, Maghrib and Isha. Plus latest Qatar news and job listings.",
-    url: "https://qatar-portal.vercel.app",
-    siteName: "Qatar Portal",
-    type: "website",
-    images: [{ url: "https://qatar-portal.vercel.app/opengraph-image", width: 1200, height: 630 }],
-  },
-  twitter: { card: "summary_large_image", title: "Doha Prayer Times Today | Qatar Portal", description: "Accurate Doha prayer times for today. Plus latest Qatar news and job listings." },
-};
+  ogTitle: "Doha Prayer Times Today — Qatar News & Jobs | Qatar Portal",
+  ogDescription: "Accurate Doha prayer times for today including Fajr, Dhuhr, Asr, Maghrib and Isha. Plus latest Qatar news and job listings.",
+});
 
 const homeJsonLd = {
   "@context": "https://schema.org",

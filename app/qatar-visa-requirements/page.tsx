@@ -1,24 +1,13 @@
-import type { Metadata } from "next";
+import { pageMeta, SITE_URL } from "@/lib/seo";
 import { safeJsonLd } from "@/lib/utils";
 
-const SITE_URL = "https://qatar-portal.vercel.app";
-
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: "Qatar Visa Requirements 2026 — Complete Guide",
-  description:
-    "Qatar visa requirements for 2026: visa-free countries, tourist visa, work visa, family visa, fees, and how to apply online via Hayya platform.",
+  description: "Qatar visa requirements for 2026: visa-free countries, tourist visa, work visa, family visa, fees, and how to apply online via Hayya platform.",
+  path: "/qatar-visa-requirements",
   keywords: ["Qatar visa requirements", "Qatar tourist visa 2026", "Qatar work visa", "Hayya visa Qatar", "Qatar visa on arrival"],
-  alternates: { canonical: `${SITE_URL}/qatar-visa-requirements` },
-  openGraph: {
-    title: "Qatar Visa Requirements 2026 — Complete Guide",
-    description: "Everything you need to know about Qatar visas: tourist, work, family, fees, and how to apply.",
-    url: `${SITE_URL}/qatar-visa-requirements`,
-    siteName: "Qatar Portal",
-    type: "website",
-    images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
-  },
-  twitter: { card: "summary_large_image", title: "Qatar Visa Requirements 2026 — Complete Guide", description: "Everything you need to know about Qatar visas: tourist, work, family, fees, and how to apply." },
-};
+  ogDescription: "Everything you need to know about Qatar visas: tourist, work, family, fees, and how to apply.",
+});
 
 export default function QatarVisaRequirementsPage() {
   const jsonLd = {

@@ -2,23 +2,15 @@ import NewsSearch from "@/components/NewsSearch";
 import NewsletterCTA from "@/components/NewsletterCTA";
 import { getNews } from "@/lib/rss";
 import { safeJsonLd } from "@/lib/utils";
-import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: "Qatar & Gulf Breaking News Today | Qatar Portal",
   description: "Latest breaking news from Qatar and the Gulf — updated every 15 minutes from Al Jazeera, BBC Middle East, and Google News.",
-  alternates: { canonical: "https://qatar-portal.vercel.app/news" },
+  path: "/news",
   keywords: ["Qatar news today", "Gulf news", "Al Jazeera Qatar", "BBC Middle East", "Qatar breaking news", "Doha news"],
-  openGraph: {
-    title: "Qatar & Gulf Breaking News Today | Qatar Portal",
-    description: "Latest breaking news from Qatar and the Gulf — updated every 15 minutes from Al Jazeera, BBC and Google News.",
-    url: "https://qatar-portal.vercel.app/news",
-    siteName: "Qatar Portal",
-    type: "website",
-    images: [{ url: "https://qatar-portal.vercel.app/opengraph-image", width: 1200, height: 630 }],
-  },
-  twitter: { card: "summary_large_image", title: "Qatar & Gulf Breaking News Today | Qatar Portal", description: "Latest breaking news from Qatar and the Gulf." },
-};
+  ogDescription: "Latest breaking news from Qatar and the Gulf — updated every 15 minutes from Al Jazeera, BBC and Google News.",
+});
 
 export default async function NewsPage() {
   let news: Awaited<ReturnType<typeof getNews>> = [];

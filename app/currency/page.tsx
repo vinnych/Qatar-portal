@@ -1,36 +1,16 @@
 import { getQARRates } from "@/lib/currency";
 import CurrencyConverter from "@/components/CurrencyConverter";
 import { safeJsonLd } from "@/lib/utils";
-import type { Metadata } from "next";
+import { pageMeta, SITE_URL } from "@/lib/seo";
 
-const SITE_URL = "https://qatar-portal.vercel.app";
-
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: "QAR Exchange Rate Today — Qatar Riyal to USD, INR, EUR & More | Qatar Portal",
-  description:
-    "Live Qatar Riyal (QAR) exchange rates today. Convert QAR to USD, EUR, GBP, INR, PKR, PHP, EGP, BDT and more. Updated hourly.",
-  alternates: { canonical: `${SITE_URL}/currency` },
-  keywords: [
-    "QAR to USD",
-    "Qatar riyal exchange rate",
-    "1 QAR to INR",
-    "QAR to EUR",
-    "Qatar currency rate today",
-    "QAR exchange rate",
-    "Qatari riyal",
-    "QAR to PKR",
-    "QAR to PHP",
-  ],
-  openGraph: {
-    title: "QAR Exchange Rate Today — Qatar Riyal Rates",
-    description: "Live Qatar Riyal exchange rates vs USD, EUR, GBP, INR, PKR and more. Updated hourly.",
-    url: `${SITE_URL}/currency`,
-    siteName: "Qatar Portal",
-    type: "website",
-    images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
-  },
-  twitter: { card: "summary_large_image", title: "QAR Exchange Rate Today — Qatar Riyal Rates", description: "Live Qatar Riyal exchange rates vs USD, EUR, GBP, INR, PKR and more." },
-};
+  description: "Live Qatar Riyal (QAR) exchange rates today. Convert QAR to USD, EUR, GBP, INR, PKR, PHP, EGP, BDT and more. Updated hourly.",
+  path: "/currency",
+  keywords: ["QAR to USD", "Qatar riyal exchange rate", "1 QAR to INR", "QAR to EUR", "Qatar currency rate today", "QAR exchange rate", "Qatari riyal", "QAR to PKR", "QAR to PHP"],
+  ogTitle: "QAR Exchange Rate Today — Qatar Riyal Rates",
+  ogDescription: "Live Qatar Riyal exchange rates vs USD, EUR, GBP, INR, PKR and more. Updated hourly.",
+});
 
 export default async function CurrencyPage() {
   const data = await getQARRates();

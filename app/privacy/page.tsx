@@ -1,22 +1,12 @@
-import type { Metadata } from "next";
+import { pageMeta, SITE_URL } from "@/lib/seo";
 
-const SITE_URL = "https://qatar-portal.vercel.app";
-
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: "Privacy Policy | Qatar Portal",
   description: "Privacy Policy for Qatar Portal — how we collect data, use analytics (Vercel), display ads (AdSense), and protect your privacy.",
+  path: "/privacy",
   keywords: ["Qatar Portal privacy policy", "data privacy Qatar Portal", "cookies Qatar Portal"],
-  alternates: { canonical: `${SITE_URL}/privacy` },
-  openGraph: {
-    title: "Privacy Policy | Qatar Portal",
-    description: "Privacy Policy for Qatar Portal — how we handle data, analytics, and advertising.",
-    url: `${SITE_URL}/privacy`,
-    siteName: "Qatar Portal",
-    type: "website",
-    images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
-  },
-  twitter: { card: "summary_large_image", title: "Privacy Policy | Qatar Portal", description: "Privacy Policy for Qatar Portal." },
-};
+  ogDescription: "Privacy Policy for Qatar Portal — how we handle data, analytics, and advertising.",
+});
 
 const LAST_UPDATED = "18 March 2026";
 

@@ -1,22 +1,14 @@
 import { getNews } from "@/lib/rss";
 import { safeJsonLd } from "@/lib/utils";
-import type { Metadata } from "next";
+import { pageMeta, SITE_URL } from "@/lib/seo";
 
-const SITE_URL = "https://qatar-portal.vercel.app";
-
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: "Browse News by Category — Qatar Portal",
   description: "Browse Qatar and Gulf news by category: Qatar, Business, Sports, World, and Gulf news — updated every 15 minutes.",
+  path: "/news-category",
   keywords: ["Qatar news categories", "Qatar business news", "Qatar sports news", "Gulf news", "Qatar world news"],
-  alternates: { canonical: `${SITE_URL}/news-category` },
-  openGraph: {
-    title: "Browse News by Category — Qatar Portal",
-    description: "Qatar and Gulf news organised by category — Qatar, Business, Sports, World, Gulf.",
-    url: `${SITE_URL}/news-category`,
-    siteName: "Qatar Portal",
-    type: "website",
-  },
-};
+  ogDescription: "Qatar and Gulf news organised by category — Qatar, Business, Sports, World, Gulf.",
+});
 
 const CATEGORIES = [
   { slug: "qatar", label: "Qatar", icon: "🇶🇦", desc: "Local Qatar news, government, and Doha updates", keywords: ["qatar", "doha", "qatari", "al thani", "lusail", "pearl"] },

@@ -1,25 +1,16 @@
-import type { Metadata } from "next";
+import { pageMeta, SITE_URL } from "@/lib/seo";
 import { safeJsonLd } from "@/lib/utils";
-
-const SITE_URL = "https://qatar-portal.vercel.app";
 
 export const revalidate = 86400;
 
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: "Working in Qatar 2026 — Complete Expat Guide | Qatar Portal",
   description: "Complete guide to working in Qatar: visa requirements, salary ranges, labour law, cost of living, and how to find jobs in Doha.",
+  path: "/work-in-qatar",
   keywords: ["working in Qatar", "work in Qatar 2026", "Qatar expat guide", "jobs in Qatar", "Qatar work visa", "Qatar salary", "moving to Qatar"],
-  alternates: { canonical: `${SITE_URL}/work-in-qatar` },
-  openGraph: {
-    title: "Working in Qatar 2026 — Complete Expat Guide",
-    description: "Everything you need to know about working in Qatar: visa, salary, labour law, cost of living, and finding a job.",
-    url: `${SITE_URL}/work-in-qatar`,
-    siteName: "Qatar Portal",
-    type: "website",
-    images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
-  },
-  twitter: { card: "summary_large_image", title: "Working in Qatar 2026 — Complete Expat Guide", description: "Visa, salary, labour law and jobs — the complete guide to working in Qatar." },
-};
+  ogTitle: "Working in Qatar 2026 — Complete Expat Guide",
+  ogDescription: "Everything you need to know about working in Qatar: visa, salary, labour law, cost of living, and finding a job.",
+});
 
 const RESOURCES = [
   {

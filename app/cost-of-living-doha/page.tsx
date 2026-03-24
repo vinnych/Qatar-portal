@@ -1,24 +1,14 @@
-import type { Metadata } from "next";
+import { pageMeta, SITE_URL } from "@/lib/seo";
 import { safeJsonLd } from "@/lib/utils";
 
-const SITE_URL = "https://qatar-portal.vercel.app";
-
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: "Cost of Living in Doha, Qatar 2026 — Expat Guide",
-  description:
-    "Complete cost of living guide for Doha, Qatar in 2026. Housing, food, transport, utilities, and schooling costs for expats and new arrivals.",
+  description: "Complete cost of living guide for Doha, Qatar in 2026. Housing, food, transport, utilities, and schooling costs for expats and new arrivals.",
+  path: "/cost-of-living-doha",
   keywords: ["cost of living Doha", "cost of living Qatar 2026", "Doha rent prices", "expat life Qatar", "Qatar living expenses"],
-  alternates: { canonical: `${SITE_URL}/cost-of-living-doha` },
-  openGraph: {
-    title: "Cost of Living in Doha, Qatar 2026",
-    description: "Housing, food, transport, and utilities costs for expats living in Doha, Qatar.",
-    url: `${SITE_URL}/cost-of-living-doha`,
-    siteName: "Qatar Portal",
-    type: "website",
-    images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
-  },
-  twitter: { card: "summary_large_image", title: "Cost of Living in Doha, Qatar 2026", description: "Housing, food, transport, and utilities costs for expats living in Doha, Qatar." },
-};
+  ogTitle: "Cost of Living in Doha, Qatar 2026",
+  ogDescription: "Housing, food, transport, and utilities costs for expats living in Doha, Qatar.",
+});
 
 export default function CostOfLivingDohaPage() {
   const jsonLd = {

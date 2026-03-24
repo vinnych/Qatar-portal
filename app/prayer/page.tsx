@@ -1,42 +1,16 @@
 import { getPrayerTimes, getMonthlyPrayerTimes } from "@/lib/prayer";
 import PrayerSelector from "@/components/PrayerSelector";
 import { safeJsonLd } from "@/lib/utils";
-import type { Metadata } from "next";
+import { pageMeta, SITE_URL } from "@/lib/seo";
 
-const SITE_URL = "https://qatar-portal.vercel.app";
-
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: "Prayer Times — Doha, Mecca, Dubai & 35 Cities | Qatar Portal",
-  description:
-    "Accurate Fajr, Sunrise, Dhuhr, Asr, Maghrib and Isha prayer times for Doha and 35+ Muslim cities worldwide — today and full monthly calendar.",
-  alternates: { canonical: `${SITE_URL}/prayer` },
-  other: {
-    "geo.region": "QA-DA",
-    "geo.placename": "Doha, Qatar",
-    "geo.position": "25.2854;51.5310",
-    "ICBM": "25.2854, 51.5310",
-  },
-  openGraph: {
-    title: "Prayer Times for Muslim Countries — Doha, Mecca, Dubai | Qatar Portal",
-    description: "Accurate Fajr, Dhuhr, Asr, Maghrib and Isha prayer times for Doha and 35+ Muslim cities worldwide.",
-    url: `${SITE_URL}/prayer`,
-    siteName: "Qatar Portal",
-    type: "website",
-    images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
-  },
-  twitter: { card: "summary_large_image", title: "Prayer Times for Muslim Countries | Qatar Portal", description: "Accurate prayer times for Doha and 35+ Muslim cities." },
-  keywords: [
-    "Doha prayer times",
-    "Qatar prayer times today",
-    "Fajr time Doha",
-    "Isha time Qatar",
-    `prayer times ${new Date().getFullYear()} Qatar`,
-    "salah times Doha",
-    "Mecca prayer times",
-    "Dubai prayer times",
-    "Muslim prayer times",
-  ],
-};
+  description: "Accurate Fajr, Sunrise, Dhuhr, Asr, Maghrib and Isha prayer times for Doha and 35+ Muslim cities worldwide — today and full monthly calendar.",
+  path: "/prayer",
+  keywords: ["Doha prayer times", "Qatar prayer times today", "Fajr time Doha", "Isha time Qatar", `prayer times ${new Date().getFullYear()} Qatar`, "salah times Doha", "Mecca prayer times", "Dubai prayer times", "Muslim prayer times"],
+  ogTitle: "Prayer Times for Muslim Countries — Doha, Mecca, Dubai | Qatar Portal",
+  ogDescription: "Accurate Fajr, Dhuhr, Asr, Maghrib and Isha prayer times for Doha and 35+ Muslim cities worldwide.",
+});
 
 export default async function PrayerPage() {
   const now = new Date();

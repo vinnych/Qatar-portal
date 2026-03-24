@@ -1,33 +1,15 @@
 import { getFullWeather } from "@/lib/weather";
 import { safeJsonLd } from "@/lib/utils";
-import type { Metadata } from "next";
+import { pageMeta, SITE_URL } from "@/lib/seo";
 
-const SITE_URL = "https://qatar-portal.vercel.app";
-
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: "Doha Weather Today — 7-Day Forecast | Qatar Portal",
-  description:
-    "Live Doha weather today: current temperature, humidity, wind speed and 7-day forecast for Qatar. Updated every 30 minutes from Open-Meteo.",
-  alternates: { canonical: `${SITE_URL}/weather` },
-  keywords: [
-    "Doha weather today",
-    "Qatar weather",
-    "weather in Doha",
-    "Doha temperature today",
-    "Qatar weather forecast",
-    "Doha 7 day forecast",
-    "weather Qatar",
-  ],
-  openGraph: {
-    title: "Doha Weather Today — Qatar Temperature & 7-Day Forecast",
-    description: "Live current weather and 7-day forecast for Doha, Qatar. Temperature, humidity, wind speed updated every 30 minutes.",
-    url: `${SITE_URL}/weather`,
-    siteName: "Qatar Portal",
-    type: "website",
-    images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
-  },
-  twitter: { card: "summary_large_image", title: "Doha Weather Today — Qatar Temperature & 7-Day Forecast", description: "Live current weather and 7-day forecast for Doha, Qatar." },
-};
+  description: "Live Doha weather today: current temperature, humidity, wind speed and 7-day forecast for Qatar. Updated every 30 minutes from Open-Meteo.",
+  path: "/weather",
+  keywords: ["Doha weather today", "Qatar weather", "weather in Doha", "Doha temperature today", "Qatar weather forecast", "Doha 7 day forecast", "weather Qatar"],
+  ogTitle: "Doha Weather Today — Qatar Temperature & 7-Day Forecast",
+  ogDescription: "Live current weather and 7-day forecast for Doha, Qatar. Temperature, humidity, wind speed updated every 30 minutes.",
+});
 
 export default async function WeatherPage() {
   const weather = await getFullWeather();

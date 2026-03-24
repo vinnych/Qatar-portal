@@ -1,26 +1,17 @@
-import type { Metadata } from "next";
+import { pageMeta, SITE_URL } from "@/lib/seo";
 import { safeJsonLd } from "@/lib/utils";
 import HijriNav from "@/components/HijriNav";
 
-const SITE_URL = "https://qatar-portal.vercel.app";
-
 export const revalidate = 86400;
 
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: "Hijri Calendar 2026 — Islamic Date Today | Qatar Portal",
   description: "Today's Hijri (Islamic) date, full Hijri calendar for 1447–1448 AH with Gregorian dates. Convert between Islamic and Gregorian calendars.",
+  path: "/hijri-calendar",
   keywords: ["Hijri calendar 2026", "Islamic date today", "Hijri date", "Islamic calendar Qatar", "1447 hijri", "1448 hijri", "Hijri Gregorian converter"],
-  alternates: { canonical: `${SITE_URL}/hijri-calendar` },
-  openGraph: {
-    title: "Hijri Calendar 2026 — Islamic Date Today",
-    description: "Today's Hijri date and full Islamic calendar with Gregorian conversion.",
-    url: `${SITE_URL}/hijri-calendar`,
-    siteName: "Qatar Portal",
-    type: "website",
-    images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
-  },
-  twitter: { card: "summary_large_image", title: "Hijri Calendar 2026 — Islamic Date Today", description: "Today's Hijri date and full Islamic calendar with Gregorian conversion." },
-};
+  ogTitle: "Hijri Calendar 2026 — Islamic Date Today",
+  ogDescription: "Today's Hijri date and full Islamic calendar with Gregorian conversion.",
+});
 
 const HIJRI_MONTHS = [
   "Muharram", "Safar", "Rabi al-Awwal", "Rabi al-Thani",
