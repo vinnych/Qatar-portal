@@ -52,19 +52,32 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
     const [news, jobs] = await Promise.all([getNews(48), getJobs(48)]);
 
-    const newsPages: MetadataRoute.Sitemap = news.map((item) => ({
-      url: `${SITE_URL}/news/${item.slug}`,
-      lastModified: item.pubDate ? new Date(item.pubDate) : new Date(),
-      changeFrequency: "daily",
-      priority: 0.7,
-    }));
+    // Only include items within 7-day Redis TTL — older items may no longer resolve
+    const cutoff = Date.now() - 7 * 24 * 60 * 60 * 1000;
 
-    const jobPages: MetadataRoute.Sitemap = jobs.map((job) => ({
-      url: `${SITE_URL}/jobs/${job.slug}`,
-      lastModified: job.pubDate ? new Date(job.pubDate) : new Date(),
-      changeFrequency: "daily",
-      priority: 0.7,
-    }));
+    const newsPages: MetadataRoute.Sitemap = news
+      .filter((item) => {
+        if (!item.pubDate) return true;
+        try { return new Date(item.pubDate).getTime() >= cutoff; } catch { return false; }
+      })
+      .map((item) => ({
+        url: `${SITE_URL}/news/${item.slug}`,
+        lastModified: item.pubDate ? new Date(item.pubDate) : new Date(),
+        changeFrequency: "daily" as const,
+        priority: 0.7,
+      }));
+
+    const jobPages: MetadataRoute.Sitemap = jobs
+      .filter((job) => {
+        if (!job.pubDate) return true;
+        try { return new Date(job.pubDate).getTime() >= cutoff; } catch { return false; }
+      })
+      .map((job) => ({
+        url: `${SITE_URL}/jobs/${job.slug}`,
+        lastModified: job.pubDate ? new Date(job.pubDate) : new Date(),
+        changeFrequency: "daily" as const,
+        priority: 0.7,
+      }));
 
     return [...base, ...newsPages, ...jobPages];
   } catch {
