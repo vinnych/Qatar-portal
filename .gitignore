@@ -2,9 +2,6 @@ node_modules/
 .next/
 .env*
 next-env.d.ts
-.claude/
 
 .vercel
 tsconfig.tsbuildinfo
-AGENT.md
-*.md
