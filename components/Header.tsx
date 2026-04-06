@@ -2,21 +2,11 @@ import { Playfair_Display } from "next/font/google";
 import { Moon } from "lucide-react";
 import { getPrayerTimes } from "@/lib/prayer";
 import MobileMenu from "./MobileMenu";
+import { NAV_LINKS } from "@/lib/nav";
 
 const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700"], style: ["normal"] });
 
 const PRAYER_ORDER = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"] as const;
-
-const NAV_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/prayer", label: "Prayer" },
-  { href: "/weather", label: "Weather" },
-  { href: "/currency", label: "Currency" },
-  { href: "/news", label: "News" },
-  { href: "/jobs", label: "Jobs" },
-  { href: "/hijri-calendar", label: "Hijri" },
-  { href: "/qatar-metro", label: "Metro" },
-];
 
 export default async function Header() {
   let nextPrayer: { name: string; time: string } | null = null;

@@ -4,23 +4,13 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MapPin, Menu, X, LocateFixed, Loader2 } from "lucide-react";
 import { Playfair_Display } from "next/font/google";
+import { NAV_LINKS } from "@/lib/nav";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["700"],
   style: ["normal", "italic"],
 });
-
-const NAV_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/prayer", label: "Prayer" },
-  { href: "/weather", label: "Weather" },
-  { href: "/currency", label: "Currency" },
-  { href: "/news", label: "News" },
-  { href: "/jobs", label: "Jobs" },
-  { href: "/hijri-calendar", label: "Hijri" },
-  { href: "/ramadan-2026", label: "Ramadan" },
-];
 
 const PRAYER_NAMES = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"] as const;
 

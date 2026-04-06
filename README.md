@@ -10,7 +10,7 @@ A fast, mobile-first portal for Qatar and Gulf audiences — prayer times, news,
 
 - **Prayer Times** — today's times + monthly calendar for 35+ cities, geolocation support
 - **News** — aggregated from Al Jazeera, The Peninsula Qatar, Gulf Times, Qatar News Agency, with AI summaries via Groq
-- **Jobs** — listings from Bayt.com and GulfTalent
+- **Jobs** — listings from Google News RSS (Qatar jobs + careers feeds)
 - **Weather** — current conditions and 7-day forecast for Doha via Open-Meteo
 - **Currency** — live QAR exchange rates + converter
 - **Hijri Calendar** — date conversion and monthly view
@@ -147,7 +147,9 @@ Article and job slugs are `toSlug(title, url)` — kebab-case title + a 4-charac
 
 | Data | Cache | TTL |
 |---|---|---|
-| News / job metadata | Redis | 7 days |
+| News metadata | Redis | 7 days |
+| Job metadata | Redis | 30 days |
+| Job tombstones (expired) | Redis | 1 year |
 | AI summaries | Redis | 7 days |
 | Article images (Pexels) | Redis | 7 days |
 | Prayer times (today) | Redis + Next.js fetch | 1 hour |

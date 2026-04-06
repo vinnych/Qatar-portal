@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(npx vercel:*)",
+      "Bash(node -e \"const p = require\\(''./package.json''\\); console.log\\(''next:'', p.dependencies.next\\)\")",
+      "Bash(/tmp/check_imports.txt:*)",
+      "Read(//tmp/**)",
+      "WebFetch(domain:qatar-portal.vercel.app)",
+      "WebSearch",
+      "Bash(curl -s \"https://qatar-portal.vercel.app/api/news\")",
+      "Bash(npm list:*)",
+      "WebFetch(domain:i.pinimg.com)",
+      "Bash(curl -L -o \"c:/Users/asish/qatar news/public/footer-skyline.jpg\" \"https://i.pinimg.com/736x/47/87/15/478715786b24f20cc0e2aac71e07c3b0.jpg\" -w \"%{http_code} %{size_download}\")",
+      "Read(//c/tmp/**)",
+      "Bash(unzip -l \"C:\\\\Users\\\\asish\\\\OneDrive\\\\Desktop\\\\qatar-portal.zip\")",
+      "Bash(mkdir -p qatar-portal-zip)",
+      "Bash(unzip -o \"C:\\\\Users\\\\asish\\\\OneDrive\\\\Desktop\\\\qatar-portal.zip\" -d /tmp/qatar-portal-zip)",
+      "Bash(cat app/jobs-category/[category]/page.tsx)",
+      "Bash(grep -n \"button\\\\|rounded-full\\\\|pill\\\\|flex.*gap\\\\|overflow-x\" app/jobs-category/[category]/page.tsx)",
+      "Bash(xargs wc:*)",
+      "Bash(xargs basename:*)",
+      "Bash(wc -l lib/*.ts app/api/*/route.ts)",
+      "Bash(wc -l app/**/*.tsx)",
+      "Bash(find components:*)",
+      "Bash(while read:*)",
+      "Bash(do echo:*)",
+      "Bash(grep -r \"import.*from.*$f\" app lib --include=\"*.tsx\" --include=\"*.ts\")",
+      "Bash(done)",
+      "Bash(npx tsc:*)",
+      "Bash(ls:*)",
+      "Bash(node -e \"const r = JSON.parse\\(require\\(''fs''\\).readFileSync\\(''psi-report.json''\\)\\); console.log\\(JSON.stringify\\(r.error\\)\\);\")",
+      "Bash(npx lighthouse:*)",
+      "Bash(node -e \":*)"
+    ]
+  }
+}

@@ -4,16 +4,7 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const NAV_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/prayer", label: "Prayer" },
-  { href: "/weather", label: "Weather" },
-  { href: "/currency", label: "Currency" },
-  { href: "/news", label: "News" },
-  { href: "/jobs", label: "Jobs" },
-  { href: "/hijri-calendar", label: "Hijri" },
-  { href: "/qatar-metro", label: "Metro" },
-];
+import { NAV_LINKS } from "@/lib/nav";
 
 export default function MobileMenu() {
   const [open, setOpen] = useState(false);

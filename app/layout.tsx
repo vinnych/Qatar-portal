@@ -95,9 +95,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main-content" className="flex-grow w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-5 pb-20 md:pb-5">{children}</main>
         <CookieConsent />
         <SpeedInsights />
-        {/* Rich footer */}
+        {/* Footer */}
         <footer className="relative mt-auto bg-primary-dark text-white overflow-hidden pb-20 md:pb-0">
-          {/* Background image with overlay */}
           <div className="absolute inset-0 z-0">
             <Image
               src="https://images.unsplash.com/photo-1599839619722-39751411ea63?auto=format&fit=crop&q=80&w=2000"
@@ -109,38 +108,44 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="absolute inset-0 bg-gradient-to-t from-primary-dark via-primary-dark/80 to-transparent" />
           </div>
 
-          <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Brand */}
+          <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            {/* Brand row — always full width on mobile */}
+            <div className="flex items-center justify-between mb-6">
               <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="font-bold text-2xl tracking-wide text-qatar-sand">QATAR</span>
-                  <span className="text-[9px] font-medium opacity-70 uppercase tracking-[0.2em] mt-1 border border-white/20 rounded-full px-2 py-0.5">Portal</span>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="font-bold text-xl tracking-wide text-qatar-sand">QATAR</span>
+                  <span className="text-[9px] font-medium opacity-60 uppercase tracking-[0.2em] border border-white/20 rounded-full px-2 py-0.5">Portal</span>
                 </div>
-                <p className="text-sm text-qatar-sand/80 leading-relaxed">
-                  Your daily companion for life in Qatar. Bringing you real-time prayer times, local news, and job opportunities in one beautifully designed dashboard.
-                </p>
+                <p className="text-xs text-qatar-sand/70 max-w-xs">Prayer times, news, jobs and Gulf resources — all in one place.</p>
               </div>
+              <div className="flex items-center gap-1.5 text-xs text-white/50">
+                <MapPin size={12} className="text-secondary-accent shrink-0" />
+                <span>Doha, Qatar</span>
+              </div>
+            </div>
 
+            {/* Links — 2-col on mobile, 3-col on md */}
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
               {/* Quick Links */}
               <div>
-                <h3 className="text-sm font-bold uppercase tracking-widest text-qatar-sand mb-4">Quick Links</h3>
-                <ul className="space-y-2 text-sm text-white/80">
+                <h3 className="text-[10px] font-bold uppercase tracking-widest text-qatar-sand mb-3">Quick Links</h3>
+                <ul className="space-y-1.5 text-xs text-white/75">
                   <li><a href="/prayer" className="hover:text-secondary-accent transition-colors">Prayer Times</a></li>
-                  <li><a href="/news" className="hover:text-secondary-accent transition-colors">Local News</a></li>
-                  <li><a href="/jobs" className="hover:text-secondary-accent transition-colors">Job Board</a></li>
+                  <li><a href="/news" className="hover:text-secondary-accent transition-colors">News</a></li>
+                  <li><a href="/jobs" className="hover:text-secondary-accent transition-colors">Jobs</a></li>
                   <li><a href="/weather" className="hover:text-secondary-accent transition-colors">Weather</a></li>
                   <li><a href="/currency" className="hover:text-secondary-accent transition-colors">QAR Rates</a></li>
                   <li><a href="/hijri-calendar" className="hover:text-secondary-accent transition-colors">Hijri Calendar</a></li>
                   <li><a href="/qatar-metro" className="hover:text-secondary-accent transition-colors">Qatar Metro</a></li>
+                  <li><a href="/qatar-services" className="hover:text-secondary-accent transition-colors">Gov Services</a></li>
                   <li><a href="/about" className="hover:text-secondary-accent transition-colors">About Us</a></li>
                 </ul>
               </div>
 
-              {/* Resources + Contact */}
+              {/* Resources */}
               <div>
-                <h3 className="text-sm font-bold uppercase tracking-widest text-qatar-sand mb-4">Resources</h3>
-                <ul className="space-y-2 text-sm text-white/80 mb-6">
+                <h3 className="text-[10px] font-bold uppercase tracking-widest text-qatar-sand mb-3">Resources</h3>
+                <ul className="space-y-1.5 text-xs text-white/75">
                   <li><a href="/work-in-qatar" className="hover:text-secondary-accent transition-colors">Work in Qatar</a></li>
                   <li><a href="/qatar-visa-requirements" className="hover:text-secondary-accent transition-colors">Qatar Visa</a></li>
                   <li><a href="/cost-of-living-doha" className="hover:text-secondary-accent transition-colors">Cost of Living</a></li>
@@ -148,20 +153,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   <li><a href="/qatar-public-holidays" className="hover:text-secondary-accent transition-colors">Public Holidays</a></li>
                   <li><a href="/emergency-numbers-qatar" className="hover:text-secondary-accent transition-colors">Emergency Numbers</a></li>
                   <li><a href="/privacy" className="hover:text-secondary-accent transition-colors">Privacy</a></li>
-                  <li><a href="/terms" className="hover:text-secondary-accent transition-colors">Terms of Service</a></li>
+                  <li><a href="/terms" className="hover:text-secondary-accent transition-colors">Terms</a></li>
                 </ul>
-                <ul className="space-y-3 text-sm text-white/80">
-                  <li className="flex items-center gap-3">
-                    <MapPin size={16} className="text-secondary-accent shrink-0" />
-                    <span>West Bay, Doha, Qatar</span>
-                  </li>
+              </div>
+
+              {/* Guides — hidden on mobile (2-col), visible from md */}
+              <div className="hidden md:block">
+                <h3 className="text-[10px] font-bold uppercase tracking-widest text-qatar-sand mb-3">Gov Guides</h3>
+                <ul className="space-y-1.5 text-xs text-white/75">
+                  <li><a href="/qatar-services/qid" className="hover:text-secondary-accent transition-colors">QID Application</a></li>
+                  <li><a href="/qatar-services/work-visa" className="hover:text-secondary-accent transition-colors">Work Visa</a></li>
+                  <li><a href="/qatar-services/family-visa" className="hover:text-secondary-accent transition-colors">Family Visa</a></li>
+                  <li><a href="/qatar-services/business-registration" className="hover:text-secondary-accent transition-colors">Business Registration</a></li>
+                  <li><a href="/qatar-services/driving-licence" className="hover:text-secondary-accent transition-colors">Driving Licence</a></li>
+                  <li><a href="/qatar-services/exit-permit" className="hover:text-secondary-accent transition-colors">Exit Permit</a></li>
                 </ul>
               </div>
             </div>
 
-            <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center text-xs text-qatar-sand/60">
+            <div className="mt-6 pt-5 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center text-[11px] text-qatar-sand/50">
               <p>© {new Date().getFullYear()} Qatar Portal · Aladhan · Open-Meteo · ExchangeRate-API</p>
-              <p className="mt-2 sm:mt-0">Made with ❤️ in Doha</p>
+              <p className="mt-1.5 sm:mt-0">Made with ❤️ in Doha</p>
             </div>
           </div>
         </footer>
