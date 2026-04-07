@@ -61,6 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{__html: safeJsonLd({
             "@context": "https://schema.org",
             "@type": "Organization",
+            "@id": "https://qatar-portal.vercel.app/#organization",
             "name": "Qatar Portal",
             "url": "https://qatar-portal.vercel.app",
             "logo": { "@type": "ImageObject", "url": "https://qatar-portal.vercel.app/logo.png", "width": 200, "height": 60 },

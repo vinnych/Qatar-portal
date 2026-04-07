@@ -42,7 +42,7 @@ export async function generateMetadata({
       description: `Job opportunity in Qatar: ${job.title} at ${job.company}`,
       url: `${SITE_URL}/jobs/${slug}`,
       siteName: "Qatar Portal",
-      type: "website",
+      type: "article",
       images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630 }],
     },
     twitter: {
@@ -116,7 +116,7 @@ export default async function JobDetailPage({
       },
     },
     datePosted: isoDate,
-    employmentType: "FULL_TIME",
+    // employmentType omitted — not reliably available from RSS feed data
     validThrough: (() => { try { const d = new Date(job.pubDate); d.setDate(d.getDate() + 30); return d.toISOString().split("T")[0]; } catch { return new Date(Date.now() + 30 * 86400000).toISOString().split("T")[0]; } })(),
     mainEntityOfPage: `${SITE_URL}/jobs/${slug}`,
   };

@@ -78,7 +78,7 @@ export default function QatarPublicHolidaysPage() {
       <div>
         <h1 className="font-newsreader text-3xl font-bold text-on-surface mb-3">Qatar Public Holidays 2026</h1>
         <p className="text-gray-600 text-base leading-relaxed">
-          Official government and Islamic holidays in Qatar for 2025. Islamic holiday dates are approximate — confirmed by moon sighting.
+          Official government and Islamic holidays in Qatar for 2026. Islamic holiday dates are approximate — confirmed by moon sighting.
         </p>
       </div>
 
@@ -128,7 +128,7 @@ export default function QatarPublicHolidaysPage() {
 
       {/* Ramadan note */}
       <section>
-        <h2 className="text-xl font-bold text-gray-900 mb-3">🌙 Ramadan 2025</h2>
+        <h2 className="text-xl font-bold text-gray-900 mb-3">🌙 Ramadan 2026</h2>
         <p className="text-sm text-gray-700 mb-2">
           Ramadan 2026 is expected to begin around <strong>18 February 2026</strong> and end around <strong>19 March 2026</strong> (subject to moon sighting).
         </p>

@@ -25,26 +25,33 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/qatar-public-holidays`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/emergency-numbers-qatar`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/work-in-qatar`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE_URL}/news-category`, lastModified: new Date(), changeFrequency: "hourly", priority: 0.7 },
+    { url: `${SITE_URL}/news-category`, lastModified: new Date(), changeFrequency: "daily", priority: 0.6 },
     // News category pages
     ...["qatar", "business", "sports", "world", "gulf"].map((cat) => ({
       url: `${SITE_URL}/news-category/${cat}`,
       lastModified: new Date(),
-      changeFrequency: "hourly" as const,
-      priority: 0.7,
+      changeFrequency: "daily" as const,
+      priority: 0.6,
     })),
     // City prayer pages
     ...["dubai", "abu-dhabi", "riyadh", "jeddah", "kuwait-city", "muscat", "manama", "cairo", "islamabad", "manila", "dhaka"].map((city) => ({
       url: `${SITE_URL}/prayer/${city}`,
       lastModified: new Date(),
       changeFrequency: "daily" as const,
-      priority: 0.7,
+      priority: 0.6,
     })),
     // Job category pages
     ...["engineering", "it", "healthcare", "finance", "construction"].map((cat) => ({
       url: `${SITE_URL}/jobs-category/${cat}`,
       lastModified: new Date(),
       changeFrequency: "daily" as const,
+      priority: 0.6,
+    })),
+    // Qatar services guide pages
+    ...["qid", "work-visa", "family-visa", "business-registration", "driving-licence", "exit-permit", "document-attestation"].map((slug) => ({
+      url: `${SITE_URL}/qatar-services/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
   ];
@@ -64,7 +71,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: `${SITE_URL}/news/${item.slug}`,
         lastModified: item.pubDate ? new Date(item.pubDate) : new Date(),
         changeFrequency: "daily" as const,
-        priority: 0.7,
+        priority: 0.5,   // expires after 7 days — lower priority
       }));
 
     const jobPages: MetadataRoute.Sitemap = jobs
@@ -76,7 +83,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: `${SITE_URL}/jobs/${job.slug}`,
         lastModified: job.pubDate ? new Date(job.pubDate) : new Date(),
         changeFrequency: "daily" as const,
-        priority: 0.7,
+        priority: 0.5,   // expires after 7 days — lower priority
       }));
 
     return [...base, ...newsPages, ...jobPages];

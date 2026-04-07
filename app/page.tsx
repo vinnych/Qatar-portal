@@ -20,8 +20,10 @@ export const metadata = pageMeta({
 const homeJsonLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
+  "@id": "https://qatar-portal.vercel.app/#faq",
   "name": "Doha Prayer Times Today — Qatar News & Jobs | Qatar Portal",
   "url": "https://qatar-portal.vercel.app",
+  "inLanguage": "en",
   "mainEntity": [
     { "@type": "Question", "name": "What time is Fajr in Doha today?", "acceptedAnswer": { "@type": "Answer", "text": "Fajr prayer time in Doha today can be found on Qatar Portal, updated daily from the Aladhan API using the Muslim World League calculation method." } },
     { "@type": "Question", "name": "What time is Maghrib in Doha today?", "acceptedAnswer": { "@type": "Answer", "text": "Maghrib prayer time in Doha today is available on Qatar Portal, updated daily with accurate sunset-based calculation." } },
