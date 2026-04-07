@@ -33,16 +33,16 @@ export default async function PrayerPage() {
     ? {
         "@context": "https://schema.org",
         "@type": "WebPage",
-        name: `Doha Prayer Times — ${today.date}`,
+        name: "Prayer Times for Doha and Muslim Cities — Qatar Portal",
         url: `${SITE_URL}/prayer`,
-        description: `Fajr: ${today.Fajr}, Dhuhr: ${today.Dhuhr}, Asr: ${today.Asr}, Maghrib: ${today.Maghrib}, Isha: ${today.Isha}`,
+        description: `Today's prayer times in Doha, Qatar. Fajr: ${today.Fajr}, Dhuhr: ${today.Dhuhr}, Asr: ${today.Asr}, Maghrib: ${today.Maghrib}, Isha: ${today.Isha}.`,
         inLanguage: "en",
         isPartOf: { "@type": "WebSite", name: "Qatar Portal", url: SITE_URL },
-        spatialCoverage: {
+        about: {
           "@type": "Place",
-          "name": "Doha, Qatar",
-          "geo": { "@type": "GeoCoordinates", "latitude": 25.2854, "longitude": 51.5310 },
-          "address": { "@type": "PostalAddress", "addressLocality": "Doha", "addressCountry": "QA" },
+          name: "Doha, Qatar",
+          geo: { "@type": "GeoCoordinates", latitude: 25.2854, longitude: 51.5310 },
+          address: { "@type": "PostalAddress", addressLocality: "Doha", addressCountry: "QA" },
         },
       }
     : null;
