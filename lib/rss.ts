@@ -145,10 +145,17 @@ export async function getNews(limit = 12): Promise<NewsItem[]> {
     );
   }
 
-  // Persist to Redis (fire-and-forget, 7-day TTL)
+  // Persist to Redis (fire-and-forget)
+  // Full item: 7-day TTL (nx:true — don't overwrite fresher cached versions)
+  // Tombstone: 1-year TTL (nx:true — written once, survives item expiry so expired
+  //   URLs never return 404 — they show a "this article has expired" page instead)
+  const TOMB_TTL = 60 * 60 * 24 * 365;
   if (redis && items.length > 0) {
     Promise.allSettled(
-      items.map((item) => redis!.set(`news:${item.slug}`, item, { ex: KV_TTL, nx: true }))
+      items.flatMap((item) => [
+        redis!.set(`news:${item.slug}`, item, { ex: KV_TTL, nx: true }),
+        redis!.set(`news:${item.slug}:tomb`, { title: item.title, source: item.source }, { ex: TOMB_TTL, nx: true }),
+      ])
     ).catch((err) => console.error("[rss] Redis persist error:", err instanceof Error ? err.message : err));
   }
 

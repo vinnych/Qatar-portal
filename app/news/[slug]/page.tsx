@@ -5,7 +5,7 @@ import { redis } from "@/lib/redis";
 import { summarizeArticle } from "@/lib/groq";
 import { cache } from "react";
 import type { Metadata } from "next";
-import { notFound, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 
 const getCachedNews = cache(() => getNews(48));
 
@@ -31,7 +31,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const item = await getNewsItem(slug);
-  if (!item) return {};
+  if (!item) {
+    return {
+      title: "Article No Longer Available | Qatar Portal",
+      robots: { index: false, follow: false },
+    };
+  }
   const rawSnippet = item.contentSnippet || `Read the latest news from ${item.source} on Qatar Portal.`;
   const description = rawSnippet.length > 160 ? rawSnippet.slice(0, 157) + "…" : rawSnippet;
   return {
@@ -66,13 +71,44 @@ export default async function NewsArticlePage({
   const { slug } = await params;
   const [item, news] = await Promise.all([getNewsItem(slug), getCachedNews()]);
   if (!item) {
-    let link: string | null = null;
+    // Legacy: some old slugs were base64url-encoded external links
     try {
       const decoded = Buffer.from(slug, "base64url").toString();
-      if (isValidHttpUrl(decoded)) link = decoded;
-    } catch { /* invalid slug */ }
-    if (link) redirect(link);
-    notFound();
+      if (isValidHttpUrl(decoded)) redirect(decoded);
+    } catch { /* not a legacy slug */ }
+
+    // Check tombstone — article existed but has expired from the feed
+    let tombstone: { title: string; source: string } | null = null;
+    if (redis) {
+      try { tombstone = await redis.get(`news:${slug}:tomb`); } catch { /* ignore */ }
+    }
+
+    // Never return 404 — show expired page with noindex so Google deindexes cleanly
+    return (
+      <div className="page-sections">
+        <div className="mb-3">
+          <a href="/news" className="inline-block text-xs text-gray-400 hover:text-primary py-2">
+            ← Back to News
+          </a>
+        </div>
+        <div className="bg-amber-50 border border-amber-200 rounded-xl p-5 mb-6">
+          <p className="text-sm font-semibold text-amber-800 mb-1">This article is no longer available</p>
+          <p className="text-sm text-amber-700">
+            {tombstone ? (
+              <><span className="font-medium">{tombstone.title}</span> — originally from {tombstone.source}.</>
+            ) : (
+              "This news article has expired or been removed from our feed."
+            )}
+          </p>
+        </div>
+        <a
+          href="/news"
+          className="inline-block bg-primary text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:scale-[1.02] transition-transform"
+        >
+          Browse latest Qatar news →
+        </a>
+      </div>
+    );
   }
 
   // Fetch image on-demand if not already present (cached in Redis)
