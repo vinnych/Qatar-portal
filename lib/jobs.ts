@@ -1,22 +1,10 @@
-import { isValidHttpUrl, toSlug } from "./utils";
-
-const SSRF_DENYLIST = /^(localhost|127\.|0\.0\.0\.0|10\.|172\.(1[6-9]|2\d|3[01])\.|192\.168\.|169\.254\.|::1$|fe80:|fc[0-9a-f]{2}:|fd[0-9a-f]{2}:)/i;
-
-function isSafeExternalUrl(str: string): boolean {
-  if (!isValidHttpUrl(str)) return false;
-  try {
-    const { hostname, protocol } = new URL(str);
-    if (protocol !== "http:" && protocol !== "https:") return false;
-    if (SSRF_DENYLIST.test(hostname)) return false;
-    return true;
-  } catch { return false; }
-}
+import { isSafeExternalUrl, toSlug } from "./utils";
+import { redis, KV_TTL, isMaintenance } from "./redis";
 
 const HARD_LIMIT = 48;
 const ITEMS_PER_FEED = 16;
 const TOMB_TTL = 60 * 60 * 24 * 365; // 1 year — keeps expired slugs resolvable
 
-import { redis, KV_TTL, isMaintenance } from "./redis";
 
 export interface Job {
   title: string;
@@ -121,7 +109,7 @@ export async function getJobs(limit = 12): Promise<Job[]> {
 
   // Persist to Redis: refresh full job (30-day TTL) + tombstone (1-year TTL, never overwritten)
   if (redis && jobs.length > 0) {
-    Promise.allSettled(
+    void Promise.allSettled(
       jobs.flatMap((job) => [
         redis!.set(`job:${job.slug}`, job, { ex: KV_TTL }),
         redis!.set(`job:${job.slug}:tomb`, { title: job.title, company: job.company } satisfies JobTombstone, { ex: TOMB_TTL, nx: true }),

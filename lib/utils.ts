@@ -45,3 +45,16 @@ export function parseDate(raw: string | undefined | null): { day: string; mon: s
 export function safeJsonLd(data: unknown): string {
   return JSON.stringify(data).replace(/</g, "\\u003c").replace(/>/g, "\\u003e");
 }
+
+const SSRF_DENYLIST = /^(localhost|127\.|0\.0\.0\.0|10\.|172\.(1[6-9]|2\d|3[01])\.|192\.168\.|169\.254\.|::1$|fe80:|fc[0-9a-f]{2}:|fd[0-9a-f]{2}:)/i;
+
+/** Like isValidHttpUrl but also blocks private/loopback IPs to prevent SSRF */
+export function isSafeExternalUrl(str: string): boolean {
+  if (!isValidHttpUrl(str)) return false;
+  try {
+    const { hostname, protocol } = new URL(str);
+    if (protocol !== "http:" && protocol !== "https:") return false;
+    if (SSRF_DENYLIST.test(hostname)) return false;
+    return true;
+  } catch { return false; }
+}

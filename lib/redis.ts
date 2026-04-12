@@ -2,7 +2,7 @@ import { Redis } from "@upstash/redis";
 
 // Returns null if Upstash is disabled or env vars are not set (local dev without Redis)
 function getRedis(): Redis | null {
-  if (process.env.ENABLE_UPSTASH === 'true') {
+  if (process.env.ENABLE_UPSTASH === 'false') {
     return null;
   }
   if (!process.env.UPSTASH_REDIS_REST_URL || !process.env.UPSTASH_REDIS_REST_TOKEN) {

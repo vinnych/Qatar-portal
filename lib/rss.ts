@@ -1,20 +1,8 @@
-import { isValidHttpUrl, toSlug } from "./utils";
-
-const SSRF_DENYLIST = /^(localhost|127\.|0\.0\.0\.0|10\.|172\.(1[6-9]|2\d|3[01])\.|192\.168\.|169\.254\.|::1$|fe80:|fc[0-9a-f]{2}:|fd[0-9a-f]{2}:)/i;
-
-/** Like isValidHttpUrl but also blocks private/loopback IPs to prevent SSRF */
-function isSafeExternalUrl(str: string): boolean {
-  if (!isValidHttpUrl(str)) return false;
-  try {
-    const { hostname, protocol } = new URL(str);
-    if (protocol !== "http:" && protocol !== "https:") return false;
-    if (SSRF_DENYLIST.test(hostname)) return false;
-    return true;
-  } catch { return false; }
-}
+import { isSafeExternalUrl, toSlug } from "./utils";
+import { redis, KV_TTL, isMaintenance } from "./redis";
 
 const HARD_LIMIT = 48;
-import { redis, KV_TTL, isMaintenance } from "./redis";
+
 
 export interface NewsItem {
   title: string;
@@ -138,7 +126,7 @@ export async function getNews(limit = 12): Promise<NewsItem[]> {
   // Images will appear on the next request once cached — avoids blocking page render.
   const itemsWithoutImage = items.filter((item) => !item.imageUrl);
   if (itemsWithoutImage.length > 0) {
-    Promise.allSettled(
+    void Promise.allSettled(
       itemsWithoutImage.map(async (item) => {
         await fetchPexelsImage(item.slug, item.title, item.link);
       })
@@ -151,7 +139,7 @@ export async function getNews(limit = 12): Promise<NewsItem[]> {
   //   URLs never return 404 — they show a "this article has expired" page instead)
   const TOMB_TTL = 60 * 60 * 24 * 365;
   if (redis && items.length > 0) {
-    Promise.allSettled(
+    void Promise.allSettled(
       items.flatMap((item) => [
         redis!.set(`news:${item.slug}`, item, { ex: KV_TTL, nx: true }),
         redis!.set(`news:${item.slug}:tomb`, { title: item.title, source: item.source }, { ex: TOMB_TTL, nx: true }),

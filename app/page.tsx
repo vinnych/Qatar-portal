@@ -61,7 +61,7 @@ export default async function Home() {
       <div className="-mx-4 sm:-mx-5 md:-mx-8 lg:-mx-12 -mt-5 sm:-mt-6 -mb-20 md:-mb-6 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 overflow-x-hidden">
 
         {/* ── Page content ─────────────────────────────────────── */}
-        <main className="max-w-7xl mx-auto px-6 lg:px-12 py-6 sm:py-10 space-y-16">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6 sm:py-10 space-y-16">
 
           {/* Hero */}
           <HomeHero />
@@ -121,7 +121,7 @@ export default async function Home() {
 
                     <p className="text-sm font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-2 mt-4">
                       <span className="w-2 h-2 rounded-full bg-green-500 shrink-0" />
-                      {weatherData.condition} &amp; Humidity {weatherData.humidity}%
+                      {weatherData.condition} & Humidity {weatherData.humidity}%
                     </p>
 
                     <div className="grid grid-cols-2 gap-4 mt-6 border-t border-slate-200 dark:border-slate-700/50 pt-6">
@@ -388,7 +388,7 @@ export default async function Home() {
               ))}
             </div>
           </section>
-        </main>
+        </div>
       </div>
     </>
   );
