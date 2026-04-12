@@ -7,3 +7,4 @@ next-env.d.ts
 tsconfig.tsbuildinfo
 AGENT.md
 fix.md
+.claude/
