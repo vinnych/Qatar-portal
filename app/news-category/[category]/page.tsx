@@ -60,12 +60,14 @@ export default async function NewsCategoryPage({ params }: { params: Promise<{ c
   if (!entry) notFound();
 
   const allNews = await getNews(48);
-  const filtered = allNews.filter((item) =>
-    entry.keywords.some((kw) =>
-      item.title.toLowerCase().includes(kw.toLowerCase()) ||
-      (item.contentSnippet ?? "").toLowerCase().includes(kw.toLowerCase())
-    )
-  );
+  const lowerKeywords = entry.keywords.map((kw) => kw.toLowerCase());
+  const filtered = allNews.filter((item) => {
+    const titleLower = item.title.toLowerCase();
+    const snippetLower = (item.contentSnippet ?? "").toLowerCase();
+    return lowerKeywords.some((kw) =>
+      titleLower.includes(kw) || snippetLower.includes(kw)
+    );
+  });
 
   const jsonLd = {
     "@context": "https://schema.org",
