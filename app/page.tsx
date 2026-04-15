@@ -61,217 +61,173 @@ export default async function Home() {
       <div className="-mx-4 sm:-mx-5 md:-mx-8 lg:-mx-12 -mt-5 sm:-mt-6 -mb-20 md:-mb-6 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 overflow-x-hidden">
 
         {/* ── Page content ─────────────────────────────────────── */}
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6 sm:py-10 space-y-16">
+        {/* ── Page content ─────────────────────────────────────── */}
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6 sm:py-10 space-y-12">
 
           {/* Hero */}
           <HomeHero />
 
-          {/* ── Widgets ─────────────────────────────────────────── */}
-          <section id="widgets" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
+          {/* ── Bento Grid Widgets ─────────────────────────────── */}
+          <section id="widgets" className="bento-grid">
 
-            {/* Prayer — col-span-5 */}
-            <div className="lg:col-span-5 bg-white dark:bg-slate-900 rounded-4xl p-8 shadow-sm border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
+            {/* Prayer — col-span-4 */}
+            <div className="lg:col-span-4 bento-tile">
               <Suspense fallback={<div className="h-72 rounded-2xl bg-slate-100 dark:bg-slate-800 animate-pulse" />}>
                 <PrayerCard />
               </Suspense>
             </div>
 
-            {/* Weather — col-span-3 */}
-            <div className="lg:col-span-3 bg-slate-100 dark:bg-slate-800 rounded-4xl p-8 flex flex-col justify-between overflow-hidden relative border border-slate-200 dark:border-slate-700/50">
-              {/* Decorative background icon */}
-              <span className="absolute -right-6 -top-6 material-symbols-outlined text-[160px] text-slate-900 dark:text-slate-100 opacity-[0.03] rotate-12 pointer-events-none select-none rtl:right-auto rtl:-left-6">wb_sunny</span>
-
-              <div className="relative z-10 flex flex-col h-full">
-                <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em] mb-4">
-                  <span className="lang-en">Current Weather</span>
-                  <span className="lang-ar">الطقس الحالي</span>
-                </p>
-
-                {weatherData ? (
-                  <>
-                    <div className="flex items-center gap-3">
-                      <span
-                        className="material-symbols-outlined text-5xl sm:text-6xl shrink-0"
-                        style={{
-                          fontVariationSettings: "'FILL' 1",
-                          color: weatherData.weatherCode === 0 ? "#f59e0b"
-                            : weatherData.weatherCode <= 2 ? "#fbbf24"
-                            : weatherData.weatherCode === 3 ? "#94a3b8"
-                            : weatherData.weatherCode <= 48 ? "#64748b"
-                            : weatherData.weatherCode <= 67 ? "#60a5fa"
-                            : weatherData.weatherCode <= 77 ? "#bae6fd"
-                            : weatherData.weatherCode <= 82 ? "#60a5fa"
-                            : "#a78bfa",
-                        }}
-                      >
-                        {weatherData.weatherCode === 0 ? "wb_sunny"
-                          : weatherData.weatherCode <= 2 ? "partly_cloudy_day"
-                          : weatherData.weatherCode === 3 ? "cloud"
-                          : weatherData.weatherCode <= 48 ? "foggy"
-                          : weatherData.weatherCode <= 67 ? "rainy"
-                          : weatherData.weatherCode <= 77 ? "ac_unit"
-                          : weatherData.weatherCode <= 82 ? "rainy"
-                          : "thunderstorm"}
-                      </span>
-                      <div className="flex items-start">
-                        <span className="text-5xl sm:text-6xl font-black text-slate-900 dark:text-slate-100 leading-none">{weatherData.temperature}°</span>
-                        <span className="text-2xl font-normal mt-1 opacity-50">C</span>
-                      </div>
-                    </div>
-
-                    <p className="text-sm font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-2 mt-4">
-                      <span className="w-2 h-2 rounded-full bg-green-500 shrink-0" />
-                      {weatherData.condition} & Humidity {weatherData.humidity}%
-                    </p>
-
-                    <div className="grid grid-cols-2 gap-4 mt-6 border-t border-slate-200 dark:border-slate-700/50 pt-6">
-                      <div className="flex items-center gap-2">
-                        <span className="material-symbols-outlined text-blue-500 text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>humidity_mid</span>
-                        <div>
-                          <p className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold tracking-wider">
-                            <span className="lang-en">Humidity</span><span className="lang-ar">الرطوبة</span>
-                          </p>
-                          <p className="text-sm font-bold text-slate-900 dark:text-slate-100">{weatherData.humidity}%</p>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="material-symbols-outlined text-blue-500 text-lg">air</span>
-                        <div>
-                          <p className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold tracking-wider">
-                            <span className="lang-en">Wind</span><span className="lang-ar">الرياح</span>
-                          </p>
-                          <p className="text-sm font-bold text-slate-900 dark:text-slate-100">{weatherData.windSpeed} km/h</p>
-                        </div>
-                      </div>
-                      {todayForecast && (
-                        <div className="flex items-center gap-2">
-                          <span className="material-symbols-outlined text-orange-500 text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>wb_sunny</span>
-                          <div>
-                            <p className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold tracking-wider">
-                              <span className="lang-en">Max Wind</span><span className="lang-ar">أقصى رياح</span>
-                            </p>
-                            <p className="text-sm font-bold text-slate-900 dark:text-slate-100">{todayForecast.maxWind} km/h</p>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-
-                    {todayForecast && (
-                      <div className="flex justify-between items-end mt-6">
-                        <div>
-                          <p className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold tracking-wider mb-1">
-                            <span className="lang-en">Tonight</span><span className="lang-ar">الليلة</span>
-                          </p>
-                          <p className="text-2xl font-black text-slate-900 dark:text-slate-100">{todayForecast.minTemp}°C</p>
-                        </div>
-                        <div className="flex gap-2.5 pb-1">
-                          <div className="h-16 w-3.5 bg-blue-200/50 dark:bg-blue-900/50 rounded-full flex items-end"><div className="h-10 w-full bg-blue-400/80 rounded-full" /></div>
-                          <div className="h-16 w-3.5 bg-blue-200/50 dark:bg-blue-900/50 rounded-full flex items-end"><div className="h-8 w-full bg-blue-400/60 rounded-full" /></div>
-                          <div className="h-16 w-3.5 bg-blue-200/50 dark:bg-blue-900/50 rounded-full flex items-end"><div className="h-12 w-full bg-blue-600 rounded-full" /></div>
-                        </div>
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <p className="text-sm text-slate-500 dark:text-slate-400">Weather unavailable</p>
-                )}
-              </div>
-
-              <div className="mt-6 pt-6 border-t border-slate-200 dark:border-slate-700/50 relative z-10">
-                <a href="/weather" className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 shadow-sm transition-colors rounded-2xl py-4 flex items-center justify-center gap-2 text-sm font-bold text-slate-900 dark:text-slate-100 group">
-                  <span className="lang-en">View Full Forecast</span>
-                  <span className="lang-ar">عرض التوقعات كاملة</span>
-                  <span className="material-symbols-outlined text-lg group-hover:translate-x-0.5 transition-transform rtl:rotate-180">arrow_forward</span>
+            {/* News Feature — col-span-8 */}
+            <div className="lg:col-span-8 bento-tile overflow-hidden !p-0 group relative">
+              {newsData[0] && (
+                <a href={`/news/${newsData[0].slug}`} className="block h-full relative">
+                  {newsData[0].imageUrl ? (
+                    <Image
+                      src={newsData[0].imageUrl}
+                      alt={newsData[0].title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary-dark" />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-8 sm:p-10">
+                    <span className="inline-block bg-primary text-white text-[10px] font-bold px-3 py-1.5 rounded-lg uppercase tracking-widest mb-4">
+                      {newsData[0].source}
+                    </span>
+                    <h2 className="text-2xl sm:text-4xl font-black text-white leading-tight group-hover:text-primary-dark transition-colors">
+                      {newsData[0].title}
+                    </h2>
+                  </div>
                 </a>
-              </div>
+              )}
+            </div>
+
+            {/* Weather — col-span-4 */}
+            <div className="lg:col-span-4 bento-tile flex flex-col justify-between overflow-hidden relative">
+               {/* Decorative background icon */}
+               <span className="absolute -right-6 -top-6 material-symbols-outlined text-[160px] text-primary opacity-[0.05] rotate-12 pointer-events-none select-none rtl:right-auto rtl:-left-6">wb_sunny</span>
+
+               <div className="relative z-10">
+                 <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em] mb-6">
+                   <span className="lang-en">Current Climate</span>
+                   <span className="lang-ar">الطقس الحالي</span>
+                 </p>
+
+                 {weatherData ? (
+                   <div className="space-y-6">
+                     <div className="flex items-center gap-4">
+                       <span className="text-5xl sm:text-7xl font-black text-slate-900 dark:text-slate-100 tracking-tighter">{weatherData.temperature}°</span>
+                       <div className="flex flex-col">
+                         <span className="material-symbols-outlined text-4xl text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>
+                           {weatherData.weatherCode === 0 ? "wb_sunny" : "partly_cloudy_day"}
+                         </span>
+                         <span className="text-sm font-bold opacity-70 uppercase tracking-widest">{weatherData.condition}</span>
+                       </div>
+                     </div>
+                     <div className="grid grid-cols-2 gap-6 border-t border-slate-100 dark:border-slate-800 pt-6">
+                       <div>
+                         <p className="text-[10px] text-slate-400 uppercase font-black">Humidity</p>
+                         <p className="text-lg font-bold">{weatherData.humidity}%</p>
+                       </div>
+                       <div>
+                         <p className="text-[10px] text-slate-400 uppercase font-black">Wind</p>
+                         <p className="text-lg font-bold">{weatherData.windSpeed} <small>km/h</small></p>
+                       </div>
+                     </div>
+                   </div>
+                 ) : (
+                   <p className="text-sm text-slate-500">Weather unavailable</p>
+                 )}
+               </div>
+
+               <a href="/weather" className="mt-8 flex items-center gap-2 text-sm font-black text-primary group">
+                 <span className="lang-en">Full Forecast</span>
+                 <span className="lang-ar">التوقعات الكاملة</span>
+                 <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform rtl:rotate-180">arrow_forward</span>
+               </a>
             </div>
 
             {/* Currency — col-span-4 */}
-            <div className="lg:col-span-4 bg-white dark:bg-slate-900 rounded-4xl p-8 flex flex-col border border-slate-200 dark:border-slate-800 shadow-sm">
+            <div className="lg:col-span-4 bento-tile">
               <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em] mb-8">
-                <span className="lang-en">QAR Exchange Rates</span>
-                <span className="lang-ar">أسعار صرف الريال</span>
+                <span className="lang-en">QAR Exchange</span>
+                <span className="lang-ar">أسعار الصرف</span>
               </p>
-              <div className="space-y-6 flex-1">
-                {topRates.length > 0 ? topRates.map((rate, i) => (
+              <div className="space-y-5">
+                {topRates.slice(0, 3).map((rate, i) => (
                   <div key={rate.code} className="flex items-center justify-between group">
                     <div className="flex items-center gap-4">
-                      <div className={`w-12 h-12 rounded-2xl flex items-center justify-center font-bold text-xl group-hover:scale-110 transition-transform ${CURRENCY_BG[i]} ${CURRENCY_TEXT[i]}`}>
+                      <div className="w-10 h-10 rounded-xl bg-slate-50 dark:bg-slate-800 flex items-center justify-center font-bold text-primary group-hover:bg-primary group-hover:text-white transition-all">
                         {CURRENCY_SYMBOLS[rate.code] ?? rate.code[0]}
                       </div>
-                      <div>
-                        <span className="block font-bold text-slate-900 dark:text-slate-100">{rate.code} / QAR</span>
-                        <span className="text-[10px] font-bold uppercase text-slate-500 dark:text-slate-400">
-                          <span className="lang-en">Market Rate</span>
-                          <span className="lang-ar">سعر السوق</span>
-                        </span>
-                      </div>
+                      <span className="font-bold text-sm">{rate.code}</span>
                     </div>
-                    <span className="font-mono font-black text-2xl text-slate-900 dark:text-slate-100">
-                      {rate.value < 1 ? rate.value.toFixed(4) : rate.value.toFixed(2)}
+                    <span className="font-mono font-black text-lg">
+                      {rate.value.toFixed(2)}
                     </span>
                   </div>
-                )) : (
-                  <p className="text-sm text-slate-500 dark:text-slate-400">Rates unavailable</p>
-                )}
+                ))}
               </div>
-              <div className="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800">
-                <a href="/currency" className="w-full py-4 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 group bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-all text-blue-600 dark:text-blue-400">
-                  <span className="lang-en">View All Currencies</span>
-                  <span className="lang-ar">عرض جميع العملات</span>
-                  <span className="material-symbols-outlined group-hover:translate-x-0.5 transition-transform rtl:rotate-180" style={{ fontSize: "18px" }}>arrow_forward</span>
-                </a>
-              </div>
-            </div>
-          </section>
-
-          {/* ── News ──────────────────────────────────────────────── */}
-          <section>
-            <div className="flex items-end justify-between mb-10 pb-6 border-b border-slate-200 dark:border-slate-800">
-              <div>
-                <span className="font-bold text-xs tracking-widest uppercase mb-1 block text-blue-600 dark:text-blue-400">
-                  <span className="lang-en">Live Updates</span>
-                  <span className="lang-ar">آخر التحديثات</span>
-                </span>
-                <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100">
-                  <span className="lang-en">Latest Updates</span>
-                  <span className="lang-ar">آخر الأخبار</span>
-                </h2>
-              </div>
-              <a href="/news" className="bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-5 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-all group">
-                <span className="lang-en">View All News</span>
-                <span className="lang-ar">عرض الأخبار</span>
-                <span className="material-symbols-outlined text-lg group-hover:translate-x-0.5 transition-transform rtl:rotate-180">arrow_outward</span>
+              <a href="/currency" className="mt-8 block text-center py-4 bg-slate-50 dark:bg-slate-800 rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-primary hover:text-white transition-all">
+                <span className="lang-en">View Market Rates</span>
+                <span className="lang-ar">عرض أسعار السوق</span>
               </a>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {newsData.slice(0, 3).map((item, i) => (
-                <a key={item.link} href={`/news/${item.slug}`} className="group cursor-pointer">
-                  <div className="relative h-64 rounded-3xl overflow-hidden mb-6 shadow-md">
+            {/* Quick Jobs — col-span-4 */}
+            <div className="lg:col-span-4 bento-tile bg-primary !text-white border-none relative overflow-hidden">
+               <span className="absolute -right-4 -bottom-4 material-symbols-outlined text-[120px] opacity-10 pointer-events-none">work</span>
+               <p className="text-[11px] font-bold text-white/60 uppercase tracking-[0.2em] mb-6">
+                 <span className="lang-en">Opportunities</span>
+                 <span className="lang-ar">الفرص المتاحة</span>
+               </p>
+               <h3 className="text-3xl font-black mb-4">
+                 <span className="lang-en">Hire in Qatar</span>
+                 <span className="lang-ar">وظائف قطر</span>
+               </h3>
+               <p className="text-sm font-medium mb-8 text-white/80">
+                 Explore {jobsData.length}+ active job listings in Doha and beyond.
+               </p>
+               <a href="/jobs" className="inline-flex items-center gap-2 bg-white text-primary px-6 py-3 rounded-xl font-bold text-sm shadow-xl shadow-black/10 hover:scale-105 transition-transform">
+                 <span className="lang-en">Search Jobs</span>
+                 <span className="lang-ar">بحث عن وظيفة</span>
+               </a>
+            </div>
+
+          </section>
+
+          {/* ── More News ────────────────────────────────────────── */}
+          <section className="space-y-8">
+            <div className="flex items-baseline justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
+              <h3 className="text-xl font-black uppercase tracking-tighter">
+                <span className="lang-en">Latest Insights</span>
+                <span className="lang-ar">آخر الأخبار</span>
+              </h3>
+              <a href="/news" className="text-sm font-bold text-primary hover:underline">View All</a>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {newsData.slice(1, 4).map((item) => (
+                <a key={item.link} href={`/news/${item.slug}`} className="group block">
+                  <div className="relative aspect-[16/10] rounded-3xl overflow-hidden mb-4">
                     {item.imageUrl ? (
-                      <Image
-                        src={item.imageUrl}
-                        alt={item.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                      />
+                      <Image src={item.imageUrl} alt={item.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                     ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700" />
+                      <div className="absolute inset-0 bg-slate-100 dark:bg-slate-800" />
                     )}
-                    <span className={`absolute top-4 left-4 rtl:left-auto rtl:right-4 text-[10px] font-bold px-3 py-1.5 rounded-lg uppercase tracking-wider shadow-lg text-white ${BADGE_COLORS[i % BADGE_COLORS.length]}`}>
-                      {item.source}
-                    </span>
                   </div>
-                  <h3 className="text-xl font-bold leading-snug text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  <h4 className="font-bold text-lg leading-snug group-hover:text-primary transition-colors">
                     {item.title}
-                  </h3>
+                  </h4>
+                  <div className="flex items-center gap-3 mt-3 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                    <span>{item.source}</span>
+                    <span className="w-1 h-1 rounded-full bg-slate-300" />
+                    <span>3 min read</span>
+                  </div>
                 </a>
               ))}
-              {newsData.length === 0 && (
-                <p className="col-span-3 text-sm text-slate-500 dark:text-slate-400">No news available right now.</p>
-              )}
             </div>
           </section>
 
@@ -344,7 +300,7 @@ export default async function Home() {
             </div>
 
             <div className="mt-8 text-center">
-              <a href="/jobs" className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold text-sm bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-all text-blue-600 dark:text-blue-400">
+              <a href="/jobs" className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold text-sm bg-primary/5 dark:bg-primary/20 hover:bg-primary/10 transition-all text-primary">
                 <span className="lang-en">View All Jobs</span>
                 <span className="lang-ar">عرض الوظائف</span>
                 <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>arrow_outward</span>
@@ -370,7 +326,7 @@ export default async function Home() {
                 <details key={en} className="group bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all p-1" suppressHydrationWarning>
                   <summary className="p-4 sm:p-6 flex items-center justify-between cursor-pointer list-none touch-manipulation select-none">
                     <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 bg-blue-50 dark:bg-blue-900/30 rounded-xl flex items-center justify-center shrink-0 text-blue-600 dark:text-blue-400">
+                      <div className="w-10 h-10 bg-primary/5 dark:bg-primary/30 rounded-xl flex items-center justify-center shrink-0 text-primary">
                         <span className="material-symbols-outlined" style={{ fontSize: "20px" }}>{icon}</span>
                       </div>
                       <span className="font-bold text-lg text-slate-900 dark:text-slate-100">
@@ -378,7 +334,7 @@ export default async function Home() {
                         <span className="lang-ar">{ar}</span>
                       </span>
                     </div>
-                    <span className="material-symbols-outlined text-blue-600 dark:text-blue-400 group-open:rotate-45 transition-transform shrink-0 ml-3" style={{ fontSize: "24px" }}>add</span>
+                    <span className="material-symbols-outlined text-primary group-open:rotate-45 transition-transform shrink-0 ml-3" style={{ fontSize: "24px" }}>add</span>
                   </summary>
                   <p className="px-6 pb-6 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
                     <span className="lang-en">{a.en}</span>
