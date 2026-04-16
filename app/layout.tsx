@@ -14,14 +14,14 @@ export const metadata: Metadata = {
   verification: { google: "fg-taPtjNWtu89uOmajC0OB3XxlZapUPAIItSnSnBQo" },
   description:
     "An independent community resource for the State of Qatar. Access curate prayer times, lifestyle guides, and career portals.",
-  keywords: ["Qatar prayer times", "Doha prayer times today", "Qatar expat guide", "living in Qatar", "Fajr time Doha", "Qatar Portal"],
+  keywords: ["Qatar prayer times", "Doha prayer times today", "Qatar expat guide", "living in Qatar", "Fajr time Doha", "Qatar Insider"],
   alternates: { canonical: "https://qatar-portal.vercel.app" },
-  applicationName: "Qatar Portal",
+  applicationName: "Qatar Insider",
   openGraph: {
-    title: "Qatar Portal",
+    title: "Qatar Insider",
     description: "Prayer times, expat guides, and services for Qatar",
     url: "https://qatar-portal.vercel.app",
-    siteName: "Qatar Portal",
+    siteName: "Qatar Insider",
     locale: "en_US",
     type: "website",
     images: [{ url: "https://qatar-portal.vercel.app/opengraph-image", width: 1200, height: 630 }],
@@ -36,6 +36,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#020617" media="(prefers-color-scheme: dark)" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/icon.png" type="image/png" sizes="32x32" />
+        <link rel="apple-touch-icon" href="/apple-icon.png" />
         <link
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
           rel="stylesheet"
@@ -46,6 +49,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className={`${inter.className} bg-[#faf9f6] dark:bg-slate-950 text-on-surface dark:text-slate-100 min-h-screen flex flex-col`}>
+        {/* Zero-Risk Header Disclaimer */}
+        <div className="bg-slate-900 text-white/60 text-[10px] uppercase tracking-[0.2em] py-1.5 text-center font-black">
+          Independent Community Guide • Unofficial Hobbyist Project
+        </div>
+        
         <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded-lg focus:shadow-lg">
           Skip to main content
         </a>
@@ -55,7 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{__html: safeJsonLd({
             "@context": "https://schema.org",
             "@type": "WebSite",
-            "name": "Qatar Portal",
+            "name": "Qatar Insider",
             "url": "https://qatar-portal.vercel.app",
             "description": "Prayer times, expat guides, and services for Qatar"
           })}}
@@ -66,9 +74,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             "@context": "https://schema.org",
             "@type": "Organization",
             "@id": "https://qatar-portal.vercel.app/#organization",
-            "name": "Qatar Portal",
+            "name": "Qatar Insider",
             "url": "https://qatar-portal.vercel.app",
-            "logo": { "@type": "ImageObject", "url": "https://qatar-portal.vercel.app/logo.png", "width": 200, "height": 60 },
+            "logo": { "@type": "ImageObject", "url": "https://qatar-portal.vercel.app/icon.png", "width": 512, "height": 512 },
             "description": "An independent community resource for the State of Qatar — prayer times, expat guides, visa information, and public service directories.",
             "address": {
               "@type": "PostalAddress",

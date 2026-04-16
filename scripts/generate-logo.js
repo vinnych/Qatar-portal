@@ -1,5 +1,5 @@
 /**
- * Generates public/logo.png — a 200×60 Qatar Portal logo banner.
+ * Generates public/logo.png — a 200×60 Qatar Insider logo banner.
  * Design: white serrated left strip (Qatar-flag-inspired) on maroon background.
  * Pure Node.js, no external dependencies.
  */

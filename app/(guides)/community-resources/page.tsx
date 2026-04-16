@@ -5,7 +5,7 @@ import BreadcrumbNav from "@/components/BreadcrumbNav";
 import RelatedGuides from "@/components/RelatedGuides";
 
 export const metadata = pageMeta({
-  title: "Community Resources for Expats in Qatar 2026 | Qatar Portal",
+  title: "Community Resources for Expats in Qatar 2026 | Qatar Insider",
   description: "Independent guide to banking, healthcare, schools, and everyday life in Qatar. Essential community resources for residents and new arrivals in Doha.",
   path: "/community-resources",
   keywords: ["expat life Qatar", "banking in Qatar", "healthcare Doha", "international schools Qatar", "living in Qatar 2026"],

@@ -7,18 +7,18 @@ import { safeJsonLd } from "@/lib/utils";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta({
-  title: "Qatar Portal — Essential Services & Utilities in Doha",
+  title: "Qatar Insider — Essential Services & Utilities in Doha",
   description: "An independent gateway to Qatar. Access real-time Doha prayer times, weather updates, QAR exchange rates, and essential public utilities in the State of Qatar.",
   path: "/",
-  keywords: ["Qatar Portal", "Doha prayer times", "Qatar Visa", "Metro Doha", "Currency exchange QAR", "Qatar essential services"],
-  ogTitle: "Qatar Portal — Independent Digital Concierge",
+  keywords: ["Qatar Insider", "Doha prayer times", "Qatar Visa", "Metro Doha", "Currency exchange QAR", "Qatar essential services"],
+  ogTitle: "Qatar Insider — Independent Digital Concierge",
   ogDescription: "Access live prayer times, weather, and currency rates in Qatar through our independent digital portal.",
 });
 
 const homeJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "Qatar Portal",
+  "name": "Qatar Insider",
   "alternateName": "بوابة قطر",
   "url": "https://qatar-portal.vercel.app",
   "description": "Essential utilities and services for residents and visitors in Qatar.",

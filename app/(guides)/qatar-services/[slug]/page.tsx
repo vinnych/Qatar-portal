@@ -24,16 +24,16 @@ export async function generateMetadata({ params }: Props) {
       : `${guide.minDays}–${guide.maxDays} days`;
  
   return pageMeta({
-    title: `${guide.title} Guide 2026 — Qatar Portal`,
+    title: `${guide.title} Guide 2026 — Qatar Insider`,
     description: `Complete ${guide.title} guide for Qatar 2026. Processing time: ${timeLabel}. Estimated fees: ${totalFees === 0 ? "Free" : `~QAR ${totalFees}`}. Step-by-step with required documents and public portals.`,
     path: `/qatar-services/${slug}`,
     keywords: [
       guide.title,
       `Qatar ${guide.title} 2026`,
-      "Qatar government services",
-      "Qatar expat guide",
+      "Qatar community guide",
+      "Qatar expat resource",
     ],
-    ogTitle: `${guide.title} Guide 2026 — Qatar Portal`,
+    ogTitle: `${guide.title} Guide 2026 — Qatar Insider`,
     ogDescription: `Complete ${guide.title} guide for Qatar 2026. Processing time: ${timeLabel}. Fees: ${totalFees === 0 ? "Free" : `~QAR ${totalFees}`}. Step-by-step with required documents.`,
   });
 }

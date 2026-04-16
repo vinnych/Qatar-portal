@@ -59,8 +59,8 @@ export default function HomeNav() {
         {/* Logo + desktop nav */}
         <div className="flex items-center gap-6 md:gap-10">
           <a href="/" className="text-lg md:text-xl font-extrabold tracking-tight text-primary shrink-0 transition-transform active:scale-95 touch-manipulation">
-            <span className="lang-ar">بوابة قطر</span>
-            <span className="lang-en font-serif italic text-xl">Qatar Portal</span>
+            <span className="lang-ar">مرشد قطر</span>
+            <span className="lang-en font-serif italic text-xl">Qatar Insider</span>
           </a>
 
           {/* Desktop grouped nav */}

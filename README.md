@@ -1,4 +1,4 @@
-# Qatar Portal — Independent Digital Concierge
+# Qatar Insider — Independent Digital Concierge
 
 A high-performance, static-first utility hub for the State of Qatar. Focused on speed, privacy, and curated public data for residents and visitors.
 

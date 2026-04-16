@@ -174,6 +174,18 @@ export default function QatarMetroPage() {
         ))}
       </section>
 
+      <div className="bento-tile bg-[#020617] !text-white border-none p-8 sm:p-12 flex flex-col md:flex-row items-center gap-8">
+        <div className="flex-1">
+          <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 mb-3">Protocol: Official Verification</h3>
+          <p className="text-sm font-medium text-stone-300 leading-relaxed">
+            Schedules and operating hours are subject to change during holidays or events. For live train status and official maps, always cross-verify at the <span className="text-accent font-bold">Qatar Rail Official Portal</span>.
+          </p>
+        </div>
+        <a href="https://www.qr.com.qa" target="_blank" rel="noopener noreferrer" className="shrink-0 px-6 py-4 bg-white/5 hover:bg-accent hover:text-primary border border-white/10 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all whitespace-nowrap">
+          Verify At Qatar Rail <span className="material-symbols-outlined align-middle" style={{ fontSize: "14px" }}>open_in_new</span>
+        </a>
+      </div>
+
       <RelatedGuides guides={[
         { href: "/community-resources",   icon: "groups",    title: "Community Resources", description: "Getting around Doha: taxis, Karwa, Uber, and what to expect as a new resident." },
         { href: "/cost-of-living-doha",   icon: "home_work", title: "Cost of Living",      description: "Transport costs in context — how much you'll spend getting around Doha monthly." },

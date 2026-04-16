@@ -3,7 +3,7 @@ import { safeJsonLd } from "@/lib/utils";
 import { pageMeta, SITE_URL } from "@/lib/seo";
 
 export const metadata = pageMeta({
-  title: "Doha Weather Today — 7-Day Forecast | Qatar Portal",
+  title: "Doha Weather Today — 7-Day Forecast | Qatar Insider",
   description: "Live Doha weather today: current temperature, humidity, wind speed and 7-day forecast for Qatar. Updated every 30 minutes from Open-Meteo.",
   path: "/weather",
   keywords: ["Doha weather today", "Qatar weather", "weather in Doha", "Doha temperature today", "Qatar weather forecast", "Doha 7 day forecast", "weather Qatar"],
@@ -162,7 +162,21 @@ export default async function WeatherPage() {
         </>
       )}
 
-      <p className="text-xs text-gray-400 dark:text-slate-500">Weather data source: Open-Meteo (open-meteo.com) · Updated every 30 minutes</p>
+      <div className="bento-tile bg-[#020617] !text-white border-none p-8 sm:p-12 flex flex-col md:flex-row items-center gap-8 mt-12">
+        <div className="flex-1">
+          <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 mb-3">Protocol: Official Verification</h3>
+          <p className="text-sm font-medium text-stone-300 leading-relaxed">
+            This dashboard uses aggregated Open-Meteo data for guidance. For safety-critical decisions or official state weather warnings, always cross-verify at the <span className="text-accent font-bold">Qatar Meteorology Department (QMD)</span>.
+          </p>
+        </div>
+        <a href="https://www.qweather.gov.qa" target="_blank" rel="noopener noreferrer" className="shrink-0 px-6 py-4 bg-white/5 hover:bg-accent hover:text-primary border border-white/10 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all whitespace-nowrap">
+          Verify At QMD Official <span className="material-symbols-outlined align-middle" style={{ fontSize: "14px" }}>open_in_new</span>
+        </a>
+      </div>
+
+      <p className="text-[10px] text-gray-400 dark:text-slate-500 font-bold uppercase tracking-widest text-center mt-6">
+        Data Hub: Open-Meteo · Independent Aggregation · Protocol v1.2
+      </p>
     </div>
   );
 }

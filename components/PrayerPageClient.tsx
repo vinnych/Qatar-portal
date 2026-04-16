@@ -411,13 +411,13 @@ export default function PrayerPageClient({
           </div>
 
           <div className="bento-tile !bg-slate-950 !text-white border-none">
-            <p className="label-xs text-white/40 mb-3 normal-case tracking-wide">Prayer source</p>
-            <p className="text-sm font-medium text-white/70 leading-relaxed">
-              Times sourced from the <span className="text-accent font-bold">Aladhan API</span> using Muslim World League (MWL) standards. Accurate to ±1 minute for Doha.
+            <p className="label-xs text-white/40 mb-3 normal-case tracking-wide">Protocol: Official Verification</p>
+            <p className="text-sm font-medium text-white/70 leading-relaxed mb-6">
+              This is an independent community guide. Always cross-verify with the <span className="text-accent font-bold">Ministry of Awqaf</span> for absolute accuracy.
             </p>
-            <a href="https://aladhan.com" target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-1.5 label-xs text-white/40 hover:text-white transition-colors normal-case tracking-wide">
-              aladhan.com
-              <span className="material-symbols-outlined" style={{ fontSize: "12px" }}>open_in_new</span>
+            <a href="https://www.islam.gov.qa/Services/PrayerTimes.aspx" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 px-6 py-4 bg-white/5 hover:bg-accent hover:text-primary border border-white/10 rounded-2xl font-black text-[10px] uppercase tracking-widest transition-all">
+              Ministry Official Portal
+              <span className="material-symbols-outlined" style={{ fontSize: "14px" }}>open_in_new</span>
             </a>
           </div>
         </div>

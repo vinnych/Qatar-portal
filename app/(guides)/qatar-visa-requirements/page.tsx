@@ -39,7 +39,7 @@ export default function QatarVisaRequirementsPage() {
       <section className="bento-tile bg-gradient-to-br from-primary to-primary-dark !text-white border-none min-h-[400px] flex items-center relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-[100px] translate-x-1/3 -translate-y-1/3" />
         <div className="relative z-10 w-full max-w-3xl">
-          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/60 mb-6">National Archive · Residency</p>
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/60 mb-6">Community Curator · Independent Guide</p>
           <h1 className="national-title text-6xl sm:text-8xl italic mb-8">
             <span className="lang-en">Qatar Visa</span>
             <span className="lang-ar">تأشيرة قطر</span>
@@ -130,6 +130,18 @@ export default function QatarVisaRequirementsPage() {
           ))}
         </div>
       </section>
+
+      <div className="bento-tile bg-[#020617] !text-white border-none p-8 sm:p-12 flex flex-col md:flex-row items-center gap-8 mt-12">
+        <div className="flex-1">
+          <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 mb-3">Protocol: Official Verification</h3>
+          <p className="text-sm font-medium text-stone-300 leading-relaxed">
+            Visa laws and residency requirements in Qatar are subject to ministerial updates without prior notice. For binding legal information, always cross-verify at the <span className="text-accent font-bold">Ministry of Interior (MOI) Portal</span> or <span className="text-accent font-bold">Hukoomi</span>.
+          </p>
+        </div>
+        <a href="https://portal.moi.gov.qa" target="_blank" rel="noopener noreferrer" className="shrink-0 px-6 py-4 bg-white/5 hover:bg-accent hover:text-primary border border-white/10 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all whitespace-nowrap">
+          Verify At MOI Official <span className="material-symbols-outlined align-middle" style={{ fontSize: "14px" }}>open_in_new</span>
+        </a>
+      </div>
 
       <RelatedGuides guides={[
         { href: "/work-in-qatar",       icon: "work",        title: "Work in Qatar",    description: "The full roadmap for relocating and starting your professional life in Qatar." },

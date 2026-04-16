@@ -4,11 +4,11 @@ import { safeJsonLd } from "@/lib/utils";
 import { pageMeta, SITE_URL } from "@/lib/seo";
 
 export const metadata = pageMeta({
-  title: "Prayer Times & Hijri Calendar — Doha, Qatar | Qatar Portal",
+  title: "Prayer Times & Hijri Calendar — Doha, Qatar | Qatar Insider",
   description: "Accurate Fajr, Sunrise, Dhuhr, Asr, Maghrib and Isha prayer times for Doha and 35+ Muslim cities. Full monthly prayer calendar with Hijri dates.",
   path: "/prayer",
   keywords: ["Doha prayer times", "Qatar prayer times today", "Fajr time Doha", "Isha time Qatar", `prayer times ${new Date().getFullYear()} Qatar`, "Hijri calendar", "Islamic date today", "salah times Doha"],
-  ogTitle: "Prayer Times & Hijri Calendar — Doha, Qatar | Qatar Portal",
+  ogTitle: "Prayer Times & Hijri Calendar — Doha, Qatar | Qatar Insider",
   ogDescription: "Accurate prayer times for Doha and 35+ Muslim cities. Monthly calendar with Hijri dates.",
 });
 
@@ -33,11 +33,11 @@ export default async function PrayerPage() {
     ? {
         "@context": "https://schema.org",
         "@type": "WebPage",
-        name: "Prayer Times & Hijri Calendar — Qatar Portal",
+        name: "Prayer Times & Hijri Calendar — Qatar Insider",
         url: `${SITE_URL}/prayer`,
         description: `Today's prayer times in Doha, Qatar. Fajr: ${today.Fajr}, Dhuhr: ${today.Dhuhr}, Asr: ${today.Asr}, Maghrib: ${today.Maghrib}, Isha: ${today.Isha}. Hijri: ${today.hijriDate} ${today.hijriMonth} ${today.hijriYear} AH.`,
         inLanguage: "en",
-        isPartOf: { "@type": "WebSite", name: "Qatar Portal", url: SITE_URL },
+        isPartOf: { "@type": "WebSite", name: "Qatar Insider", url: SITE_URL },
         about: {
           "@type": "Place",
           name: "Doha, Qatar",

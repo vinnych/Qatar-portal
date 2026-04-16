@@ -2,14 +2,14 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Qatar Portal — Prayer Times & Service Guides",
-    short_name: "Qatar Portal",
+    name: "Qatar Insider — Independent Community Guide",
+    short_name: "Qatar Insider",
     description:
-      "Your daily Qatar resource: accurate prayer times for Doha, service guides, and essential public utilities.",
+      "Your daily Qatar resource: accurate prayer times for Doha, community guides, and essential public utilities.",
     start_url: "/",
     display: "standalone",
     background_color: "#faf9f6",
-    theme_color: "#003fa4",
+    theme_color: "#8A1538",
     icons: [
       { src: "/icon", sizes: "32x32", type: "image/png" },
       { src: "/apple-icon", sizes: "180x180", type: "image/png" },
