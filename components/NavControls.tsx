@@ -7,8 +7,10 @@ export default function NavControls() {
   const router = useRouter();
   const [dark, setDark] = useState(false);
   const [lang, setLang] = useState<"en" | "ar">("en");
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     // 1. Theme initialization
     const savedTheme = localStorage.getItem("theme");
     const prefersDark = savedTheme === "dark" || (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches);
@@ -41,6 +43,8 @@ export default function NavControls() {
     document.documentElement.dir = next === "ar" ? "rtl" : "ltr";
     localStorage.setItem("lang", next);
   };
+
+  if (!mounted) return <div className="h-10 w-24 bg-slate-100 dark:bg-slate-800 rounded-lg animate-pulse" />;
 
   return (
     <div className="flex items-center gap-4 lg:gap-6 shrink-0">

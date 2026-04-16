@@ -24,8 +24,10 @@ const CARD_PRAYERS = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
 
 export default function PrayerCardInner({ prayers }: { prayers: Prayer[] }) {
   const [now, setNow] = useState(new Date());
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const id = setInterval(() => setNow(new Date()), 30000);
     return () => clearInterval(id);
   }, []);
@@ -44,6 +46,22 @@ export default function PrayerCardInner({ prayers }: { prayers: Prayer[] }) {
   const countdown = h > 0 ? `${h}h ${m}m` : `${m}m`;
 
   const cardPrayers = prayers.filter((p) => CARD_PRAYERS.includes(p.name));
+
+  if (!mounted) {
+    return (
+      <div className="flex flex-col gap-6 animate-pulse">
+        <div className="flex justify-between items-center">
+          <div className="h-10 w-32 bg-slate-100 dark:bg-slate-800 rounded-xl" />
+          <div className="h-12 w-16 bg-slate-100 dark:bg-slate-800 rounded-xl" />
+        </div>
+        <div className="space-y-2">
+          {[1,2,3,4,5].map(i => (
+            <div key={i} className="h-12 w-full bg-slate-100 dark:bg-slate-800 rounded-2xl" />
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
