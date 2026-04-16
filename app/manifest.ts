@@ -2,10 +2,10 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Arabia Khaleej — Elite GCC Digital Concierge",
+    name: "Arabia Khaleej — Independent Community Guide",
     short_name: "Arabia Khaleej",
     description:
-      "The definitive digital concierge for the GCC: accurate prayer times, country guides, and regional protocols.",
+      "Independent informational guide for the GCC region: accurate prayer times, country guides, and regional protocols.",
     start_url: "/",
     display: "standalone",
     background_color: "#faf9f6",

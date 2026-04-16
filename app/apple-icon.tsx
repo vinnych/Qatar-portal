@@ -22,7 +22,7 @@ export default function AppleIcon() {
             style={{
               width: "25%",
               height: "100%",
-              background: "#d4af37", // Gold
+              background: "#D4AF37", // Gold
             }}
           />
         </div>

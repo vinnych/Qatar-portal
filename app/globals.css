@@ -4,7 +4,25 @@
 
 @layer base {
   body {
-    @apply bg-white text-slate-900 antialiased;
+    @apply bg-brand-obsidian text-brand-champagne antialiased selection:bg-brand-gold/30 selection:text-brand-gold;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-brand-gold tracking-tight;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-brand-slate/40 backdrop-blur-md border border-brand-gold/10;
+  }
+  
+  .gold-gradient {
+    @apply bg-gradient-to-br from-brand-gold via-brand-gold to-brand-accent;
+  }
+
+  .text-gold-gradient {
+    @apply bg-gradient-to-br from-[#F5C75D] via-[#D4AF37] to-[#B8860B] bg-clip-text text-transparent;
   }
 }
 
