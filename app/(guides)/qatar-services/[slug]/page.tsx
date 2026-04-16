@@ -25,14 +25,14 @@ export async function generateMetadata({ params }: Props) {
       : `${guide.minDays}–${guide.maxDays} days`;
  
   return pageMeta({
-    title: `${guide.title} Protocol | Elite Service Registry | Qatar Insider`,
+    title: `${guide.title} Protocol | Elite Service Registry | Arabia Khaleej`,
     description: `Complete ${guide.title} administrative protocol for Qatar 2026. Processing cycle: ${timeLabel}. Fees: ${hasOfficialRate ? "Official Registry Rate" : (totalFees === 0 ? "Free" : `~QAR ${totalFees}`)}. Step-by-step verification registry.`,
     path: `/qatar-services/${slug}`,
     keywords: [
       guide.title,
       `Qatar ${guide.title} protocol`,
       "Qatar administrative registry",
-      "Qatar Insider services",
+      "Arabia Khaleej services",
     ],
     ogTitle: `${guide.title} | Administrative Protocol`,
   });
