@@ -48,11 +48,20 @@ export default function Home() {
         {/* Newsletter Section: Gilded Access */}
         <div className="mt-8 pt-8 border-t border-brand-gold/10">
           <h2 className="text-xs tracking-[0.3em] uppercase font-bold mb-6 opacity-60">Gilded Access</h2>
-          <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={(e) => e.preventDefault()}>
-            <input 
-              type="email" 
-              placeholder="Your email for exclusive access..." 
+          <form
+            className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+            onSubmit={(e) => {
+              e.preventDefault();
+              const email = (e.currentTarget.elements.namedItem("email") as HTMLInputElement)?.value;
+              window.location.href = `mailto:connect@arabiakhaleej.com?subject=Invite Request&body=Please send an invite to: ${encodeURIComponent(email)}`;
+            }}
+          >
+            <input
+              type="email"
+              name="email"
+              placeholder="Your email for exclusive access..."
               className="flex-grow bg-brand-slate/10 dark:bg-brand-obsidian/40 border border-brand-gold/20 rounded-full px-6 py-3 text-sm focus:outline-none focus:border-brand-gold transition-colors placeholder:opacity-50"
+              required
             />
             <button className="gold-gradient text-brand-obsidian font-bold text-xs uppercase tracking-widest px-8 py-3 rounded-full hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all active:scale-95">
               Request Invite
