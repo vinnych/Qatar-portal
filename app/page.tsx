@@ -9,19 +9,21 @@ export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [inviteStatus, setInviteStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const emailRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => setMounted(true), []);
 
   async function handleInvite(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const email = emailRef.current?.value?.trim();
+    const name = nameRef.current?.value?.trim();
     if (!email) return;
     setInviteStatus("sending");
     try {
       const res = await fetch("https://arabiakhaleej-contact.asishchilakapati.workers.dev", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, name }),
       });
       setInviteStatus(res.ok ? "sent" : "error");
     } catch {
@@ -70,17 +72,25 @@ export default function Home() {
           {inviteStatus === "sent" ? (
             <p className="text-sm text-brand-gold/80 tracking-widest uppercase">Inquiry received — we'll be in touch.</p>
           ) : (
-            <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={handleInvite}>
-              <input
-                ref={emailRef}
-                type="email"
-                placeholder="Your email for exclusive access..."
-                className="flex-grow bg-brand-slate/10 dark:bg-brand-obsidian/40 border border-brand-gold/20 rounded-full px-6 py-3 text-sm focus:outline-none focus:border-brand-gold transition-colors placeholder:opacity-50"
-                required
-              />
+            <form className="flex flex-col gap-4 max-w-lg mx-auto" onSubmit={handleInvite}>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <input
+                  ref={nameRef}
+                  type="text"
+                  placeholder="Your name..."
+                  className="flex-grow bg-brand-slate/10 dark:bg-brand-obsidian/40 border border-brand-gold/20 rounded-full px-6 py-4 text-sm focus:outline-none focus:border-brand-gold transition-all placeholder:opacity-50"
+                />
+                <input
+                  ref={emailRef}
+                  type="email"
+                  placeholder="Your email..."
+                  className="flex-grow bg-brand-slate/10 dark:bg-brand-obsidian/40 border border-brand-gold/20 rounded-full px-6 py-4 text-sm focus:outline-none focus:border-brand-gold transition-all placeholder:opacity-50"
+                  required
+                />
+              </div>
               <button
                 disabled={inviteStatus === "sending"}
-                className="gold-gradient text-brand-obsidian font-bold text-xs uppercase tracking-widest px-8 py-3 rounded-full hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all active:scale-95 disabled:opacity-60"
+                className="gold-gradient text-brand-obsidian font-bold text-sm uppercase tracking-[0.2em] px-8 py-4 rounded-full hover:shadow-[0_0_25px_rgba(212,175,55,0.4)] transition-all active:scale-[0.98] disabled:opacity-60"
               >
                 {inviteStatus === "sending" ? "Sending..." : "Submit Inquiry"}
               </button>
