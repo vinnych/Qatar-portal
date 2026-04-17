@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/Providers";
 import ThemeToggle from "@/components/ThemeToggle";
+import ContactLink from "@/components/ContactLink";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <a href="/privacy" className="hover:text-brand-gold transition-colors">Privacy</a>
             <a href="/terms" className="hover:text-brand-gold transition-colors">Terms</a>
             <a href="/disclaimer" className="hover:text-brand-gold transition-colors">Disclaimer</a>
+            <ContactLink />
           </footer>
         </Providers>
       </body>
