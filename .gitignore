@@ -8,3 +8,4 @@ tsconfig.tsbuildinfo
 AGENT.md
 fix.md
 .claude/
+.wrangler/
