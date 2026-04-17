@@ -100,11 +100,16 @@ export default {
         ],
       };
 
-      await fetch("https://api.mailchannels.net/tx/v1/send", {
+      const mcRes = await fetch("https://api.mailchannels.net/tx/v1/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(autoReplyData),
       });
+
+      if (!mcRes.ok) {
+        const errorText = await mcRes.text();
+        throw new Error(`Auto-reply failed: ${mcRes.status} ${errorText}`);
+      }
 
       return new Response(JSON.stringify({ success: true }), {
         status: 200,
