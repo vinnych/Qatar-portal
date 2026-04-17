@@ -11,6 +11,10 @@ export const metadata: Metadata = {
   verification: { google: "fg-taPtjNWtu89uOmajC0OB3XxlZapUPAIItSnSnBQo" },
   title: "Arabia Khaleej",
   description: "Independent community guide for the GCC region.",
+  icons: {
+    icon: "/favicon-emblem.png",
+    apple: "/favicon-emblem.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
