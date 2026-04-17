@@ -29,6 +29,9 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+// Initialize OpenNext for local development only, avoiding issues in Vercel/CI builds
+if (!process.env.VERCEL) {
+  import('@opennextjs/cloudflare').then(m => m.initOpenNextCloudflareForDev());
+}
 
-import('@opennextjs/cloudflare').then(m => m.initOpenNextCloudflareForDev());
+export default nextConfig;
