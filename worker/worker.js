@@ -1,4 +1,5 @@
 import { createMimeMessage } from "mimetext";
+import { EmailMessage } from "cloudflare:email";
 
 export default {
   async fetch(request, env) {
@@ -53,8 +54,14 @@ export default {
         `
       });
 
-      // Send the email using Cloudflare's Email Routing binding
-      await env.SEND_EMAIL.send(msg);
+      // Construct and send the EmailMessage
+      const emailMsg = new EmailMessage(
+        "connect@arabiakhaleej.com",
+        "asishchilakapati@gmail.com",
+        msg.asRaw()
+      );
+
+      await env.SEND_EMAIL.send(emailMsg);
 
       return new Response(JSON.stringify({ success: true }), {
         status: 200,
