@@ -54,7 +54,7 @@ export default {
         `
       });
 
-      // Construct and send the EmailMessage
+      // 1. Construct and send the Notification to YOU (The Owner)
       const emailMsg = new EmailMessage(
         "connect@arabiakhaleej.com",
         "asishchilakapati@gmail.com",
@@ -62,6 +62,49 @@ export default {
       );
 
       await env.SEND_EMAIL.send(emailMsg);
+
+      // 2. Send the Auto-Reply to the CUSTOMER (The Visitor)
+      // Using Mailchannels to allow sending to any email address
+      const autoReplyData = {
+        personalizations: [
+          {
+            to: [{ email: email }],
+          },
+        ],
+        from: {
+          email: "connect@arabiakhaleej.com",
+          name: "Arabia Khaleej",
+        },
+        subject: "Thank you for your inquiry — Arabia Khaleej",
+        content: [
+          {
+            type: "text/html",
+            value: `
+              <div style="font-family: 'Times New Roman', serif; padding: 50px; background-color: #0a0a0a; color: #e0e0e0; text-align: center;">
+                <div style="max-width: 500px; margin: 0 auto; border: 1px solid #D4AF37; padding: 40px; border-radius: 4px;">
+                  <h1 style="color: #D4AF37; font-weight: 300; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 30px;">Arabia Khaleej</h1>
+                  <p style="font-size: 18px; line-height: 1.8; font-style: italic; opacity: 0.9;">
+                    "Thank you for your interest in our premier community guide."
+                  </p>
+                  <div style="margin: 40px auto; width: 40px; height: 1px; background: #D4AF37; opacity: 0.5;"></div>
+                  <p style="font-size: 14px; opacity: 0.7; line-height: 1.6; letter-spacing: 1px;">
+                    Our team has received your inquiry. We are currently curating our exclusive waitlist and will reach out to you personally as we expand our gilded access.
+                  </p>
+                  <p style="margin-top: 60px; font-size: 10px; text-transform: uppercase; letter-spacing: 3px; color: #D4AF37; opacity: 0.8;">
+                    Independent Community Guide — GCC
+                  </p>
+                </div>
+              </div>
+            `,
+          },
+        ],
+      };
+
+      await fetch("https://api.mailchannels.net/tx/v1/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(autoReplyData),
+      });
 
       return new Response(JSON.stringify({ success: true }), {
         status: 200,
