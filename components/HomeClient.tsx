@@ -99,12 +99,12 @@ export default function HomeClient() {
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 px-2">
           {[
-            { id: 'saudi-arabia', key: 'saudiArabia', flag: '/flags/saudi.png' },
-            { id: 'united-arab-emirates', key: 'uae', flag: '/flags/uae.png' },
-            { id: 'qatar', key: 'qatar', flag: '/flags/qatar.png' },
-            { id: 'kuwait', key: 'kuwait', flag: '/flags/kuwait.png' },
-            { id: 'oman', key: 'oman', flag: '/flags/oman.png' },
-            { id: 'bahrain', key: 'bahrain', flag: '/flags/bahrain.png' },
+            { id: 'saudi-arabia', key: 'saudiArabia', flag: '/flags/saudi_new.png' },
+            { id: 'united-arab-emirates', key: 'uae', flag: '/flags/uae_new.png' },
+            { id: 'qatar', key: 'qatar', flag: '/flags/qatar_new.png' },
+            { id: 'kuwait', key: 'kuwait', flag: '/flags/kuwait_new.png' },
+            { id: 'oman', key: 'oman', flag: '/flags/oman_new.png' },
+            { id: 'bahrain', key: 'bahrain', flag: '/flags/bahrain_new.png' },
           ].map((country) => (
             <Link
               key={country.id}
@@ -117,6 +117,7 @@ export default function HomeClient() {
                   src={country.flag} 
                   alt={t(country.key)}
                   fill
+                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 16vw"
                   className="object-cover opacity-20 group-hover:opacity-40 transition-all duration-700 group-hover:scale-110 transform"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-obsidian via-brand-obsidian/40 to-transparent z-10" />

@@ -143,7 +143,7 @@ export default function PrayerClient({ initialCity }: PrayerClientProps) {
   }
 
   return (
-    <div className={`flex flex-col items-center justify-start min-h-screen pt-12 pb-20 px-4 relative ${isRTL ? 'font-serif-ar' : ''}`}>
+    <div className={`flex flex-col items-center justify-start min-h-screen pt-24 pb-20 px-4 relative ${isRTL ? 'font-serif-ar' : ''}`}>
       <div className="w-full max-w-4xl mx-auto mb-8">
         <Breadcrumbs items={breadcrumbItems} isRTL={isRTL} />
       </div>

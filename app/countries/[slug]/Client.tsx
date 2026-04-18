@@ -16,7 +16,7 @@ const COUNTRY_DATA: Record<string, any> = {
     nameKey: 'saudiArabia',
     introKey: 'saudiIntro',
     color: "from-emerald-600 to-emerald-900",
-    flag: "/flags/saudi.png",
+    flag: "/flags/saudi_new.png",
     stats: {
       population: "36.4 Million",
       capital: "Riyadh",
@@ -43,7 +43,7 @@ const COUNTRY_DATA: Record<string, any> = {
     nameKey: 'uae',
     introKey: 'uaeIntro',
     color: "from-red-600 to-black",
-    flag: "/flags/uae.png",
+    flag: "/flags/uae_new.png",
     stats: {
       population: "9.9 Million",
       capital: "Abu Dhabi",
@@ -70,7 +70,7 @@ const COUNTRY_DATA: Record<string, any> = {
     nameKey: 'qatar',
     introKey: 'qatarIntro',
     color: "from-red-800 to-stone-900",
-    flag: "/flags/qatar.png",
+    flag: "/flags/qatar_new.png",
     stats: {
       population: "2.9 Million",
       capital: "Doha",
@@ -97,7 +97,7 @@ const COUNTRY_DATA: Record<string, any> = {
     nameKey: 'kuwait',
     introKey: 'kuwaitIntro',
     color: "from-blue-600 to-emerald-900",
-    flag: "/flags/kuwait.png",
+    flag: "/flags/kuwait_new.png",
     stats: {
       population: "4.3 Million",
       capital: "Kuwait City",
@@ -124,7 +124,7 @@ const COUNTRY_DATA: Record<string, any> = {
     nameKey: 'oman',
     introKey: 'omanIntro',
     color: "from-red-700 to-emerald-800",
-    flag: "/flags/oman.png",
+    flag: "/flags/oman_new.png",
     stats: {
       population: "5.2 Million",
       capital: "Muscat",
@@ -151,7 +151,7 @@ const COUNTRY_DATA: Record<string, any> = {
     nameKey: 'bahrain',
     introKey: 'bahrainIntro',
     color: "from-red-600 to-stone-800",
-    flag: "/flags/bahrain.png",
+    flag: "/flags/bahrain_new.png",
     stats: {
       population: "1.5 Million",
       capital: "Manama",
@@ -201,7 +201,7 @@ export default function CountryClient() {
 
   return (
     <div className={`min-h-screen ${isRTL ? 'font-serif-ar' : ''}`}>
-      <div className="max-w-6xl mx-auto px-6 pt-12">
+      <div className="max-w-6xl mx-auto px-6 pt-24">
         <Breadcrumbs items={breadcrumbItems} isRTL={isRTL} />
       </div>
 
@@ -214,6 +214,7 @@ export default function CountryClient() {
             src={data.flag} 
             alt={t(data.nameKey)}
             fill
+            sizes="100vw"
             className="object-cover opacity-30 mix-blend-overlay"
             priority
           />
@@ -224,7 +225,7 @@ export default function CountryClient() {
         <div className="relative z-20 text-center px-6 animate-in fade-in zoom-in duration-1000">
           <div className="flex flex-col items-center">
             <div className="w-20 h-12 relative mb-6 rounded shadow-2xl overflow-hidden border border-white/10">
-              <Image src={data.flag} alt="Flag Icon" fill className="object-cover" />
+              <Image src={data.flag} alt="Flag Icon" fill sizes="80px" className="object-cover" priority />
             </div>
             <h1 className="text-5xl sm:text-7xl font-black text-white uppercase tracking-tighter mb-4 drop-shadow-2xl">
               {t(data.nameKey)}

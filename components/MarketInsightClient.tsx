@@ -52,7 +52,7 @@ export default function MarketInsightClient() {
   ];
 
   return (
-    <div className={`flex flex-col items-center justify-start min-h-screen pt-12 pb-20 px-4 max-w-7xl mx-auto w-full ${isRTL ? 'font-serif-ar text-right' : 'text-left'}`}>
+    <div className={`flex flex-col items-center justify-start min-h-screen pt-24 pb-20 px-4 max-w-7xl mx-auto w-full ${isRTL ? 'font-serif-ar text-right' : 'text-left'}`}>
       <div className="w-full mb-8">
         <Breadcrumbs items={breadcrumbItems} isRTL={isRTL} />
       </div>

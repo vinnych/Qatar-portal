@@ -21,7 +21,7 @@ export default function Breadcrumbs({ items, isRTL }: BreadcrumbsProps) {
   return (
     <nav
       aria-label="Breadcrumb"
-      className={`flex mb-8 text-[10px] font-black uppercase tracking-[0.2em] ${isRTL ? "flex-row-reverse" : ""}`}
+      className="flex mb-8 text-[10px] font-black uppercase tracking-[0.2em]"
     >
       <ol className="flex items-center gap-2 text-foreground/40">
         {items.map((item, idx) => (

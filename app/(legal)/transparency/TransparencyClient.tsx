@@ -59,7 +59,7 @@ export default function TransparencyPage() {
         <div className="flex justify-center gap-2 mb-12 opacity-40">
           {['saudi', 'uae', 'qatar', 'kuwait', 'oman', 'bahrain'].map(f => (
             <div key={f} className="w-10 h-6 relative rounded-sm overflow-hidden border border-white/10 grayscale hover:grayscale-0 transition-all duration-500 hover:scale-110">
-              <Image src={`/flags/${f}.png`} alt={f} fill className="object-cover" />
+              <Image src={`/flags/${f}_new.png`} alt={f} fill className="object-cover" />
             </div>
           ))}
         </div>
