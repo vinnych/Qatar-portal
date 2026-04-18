@@ -4,12 +4,18 @@
 
 @layer base {
   :root {
-    --background: #F5F2EB; /* Sand */
-    --foreground: #1A1C20; /* Charcoal */
-    --accent: #C5A028;     /* Burnished Gold */
-    --muted: #E6E1D3;
-    --glass-bg: rgba(255, 255, 255, 0.4);
-    --glass-border: rgba(197, 160, 40, 0.1);
+    --background: #F8F7F2; /* Brighter Sand */
+    --foreground: #0A0C10; /* Obsidian for deeper contrast */
+    --accent: #7C5E12;     /* Deeper Bronze Gold for maximum visibility */
+    --muted: #EDE9E0;
+    --glass-bg: rgba(255, 255, 255, 0.8);
+    --glass-border: rgba(124, 94, 18, 0.3);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.18);
+    --shadow-lg: 0 20px 50px -15px rgba(0, 0, 0, 0.25);
+    
+    --font-sans: var(--font-inter), system-ui, sans-serif;
+    --font-serif: var(--font-playfair), Georgia, serif;
   }
 
   .dark {
@@ -17,42 +23,117 @@
     --foreground: #F3E5D0; /* Champagne */
     --accent: #D4AF37;     /* Gold */
     --muted: #0F172A;      /* Slate */
-    --glass-bg: rgba(15, 23, 42, 0.4);
-    --glass-border: rgba(212, 175, 55, 0.1);
+    --glass-bg: rgba(15, 23, 42, 0.65);
+    --glass-border: rgba(212, 175, 55, 0.2);
+    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow: 0 15px 40px -12px rgba(0, 0, 0, 0.7), 0 0 15px rgba(212, 175, 55, 0.05);
+    --shadow-lg: 0 25px 60px -20px rgba(0, 0, 0, 0.9), 0 0 25px rgba(212, 175, 55, 0.1);
   }
 
   * {
     transition: background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
                 color 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
                 border-color 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   body {
     background-color: var(--background);
     color: var(--foreground);
+    font-family: var(--font-sans);
     @apply antialiased selection:bg-brand-gold/30 selection:text-brand-gold overflow-x-hidden;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv11";
+  }
+
+  /* Global Shadow & Contrast Policy */
+  button, input, textarea, .glass, [class*="rounded-"] {
+    box-shadow: var(--shadow);
+  }
+
+  button:hover, input:focus {
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Specific shadow for transparent images like Logo */
+  .logo-shadow {
+    filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.15)) drop-shadow(0 0 12px rgba(124, 94, 18, 0.2));
+  }
+
+  .dark .logo-shadow {
+    filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 20px rgba(212, 175, 55, 0.2));
+  }
+
+  /* Specific shadow for footer text links */
+  .footer-link-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .footer-link-shadow {
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Global Visibility Overrides for Light Theme */
+  html:not(.dark) input::placeholder,
+  html:not(.dark) textarea::placeholder {
+    color: rgba(10, 12, 16, 0.7) !important;
+  }
+
+  html:not(.dark) .text-brand-gold,
+  html:not(.dark) .text-gold-500 {
+    color: var(--accent) !important; /* Force deeper bronze for visibility */
+  }
+
+  html:not(.dark) .border-brand-gold\/10,
+  html:not(.dark) .border-brand-gold\/20,
+  html:not(.dark) .border-brand-gold\/30,
+  html:not(.dark) .border-brand-gold\/40 {
+    border-color: rgba(124, 94, 18, 0.4) !important; /* Minimum visibility for borders */
+  }
+
+  /* Global Opacity Hardening for Light Theme Visibility */
+  html:not(.dark) .opacity-40 { opacity: 0.65 !important; }
+  html:not(.dark) .opacity-50 { opacity: 0.75 !important; }
+  html:not(.dark) .opacity-60 { opacity: 0.85 !important; }
+  html:not(.dark) .opacity-70 { opacity: 0.9 !important; }
+  html:not(.dark) .opacity-80, 
+  html:not(.dark) .opacity-90 { opacity: 1 !important; }
+
+  html:not(.dark) ::selection {
+    background-color: rgba(124, 94, 18, 0.25);
+    color: #000;
   }
 
   h1, h2, h3, h4, h5, h6 {
     color: var(--accent);
-    @apply tracking-tight;
+    font-family: var(--font-serif);
+    @apply tracking-tight font-semibold;
   }
 }
 
 @layer utilities {
+  .serif {
+    font-family: var(--font-serif);
+  }
+
   .glass {
     background-color: var(--glass-bg);
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
   }
   
   .gold-gradient {
-    @apply bg-gradient-to-br from-brand-gold via-brand-gold to-brand-accent;
+    @apply bg-gradient-to-br from-[#D4AF37] via-[#C5A028] to-[#8B7355];
   }
 
   .text-gold-gradient {
-    @apply bg-gradient-to-br from-[#F5C75D] via-[#D4AF37] to-[#B8860B] bg-clip-text text-transparent;
+    @apply bg-gradient-to-br from-[#D4AF37] via-[#C5A028] to-[#8B7355] bg-clip-text text-transparent font-bold;
+  }
+
+  .premium-drop-shadow {
+    filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.15));
   }
 }
 

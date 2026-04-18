@@ -1,14 +1,29 @@
 import { MetadataRoute } from "next";
-
-const SITE_URL = "https://arabiakhaleej.com";
+import { SITE_URL } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ["", "/about", "/privacy", "/terms", "/disclaimer"].map((route) => ({
+  const routes = [
+    "",
+    "/prayer",
+    "/prayer/qatar",
+    "/prayer/uae",
+    "/prayer/saudi-arabia",
+    "/prayer/kuwait",
+    "/prayer/oman",
+    "/prayer/bahrain",
+    "/finance",
+    "/join",
+    "/about",
+    "/privacy",
+    "/terms",
+    "/disclaimer"
+  ].map((route) => ({
     url: `${SITE_URL}${route}`,
     lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: route === "" ? 1 : 0.8,
+    changeFrequency: "weekly" as const,
+    priority: route === "" ? 1 : route === "/join" ? 0.9 : 0.8,
   }));
 
   return routes;
 }
+

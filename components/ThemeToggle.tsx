@@ -15,16 +15,19 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="fixed bottom-8 right-8 p-3 rounded-full glass hover:scale-110 active:scale-95 transition-all duration-300 group z-50 shadow-2xl"
+      className="fixed bottom-10 right-10 p-4 rounded-full glass hover:scale-110 active:scale-95 transition-all duration-500 group z-50 border-brand-gold/20 shadow-2xl"
       aria-label="Toggle Theme"
     >
-      <div className="relative w-6 h-6">
+      <div className="relative w-5 h-5">
         <Sun className={`absolute inset-0 transition-all duration-700 ${theme === "dark" ? "rotate-90 scale-0 opacity-0" : "rotate-0 scale-100 opacity-100 text-brand-burnished"}`} />
         <Moon className={`absolute inset-0 transition-all duration-700 ${theme === "dark" ? "rotate-0 scale-100 opacity-100 text-brand-gold" : "-rotate-90 scale-0 opacity-0"}`} />
       </div>
       
+      {/* Decorative Outer Ring */}
+      <div className="absolute inset-[-4px] rounded-full border border-brand-gold/5 scale-0 group-hover:scale-100 transition-transform duration-500" />
+      
       {/* Glow Effect */}
-      <div className={`absolute inset-0 rounded-full blur-xl transition-opacity duration-1000 ${theme === "dark" ? "bg-brand-gold/20 opacity-100" : "bg-brand-burnished/10 opacity-0"}`} />
+      <div className={`absolute inset-0 rounded-full blur-2xl transition-all duration-1000 -z-10 ${theme === "dark" ? "bg-brand-gold/30 opacity-100" : "bg-brand-burnished/20 opacity-100"}`} />
     </button>
   );
 }

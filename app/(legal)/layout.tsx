@@ -8,12 +8,12 @@ export default function LegalLayout({ children }: { children: React.ReactNode })
       <div className="fixed bottom-1/4 right-1/4 w-[400px] h-[400px] bg-brand-accent/3 blur-[140px] rounded-full -z-10 pointer-events-none" />
 
       {/* Top navigation breadcrumb */}
-      <nav className="px-6 sm:px-12 pt-8 pb-0">
+      <nav className="px-6 sm:px-12 pt-10 pb-0">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.25em] text-brand-gold/40 hover:text-brand-gold transition-colors duration-300 group"
+          className="inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.3em] text-accent hover:text-brand-gold transition-all duration-300 group"
         >
-          <span className="w-4 h-[1px] bg-brand-gold/40 group-hover:bg-brand-gold transition-colors duration-300 group-hover:w-6" />
+          <span className="w-5 h-[1.5px] bg-brand-gold/40 group-hover:bg-brand-gold transition-all duration-300 group-hover:w-8" />
           Arabia Khaleej
         </Link>
       </nav>
