@@ -34,9 +34,11 @@ export default function PrayerClient({ initialCity }: PrayerClientProps) {
 
   useEffect(() => {
     setMounted(true);
-    
-    // IP-based Geolocation only if no initialCity was provided or as an option
-    if (!initialCity) {
+  }, []);
+
+  useEffect(() => {
+    // IP-based Geolocation only if no initialCity was provided
+    if (mounted && !initialCity) {
       async function detectLocation() {
         try {
           const res = await fetch("https://freeipapi.com/api/json");
@@ -52,7 +54,7 @@ export default function PrayerClient({ initialCity }: PrayerClientProps) {
       }
       detectLocation();
     }
-  }, [initialCity]);
+  }, [mounted, initialCity]);
 
   useEffect(() => {
     if (!mounted) return;
