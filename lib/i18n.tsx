@@ -36,8 +36,8 @@ export const translations: Translations = {
     ar: "الجداول المحلية والإقليمية"
   },
   marketDesc: {
-    en: "Gold & GCC currency rates",
-    ar: "أسعار الذهب والعملات الخليجية"
+    en: "Stocks, Gold & GCC Currencies",
+    ar: "الأسهم والذهب والعملات الخليجية"
   },
   boutiqueDesc: {
     en: "Direct channel for all inquiries",
@@ -58,11 +58,75 @@ export const translations: Translations = {
   muscat: { en: "Muscat", ar: "مسقط" },
   manama: { en: "Manama", ar: "المنامة" },
 
+  // Country Guides
+  regionalGuides: { en: "Regional Guides", ar: "أدلة إقليمية" },
+  guideDesc: { en: "High-Fidelity Regional Intelligence", ar: "استخبارات إقليمية عالية الدقة" },
+  population: { en: "Population", ar: "السكان" },
+  capital: { en: "Capital", ar: "العاصمة" },
+  currency: { en: "Currency", ar: "العملة" },
+  language: { en: "Official Language", ar: "اللغة الرسمية" },
+  economy: { en: "Economy", ar: "الاقتصاد" },
+  vision: { en: "National Vision", ar: "الرؤية الوطنية" },
+  
+  saudiIntro: { 
+    en: "The Kingdom of Saudi Arabia is the largest economy in the Middle East and the heart of the Islamic world. Under Vision 2030, the Kingdom is undergoing a historic transformation into a global investment powerhouse.", 
+    ar: "المملكة العربية السعودية هي أكبر اقتصاد في الشرق الأوسط وقلب العالم الإسلامي. تحت رؤية 2030، تشهد المملكة تحولاً تاريخياً إلى قوة استثمارية عالمية." 
+  },
+  uaeIntro: { 
+    en: "The United Arab Emirates is a global hub for innovation, trade, and tourism. Comprising seven emirates, it has established itself as a pioneer in technology, space exploration, and sustainable energy.", 
+    ar: "دولة الإمارات العربية المتحدة هي مركز عالمي للابتكار والتجارة والسياحة. تضم سبع إمارات، وقد أثبتت نفسها كرائدة في التكنولوجيا واستكشاف الفضاء والطاقة المستدامة." 
+  },
+  qatarIntro: { 
+    en: "Qatar is a high-income sovereign state, world-leading in LNG exports. Known for its sophisticated diplomacy and sports heritage, it continues to define modern luxury and cultural excellence.", 
+    ar: "قطر هي دولة ذات سيادة عالية الدخل، ورائدة عالمياً في صادرات الغاز الطبيعي المسال. تشتهر بدبلوماسيتها المتطورة وتراثها الرياضي، وتستمر في تحديد الرفاهية الحديثة والتميز الثقافي." 
+  },
+  kuwaitIntro: { 
+    en: "Kuwait maintains a unique position with its rich parliamentary history and significant oil reserves. It is a cornerstone of regional stability with a deeply rooted cultural identity.", 
+    ar: "تحافظ الكويت على مكانة فريدة بفضل تاريخها البرلماني الغني واحتياطياتها النفطية الكبيرة. إنها حجر الزاوية في الاستقرار الإقليمي مع هوية ثقافية متجذرة." 
+  },
+  omanIntro: { 
+    en: "The Sultanate of Oman is celebrated for its natural beauty and balanced foreign policy. It remains a serene destination that harmonizes ancient heritage with forward-looking development.", 
+    ar: "تُعرف سلطنة عمان بجمالها الطبيعي وسياستها الخارجية المتوازنة. تظل وجهة هادئة تجمع بين التراث القديم والتنمية المتطلعة للمستقبل." 
+  },
+  bahrainIntro: { 
+    en: "Bahrain, the 'Island of Two Seas', was the first GCC nation to discover oil and the first to diversify into finance. It remains a vibrant financial and cultural crossroads.", 
+    ar: "كانت البحرين، 'جزيرة السطرين'، أول دولة خليجية تكتشف النفط وأول من نوع اقتصاده إلى التمويل. تظل مفترق طرق مالي وثقافي حيوي." 
+  },
+
+  // Detailed Country Sections
+  econPower: { en: "Economic Powerhouse", ar: "القوة الاقتصادية" },
+  globalLead: { en: "Global Leadership", ar: "القيادة العالمية" },
+  megaProj: { en: "Mega Projects", ar: "المشاريع الضخمة" },
+  innovationHub: { en: "Global Innovation Hub", ar: "مركز الابتكار العالمي" },
+  spaceTech: { en: "Space & Technology", ar: "الفضاء والتكنولوجيا" },
+  culturalDiv: { en: "Cultural Diversity", ar: "التنوع الثقافي" },
+  energyGiant: { en: "Energy Giant", ar: "عملاق الطاقة" },
+  diplomaticHub: { en: "Diplomatic & Media Hub", ar: "المركز الدبلوماسي والإعلامي" },
+  sportsExcellence: { en: "Sports Excellence", ar: "التميز الرياضي" },
+  finHeritage: { en: "Financial Heritage", ar: "التراث المالي" },
+  parlTradition: { en: "Parliamentary Tradition", ar: "التقليد البرلماني" },
+  culturalHeart: { en: "Cultural Heartland", ar: "القلب الثقافي" },
+  naturalMajesty: { en: "Natural Majesty", ar: "العظمة الطبيعية" },
+  strategicNeutrality: { en: "Strategic Neutrality", ar: "الحياد الاستراتيجي" },
+  maritimeLegacy: { en: "Maritime Legacy", ar: "الإرث البحري" },
+  finInnovation: { en: "Financial Innovation", ar: "الابتكار المالي" },
+  ancientHistory: { en: "Ancient History", ar: "التاريخ القديم" },
+  motorsportsHub: { en: "Motorsports Hub", ar: "مركز رياضة المحركات" },
+
+  // Transparency Notice (Anti-Ban)
+  transparencyNotice: { en: "Transparency & Neutrality", ar: "الشفافية والحياد" },
+  transparencyTitle: { en: "Official Compliance & Transparency Statement", ar: "بيان الامتثال الرسمي والشفافية" },
+  transparencyBody: {
+    en: "Arabia Khaleej is a strictly independent digital reference platform. We aggregate and surface publicly available information provided by official government portals and international institutions. Our mission is to promote regional understanding and accessibility through high-fidelity data. We operate with full respect for the sovereign laws and digital regulations of every GCC member state. If you represent a regulatory authority and have inquiries regarding our content, please contact us directly via our formal channels. We are committed to transparency and constructive dialogue.",
+    ar: "عربية خليج هي منصة مرجعية رقمية مستقلة تماماً. نحن نجمع ونعرض المعلومات المتاحة للجمهور المقدمة من البوابات الحكومية الرسمية والمؤسسات الدولية. مهمتنا هي تعزيز الفهم الإقليمي وسهولة الوصول من خلال بيانات عالية الدقة. نحن نعمل باحترام كامل للقوانين السيادية واللوائح الرقمية لكل دولة عضو في مجلس التعاون الخليجي. إذا كنت تمثل سلطة تنظيمية ولديك استفسارات بشأن محتوانا، يرجى الاتصال بنا مباشرة عبر قنواتنا الرسمية. نحن ملتزمون بالشفافية والحوار البناء."
+  },
+
   // UI
   upcoming: { en: "Upcoming", ar: "قادم" },
   scheduleFor: { en: "Schedule for", ar: "جدول" },
   calculationMethod: { en: "Umm Al-Qura Calculation Method (Local Engine)", ar: "طريقة حساب أم القرى (محرك محلي)" },
   home: { en: "Home", ar: "الرئيسية" },
+  countries: { en: "Countries", ar: "الدول" },
   viewHijri: { en: "View Hijri Calendar", ar: "عرض التقويم الهجري" },
   processing: { en: "Processing...", ar: "جاري المعالجة..." },
   somethingWentWrong: { en: "Something went wrong. Please try again.", ar: "حدث خطأ ما. حاول مرة أخرى." },
@@ -186,6 +250,30 @@ export const translations: Translations = {
   submissionReceived: {
     en: "Your inquiry has been received. Our team will review your proposal and be in touch shortly.",
     ar: "تم استلام استفسارك. سيراجع فريقنا مقترحك وسنتواصل معك قريباً."
+  },
+
+  // Market Insight
+  stockMarkets: { en: "Stock Markets", ar: "أسواق الأسهم" },
+  commodities: { en: "Commodities", ar: "السلع" },
+  currencies: { en: "Currencies", ar: "العملات" },
+  marketOverview: { en: "Market Overview", ar: "نظرة عامة على السوق" },
+  liveIndices: { en: "Live Indices", ar: "المؤشرات المباشرة" },
+  topPerformers: { en: "Top Performers", ar: "الأفضل أداءً" },
+  marketSentiment: { en: "Market Sentiment", ar: "معنويات السوق" },
+  brentCrude: { en: "Brent Crude", ar: "خام برنت" },
+  naturalGas: { en: "Natural Gas", ar: "الغاز الطبيعي" },
+  marketSummary: { 
+    en: "Comprehensive real-time insights into GCC equity markets, global commodities, and regional currency performance.",
+    ar: "رؤى شاملة في الوقت الفعلي لأسواق الأسهم في دول مجلس التعاون الخليجي، والسلع العالمية، وأداء العملات الإقليمية."
+  },
+  indexValue: { en: "Index Value", ar: "قيمة المؤشر" },
+  dailyChange: { en: "Daily Change", ar: "التغيير اليومي" },
+  peggedStatus: { en: "Pegged to USD", ar: "مثبت بالدولار" },
+  viewDetails: { en: "View Details", ar: "عرض التفاصيل" },
+  sentimentTitle: { en: "Regional Stability with Positive Outlook", ar: "استقرار إقليمي مع نظرة إيجابية" },
+  sentimentDesc: { 
+    en: "GCC markets continue to show resilience amid global volatility, supported by strong energy prices and non-oil sector growth.",
+    ar: "تستمر الأسواق الخليجية في إظهار المرونة وسط التقلبات العالمية، مدعومة بأسعار الطاقة القوية ونمو القطاع غير النفطي."
   }
 };
 
@@ -202,11 +290,26 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<Language>('en');
 
   useEffect(() => {
-    const savedLang = localStorage.getItem('language') as Language;
-    if (savedLang && (savedLang === 'en' || savedLang === 'ar')) {
-      setLanguageState(savedLang);
-    } else if (navigator.language.startsWith('ar')) {
-      setLanguageState('ar');
+    // Priority: URL Param > LocalStorage > Browser Language
+    const params = new URLSearchParams(window.location.search);
+    const langParam = params.get('lang') as Language;
+    
+    if (langParam && (langParam === 'en' || langParam === 'ar')) {
+      setLanguageState(langParam);
+      localStorage.setItem('language', langParam);
+      document.documentElement.lang = langParam;
+      document.documentElement.dir = langParam === 'ar' ? 'rtl' : 'ltr';
+    } else {
+      const savedLang = localStorage.getItem('language') as Language;
+      if (savedLang && (savedLang === 'en' || savedLang === 'ar')) {
+        setLanguageState(savedLang);
+        document.documentElement.lang = savedLang;
+        document.documentElement.dir = savedLang === 'ar' ? 'rtl' : 'ltr';
+      } else if (navigator.language.startsWith('ar')) {
+        setLanguageState('ar');
+        document.documentElement.lang = 'ar';
+        document.documentElement.dir = 'rtl';
+      }
     }
   }, []);
 
@@ -215,7 +318,13 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('language', lang);
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    
+    // Update URL to maintain SEO parity if desired, or just keep as is
+    const url = new URL(window.location.href);
+    url.searchParams.set('lang', lang);
+    window.history.replaceState({}, '', url.toString());
   };
+
 
   const t = (key: string): string => {
     return translations[key]?.[language] || key;

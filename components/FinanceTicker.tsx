@@ -13,25 +13,27 @@ export default function FinanceTicker() {
   useEffect(() => {
     setMounted(true);
     
-    async function fetchRates() {
+    async function fetchData() {
       try {
-        const res = await fetch("https://open.er-api.com/v6/latest/USD");
-        const data = await res.json();
-        if (data && data.rates) {
-          setRates(data.rates);
+        const res = await fetch("/api/market-data");
+        const json = await res.json();
+        if (json.status === 'success') {
+          const rateMap = json.currencies.reduce((acc: any, curr: any) => {
+            acc[curr.code] = curr.rate;
+            return acc;
+          }, {});
+          setRates(rateMap);
+          
+          const gold = json.commodities.find((c: any) => c.id === 'gold');
+          if (gold) setGoldPrice(gold.value);
         }
       } catch (e) {
-        console.log("Finance API failed, using fallbacks");
+        console.log("Finance API failed");
       }
     }
 
-    fetchRates();
-    
-    // Simulate slight gold fluctuations for a "live" feel
-    const interval = setInterval(() => {
-      setGoldPrice(prev => prev + (Math.random() - 0.5) * 0.2);
-    }, 5000);
-
+    fetchData();
+    const interval = setInterval(fetchData, 30000);
     return () => clearInterval(interval);
   }, []);
 

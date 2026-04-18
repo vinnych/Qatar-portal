@@ -1,14 +1,26 @@
 import type { Metadata } from "next";
 
+// Re-export the Breadcrumbs UI component from its .tsx home
+export { default as Breadcrumbs } from "@/components/Breadcrumbs";
+
 export const SITE_URL = "https://arabiakhaleej.com";
-export const SITE_NAME = "Arabia Khaleej";
-export const SITE_DESCRIPTION = "The definitive reference for a refined GCC experience.";
+export const SITE_NAME_EN = "Arabia Khaleej";
+export const SITE_NAME_AR = "عربية خليج";
+export const SITE_NAME = SITE_NAME_EN;
+
+export const SITE_DESCRIPTION_EN = "The definitive reference for a refined GCC experience.";
+export const SITE_DESCRIPTION_AR = "المرجع النهائي لتجربة خليجية متميزة في دول مجلس التعاون.";
+export const SITE_DESCRIPTION = SITE_DESCRIPTION_EN;
 
 interface PageMetaOptions {
   /** Full page title */
   title: string;
+  /** Arabic page title */
+  titleAr?: string;
   /** Meta description, max ~160 chars */
   description: string;
+  /** Arabic meta description */
+  descriptionAr?: string;
   /** URL path, e.g. "/qatar-metro" */
   path: string;
   keywords?: string[];
@@ -39,11 +51,14 @@ interface PageMetaOptions {
  * - Open Graph tags + image
  * - Twitter card
  * - Regional Geo tags
+ * - Arabic/English alternates
  * - AI Crawler instructions
  */
 export function pageMeta({
   title,
+  titleAr,
   description,
+  descriptionAr,
   path,
   keywords,
   ogTitle,
@@ -67,19 +82,29 @@ export function pageMeta({
   const published = datePublished ?? "2024-01-01T00:00:00Z";
   const modified = dateModified ?? now;
 
+  // Combine English and Arabic for maximum SEO reach on a single URL
+  const combinedTitle = titleAr ? `${title} | ${titleAr}` : title;
+  const combinedDescription = descriptionAr ? `${description} ${descriptionAr}` : description;
+
+  const defaultKeywords = [
+    "GCC guide",
+    "Arabia Khaleej",
+    "Gulf community",
+    "Doha guide",
+    "Dubai guide",
+    "Riyadh guide",
+    "GCC prayer times",
+    "GCC gold rates",
+    "دليل الخليج",
+    "عربية خليج",
+    "مواقيت الصلاة",
+    "أسعار الذهب",
+  ];
+
   return {
-    title,
-    description,
-    keywords: keywords || [
-      "GCC guide",
-      "Arabia Khaleej",
-      "Gulf community",
-      "Doha guide",
-      "Dubai guide",
-      "Riyadh guide",
-      "GCC prayer times",
-      "GCC gold rates",
-    ],
+    title: combinedTitle,
+    description: combinedDescription,
+    keywords: keywords ? [...keywords, ...defaultKeywords] : defaultKeywords,
     metadataBase: new URL(SITE_URL),
     icons: {
       icon: "/favicon-emblem.png",
@@ -88,8 +113,14 @@ export function pageMeta({
     alternates: {
       canonical,
       languages: {
-        "en": canonical,
-        "ar": canonical,
+        "en-US": `${canonical}?lang=en`,
+        "ar-SA": `${canonical}?lang=ar`,
+        "ar-AE": `${canonical}?lang=ar`,
+        "ar-QA": `${canonical}?lang=ar`,
+        "ar-KW": `${canonical}?lang=ar`,
+        "ar-OM": `${canonical}?lang=ar`,
+        "ar-BH": `${canonical}?lang=ar`,
+        "x-default": canonical,
       },
     },
     robots: {
@@ -108,11 +139,13 @@ export function pageMeta({
       "geo.placename": geo.placename || "Doha, Qatar",
       "geo.position": `${geo.latitude};${geo.longitude}`,
       "ICBM": `${geo.latitude}, ${geo.longitude}`,
-      "DC.title": title,
-      "DC.description": description,
+      "DC.title": combinedTitle,
+      "DC.description": combinedDescription,
       "DC.date.issued": published,
       "DC.date.modified": modified,
       "apple-mobile-web-app-title": SITE_NAME,
+      "format-detection": "telephone=no",
+      "google": "notranslate", // We provide our own translations
     },
     openGraph: {
       title: og,
@@ -120,6 +153,7 @@ export function pageMeta({
       url: canonical,
       siteName: SITE_NAME,
       locale: "en_US",
+      alternateLocale: ["ar_AR", "en_GB"],
       type,
       publishedTime: published,
       modifiedTime: modified,
@@ -132,6 +166,7 @@ export function pageMeta({
         },
       ],
     },
+    publisher: SITE_NAME,
     twitter: {
       card: "summary_large_image",
       title: og,
@@ -141,5 +176,4 @@ export function pageMeta({
     },
   };
 }
-
 

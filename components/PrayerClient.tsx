@@ -8,6 +8,7 @@ import { GCC_COUNTRIES } from "@/lib/countries";
 import HijriCalendar from "@/components/HijriCalendar";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
+import { Breadcrumbs } from "@/lib/seo";
 
 interface PrayerClientProps {
   initialCity?: {
@@ -129,8 +130,23 @@ export default function PrayerClient({ initialCity }: PrayerClientProps) {
     return translated !== key ? translated : capital;
   };
 
+  const breadcrumbItems = [
+    { name: t('home'), href: "/" },
+    { name: t('prayerTimes'), href: "/prayer" }
+  ];
+
+  if (selectedCity.slug && !selectedCity.isAuto) {
+    breadcrumbItems.push({ 
+      name: getTranslatedCountryName(selectedCity.slug, selectedCity.country), 
+      href: `/prayer/${selectedCity.slug}` 
+    });
+  }
+
   return (
-    <div className={`flex flex-col items-center justify-start min-h-screen pt-20 pb-20 px-4 relative ${isRTL ? 'font-serif-ar' : ''}`}>
+    <div className={`flex flex-col items-center justify-start min-h-screen pt-12 pb-20 px-4 relative ${isRTL ? 'font-serif-ar' : ''}`}>
+      <div className="w-full max-w-4xl mx-auto mb-8">
+        <Breadcrumbs items={breadcrumbItems} isRTL={isRTL} />
+      </div>
       <HijriCalendar 
         isOpen={showCalendar} 
         onClose={() => setShowCalendar(false)} 

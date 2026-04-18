@@ -13,5 +13,17 @@ export default function manifest(): MetadataRoute.Manifest {
     icons: [
       { src: "/favicon-emblem.png", sizes: "512x512", type: "image/png" },
     ],
+    shortcuts: [
+      {
+        name: "Prayer Times",
+        url: "/prayer",
+        description: "GCC Prayer Schedules",
+      },
+      {
+        name: "Market Insight",
+        url: "/market-insight",
+        description: "GCC Stocks & Gold",
+      }
+    ]
   };
 }

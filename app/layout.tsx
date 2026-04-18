@@ -13,10 +13,13 @@ import { OrganizationSchema, WebSiteSchema } from "@/components/StructuredData";
 import Header from "@/components/Header";
 
 export const metadata = pageMeta({
-  title: `${SITE_NAME} — The GCC Standard`,
-  description: SITE_DESCRIPTION,
+  title: "Arabia Khaleej | The GCC Standard — Regional Intelligence Portal",
+  titleAr: "عربية خليج | المعيار الخليجي — بوابة الاستخبارات الإقليمية",
+  description: "The definitive reference for a refined GCC experience. High-fidelity intelligence on economy, sovereign vision, and national infrastructure across the Gulf.",
+  descriptionAr: "المرجع النهائي لتجربة خليجية متميزة. معلومات عالية الدقة حول الاقتصاد والرؤية السيادية والبنية التحتية الوطنية في جميع أنحاء الخليج.",
   path: "/",
 });
+
 
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -12,7 +12,7 @@ export default function HomeClient() {
 
   const NAV_LINKS = [
     { name: t('prayerTimes'), href: "/prayer", desc: t('prayerDesc'), icon: Clock },
-    { name: t('marketInsights'), href: "/finance", desc: t('marketDesc'), icon: TrendingUp },
+    { name: t('marketInsights'), href: "/market-insight", desc: t('marketDesc'), icon: TrendingUp },
     { name: t('boutiqueEnquiry'), href: "/join", desc: t('boutiqueDesc'), icon: UserPlus },
   ];
 
@@ -72,6 +72,75 @@ export default function HomeClient() {
           </Link>
         ))}
       </nav>
+
+      {/* Regional Guides Section */}
+      <div className="w-full max-w-6xl mt-24 sm:mt-32 animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-500 fill-mode-both">
+        <div className="flex flex-col items-center mb-16 px-4">
+          <div className="relative inline-block px-12 py-3 mb-6">
+            {/* Elegant Corner Borders */}
+            <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-brand-gold/40" />
+            <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-brand-gold/40" />
+            <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-brand-gold/40" />
+            <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-brand-gold/40" />
+            
+            <h2 className="text-2xl sm:text-4xl font-black uppercase tracking-[0.4em] text-accent text-center drop-shadow-sm">
+              {t('regionalGuides')}
+            </h2>
+          </div>
+          
+          <div className="flex items-center gap-6 w-full max-w-md">
+            <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-brand-gold/20 to-transparent" />
+            <p className="text-[10px] font-black text-foreground/30 uppercase tracking-[0.6em] whitespace-nowrap">
+              {t('guideDesc')}
+            </p>
+            <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-brand-gold/20 to-transparent" />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 px-2">
+          {[
+            { id: 'saudi-arabia', key: 'saudiArabia', flag: '/flags/saudi.png' },
+            { id: 'united-arab-emirates', key: 'uae', flag: '/flags/uae.png' },
+            { id: 'qatar', key: 'qatar', flag: '/flags/qatar.png' },
+            { id: 'kuwait', key: 'kuwait', flag: '/flags/kuwait.png' },
+            { id: 'oman', key: 'oman', flag: '/flags/oman.png' },
+            { id: 'bahrain', key: 'bahrain', flag: '/flags/bahrain.png' },
+          ].map((country) => (
+            <Link
+              key={country.id}
+              href={`/countries/${country.id}`}
+              className="group relative glass rounded-3xl border-brand-gold/10 hover:border-brand-gold/40 transition-all hover:-translate-y-2 overflow-hidden flex flex-col min-h-[160px] shadow-lg hover:shadow-2xl"
+            >
+              {/* Flag Background / Image */}
+              <div className="absolute inset-0 z-0">
+                <Image 
+                  src={country.flag} 
+                  alt={t(country.key)}
+                  fill
+                  className="object-cover opacity-20 group-hover:opacity-40 transition-all duration-700 group-hover:scale-110 transform"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-obsidian via-brand-obsidian/40 to-transparent z-10" />
+              </div>
+
+              <div className="relative z-20 p-6 flex flex-col items-center justify-end h-full text-center">
+                <span className="text-[10px] font-black text-accent uppercase tracking-[0.2em] group-hover:tracking-[0.4em] transition-all duration-500">
+                  {t(country.key)}
+                </span>
+                <div className="mt-4 w-4 h-[1.5px] bg-brand-gold/40 group-hover:w-8 group-hover:bg-brand-gold transition-all duration-500" />
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        <div className="mt-16 text-center">
+          <Link 
+            href="/transparency"
+            className="text-[10px] font-bold text-foreground/30 uppercase tracking-[0.3em] hover:text-brand-gold transition-colors"
+          >
+            {t('transparencyNotice')}
+          </Link>
+        </div>
+      </div>
 
       {/* Decorative Line - Reduced */}
       <div className="mt-12 w-16 h-[1px] bg-brand-gold/15 rounded-full" />
