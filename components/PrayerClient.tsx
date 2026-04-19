@@ -53,7 +53,7 @@ export default function PrayerClient({ initialCity }: PrayerClientProps) {
             setSelectedCity({ name, lat: data.latitude, lng: data.longitude, isAuto: true });
           }
         } catch (e) {
-          console.log("IP detection failed");
+          console.error("IP detection failed", e);
         }
       }
       detectLocation();
@@ -95,7 +95,7 @@ export default function PrayerClient({ initialCity }: PrayerClientProps) {
           return;
         }
       } catch (e) {
-        console.log("Primary API failed, falling back to local engine");
+        console.error("Primary API failed, falling back to local engine", e);
       }
 
       // API 2: Adhan Local Engine (Failover)
@@ -157,14 +157,14 @@ export default function PrayerClient({ initialCity }: PrayerClientProps) {
       {/* Header */}
       <div className="mb-12 animate-in fade-in slide-in-from-top-4 duration-1000">
         <h1 className="text-xs tracking-[0.6em] uppercase font-bold text-accent mb-6 text-center">{t('prayerTimes')}</h1>
-        <div className="flex flex-wrap justify-center gap-3 max-w-2xl mx-auto">
+        <div className="flex flex-wrap justify-center gap-2 max-w-3xl mx-auto">
           {/* Detected City Button (if found) */}
           {detectedCity && (
             <button
               onClick={() => {
                 setSelectedCity((prev: any) => ({ ...prev, isAuto: true }));
               }}
-              className={`text-[10px] uppercase font-bold tracking-[0.2em] px-5 py-2.5 rounded-full border transition-all flex items-center gap-2 ${
+              className={`text-[10px] uppercase font-bold tracking-[0.2em] px-4 py-2 rounded-full border transition-all flex items-center gap-2 ${
                 selectedCity.isAuto
                   ? "bg-accent text-white border-accent shadow-xl scale-105"
                   : "bg-white/50 dark:bg-brand-obsidian/20 border-brand-gold/30 text-foreground/70 dark:text-brand-gold hover:border-brand-gold hover:text-accent"
@@ -179,7 +179,7 @@ export default function PrayerClient({ initialCity }: PrayerClientProps) {
             <Link
               key={country.slug}
               href={`/prayer/${country.slug}`}
-              className={`text-[10px] uppercase font-bold tracking-[0.2em] px-5 py-2.5 rounded-full border transition-all ${
+              className={`text-[10px] uppercase font-bold tracking-[0.2em] px-4 py-2 rounded-full border transition-all ${
                 selectedCity.slug === country.slug && !selectedCity.isAuto
                   ? "bg-brand-gold text-brand-obsidian border-brand-gold shadow-xl scale-105"
                   : "bg-white/50 dark:bg-brand-obsidian/20 border-brand-gold/30 text-foreground/70 dark:text-brand-gold hover:border-brand-gold hover:text-accent"
@@ -231,8 +231,8 @@ export default function PrayerClient({ initialCity }: PrayerClientProps) {
                     >
                       {isActive && (
                         <div className={`absolute top-2 ${isRTL ? 'left-2' : 'right-2'} flex items-center gap-1.5`}>
-                          <span className="text-[7px] font-black uppercase tracking-tighter opacity-40">{t('upcoming')}</span>
-                          <div className="w-1.5 h-1.5 rounded-full bg-brand-obsidian animate-pulse" />
+                          <span className="text-[7px] font-black uppercase tracking-tighter opacity-70">NEXT</span>
+                          <div className="w-1.5 h-1.5 rounded-full bg-brand-obsidian/70 animate-pulse" />
                         </div>
                       )}
                       <span className={`text-[10px] uppercase tracking-[0.3em] font-bold mb-3 ${isActive ? "text-brand-obsidian/60" : "text-accent"}`}>{displayName}</span>

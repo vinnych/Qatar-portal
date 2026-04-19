@@ -182,11 +182,15 @@ export default function MarketInsightClient() {
               <p className="text-[10px] uppercase font-bold tracking-[0.2em] text-accent mb-4 block text-center">
                 {t('peggedStatus')}
               </p>
-              <div className="flex justify-center gap-2">
+              <div className="flex justify-center gap-2 mb-6">
                 <div className="w-1.5 h-1.5 rounded-full bg-accent" />
                 <div className="w-1.5 h-1.5 rounded-full bg-accent/30" />
                 <div className="w-1.5 h-1.5 rounded-full bg-accent/30" />
               </div>
+              <Link href="/currency-exchange" className="flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-brand-gold/10 hover:bg-brand-gold/20 border border-brand-gold/20 hover:border-brand-gold/40 text-accent text-[10px] font-black uppercase tracking-widest transition-all hover:scale-105 active:scale-95">
+                {isRTL ? 'تحويل العملات' : 'Currency Converter'}
+                <ArrowUpRight size={12} strokeWidth={3} />
+              </Link>
             </div>
           </div>
 

@@ -64,7 +64,7 @@ export default function PrayerLite() {
           calculate(data.latitude, data.longitude, data.cityName || "Nearby");
         }
       } catch (e) {
-        console.log("IP Geolocation failed, staying with default");
+        console.error("IP Geolocation failed, staying with default", e);
       }
     }
     

@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "", priority: 1.0, changeFrequency: "daily" as const },
     { url: "/prayer", priority: 0.9, changeFrequency: "daily" as const },
     { url: "/market-insight", priority: 0.9, changeFrequency: "daily" as const },
+    { url: "/currency-exchange", priority: 0.9, changeFrequency: "daily" as const },
     { url: "/join", priority: 0.8, changeFrequency: "monthly" as const },
   ];
 

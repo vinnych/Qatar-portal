@@ -83,7 +83,7 @@ export default function HomeClient() {
             <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-brand-gold/40" />
             <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-brand-gold/40" />
             
-            <h2 className="text-2xl sm:text-4xl font-black uppercase tracking-[0.4em] text-accent text-center drop-shadow-sm">
+            <h2 className="text-xl sm:text-2xl font-black uppercase tracking-[0.3em] text-accent text-center drop-shadow-sm">
               {t('regionalGuides')}
             </h2>
           </div>
@@ -109,7 +109,7 @@ export default function HomeClient() {
             <Link
               key={country.id}
               href={`/countries/${country.id}`}
-              className="group relative glass rounded-3xl border-brand-gold/10 hover:border-brand-gold/40 transition-all hover:-translate-y-2 overflow-hidden flex flex-col min-h-[160px] shadow-lg hover:shadow-2xl"
+              className="group relative glass rounded-3xl border-brand-gold/10 hover:border-brand-gold/40 transition-all hover:-translate-y-2 hover:z-10 overflow-hidden flex flex-col min-h-[160px] shadow-lg hover:shadow-2xl"
             >
               {/* Flag Background / Image */}
               <div className="absolute inset-0 z-0">
@@ -120,11 +120,11 @@ export default function HomeClient() {
                   sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 16vw"
                   className="object-cover opacity-20 group-hover:opacity-40 transition-all duration-700 group-hover:scale-110 transform"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-obsidian via-brand-obsidian/40 to-transparent z-10" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 dark:from-brand-obsidian via-black/30 dark:via-brand-obsidian/40 to-transparent z-10" />
               </div>
 
               <div className="relative z-20 p-6 flex flex-col items-center justify-end h-full text-center">
-                <span className="text-[10px] font-black text-accent uppercase tracking-[0.2em] group-hover:tracking-[0.4em] transition-all duration-500">
+                <span className="text-[10px] font-black text-white uppercase tracking-[0.2em] group-hover:tracking-[0.4em] transition-all duration-500 drop-shadow-md">
                   {t(country.key)}
                 </span>
                 <div className="mt-4 w-4 h-[1.5px] bg-brand-gold/40 group-hover:w-8 group-hover:bg-brand-gold transition-all duration-500" />

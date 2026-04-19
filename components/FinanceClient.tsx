@@ -20,7 +20,7 @@ export default function FinanceClient() {
           setRates(data.rates);
         }
       } catch (e) {
-        console.log("Finance Page API failed");
+        console.error("Finance Page API failed", e);
       }
     }
     fetchRates();

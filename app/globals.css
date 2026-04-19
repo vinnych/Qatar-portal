@@ -35,8 +35,7 @@
                 color 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
                 border-color 0.8s cubic-bezier(0.4, 0, 0.2, 1),
                 box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-                transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   body {
@@ -47,13 +46,13 @@
     font-feature-settings: "ss01", "ss02", "cv01", "cv11";
   }
 
-  /* Global Shadow & Contrast Policy */
-  button, input, textarea, .glass, [class*="rounded-"] {
-    box-shadow: var(--shadow);
+  /* Global Shadow & Contrast Policy — scoped to interactive/container elements only */
+  button, input, textarea, .glass {
+    box-shadow: var(--shadow-sm);
   }
 
   button:hover, input:focus {
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow);
   }
 
   /* Specific shadow for transparent images like Logo */

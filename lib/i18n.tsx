@@ -274,6 +274,25 @@ export const translations: Translations = {
   sentimentDesc: { 
     en: "GCC markets continue to show resilience amid global volatility, supported by strong energy prices and non-oil sector growth.",
     ar: "تستمر الأسواق الخليجية في إظهار المرونة وسط التقلبات العالمية، مدعومة بأسعار الطاقة القوية ونمو القطاع غير النفطي."
+  },
+
+  // Currency Exchange
+  currencyExchange: { en: "Currency Exchange", ar: "تحويل العملات" },
+  currencyConverter: { en: "Currency Converter", ar: "محوّل العملات" },
+  currencyExchangeDesc: {
+    en: "Convert between 40+ world currencies with live rates. GCC currencies, major pairs, and more.",
+    ar: "حوّل بين أكثر من 40 عملة عالمية بأسعار مباشرة. عملات الخليج والعملات الرئيسية وأكثر."
+  },
+  from: { en: "From", ar: "من" },
+  to: { en: "To", ar: "إلى" },
+  quickConversions: { en: "Quick Conversions", ar: "تحويلات سريعة" },
+  inverseRate: { en: "Inverse Rate", ar: "سعر الصرف المعكوس" },
+  gccRates: { en: "GCC Currency Rates", ar: "أسعار عملات الخليج" },
+  searchCurrency: { en: "Search currency...", ar: "ابحث عن عملة..." },
+  noResults: { en: "No results found", ar: "لا توجد نتائج" },
+  ratesDisclaimer: {
+    en: "Rates for informational purposes only. Verify with local financial institutions for official rates.",
+    ar: "الأسعار لأغراض إعلامية فقط. تحقق من المؤسسات المالية المحلية للأسعار الرسمية."
   }
 };
 

@@ -28,7 +28,7 @@ export default function FinanceTicker() {
           if (gold) setGoldPrice(gold.value);
         }
       } catch (e) {
-        console.log("Finance API failed");
+        console.error("Finance API failed", e);
       }
     }
 

@@ -77,7 +77,7 @@ export default function JoinClient() {
             </div>
             <button
               disabled={inviteStatus === "sending"}
-              className="w-full gold-gradient text-white dark:text-brand-obsidian font-bold text-[11px] uppercase tracking-[0.3em] py-5 rounded-full hover:scale-105 transition-all disabled:opacity-50 shadow-xl mt-4"
+              className="w-full gold-gradient text-brand-obsidian font-bold text-[11px] uppercase tracking-[0.3em] py-5 rounded-full hover:scale-105 transition-all disabled:opacity-50 shadow-xl mt-4"
             >
               {inviteStatus === "sending" ? (isRTL ? 'جاري المعالجة...' : 'Processing...') : t('submit')}
             </button>
