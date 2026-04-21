@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { redis, CACHE_TIMES } from '@/lib/redis';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 interface NewsItem {
   id: string;
   slug: string;
@@ -188,14 +191,18 @@ export async function GET(request: Request) {
           const url = urls[lang as keyof typeof urls];
           console.log(`Fetching GCC news from ${key}: ${url}`);
           const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 5000);
+          const timeoutId = setTimeout(() => controller.abort(), 4000); // reduced timeout to 4s to prevent vercel 10s 504
           
-          const res = await fetch(url, { 
-            next: { revalidate: 3600 },
-            headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36' },
-            signal: controller.signal
-          });
-          clearTimeout(timeoutId);
+          let res;
+          try {
+            res = await fetch(url, { 
+              next: { revalidate: 3600 },
+              headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' },
+              signal: controller.signal
+            });
+          } finally {
+            clearTimeout(timeoutId);
+          }
           
           if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
           const xml = await res.text();
@@ -215,25 +222,29 @@ export async function GET(request: Request) {
         try {
           console.log(`Fetching Expat news for ${key}`);
           const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 5000);
+          const timeoutId = setTimeout(() => controller.abort(), 4000);
 
-          const [enRes, regRes] = await Promise.all([
-            fetch(urls.en, { 
-              next: { revalidate: 3600 }, 
-              headers: { 'User-Agent': 'Mozilla/5.0' },
-              signal: controller.signal 
-            }),
-            fetch(urls.regional, { 
-              next: { revalidate: 3600 }, 
-              headers: { 'User-Agent': 'Mozilla/5.0' },
-              signal: controller.signal
-            })
-          ]);
-          clearTimeout(timeoutId);
+          let enRes, regRes;
+          try {
+            [enRes, regRes] = await Promise.all([
+              fetch(urls.en, { 
+                next: { revalidate: 3600 }, 
+                headers: { 'User-Agent': 'Mozilla/5.0' },
+                signal: controller.signal 
+              }).catch(e => { console.error(`Error EN ${key}:`, e); return null; }),
+              fetch(urls.regional, { 
+                next: { revalidate: 3600 }, 
+                headers: { 'User-Agent': 'Mozilla/5.0' },
+                signal: controller.signal
+              }).catch(e => { console.error(`Error REG ${key}:`, e); return null; })
+            ]);
+          } finally {
+            clearTimeout(timeoutId);
+          }
           
           const [enXml, regXml] = await Promise.all([
-            enRes.ok ? enRes.text() : Promise.resolve(''),
-            regRes.ok ? regRes.text() : Promise.resolve('')
+            enRes?.ok ? enRes.text() : Promise.resolve(''),
+            regRes?.ok ? regRes.text() : Promise.resolve('')
           ]);
           
           const enItems = enXml ? parseRSS(enXml, key, 'expat', 'en') : [];

@@ -29,7 +29,11 @@ export default function NewsClient() {
     setLoading(true);
     setError(false);
     try {
-      const res = await fetch(`/api/news?lang=${language}`);
+      const res = await fetch(`/api/news?lang=${language}&t=${Date.now()}`, {
+        cache: 'no-store',
+        headers: { 'Pragma': 'no-cache' }
+      });
+      if (!res.ok) throw new Error('Network response was not ok');
       const data = await res.json();
       if (data.status === 'success') {
         setNews(data.news);
@@ -37,6 +41,7 @@ export default function NewsClient() {
         setError(true);
       }
     } catch (err) {
+      console.error("News fetch error:", err);
       setError(true);
     } finally {
       setLoading(false);
@@ -170,7 +175,12 @@ export default function NewsClient() {
                     alt={item.title} 
                     fill 
                     className="object-cover group-hover:scale-110 transition-transform duration-700"
-                    unoptimized={item.image.includes('unsplash') || item.image.includes('http')}
+                    unoptimized={true}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = 'https://images.unsplash.com/photo-1495020689067-958852a7765e?q=80&w=800&auto=format&fit=crop';
+                      target.onerror = null; // Prevent infinite loop if fallback also fails
+                    }}
                   />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
