@@ -51,7 +51,7 @@ export default function PrayerClient({ initialCity }: PrayerClientProps) {
 
       async function detectLocation() {
         try {
-          const res = await fetch("https://freeipapi.com/api/json", {
+          const res = await fetch("/api/geolocation", {
             signal: AbortSignal.timeout(5000) // 5s timeout
           });
           
@@ -98,8 +98,8 @@ export default function PrayerClient({ initialCity }: PrayerClientProps) {
       setActivePrayer(next === "none" ? "Fajr" : next.charAt(0).toUpperCase() + next.slice(1));
 
       try {
-        // API 1: Aladhan API (Primary)
-        const res = await fetch(`https://api.aladhan.com/v1/timings?latitude=${selectedCity.lat}&longitude=${selectedCity.lng}&method=4`, {
+        // API 1: Internal Proxy to Aladhan API (Primary)
+        const res = await fetch(`/api/prayer-times?lat=${selectedCity.lat}&lng=${selectedCity.lng}&method=4`, {
           signal: AbortSignal.timeout(8000) // 8s timeout
         });
         

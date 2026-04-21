@@ -58,7 +58,7 @@ export default function PrayerLite() {
     // 2. IP-based Geolocation (No popup)
     async function fetchIPLocation() {
       try {
-        const res = await fetch("https://freeipapi.com/api/json");
+        const res = await fetch("/api/geolocation");
         const data = await res.json();
         if (data.latitude && data.longitude) {
           calculate(data.latitude, data.longitude, data.cityName || "Nearby");

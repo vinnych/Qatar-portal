@@ -12,9 +12,8 @@ export default function FinanceClient() {
 
   useEffect(() => {
     setMounted(true);
-    async function fetchRates() {
       try {
-        const res = await fetch("https://open.er-api.com/v6/latest/USD");
+        const res = await fetch("/api/exchange-rates");
         const data = await res.json();
         if (data && data.rates) {
           setRates(data.rates);
