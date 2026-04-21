@@ -16,7 +16,7 @@ export default function JoinClient() {
     if (!email) return;
     setInviteStatus("sending");
     try {
-      const res = await fetch("https://arabiakhaleej-contact.asishchilakapati.workers.dev", {
+      const res = await fetch("/api/invite", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, name }),
@@ -53,10 +53,12 @@ export default function JoinClient() {
         ) : (
           <form className="space-y-6" onSubmit={handleInvite}>
             <div>
-              <label className={`block text-[10px] font-black uppercase tracking-[0.3em] text-accent mb-3 ${isRTL ? 'mr-4 text-right' : 'ml-4'}`}>
+              <label htmlFor="full-name" className={`block text-[10px] font-black uppercase tracking-[0.3em] text-accent mb-3 ${isRTL ? 'mr-4 text-right' : 'ml-4'}`}>
                 {t('fullName')}
               </label>
               <input
+                id="full-name"
+                name="full-name"
                 ref={nameRef}
                 type="text"
                 placeholder={isRTL ? 'اسمك...' : 'Your Name...'}
@@ -64,10 +66,12 @@ export default function JoinClient() {
               />
             </div>
             <div>
-              <label className={`block text-[10px] font-black uppercase tracking-[0.3em] text-accent mb-3 ${isRTL ? 'mr-4 text-right' : 'ml-4'}`}>
+              <label htmlFor="email-address" className={`block text-[10px] font-black uppercase tracking-[0.3em] text-accent mb-3 ${isRTL ? 'mr-4 text-right' : 'ml-4'}`}>
                 {t('emailAddress')}
               </label>
               <input
+                id="email-address"
+                name="email-address"
                 ref={emailRef}
                 type="email"
                 placeholder={isRTL ? 'عنوان بريدك...' : 'Email address...'}

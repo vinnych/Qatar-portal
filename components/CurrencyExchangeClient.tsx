@@ -158,6 +158,9 @@ export default function CurrencyExchangeClient() {
           <div className="relative">
             <Search size={14} className={`absolute top-1/2 -translate-y-1/2 text-foreground/30 ${isRTL ? 'right-4' : 'left-4'}`} />
             <input
+              id="currency-search"
+              name="currency-search"
+              aria-label={isRTL ? "ابحث عن عملة" : "Search currency"}
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -239,7 +242,7 @@ export default function CurrencyExchangeClient() {
         <div className="glass rounded-[2.5rem] p-6 md:p-10 border-brand-gold/15 relative overflow-visible">
           {/* From Section */}
           <div className="mb-3">
-            <label className={`text-[10px] uppercase font-black tracking-[0.3em] text-foreground/40 mb-3 block ${isRTL ? 'text-right' : ''}`}>
+            <label htmlFor="from-amount" className={`text-[10px] uppercase font-black tracking-[0.3em] text-foreground/40 mb-3 block ${isRTL ? 'text-right' : ''}`}>
               {isRTL ? "من" : "From"}
             </label>
             <div className={`flex gap-3 items-stretch ${isRTL ? 'flex-row-reverse' : ''}`}>
