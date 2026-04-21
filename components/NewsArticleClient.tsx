@@ -25,6 +25,7 @@ export default function NewsArticleClient({ slug }: { slug: string }) {
   const [article, setArticle] = useState<NewsItem | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
     const fetchArticle = async () => {
@@ -140,18 +141,14 @@ export default function NewsArticleClient({ slug }: { slug: string }) {
         {/* Hero Image */}
         {article.image && (
           <div className="relative w-full aspect-video rounded-[3rem] overflow-hidden shadow-2xl border border-white/5">
-            <Image 
-              src={article.image} 
-              alt={article.title} 
-              fill 
+            <Image
+              src={imgError ? getDeterministicFallback(article.slug) : article.image}
+              alt={article.title}
+              fill
               className="object-cover"
               priority
-              unoptimized={article.image.includes('http')}
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.src = getDeterministicFallback(article.slug);
-                target.onerror = null;
-              }}
+              unoptimized={true}
+              onError={() => setImgError(true)}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
           </div>

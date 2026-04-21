@@ -1,6 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      // Allow any HTTPS image source — news feeds come from unpredictable domains
+      { protocol: 'https', hostname: '**' },
+    ],
+    // Disable optimization for external news images (they're already CDN-optimized)
+    unoptimized: false,
+  },
   async redirects() {
     return [
       {

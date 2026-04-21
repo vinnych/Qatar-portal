@@ -25,6 +25,10 @@ export default function NewsClient() {
   const [news, setNews] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
+
+  const markFailed = (id: string) =>
+    setFailedImages(prev => { const s = new Set(prev); s.add(id); return s; });
 
   const fetchNews = async () => {
     setLoading(true);
@@ -142,20 +146,14 @@ export default function NewsClient() {
             >
               {/* Article Image */}
               <div className="relative w-full h-40 sm:h-44 overflow-hidden shrink-0">
-                {item.image && (
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    unoptimized={true}
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = getDeterministicFallback(item.slug);
-                      target.onerror = null;
-                    }}
-                  />
-                )}
+                <Image
+                  src={failedImages.has(item.id) ? getDeterministicFallback(item.slug) : (item.image || getDeterministicFallback(item.slug))}
+                  alt={item.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  unoptimized={true}
+                  onError={() => markFailed(item.id)}
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 {/* Source badge overlaid on image */}
                 <div className="absolute bottom-2.5 left-3 flex items-center gap-1.5">
