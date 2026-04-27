@@ -5,6 +5,8 @@ import { Providers } from "@/components/layout/Providers";
 import ClientLayout from "@/components/layout/ClientLayout";
 import Script from "next/script";
 import { headers } from "next/headers";
+import Header from "@/components/layout/Header";
+
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const amiri = Amiri({ weight: ["400", "700"], subsets: ["arabic"], variable: "--font-amiri" });
