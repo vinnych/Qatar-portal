@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Coins, TrendingUp, TrendingDown, ArrowLeftRight, Globe } from "lucide-react";
+import Link from "next/link";
 import FinanceTicker from "@/components/finance/FinanceTicker";
 import { useLanguage } from "@/lib/i18n";
 
@@ -26,7 +27,15 @@ export default function FinanceClient() {
     fetchRates();
   }, []);
 
-  if (!mounted) return null;
+  if (!mounted) {
+    return (
+      <div className="flex flex-col items-center justify-start min-h-screen pt-20 px-4 animate-pulse">
+        <div className="w-48 h-4 bg-white/5 rounded-full mb-4"></div>
+        <div className="w-64 h-8 bg-white/10 rounded-full mb-16"></div>
+        <div className="w-full max-w-4xl h-96 glass rounded-[2.5rem]"></div>
+      </div>
+    );
+  }
 
   const gccCurrencies = [
     { code: "AED", name: t('uaeDirham'), country: t('uae'), flag: "🇦🇪" },
@@ -44,7 +53,7 @@ export default function FinanceClient() {
         <h1 className="sr-only">GCC Finance, Market Insights & Currency Exchange Rates</h1>
         <p className="text-xs tracking-[0.6em] uppercase font-bold text-accent mb-4 text-center">{t('marketInsights')}</p>
         <p className="text-2xl font-black serif text-foreground text-center" aria-hidden="true">
-          {isRTL ? 'المالية والعملات الخليجية' : 'GCC Finance & Currency'}
+          {t('gccFinanceCurrency')}
         </p>
       </div>
 
@@ -74,12 +83,9 @@ export default function FinanceClient() {
                   </p>
                 </div>
                 <div className={`flex flex-col ${isRTL ? 'items-start' : 'items-end'}`}>
-                  <span className="text-green-600 dark:text-green-400 text-xs font-bold flex items-center gap-1">
-                    <TrendingUp size={12} />
-                    0.00%
-                  </span>
-                  <span className="text-[9px] uppercase font-bold text-foreground/20 tracking-widest">
-                    {isRTL ? 'مثبت' : 'Pegged'}
+                  <span className="text-[9px] uppercase font-bold text-foreground/40 tracking-widest flex items-center gap-1.5">
+                    <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                    {isRTL ? 'مثبت بالدولار' : 'Pegged to USD'}
                   </span>
                 </div>
               </div>
@@ -97,9 +103,9 @@ export default function FinanceClient() {
 
       {/* Back to Home */}
       <div className="mt-20">
-        <a href="/" className="text-[11px] font-bold uppercase tracking-[0.4em] text-accent hover:tracking-[0.6em] transition-all">
+        <Link href="/" className="text-[11px] font-bold uppercase tracking-[0.4em] text-accent hover:tracking-[0.6em] transition-all">
           {isRTL ? 'الرئيسية ←' : '← Home'}
-        </a>
+        </Link>
       </div>
     </div>
   );

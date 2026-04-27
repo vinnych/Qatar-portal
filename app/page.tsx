@@ -1,7 +1,5 @@
 import { pageMeta } from "@/lib/seo";
 import {
-  OrganizationSchema,
-  WebSiteSchema,
   DatasetSchema,
   WebPageSchema,
   FAQSchema,

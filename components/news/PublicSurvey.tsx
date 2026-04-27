@@ -94,13 +94,14 @@ export default function PublicSurvey() {
   const currentSurvey = surveys[currentIndex];
 
   useEffect(() => {
+    const surveyData = MOCK_SURVEYS[language as keyof typeof MOCK_SURVEYS] || MOCK_SURVEYS.en;
     const savedVotes: Record<string, string> = {};
-    surveys.forEach(s => {
+    surveyData.forEach(s => {
       const vote = localStorage.getItem(`voted_${s.id}`);
       if (vote) savedVotes[s.id] = vote;
     });
     setVotedIds(savedVotes);
-  }, [language, surveys]);
+  }, [language]);
 
   const handleVote = (optionId: string) => {
     if (votedIds[currentSurvey.id]) return;

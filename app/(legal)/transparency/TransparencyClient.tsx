@@ -3,7 +3,6 @@
 import { useLanguage } from "@/lib/i18n";
 import { ShieldCheck, Info, Scale, Globe } from "lucide-react";
 import Image from "next/image";
-import StructuredData from "@/components/seo/StructuredData";
 import { SITE_URL, SITE_NAME } from "@/lib/seo";
 
 export default function TransparencyPage() {
@@ -53,16 +52,23 @@ export default function TransparencyPage() {
 
   return (
     <div className="max-w-4xl mx-auto py-12 px-6">
-      <StructuredData type="Service" data={articleData} />
       <div className="text-center mb-16 animate-in fade-in slide-in-from-top-4 duration-1000 px-4">
         {/* Flag Row for Regional Emphasis */}
         <div className="flex justify-center gap-2 mb-12 opacity-40">
-          {['saudi', 'uae', 'qatar', 'kuwait', 'oman', 'bahrain'].map(f => (
-            <div key={f} className="w-10 h-6 relative rounded-sm overflow-hidden border border-white/10 grayscale hover:grayscale-0 transition-all duration-500 hover:scale-110">
-              <Image src={`/flags/${f}_new.png`} alt={f} fill className="object-cover" />
+          {[
+            { key: 'saudi', i18n: 'saudiArabia' },
+            { key: 'uae', i18n: 'uae' },
+            { key: 'qatar', i18n: 'qatar' },
+            { key: 'kuwait', i18n: 'kuwait' },
+            { key: 'oman', i18n: 'oman' },
+            { key: 'bahrain', i18n: 'bahrain' }
+          ].map(f => (
+            <div key={f.key} className="w-10 h-6 relative rounded-sm overflow-hidden border border-white/10 grayscale hover:grayscale-0 transition-all duration-500 hover:scale-110">
+              <Image src={`/flags/${f.key}_new.png`} alt={t('flagOf').replace('%s', t(f.i18n))} fill className="object-cover" />
             </div>
           ))}
         </div>
+
         
         <div className="relative inline-block px-12 py-4 mb-8">
           {/* Elegant Corner Borders */}

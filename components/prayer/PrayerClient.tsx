@@ -108,14 +108,14 @@ export default function PrayerClient({ initialCity }: PrayerClientProps) {
         const data = await res.json();
         
         if (data && data.code === 200) {
-          const t = data.data.timings;
+          const timings = data.data.timings;
           setTimes({
-            Fajr: t.Fajr,
-            Sunrise: t.Sunrise,
-            Dhuhr: t.Dhuhr,
-            Asr: t.Asr,
-            Maghrib: t.Maghrib,
-            Isha: t.Isha,
+            Fajr: timings.Fajr,
+            Sunrise: timings.Sunrise,
+            Dhuhr: timings.Dhuhr,
+            Asr: timings.Asr,
+            Maghrib: timings.Maghrib,
+            Isha: timings.Isha,
             source: "Cloud"
           });
           return;
@@ -137,11 +137,30 @@ export default function PrayerClient({ initialCity }: PrayerClientProps) {
     }
 
     getPrayerTimes();
-    const interval = setInterval(getPrayerTimes, 60000); // Refresh every minute
-    return () => clearInterval(interval);
+    const interval = setInterval(getPrayerTimes, 60000);
+    
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible') getPrayerTimes();
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+    
+    return () => {
+      clearInterval(interval);
+      document.removeEventListener('visibilitychange', handleVisibility);
+    };
   }, [selectedCity, mounted]);
 
-  if (!mounted) return null;
+  if (!mounted) {
+    return (
+      <div className="w-full max-w-6xl mx-auto px-4 py-12 animate-pulse">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+          {[...Array(6)].map((_, i) => (
+            <div key={i} className="glass rounded-[2rem] h-40 w-full opacity-50"></div>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   // Helper to get translated names
   const getTranslatedCountryName = (slug: string, fallback: string) => {
@@ -285,7 +304,7 @@ export default function PrayerClient({ initialCity }: PrayerClientProps) {
                         </div>
                       )}
                       
-                      <span className={`text-[9px] uppercase tracking-[0.25em] font-black mb-3 ${isActive ? "text-brand-obsidian/70" : "text-[#f3e5d0]/90 dark:text-[#f3e5d0]/90 text-brand-gold"}`}>
+                      <span className={`text-[9px] uppercase tracking-[0.25em] font-black mb-3 ${isActive ? "text-brand-obsidian/70" : "text-foreground/60"}`}>
                         {displayName}
                       </span>
                       <span className="text-xl sm:text-2xl font-black tabular-nums tracking-tighter">
@@ -294,7 +313,7 @@ export default function PrayerClient({ initialCity }: PrayerClientProps) {
                       
                       {/* Active Label (Mobile only) */}
                       {isActive && (
-                        <span className="absolute bottom-2 text-[6px] font-black uppercase tracking-widest opacity-40">Active</span>
+                        <span className="absolute bottom-2 text-[6px] font-black uppercase tracking-widest opacity-40">{isRTL ? 'الحالي' : 'Active'}</span>
                       )}
                     </div>
                   );

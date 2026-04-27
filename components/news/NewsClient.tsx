@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { ExternalLink, RefreshCw, AlertCircle, Share2, CheckCircle2 } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
 import Link from "next/link";
@@ -45,7 +45,7 @@ export default function NewsClient({ category: initialCategory }: { category?: s
   const markFailed = (id: string) =>
     setFailedImages(prev => { const s = new Set(prev); s.add(id); return s; });
 
-  const fetchNews = async () => {
+  const fetchNews = useCallback(async () => {
     setLoading(true);
     setError(false);
     try {
@@ -53,7 +53,7 @@ export default function NewsClient({ category: initialCategory }: { category?: s
       const res = await fetch(`/api/news?lang=${language}${categoryParam}&t=${Date.now()}`, {
         cache: 'no-store',
         headers: { 'Pragma': 'no-cache' },
-        signal: AbortSignal.timeout(10000) // 10s timeout
+        signal: AbortSignal.timeout(10000)
       });
       if (!res.ok) throw new Error('Network response was not ok');
       const data = await res.json();
@@ -68,11 +68,11 @@ export default function NewsClient({ category: initialCategory }: { category?: s
     } finally {
       setLoading(false);
     }
-  };
+  }, [language, activeTab]);
 
   useEffect(() => {
     fetchNews();
-  }, [language, activeTab]);
+  }, [fetchNews]);
 
   const handleShare = async (e: React.MouseEvent, item: NewsItem) => {
     e.preventDefault();
@@ -86,7 +86,9 @@ export default function NewsClient({ category: initialCategory }: { category?: s
         setSharingId(item.id);
         setTimeout(() => setSharingId(null), 2000);
       }
-    } catch (err) {}
+    } catch (err) {
+      console.warn("Share failed or was cancelled:", err);
+    }
   };
 
   const sourceLabels: Record<string, string> = {
@@ -156,6 +158,84 @@ export default function NewsClient({ category: initialCategory }: { category?: s
         className={loading ? "opacity-50 pointer-events-none" : ""}
       />
 
+      {/* Trending Now Ticker */}
+      <div className="mb-12 overflow-hidden glass rounded-2xl py-3 border-brand-gold/10 group">
+        <div className="flex items-center gap-4 px-6">
+          <div className="flex items-center gap-2 shrink-0">
+            <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-accent">{language === 'ar' ? 'الأكثر تداولاً' : 'Trending Now'}</span>
+          </div>
+          <div className="h-4 w-[1px] bg-brand-gold/20 shrink-0" />
+          <div className="flex-1 overflow-hidden whitespace-nowrap relative">
+            <div className="inline-block animate-marquee group-hover:pause-marquee">
+              {news.slice(0, 5).map((item, i) => (
+                <Link 
+                  key={`ticker-${item.id}-${i}`} 
+                  href={`/news/${item.slug}`}
+                  className="inline-flex items-center gap-4 mx-8 text-[11px] font-bold text-foreground/70 hover:text-brand-gold transition-colors"
+                >
+                  <span className="opacity-30">#{i + 1}</span>
+                  {item.title}
+                </Link>
+              ))}
+            </div>
+            <div className="inline-block animate-marquee group-hover:pause-marquee">
+              {news.slice(0, 5).map((item, i) => (
+                <Link 
+                  key={`ticker-loop-${item.id}-${i}`} 
+                  href={`/news/${item.slug}`}
+                  className="inline-flex items-center gap-4 mx-8 text-[11px] font-bold text-foreground/70 hover:text-brand-gold transition-colors"
+                >
+                  <span className="opacity-30">#{i + 1}</span>
+                  {item.title}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Top Stories Section */}
+      {!loading && news.length > 0 && activeTab === 'all' && (
+        <div className="mb-20 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+          <div className="flex items-center gap-4">
+            <h2 className="text-[10px] font-black uppercase tracking-[0.5em] text-accent">{t('topStories') || 'Top Stories'}</h2>
+            <div className="h-px flex-1 bg-brand-gold/10" />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {news.filter(n => n.isPremium).slice(0, 2).map((item, idx) => (
+              <Link
+                key={`top-${item.id}-${idx}`}
+                href={`/news/${item.slug}`}
+                className="group relative h-[400px] rounded-[3rem] overflow-hidden border border-brand-gold/20 shadow-2xl hover:border-brand-gold/40 transition-all duration-700"
+              >
+                <Image
+                  src={failedImages.has(item.id) ? getDeterministicFallback(item.slug) : (item.image || getDeterministicFallback(item.slug))}
+                  alt={item.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-[2000ms] ease-out"
+                  unoptimized={!!item.image && !item.image.startsWith('https://images.unsplash.com')}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-obsidian via-brand-obsidian/40 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-10 space-y-4">
+                  <div className="flex items-center gap-3">
+                    <span className="px-3 py-1 rounded-full bg-brand-gold text-brand-obsidian text-[8px] font-black uppercase tracking-widest">
+                      {t('premium') || 'Premium'}
+                    </span>
+                    <span className="text-[8px] font-bold uppercase tracking-widest text-white/60">
+                      {sourceLabels[item.source] || item.source}
+                    </span>
+                  </div>
+                  <h3 className="text-2xl sm:text-3xl font-black text-white leading-tight group-hover:text-brand-gold transition-colors duration-500">
+                    {item.title}
+                  </h3>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Content Grid */}
       {loading && news.length === 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -170,7 +250,7 @@ export default function NewsClient({ category: initialCategory }: { category?: s
             onClick={fetchNews}
             className="px-8 py-3 bg-brand-gold/10 text-brand-gold rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-brand-gold/20 active:scale-95 transition-all"
           >
-            Retry Connection
+            {t('retryConnection')}
           </button>
         </div>
       ) : (
@@ -194,7 +274,7 @@ export default function NewsClient({ category: initialCategory }: { category?: s
                     alt={item.title}
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-1000 ease-out"
-                    unoptimized={true}
+                    unoptimized={!!item.image && !item.image.startsWith('https://images.unsplash.com')}
                     onError={() => markFailed(item.id)}
                   />
                   
@@ -217,7 +297,7 @@ export default function NewsClient({ category: initialCategory }: { category?: s
                       <div className="absolute top-6 left-6 z-20">
                         <div className="px-4 py-1.5 rounded-full bg-brand-gold text-brand-obsidian text-xs font-bold uppercase tracking-[0.2em] shadow-lg flex items-center gap-2">
                           <span className="w-1.5 h-1.5 rounded-full bg-brand-obsidian animate-pulse" />
-                          Premium
+                          {language === 'ar' ? 'مميز' : 'Premium'}
                         </div>
                       </div>
                     )}

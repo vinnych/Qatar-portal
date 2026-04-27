@@ -11,12 +11,13 @@ interface MarketData {
   commodities: any[];
   currencies: any[];
   timestamp: string;
+  marketStatus?: 'open' | 'closed';
 }
 
 export default function MarketInsightClient() {
   const [data, setData] = useState<MarketData | null>(null);
   const [loading, setLoading] = useState(true);
-  const { t, isRTL } = useLanguage();
+  const { t, isRTL, language } = useLanguage();
 
   useEffect(() => {
     async function fetchData() {
@@ -35,8 +36,17 @@ export default function MarketInsightClient() {
       }
     }
     fetchData();
-    const interval = setInterval(fetchData, 30000); // Refresh every 30s
-    return () => clearInterval(interval);
+    const interval = setInterval(fetchData, 30000);
+    
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible') fetchData();
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+    
+    return () => {
+      clearInterval(interval);
+      document.removeEventListener('visibilitychange', handleVisibility);
+    };
   }, []);
 
   if (loading) {
@@ -53,6 +63,8 @@ export default function MarketInsightClient() {
     { name: t('marketInsights'), href: "/market-insight" }
   ];
 
+  const isMarketOpen = data?.marketStatus === 'open';
+
   return (
     <div className={`flex flex-col items-center justify-start min-h-screen pt-24 pb-32 px-4 max-w-7xl mx-auto w-full ${isRTL ? 'font-serif-ar text-right' : 'text-left'}`}>
       <div className="w-full mb-8">
@@ -61,7 +73,17 @@ export default function MarketInsightClient() {
       
       {/* Header Section */}
       <div className="w-full mb-16 animate-in fade-in slide-in-from-top-4 duration-1000">
-        <p className="text-[10px] tracking-[0.5em] uppercase font-bold text-accent mb-3">{t('marketInsights')}</p>
+        <div className="flex items-center gap-4 mb-3">
+          <p className="text-[10px] tracking-[0.5em] uppercase font-bold text-accent">{t('marketInsights')}</p>
+          <div className={`px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest flex items-center gap-2 border ${
+            isMarketOpen 
+            ? 'bg-green-500/10 border-green-500/20 text-green-500' 
+            : 'bg-red-500/10 border-red-500/20 text-red-500'
+          }`}>
+            <span className={`w-1 h-1 rounded-full ${isMarketOpen ? 'bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]' : 'bg-red-500'}`} />
+            {isMarketOpen ? (language === 'ar' ? 'الأسواق مفتوحة' : 'Markets Open') : (language === 'ar' ? 'الأسواق مغلقة' : 'Markets Closed')}
+          </div>
+        </div>
         <h1 className="text-4xl md:text-5xl font-black serif text-foreground mb-6">
           {t('marketOverview')}
         </h1>
@@ -83,14 +105,22 @@ export default function MarketInsightClient() {
                 </div>
                 <div>
                   <h2 className="text-xl font-black serif">{t('stockMarkets')}</h2>
-                  <p className="text-[8px] uppercase font-black tracking-[0.2em] text-foreground/30 mt-0.5">
-                    Updated {data ? new Date(data.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '--:--'}
-                  </p>
+                  <div className="flex items-center gap-2 mt-0.5">
+                    <p className="text-[8px] uppercase font-black tracking-[0.2em] text-foreground/30">
+                      Updated {data ? new Date(data.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '--:--'}
+                    </p>
+                    <span className="w-1 h-1 rounded-full bg-foreground/10" />
+                    <p className="text-[8px] uppercase font-bold tracking-[0.1em] text-accent/50 italic">
+                      {t('indicativeData')}
+                    </p>
+                  </div>
                 </div>
               </div>
               <div className="flex items-center gap-2" aria-live="polite">
-                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
-                <span className="text-[9px] uppercase font-bold tracking-widest text-foreground/40">{t('marketsLive')}</span>
+                <div className={`w-2 h-2 rounded-full ${isMarketOpen ? 'bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]' : 'bg-red-500'}`} />
+                <span className="text-[9px] uppercase font-bold tracking-widest text-foreground/40">
+                  {isMarketOpen ? t('marketsLive') : (language === 'ar' ? 'جلسة مغلقة' : 'Closed Session')}
+                </span>
               </div>
             </div>
 

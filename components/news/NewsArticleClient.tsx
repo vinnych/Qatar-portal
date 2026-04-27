@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/lib/i18n";
-import { Calendar, ChevronLeft, ExternalLink, Globe, Newspaper, Share2, Clock, AlertCircle } from "lucide-react";
+import { Calendar, ChevronLeft, ExternalLink, Globe, Newspaper, Share2, Clock, AlertCircle, Languages, RefreshCw } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { getDeterministicFallback } from "@/lib/fallbacks";
@@ -26,7 +26,37 @@ export default function NewsArticleClient({ initialArticle }: { initialArticle: 
   const { t, isRTL, language } = useLanguage();
   const router = useRouter();
   const [imgError, setImgError] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [perspectiveMode, setPerspectiveMode] = useState(false);
+  const [translation, setTranslation] = useState<NewsItem | null>(null);
+  const [loadingTranslation, setLoadingTranslation] = useState(false);
   const article = initialArticle;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = (window.scrollY / totalHeight) * 100;
+      setScrollProgress(progress);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const togglePerspective = async () => {
+    if (!perspectiveMode && !translation) {
+      setLoadingTranslation(true);
+      const targetLang = language === 'en' ? 'ar' : 'en';
+      try {
+        const res = await fetch(`/api/news?slug=${article.slug}&lang=${targetLang}`);
+        const data = await res.json();
+        if (data.status === 'success' && data.news?.[0]) {
+          setTranslation(data.news[0]);
+        }
+      } catch (e) { console.error("Translation fetch failed"); }
+      finally { setLoadingTranslation(false); }
+    }
+    setPerspectiveMode(!perspectiveMode);
+  };
 
   const [copied, setCopied] = useState(false);
 
@@ -68,6 +98,14 @@ export default function NewsArticleClient({ initialArticle }: { initialArticle: 
 
   return (
     <div className={`w-full max-w-4xl mx-auto px-4 py-12 pb-32 ${isRTL ? 'font-serif-ar' : ''}`}>
+      {/* Scroll Progress Bar */}
+      <div className="fixed top-0 left-0 w-full h-1 z-[110] bg-white/5 pointer-events-none">
+        <div 
+          className="h-full bg-brand-gold shadow-[0_0_10px_rgba(212,175,55,0.5)] transition-all duration-150 ease-out"
+          style={{ width: `${scrollProgress}%` }}
+        />
+      </div>
+
       {/* Navigation */}
       <Link 
         href="/news" 
@@ -85,7 +123,25 @@ export default function NewsArticleClient({ initialArticle }: { initialArticle: 
         className={isRTL ? "[&_svg]:rotate-180" : ""}
       />
 
-      <article className="space-y-12">
+      {/* Perspective Mode Toggle */}
+      <div className="flex justify-end mb-8">
+        <button 
+          onClick={togglePerspective}
+          disabled={loadingTranslation}
+          className={`flex items-center gap-3 px-6 py-3 rounded-2xl border transition-all ${
+            perspectiveMode 
+            ? 'bg-brand-gold text-brand-obsidian border-brand-gold' 
+            : 'glass border-brand-gold/10 text-foreground/60 hover:text-accent'
+          }`}
+        >
+          {loadingTranslation ? <RefreshCw size={16} className="animate-spin" /> : <Languages size={16} />}
+          <span className="text-[10px] font-black uppercase tracking-widest">
+            {perspectiveMode ? (isRTL ? 'إغلاق المنظور' : 'Close Perspective') : (isRTL ? 'عرض المنظور الإنجليزي' : 'Perspective Mode (AR)')}
+          </span>
+        </button>
+      </div>
+
+      <article className={`space-y-12 transition-all duration-700 ${perspectiveMode ? 'max-w-none' : ''}`}>
         {/* Header Metadata */}
         <div className="space-y-6">
           <div className="flex flex-wrap items-center gap-4">
@@ -125,7 +181,7 @@ export default function NewsArticleClient({ initialArticle }: { initialArticle: 
               </button>
               {copied && (
                 <div className="absolute bottom-full right-0 mb-2 px-3 py-1 bg-accent text-brand-obsidian text-[10px] font-bold uppercase tracking-widest rounded-lg animate-in fade-in slide-in-from-bottom-1">
-                  Link Copied
+                  {language === 'ar' ? 'تم نسخ الرابط' : 'Link Copied'}
                 </div>
               )}
             </div>
@@ -141,7 +197,7 @@ export default function NewsArticleClient({ initialArticle }: { initialArticle: 
               fill
               className="object-cover"
               priority
-              unoptimized={true}
+              unoptimized={!article.image?.startsWith('https://images.unsplash.com')}
               onError={() => setImgError(true)}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
@@ -149,31 +205,51 @@ export default function NewsArticleClient({ initialArticle }: { initialArticle: 
         )}
 
         {/* Article Content */}
-        <div className="max-w-3xl mx-auto space-y-8">
-          <p className="text-xl sm:text-2xl text-foreground/90 leading-relaxed font-normal">
-            {article.description}
-          </p>
-          
-          <div className="glass p-8 rounded-[2rem] border-brand-gold/10 space-y-6">
-            <div className="flex items-start gap-4">
-              <Newspaper className="text-brand-gold shrink-0" size={24} />
-              <div>
-                <h3 className="text-lg font-bold text-foreground mb-2">{t('readMore')}</h3>
-                <p className="text-sm text-foreground/50 mb-6 leading-relaxed">
-                  {t('newsDisclaimer')}
-                </p>
-                <Link 
-                  href={article.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 bg-brand-gold text-brand-obsidian px-8 py-4 rounded-2xl text-xs font-black uppercase tracking-widest hover:scale-105 transition-transform"
-                >
-                  <span>{t('officialSource')}</span>
-                  <ExternalLink size={16} />
-                </Link>
+        <div className={`grid grid-cols-1 ${perspectiveMode ? 'lg:grid-cols-2' : ''} gap-12 max-w-none`}>
+          <div className="space-y-8">
+            <p className="text-xl sm:text-2xl text-foreground/90 leading-relaxed font-normal">
+              {article.description}
+            </p>
+            
+            <div className="glass p-8 rounded-[2rem] border-brand-gold/10 space-y-6">
+              <div className="flex items-start gap-4">
+                <Newspaper className="text-brand-gold shrink-0" size={24} />
+                <div>
+                  <h3 className="text-lg font-bold text-foreground mb-2">{t('readMore')}</h3>
+                  <p className="text-sm text-foreground/50 mb-6 leading-relaxed">
+                    {t('newsDisclaimer')}
+                  </p>
+                  <Link 
+                    href={article.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 bg-brand-gold text-brand-obsidian px-8 py-4 rounded-2xl text-xs font-black uppercase tracking-widest hover:scale-105 transition-transform"
+                  >
+                    <span>{t('officialSource')}</span>
+                    <ExternalLink size={16} />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
+
+          {perspectiveMode && (
+            <div className="space-y-8 animate-in fade-in slide-in-from-right-4 duration-700">
+              <div className={`p-8 rounded-[2rem] glass border-brand-gold/20 ${!isRTL ? 'font-serif-ar text-right' : ''}`}>
+                <h3 className="text-sm font-black uppercase tracking-widest text-accent mb-6 border-b border-brand-gold/10 pb-4">
+                  {isRTL ? 'English Translation' : 'الترجمة العربية'}
+                </h3>
+                {translation ? (
+                  <div className="space-y-6">
+                    <h2 className="text-2xl font-bold leading-tight">{translation.title}</h2>
+                    <p className="text-lg leading-relaxed opacity-80">{translation.description}</p>
+                  </div>
+                ) : (
+                  <p className="text-sm italic opacity-40">No translation available for this article.</p>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </article>
 

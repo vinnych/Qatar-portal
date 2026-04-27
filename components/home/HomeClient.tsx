@@ -8,9 +8,40 @@ import { useLanguage } from "@/lib/i18n";
 import PrayerLite from "@/components/prayer/PrayerLite";
 import FinanceTicker from "@/components/finance/FinanceTicker";
 import PublicSurvey from "@/components/news/PublicSurvey";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function HomeClient() {
   const { t, isRTL } = useLanguage();
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.3
+      }
+    }
+  } as any;
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } as any
+    }
+  } as any;
+
+  const cardVariants = {
+    initial: { scale: 1, y: 0 },
+    hover: { 
+      scale: 1.05, 
+      y: -10,
+      transition: { duration: 0.4, ease: "easeOut" }
+    },
+    tap: { scale: 0.95 }
+  } as any;
 
   const NAV_LINKS = [
     { name: t('prayerTimes'), href: "/prayer", icon: Clock },
@@ -74,8 +105,14 @@ export default function HomeClient() {
       </nav>
 
       {/* Regional Guides Section */}
-      <div className="w-full max-w-5xl mt-20 sm:mt-28 motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-12 duration-1000 delay-500 fill-mode-both">
-        <div className="flex flex-col items-center mb-12 px-4">
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="w-full max-w-5xl mt-20 sm:mt-28"
+      >
+        <motion.div variants={itemVariants} className="flex flex-col items-center mb-12 px-4">
           <div className="flex items-center gap-6 w-full max-w-lg">
             <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-brand-gold/40 to-transparent" />
             <h2 className="text-sm font-extrabold text-brand-gold uppercase tracking-[0.4em] whitespace-nowrap">
@@ -83,7 +120,7 @@ export default function HomeClient() {
             </h2>
             <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-brand-gold/40 to-transparent" />
           </div>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-5 sm:gap-8 px-2">
           {[
@@ -94,35 +131,44 @@ export default function HomeClient() {
             { id: 'oman', key: 'oman', flag: '/flags/oman_new.png' },
             { id: 'bahrain', key: 'bahrain', flag: '/flags/bahrain_new.png' },
           ].map((country) => (
-            <Link
-              key={country.id}
-              href={`/countries/${country.id}`}
-              style={{ touchAction: 'manipulation' }}
-              className="group relative glass rounded-[2.5rem] border border-brand-gold/20 hover:border-brand-gold/60 active:scale-[0.96] transition-all duration-700 overflow-hidden flex flex-col min-h-[160px] sm:min-h-[200px] select-none shadow-xl"
-            >
-              {/* Background Flag */}
-              <div className="absolute inset-0 z-0">
-                <Image
-                  src={country.flag}
-                  alt={t(country.key)}
-                  fill
-                  sizes="(max-width: 768px) 50vw, 16vw"
-                  className="object-cover opacity-25 group-hover:opacity-50 group-hover:scale-125 transition-all duration-1000 ease-out"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-obsidian via-brand-obsidian/50 to-transparent z-10" />
-              </div>
+            <motion.div key={country.id} variants={itemVariants}>
+              <Link
+                href={`/countries/${country.id}`}
+                style={{ touchAction: 'manipulation' }}
+                className="group block"
+              >
+                <motion.div
+                  variants={cardVariants}
+                  initial="initial"
+                  whileHover="hover"
+                  whileTap="tap"
+                  className="relative glass rounded-[2.5rem] border border-brand-gold/20 overflow-hidden flex flex-col min-h-[160px] sm:min-h-[200px] select-none shadow-xl"
+                >
+                  {/* Background Flag */}
+                  <div className="absolute inset-0 z-0">
+                    <Image
+                      src={country.flag}
+                      alt={t(country.key)}
+                      fill
+                      sizes="(max-width: 768px) 50vw, 16vw"
+                      className="object-cover opacity-25 group-hover:opacity-50 group-hover:scale-125 transition-all duration-1000 ease-out"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 dark:from-brand-obsidian via-black/40 dark:via-brand-obsidian/50 to-transparent z-10" />
+                  </div>
 
-              {/* Content */}
-              <div className="relative z-20 p-6 flex flex-col items-center justify-end h-full text-center">
-                <div className="mb-4 w-6 h-[2px] bg-brand-gold/50 group-hover:w-20 group-hover:bg-brand-gold transition-all duration-700" />
-                <span className="text-sm sm:text-base font-extrabold text-white uppercase tracking-[0.2em] drop-shadow-xl leading-tight group-hover:text-brand-gold transition-colors duration-500">
-                  {t(country.key)}
-                </span>
-              </div>
-            </Link>
+                  {/* Content */}
+                  <div className="relative z-20 p-6 flex flex-col items-center justify-end h-full text-center">
+                    <div className="mb-4 w-6 h-[2px] bg-brand-gold/50 group-hover:w-20 group-hover:bg-brand-gold transition-all duration-700" />
+                    <span className="text-sm sm:text-base font-extrabold text-white uppercase tracking-[0.2em] drop-shadow-xl leading-tight group-hover:text-brand-gold transition-colors duration-500">
+                      {t(country.key)}
+                    </span>
+                  </div>
+                </motion.div>
+              </Link>
+            </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       {/* Interactive Section: Public Sentiment */}
       <div className="w-full mt-32">
@@ -130,7 +176,7 @@ export default function HomeClient() {
           <div className="flex items-center gap-6 w-full max-w-lg">
             <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-brand-gold/40 to-transparent" />
             <span className="text-xs font-bold text-brand-gold/60 uppercase tracking-[0.5em] whitespace-nowrap">
-              Engagement
+              {isRTL ? 'المشاركة' : 'Engagement'}
             </span>
             <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-brand-gold/40 to-transparent" />
           </div>

@@ -1,12 +1,20 @@
 import { NextResponse } from 'next/server';
+import { rateLimit } from '@/lib/redis';
 
 export async function POST(request: Request) {
+  const ip = request.headers.get('x-forwarded-for') || '127.0.0.1';
+  const { success } = await rateLimit(ip, 5, 3600); // 5 invites per hour
+
+  if (!success) {
+    return NextResponse.json({ status: 'error', message: 'Too many requests' }, { status: 429 });
+  }
+
   try {
     const body = await request.json();
     const { email, name } = body;
 
     // Server-side validation
-    if (!email || typeof email !== 'string' || !email.includes('@')) {
+    if (!email || typeof email !== 'string' || !/.+@.+\..+/.test(email)) {
       return NextResponse.json({ status: 'error', message: 'Invalid email' }, { status: 400 });
     }
 

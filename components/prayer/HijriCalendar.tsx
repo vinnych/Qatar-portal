@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { X, Calendar as CalendarIcon, Clock } from "lucide-react";
 import { Coordinates, CalculationMethod, PrayerTimes } from "adhan";
+import { useLanguage } from "@/lib/i18n";
 
 interface HijriDate {
   gregorian: string;
@@ -50,15 +51,18 @@ export default function HijriCalendar({
 }) {
   const [calendar, setCalendar] = useState<HijriDate[]>([]);
   const [loading, setLoading] = useState(false);
+  const { language } = useLanguage();
 
   useEffect(() => {
     if (!isOpen) return;
 
+    const timeFormatter = (d: Date) => d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+    const gregFormatter = new Intl.DateTimeFormat("en-US", { day: "numeric", month: "short" });
+    const dayFormatter = new Intl.DateTimeFormat("en-US", { weekday: "long" });
+    const abortController = new AbortController();
+
     async function fetchHijriDates() {
       setLoading(true);
-      const gregFormatter = new Intl.DateTimeFormat("en-US", { day: "numeric", month: "short" });
-      const dayFormatter = new Intl.DateTimeFormat("en-US", { weekday: "long" });
-      const timeFormatter = (d: Date) => d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
 
       const coords = new Coordinates(lat, lng);
       const params = CalculationMethod.UmmAlQura();
@@ -68,8 +72,10 @@ export default function HijriCalendar({
       try {
         const month = new Date().getMonth() + 1;
         const year = new Date().getFullYear();
-        const res = await fetch(`https://api.aladhan.com/v1/gToHCalendar/${month}/${year}`);
+        const res = await fetch(`/api/hijri?month=${month}&year=${year}`, { signal: abortController.signal });
         const data = await res.json();
+        
+        if (abortController.signal.aborted) return;
         
         for (let i = 0; i < 7; i++) {
           const date = new Date();
@@ -99,8 +105,9 @@ export default function HijriCalendar({
             timings
           });
         }
-      } catch (e) {
-        console.warn("Hijri API failed, using local calculation");
+      } catch (error: any) {
+        if (error.name === 'AbortError') return;
+        console.warn("Hijri API failed, using local calculation:", error);
         finalDates = []; // Reset and use fallback for all 7 days
         for (let i = 0; i < 7; i++) {
           const date = new Date();
@@ -119,22 +126,32 @@ export default function HijriCalendar({
             }
           });
         }
+      } finally {
+        if (!abortController.signal.aborted) {
+          setCalendar(finalDates);
+          setLoading(false);
+        }
       }
-      setCalendar(finalDates);
-      setLoading(false);
     }
 
     fetchHijriDates();
+    return () => abortController.abort();
   }, [isOpen, lat, lng]);
 
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
-      <div className="relative w-full max-w-2xl glass p-6 sm:p-10 rounded-[3rem] border-brand-gold/30 shadow-2xl animate-in zoom-in duration-500 overflow-hidden flex flex-col max-h-[90vh]">
+      <div 
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="hijri-calendar-title"
+        className="relative w-full max-w-2xl glass p-6 sm:p-10 rounded-[3rem] border-brand-gold/30 shadow-2xl animate-in zoom-in duration-500 overflow-hidden flex flex-col max-h-[90vh]"
+      >
         <button 
           onClick={onClose}
           className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-accent transition-all hover:rotate-90 z-10"
+          aria-label={language === 'ar' ? "إغلاق" : "Close"}
         >
           <X size={20} />
         </button>
@@ -144,8 +161,8 @@ export default function HijriCalendar({
             <CalendarIcon size={24} />
           </div>
           <div>
-            <h3 className="text-[11px] font-black uppercase tracking-[0.4em] text-accent mb-1">Calendar</h3>
-            <p className="text-xl font-black serif text-foreground">7-Day Hijri & Prayer Schedule</p>
+            <h3 id="hijri-calendar-title" className="text-[11px] font-black uppercase tracking-[0.4em] text-accent mb-1">{language === 'ar' ? 'التقويم' : 'Calendar'}</h3>
+            <p className="text-xl font-black serif text-foreground">{language === 'ar' ? 'جدول الصلاة والتقويم الهجري - 7 أيام' : '7-Day Hijri & Prayer Schedule'}</p>
           </div>
         </div>
 

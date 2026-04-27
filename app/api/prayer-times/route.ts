@@ -1,13 +1,29 @@
 import { NextResponse } from 'next/server';
+import { rateLimit } from '@/lib/redis';
 
 export async function GET(request: Request) {
+  const ip = request.headers.get('x-forwarded-for') || '127.0.0.1';
+  const { success } = await rateLimit(ip, 60, 3600);
+
+  if (!success) {
+    return NextResponse.json({ status: 'error', message: 'Too many requests' }, { status: 429 });
+  }
+
   const { searchParams } = new URL(request.url);
-  const lat = searchParams.get('lat');
-  const lng = searchParams.get('lng');
+  const latStr = searchParams.get('lat');
+  const lngStr = searchParams.get('lng');
   const method = searchParams.get('method') || '4';
 
-  if (!lat || !lng) {
-    return NextResponse.json({ status: 'error', message: 'Missing coordinates' }, { status: 400 });
+  const lat = parseFloat(latStr || '');
+  const lng = parseFloat(lngStr || '');
+
+  if (!isFinite(lat) || !isFinite(lng) || lat < -90 || lat > 90 || lng < -180 || lng > 180) {
+    return NextResponse.json({ status: 'error', message: 'Invalid coordinates' }, { status: 400 });
+  }
+
+  const methodNum = parseInt(method, 10);
+  if (!isFinite(methodNum) || methodNum < 0 || methodNum > 20) {
+    return NextResponse.json({ status: 'error', message: 'Invalid method' }, { status: 400 });
   }
 
   try {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
-import { ArrowDownUp, Search, Star, Clock, TrendingUp, ChevronDown, X, RefreshCw, Globe, Copy, Check } from "lucide-react";
+import { ArrowDownUp, Search, Star, Clock, TrendingUp, ChevronDown, X, RefreshCw, Globe, Copy, Check, Share2 } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
 import Link from "next/link";
 import { Breadcrumbs } from "@/lib/seo";
@@ -54,7 +54,9 @@ export default function CurrencyExchangeClient() {
   useEffect(() => {
     fetchRates();
     const saved = localStorage.getItem("ak_fav_currencies");
-    if (saved) setFavorites(JSON.parse(saved));
+    if (saved) {
+      try { setFavorites(JSON.parse(saved)); } catch { /* corrupted data, ignore */ }
+    }
     const interval = setInterval(() => fetchRates(), 60000);
     return () => clearInterval(interval);
   }, [fetchRates]);
@@ -103,12 +105,21 @@ export default function CurrencyExchangeClient() {
     const text = `${parsedAmount} ${fromCode} = ${result.toFixed(4)} ${toCode}`;
     navigator.clipboard.writeText(text);
     setCopied(true);
-    const start = performance.now();
-    const reset = (now: number) => {
-      if (now - start >= 2000) { setCopied(false); return; }
-      requestAnimationFrame(reset);
-    };
-    requestAnimationFrame(reset);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleShare = async () => {
+    const text = `${parsedAmount} ${fromCode} = ${result.toFixed(4)} ${toCode}`;
+    const url = window.location.href;
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: "Currency Conversion | Arabia Khaleej", text, url });
+      } else {
+        await navigator.clipboard.writeText(`${text}\n${url}`);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      }
+    } catch (err) { console.warn("Share failed"); }
   };
 
   const filteredCurrencies = useMemo(() => {
@@ -355,6 +366,9 @@ export default function CurrencyExchangeClient() {
               </p>
             </div>
             <div className="flex items-center gap-2">
+              <button onClick={handleShare} className="p-2 rounded-xl hover:bg-foreground/5 transition-all text-foreground/30 hover:text-accent" aria-label="Share result">
+                <Share2 size={14} />
+              </button>
               <button onClick={handleCopy} className="p-2 rounded-xl hover:bg-foreground/5 transition-all text-foreground/30 hover:text-accent" aria-label="Copy result">
                 {copied ? <Check size={14} className="text-green-500" /> : <Copy size={14} />}
               </button>
@@ -457,8 +471,14 @@ function CurrencyRow({ currency, isRTL, lang, isActive, isFav, onToggleFav, onSe
 }) {
   return (
     <div className={`flex items-center justify-between py-2.5 px-3 rounded-xl hover:bg-foreground/5 transition-all cursor-pointer group ${isActive ? 'bg-brand-gold/10 border border-brand-gold/20' : ''} ${isRTL ? 'flex-row-reverse' : ''}`}>
-      <div className={`flex items-center gap-3 flex-1 ${isRTL ? 'flex-row-reverse' : ''}`} onClick={onSelect}>
-        <span className="text-xl">{currency.flag}</span>
+      <div 
+        role="button"
+        tabIndex={0}
+        className={`flex items-center gap-3 flex-1 ${isRTL ? 'flex-row-reverse' : ''}`} 
+        onClick={onSelect}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onSelect(); } }}
+      >
+        <span className="text-xl" aria-hidden="true">{currency.flag}</span>
         <div className={isRTL ? 'text-right' : ''}>
           <p className="text-sm font-black">{currency.code}</p>
           <p className="text-[10px] text-foreground/40 font-medium">{lang === 'ar' ? currency.nameAr : currency.name}</p>

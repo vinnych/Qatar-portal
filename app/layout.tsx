@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "@/components/layout/Providers";
 import ClientLayout from "@/components/layout/ClientLayout";
 import Script from "next/script";
+import { headers } from "next/headers";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const amiri = Amiri({ weight: ["400", "700"], subsets: ["arabic"], variable: "--font-amiri" });
@@ -11,29 +12,34 @@ const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfa
 
 import { pageMeta, SITE_NAME, SITE_DESCRIPTION } from "@/lib/seo";
 import { OrganizationSchema, WebSiteSchema } from "@/components/seo/StructuredData";
-import Header from "@/components/layout/Header";
+import { Language } from "@/lib/i18n";
+import CookieConsent from "@/components/ui/CookieConsent";
 
 export const metadata = pageMeta({
-  title: "Arabia Khaleej | The GCC Standard — Regional Intelligence Portal",
-  titleAr: "عربية خليج | المعيار الخليجي — بوابة الاستخبارات الإقليمية",
-  description: "The definitive reference for a refined GCC experience. High-fidelity intelligence on economy, sovereign vision, and national infrastructure across the Gulf.",
-  descriptionAr: "المرجع النهائي لتجربة خليجية متميزة. معلومات عالية الدقة حول الاقتصاد والرؤية السيادية والبنية التحتية الوطنية في جميع أنحاء الخليج.",
+  title: "Arabia Khaleej — The GCC Standard",
+  titleAr: "عربية خليج — المعيار الخليجي",
+  description: "The definitive reference for a refined GCC experience.",
+  descriptionAr: "المرجع النهائي لتجربة خليجية متميزة.",
   path: "/",
 });
 
 export const viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
   viewportFit: 'cover',
 };
 
 
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const headList = await headers();
+  const nonce = headList.get('x-nonce') || undefined;
+  
+  const cookieHeader = headList.get('cookie') || '';
+  const initialLanguage = (cookieHeader.split('; ').find(row => row.startsWith('NEXT_LOCALE='))?.split('=')[1] || 'en') as Language;
+
   return (
-    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${amiri.variable} ${playfair.variable}`}>
+    <html lang={initialLanguage} dir={initialLanguage === 'ar' ? 'rtl' : 'ltr'} suppressHydrationWarning className={`${inter.variable} ${amiri.variable} ${playfair.variable}`}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -43,8 +49,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         <link rel="dns-prefetch" href="https://va.vercel-scripts.com" />
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-WRXQ5H9Z7K" strategy="afterInteractive" />
-        <Script id="google-analytics" strategy="afterInteractive">{`
+        <Script 
+          async 
+          src="https://www.googletagmanager.com/gtag/js?id=G-WRXQ5H9Z7K" 
+          strategy="afterInteractive" 
+          nonce={nonce}
+        />
+        <Script id="google-analytics" strategy="afterInteractive" nonce={nonce}>{`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
@@ -52,13 +63,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         `}</Script>
       </head>
       <body className="font-sans min-h-screen flex flex-col antialiased">
-        <Providers>
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-6 focus:py-3 focus:bg-brand-gold focus:text-brand-obsidian focus:rounded-2xl focus:font-bold focus:shadow-2xl transition-all">
+          Skip to content
+        </a>
+        <div className="fluid-gold-bg" />
+        <Providers initialLanguage={initialLanguage}>
           <OrganizationSchema />
           <WebSiteSchema />
           <Header />
           <ClientLayout>
-            {children}
+            <main id="main-content">
+              {children}
+            </main>
           </ClientLayout>
+          <CookieConsent />
         </Providers>
       </body>
     </html>

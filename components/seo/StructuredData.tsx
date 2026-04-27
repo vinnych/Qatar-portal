@@ -1,4 +1,5 @@
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/seo";
+import { headers } from "next/headers";
 
 interface StructuredDataProps {
   type: string;
@@ -6,7 +7,9 @@ interface StructuredDataProps {
   id?: string;
 }
 
-export default function StructuredData({ type, data, id }: StructuredDataProps) {
+export default async function StructuredData({ type, data, id }: StructuredDataProps) {
+  const nonce = (await headers()).get('x-nonce') || undefined;
+  
   const schema: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": type,
@@ -17,6 +20,7 @@ export default function StructuredData({ type, data, id }: StructuredDataProps) 
   return (
     <script
       type="application/ld+json"
+      nonce={nonce}
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />
   );
@@ -132,7 +136,7 @@ export function WebPageSchema({
     publisher: { "@id": `${SITE_URL}/#organization` },
     inLanguage: ["en", "ar"],
     datePublished,
-    dateModified: dateModified ?? new Date().toISOString(),
+    dateModified: dateModified,
     potentialAction: {
       "@type": "ReadAction",
       target: [`${SITE_URL}${url}`],

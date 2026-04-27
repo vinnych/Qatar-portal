@@ -41,8 +41,8 @@ export default function MobileNav() {
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-[100] md:hidden">
-      {/* Background with advanced glass effect */}
-      <div className="absolute inset-0 bg-background/80 backdrop-blur-3xl border-t border-brand-gold/15 shadow-[0_-20px_50px_rgba(0,0,0,0.3)]" />
+      {/* Background with standardized glass effect */}
+      <div className="absolute inset-0 glass rounded-none border-t border-brand-gold/15 shadow-[0_-20px_50px_rgba(0,0,0,0.3)]" />
       
       {/* Navigation Links */}
       <div className="relative flex justify-around items-end h-20 px-2 pb-2">

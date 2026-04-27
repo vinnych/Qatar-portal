@@ -155,6 +155,11 @@ export const translations: Translations = {
   qatariRiyal: { en: "Qatari Riyal", ar: "ريال قطري" },
   omaniRial: { en: "Omani Rial", ar: "ريال عماني" },
   bahrainiDinar: { en: "Bahraini Dinar", ar: "دينار بحريني" },
+  flagOf: { en: "Flag of %s", ar: "علم %s" },
+  gccFinanceCurrency: { en: "GCC Finance & Currency", ar: "المالية والعملات الخليجية" },
+  retryConnection: { en: "Retry Connection", ar: "إعادة الاتصال" },
+  indicativeData: { en: "Indicative data. Markets are simulated for informational purposes.", ar: "بيانات استرشادية. يتم محاكاة الأسواق لأغراض إعلامية." },
+
 
   // About Page
   aboutTitle: { en: "About Arabia Khaleej", ar: "حول عربية خليج" },
@@ -351,48 +356,34 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<Language>('en');
+export function LanguageProvider({ 
+  children,
+  initialLanguage = 'en'
+}: { 
+  children: React.ReactNode;
+  initialLanguage?: Language;
+}) {
+  const [language, setLanguageState] = useState<Language>(initialLanguage);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Priority: URL Param > Cookie > LocalStorage > Browser Language
+    setMounted(true);
+    
+    // Only sync if the URL has a lang parameter that differs from current state
     const params = new URLSearchParams(window.location.search);
     const langParam = params.get('lang') as Language;
     
-    const getInitialLang = (): Language => {
-      if (langParam && (langParam === 'en' || langParam === 'ar')) return langParam;
-      
-      const savedLang = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('NEXT_LOCALE='))
-        ?.split('=')[1] as Language;
-        
-      if (savedLang && (savedLang === 'en' || savedLang === 'ar')) return savedLang;
-      
-      const lsLang = localStorage.getItem('language') as Language;
-      if (lsLang && (lsLang === 'en' || lsLang === 'ar')) return lsLang;
-      
-      return navigator.language.startsWith('ar') ? 'ar' : 'en';
-    };
-
-    const initialLang = getInitialLang();
-    setLanguageState(initialLang);
-    
-    // Immediate DOM update to prevent further shifts
-    document.documentElement.lang = initialLang;
-    document.documentElement.dir = initialLang === 'ar' ? 'rtl' : 'ltr';
-    
-    if (initialLang !== langParam) {
-      const url = new URL(window.location.href);
-      url.searchParams.set('lang', initialLang);
-      window.history.replaceState({}, '', url.toString());
+    if (langParam && (langParam === 'en' || langParam === 'ar') && langParam !== language) {
+      setLanguage(langParam);
     }
-  }, []);
+  }, [language]);
 
   const setLanguage = (lang: Language) => {
+    if (lang === language) return;
+    
     setLanguageState(lang);
     localStorage.setItem('language', lang);
-    document.cookie = `NEXT_LOCALE=${lang}; path=/; max-age=31536000`;
+    document.cookie = `NEXT_LOCALE=${lang}; path=/; max-age=31536000; SameSite=Lax; ${window.location.protocol === 'https:' ? 'Secure' : ''}`;
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
     

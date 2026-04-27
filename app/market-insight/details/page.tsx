@@ -102,6 +102,47 @@ export default function SentimentDetailsPage() {
           </div>
         </div>
 
+        {/* Regional Stability Index Visualization */}
+        <div className="mb-16 p-8 md:p-12 glass rounded-[2.5rem] border-brand-gold/20 bg-brand-gold/5 relative overflow-hidden group">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10">
+            <div>
+              <h3 className="text-xs font-black uppercase tracking-[0.4em] text-accent mb-2">Regional Intelligence</h3>
+              <h2 className="text-2xl font-black serif">Stability Index <span className="text-brand-gold">2026</span></h2>
+            </div>
+            <div className="px-5 py-2 rounded-xl bg-brand-gold text-brand-obsidian text-[10px] font-black uppercase tracking-widest shadow-lg">
+              Current Rating: AAA-
+            </div>
+          </div>
+
+          <div className="space-y-10">
+            {[
+              { label: "Fiscal Buffer", value: 92, color: "bg-brand-gold" },
+              { label: "Diversification Speed", value: 78, color: "bg-accent" },
+              { label: "Digital Infrastructure", value: 88, color: "bg-brand-gold" },
+              { label: "Regional Integration", value: 72, color: "bg-accent" }
+            ].map((metric, i) => (
+              <div key={i} className="space-y-3">
+                <div className="flex justify-between items-end">
+                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/60">{metric.label}</span>
+                  <span className="text-sm font-black tabular-nums text-foreground">{metric.value}%</span>
+                </div>
+                <div className="h-2 w-full bg-foreground/5 rounded-full overflow-hidden border border-foreground/5">
+                  <div 
+                    className={`h-full ${metric.color} rounded-full transition-all duration-[2000ms] ease-out shadow-[0_0_15px_rgba(212,175,55,0.3)]`}
+                    style={{ 
+                      width: `${metric.value}%`,
+                      transitionDelay: `${i * 200}ms`
+                    }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Subtle Grid Pattern Overlay */}
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none select-none overflow-hidden" style={{ backgroundImage: 'radial-gradient(#D4AF37 0.5px, transparent 0.5px)', backgroundSize: '24px 24px' }} />
+        </div>
+
         <div className="p-8 rounded-3xl bg-foreground/5 border border-foreground/10 mb-12">
           <h3 className="text-xs font-black uppercase tracking-[0.3em] text-foreground/40 mb-4">
             Outlook Summary

@@ -225,8 +225,9 @@ export default function CountryClient() {
         <div className="relative z-20 text-center px-6 animate-in fade-in zoom-in duration-1000">
           <div className="flex flex-col items-center">
             <div className="w-20 h-12 relative mb-6 rounded shadow-2xl overflow-hidden border border-white/10">
-              <Image src={data.flag} alt="Flag Icon" fill sizes="80px" className="object-cover" priority />
+              <Image src={data.flag} alt={t('flagOf').replace('%s', t(data.nameKey))} fill sizes="80px" className="object-cover" priority />
             </div>
+
             <h1 className="text-5xl sm:text-7xl font-black text-white uppercase tracking-tighter mb-4 drop-shadow-2xl">
               {t(data.nameKey)}
             </h1>

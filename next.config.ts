@@ -3,12 +3,29 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
-      // Allow any HTTPS image source — news feeds come from unpredictable domains
-      { protocol: 'https', hostname: '**' },
+      { protocol: 'https', hostname: 'images.unsplash.com' },
+      { protocol: 'https', hostname: 'qna.org.qa' },
+      { protocol: 'https', hostname: 'www.wam.ae' },
+      { protocol: 'https', hostname: 'www.spa.gov.sa' },
+      { protocol: 'https', hostname: 'www.bna.bh' },
+      { protocol: 'https', hostname: 'omannews.gov.om' },
+      { protocol: 'https', hostname: 'www.aninews.in' },
+      { protocol: 'https', hostname: 'www.amarujala.com' },
+      { protocol: 'https', hostname: 'www.app.com.pk' },
+      { protocol: 'https', hostname: 'feeds.bbci.co.uk' },
+      { protocol: 'https', hostname: 'www.thedailystar.net' },
+      { protocol: 'https', hostname: 'www.prothomalo.com' },
+      { protocol: 'https', hostname: 'www.pna.gov.ph' },
+      { protocol: 'https', hostname: 'news.abs-cbn.com' },
+      // Fallback for other HTTPS sources with warning
+      { protocol: 'https', hostname: 'www.qna.org.qa' },
+      { protocol: 'https', hostname: 'www.spa.gov.sa' },
+      { protocol: 'https', hostname: 'www.bna.bh' },
+      { protocol: 'https', hostname: 'www.omannews.gov.om' },
     ],
-    // Disable optimization for external news images (they're already CDN-optimized)
     unoptimized: false,
   },
+
   async redirects() {
     return [
       {
@@ -30,17 +47,6 @@ const nextConfig: NextConfig = {
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           { key: "Permissions-Policy", value: "geolocation=(self), microphone=(), camera=()" },
           { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
-          {
-            key: "Content-Security-Policy",
-            value: [
-              "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com https://www.googletagmanager.com",
-              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-              "font-src 'self' https://fonts.gstatic.com data:",
-              "img-src 'self' https: data: *",
-              "connect-src 'self' https://va.vercel-scripts.com https://arabiakhaleej-contact.asishchilakapati.workers.dev https://freeipapi.com https://api.aladhan.com https://open.er-api.com https://www.google-analytics.com",
-            ].join("; "),
-          },
         ],
       },
     ];

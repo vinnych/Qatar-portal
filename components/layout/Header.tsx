@@ -4,7 +4,6 @@ import Link from "next/link";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { useLanguage } from "@/lib/i18n";
-import { motion } from "framer-motion";
 
 export default function Header() {
   const { isRTL, language } = useLanguage();

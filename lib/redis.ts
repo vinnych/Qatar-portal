@@ -30,7 +30,32 @@ export const redis = redisUrl && redisToken
         delete memoryCache[key];
         return 1;
       },
+      incr: async (key: string) => {
+        const cached = memoryCache[key] || { value: 0, expiresAt: Date.now() + 60000 };
+        cached.value++;
+        memoryCache[key] = cached;
+        return cached.value;
+      },
+      expire: async (key: string, seconds: number) => {
+        if (memoryCache[key]) {
+          memoryCache[key].expiresAt = Date.now() + (seconds * 1000);
+        }
+        return 1;
+      }
     } as unknown as Redis;
+
+export async function rateLimit(ip: string, limit: number = 10, windowSeconds: number = 60) {
+  const key = `ratelimit:${ip}`;
+  const current = await redis.incr(key);
+  if (current === 1) {
+    await redis.expire(key, windowSeconds);
+  }
+  return {
+    success: current <= limit,
+    current,
+    limit
+  };
+}
 
 
 // Cache durations (in seconds)

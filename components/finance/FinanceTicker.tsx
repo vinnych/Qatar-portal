@@ -6,7 +6,8 @@ import { useLanguage } from "@/lib/i18n";
 
 export default function FinanceTicker() {
   const [rates, setRates] = useState<any>(null);
-  const [goldPrice, setGoldPrice] = useState<number>(2385.40); // Base live price
+  const [goldPrice, setGoldPrice] = useState<number>(2385.40);
+  const [goldChange, setGoldChange] = useState<number>(0.12);
   const [mounted, setMounted] = useState(false);
   const { t, isRTL } = useLanguage();
 
@@ -27,7 +28,10 @@ export default function FinanceTicker() {
           setRates(rateMap);
           
           const gold = json.commodities.find((c: any) => c.id === 'gold');
-          if (gold) setGoldPrice(gold.value);
+          if (gold) {
+            setGoldPrice(gold.value);
+            setGoldChange(gold.change);
+          }
         }
       } catch (e) {
         console.error("Finance API failed", e);
@@ -36,10 +40,25 @@ export default function FinanceTicker() {
 
     fetchData();
     const interval = setInterval(fetchData, 30000);
-    return () => clearInterval(interval);
+    
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible') fetchData();
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+    
+    return () => {
+      clearInterval(interval);
+      document.removeEventListener('visibilitychange', handleVisibility);
+    };
   }, []);
 
-  if (!mounted || !rates) return null;
+  if (!mounted || !rates) {
+    return (
+      <div className="w-full max-w-4xl mx-auto px-4 mb-8">
+        <div className="glass rounded-full h-14 w-full animate-pulse opacity-50"></div>
+      </div>
+    );
+  }
 
   const gccCurrencies = [
     { code: "AED", name: t('uaeDirham'), symbol: "د.إ" },
@@ -61,7 +80,7 @@ export default function FinanceTicker() {
             <p className="text-[10px] uppercase font-bold tracking-[0.15em] text-foreground/50 leading-none mb-1">{t('gold')}</p>
             <p className="text-sm font-bold text-foreground tabular-nums leading-none">
               ${goldPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-              <span className={`ml-2 text-[10px] text-green-600 dark:text-green-400 font-bold ${isRTL ? 'mr-2' : 'ml-2'}`}>+0.12%</span>
+              <span className={`${isRTL ? 'mr-2' : 'ml-2'} text-[10px] ${goldChange >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-500'} font-bold`}>{goldChange >= 0 ? '+' : ''}{goldChange.toFixed(2)}%</span>
             </p>
           </div>
         </div>
