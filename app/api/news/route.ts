@@ -30,9 +30,9 @@ const GCC_FEEDS = {
 };
 
 const EXPAT_FEEDS = {
-  INDIA: { en: 'https://www.aninews.in/rss/feed/category/national.xml', regional: 'https://www.amarujala.com/rss/india-news.xml' },
+  INDIA: { en: 'https://pib.gov.in/RssXml.aspx?LID=1', regional: 'https://pib.gov.in/RssXml.aspx?LID=2' },
   PAKISTAN: { en: 'https://www.app.com.pk/feed/', regional: 'http://feeds.bbci.co.uk/urdu/rss.xml' },
-  BANGLADESH: { en: 'https://www.thedailystar.net/rss.xml', regional: 'https://www.prothomalo.com/feed/' },
+  BANGLADESH: { en: 'https://www.bssnews.net/rss', regional: 'https://www.bssnews.net/bn/rss' },
   PHILIPPINES: { en: 'https://www.pna.gov.ph/rss/national.xml', regional: 'https://news.abs-cbn.com/feed' }
 };
 
