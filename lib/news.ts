@@ -13,6 +13,7 @@ export interface NewsItem {
   image?: string;
   tags?: string[];
   isPremium?: boolean;
+  content?: string;
 }
 
 /**

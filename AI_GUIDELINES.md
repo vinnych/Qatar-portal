@@ -26,10 +26,11 @@ This document provides core principles and technical standards for AI assistants
 13. **Engagement Variety:** Ensure a balance in content variety and high-quality engagement.
 14. **News Ecosystem:** Dedicated, high-performance pages for Entertainment, Technology, Politics, and Sports.
 15. **Data-Driven Insights:** Use public survey reports and trending metrics to guide content presentation.
+16. **Long-Form Excellence (Groq):** AI-generated articles must be at least 1200 words, authoritative, and formatted in clean Markdown. They must follow a "journalistic-first" approach, avoiding repetitive AI patterns.
 
 ## V. ACCESSIBILITY & SECURITY
-16. **Inclusive Design:** Adhere to WCAG 2.1 accessibility standards.
-17. **Hardened Security:** Ensure all forms, data inputs, and user interactions are secure and follow privacy best practices.
+17. **Inclusive Design:** Adhere to WCAG 2.1 accessibility standards.
+18. **Hardened Security:** Ensure all forms, data inputs, and user interactions are secure and follow privacy best practices.
 
 ---
-*Last Updated: April 29, 2026*
+*Last Updated: April 30, 2026*

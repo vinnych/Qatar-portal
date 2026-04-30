@@ -43,9 +43,10 @@ As an independent digital platform, these rules are **STRICT** and must be revie
 - **Always** provide a high-visibility link to the official government portal for every guide (e.g., Hukoomi, MOI, Metrash2).
 - **Always** state that information is for guidance purposes only and subject to change by official authorities.
 
-#### 3. Data Privacy (Zero-PII)
+#### 3. Data Privacy (User-Centric)
 - **Always** ensure the site requires no login or registration.
-- **Always** ensure IP addresses and GPS coordinates are processed transiently and never stored in a permanent database.
+- **Always** disclose the use of third-party advertising cookies (Google AdSense) in the Privacy Policy.
+- **Always** ensure IP addresses are used for transient utility (Geo-location) and never stored permanently.
 
 ---
 
@@ -56,9 +57,13 @@ To provide real-time regional updates while strictly adhering to the **Cybercrim
 
 ### 🛡️ Operational Safeguards
 1. **Official-Only Sourcing**: We aggregate exclusively from official state news agencies.
-2. **Verbatim Content**: Content is displayed as-is. No original reporting or editorial commentary.
-3. **Direct Redirection**: Headlines link directly to the official agency's portal.
-4. **Transient Archiving**: News content is not permanently stored. A 30-day transient archive is maintained in Redis (Upstash) for SEO and deep-linking.
+2. **Original Insights**: Original, long-form content (1000+ words) is generated to provide unique regional analysis while strictly avoiding sensitive political or religious commentary.
+3. **Verbatim Content (Aggregated)**: External news content is displayed as-is with no editorial commentary.
+4. **Direct Redirection**: Aggregated headlines link directly to the official agency's portal.
+5. **Archive Optimization**: News content is kept in a transient archive (max 100 items per language) to ensure high-quality indexing and system performance.
+6. **Advertising Transparency**: 
+    - Google AdSense is used for monetization with clear policy disclosure.
+    - All marketplace links are clearly disclosed as affiliate links.
 
 ### 🔗 Integrated Sources (GCC)
 | Agency | Country | Format | Status |
@@ -89,4 +94,4 @@ To serve the diverse demographic of the GCC, the platform includes official nati
 > These rules help minimize risk but do not eliminate it. Qatari laws are subject to broad interpretation by authorities. Use this project as a bridge to information, not as a replacement for official state sources.
 
 ---
-*Last Updated: April 29, 2026*
+*Last Updated: April 30, 2026*

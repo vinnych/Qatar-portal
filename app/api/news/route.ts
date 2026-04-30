@@ -114,7 +114,7 @@ export async function GET(request: Request) {
   const lang = (searchParams.get('lang') || 'en') as 'en' | 'ar';
   const slug = searchParams.get('slug');
   const category = searchParams.get('category');
-  const limit = parseInt(searchParams.get('limit') || '100');
+  const limit = parseInt(searchParams.get('limit') || '20'); // Reduced default limit from 100 to 20
   const cacheKey = `news_unified_${lang}`;
 
   try {
@@ -168,7 +168,10 @@ export async function GET(request: Request) {
         const mergedMap = new Map<string, NewsItem>();
         allNews.forEach(item => mergedMap.set(item.slug, item));
         freshNews.forEach(item => mergedMap.set(item.slug, item));
-        allNews = Array.from(mergedMap.values()).sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime()).slice(0, 3000);
+        
+        allNews = Array.from(mergedMap.values())
+          .sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime())
+          .slice(0, 100); // Reduced from 3000 to 100 to focus on quality
         await redis.set(archiveKey, allNews, { ex: CACHE_TIMES.NEWS_ARCHIVE });
         await redis.set(cacheKey, 'true', { ex: CACHE_TIMES.NEWS });
       }

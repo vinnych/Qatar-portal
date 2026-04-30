@@ -20,6 +20,7 @@ To maintain a clean project structure, documentation is organized as follows:
 - **Styling**: Vanilla CSS / Premium UI Components
 - **Data Layer**: Redis (Upstash) for transient caching
 - **News**: Official State Agency RSS Aggregation
+- **AI**: Groq API for Original Regional Insights
 - **Deployment**: Vercel
 
 ## ⚖️ Project Status & Nature
@@ -27,4 +28,4 @@ To maintain a clean project structure, documentation is organized as follows:
 Arabia Khaleej is an **independent regional reference**. It is not affiliated with any government body or official media agency. All content is aggregated from public sources and provided for informational purposes only.
 
 ---
-*Last Updated: April 29, 2026*
+*Last Updated: April 30, 2026*

@@ -7,28 +7,28 @@ export default function PrivacyPage() {
 
   const sections = [
     {
-      title: "No Data Collection",
-      body: "Arabia Khaleej does not collect, store, process, or sell any personally identifiable information (PII). We have no user accounts, no sign-up flows, and no persistent data storage tied to individuals.",
+      title: "No Personal Account Data",
+      body: "Arabia Khaleej does not require user accounts or sign-up flows. We do not store or process personally identifiable information (PII) like names or addresses in our internal databases.",
     },
     {
-      title: "No Cookies",
-      body: "We do not set tracking, advertising, or analytics cookies. Your browser's cookie jar remains untouched by us. The only state stored locally is your theme preference, which never leaves your device.",
+      title: "Cookies and Advertising",
+      body: "We use cookies to improve your experience and serve relevant advertisements through Google AdSense. Google uses cookies to serve ads based on a user's previous visits to this website or other websites. You may opt out of personalized advertising by visiting Google's Ads Settings.",
     },
     {
-      title: "No Third-Party Trackers",
-      body: "We do not embed third-party advertising networks, pixel trackers, or social media widgets that phone home with your browsing behaviour. What you read here stays here.",
+      title: "Third-Party Partners",
+      body: "We partner with Google AdSense to provide regional advertising. These third-party vendors use cookies to serve ads based on your interests. We also link to official government portals which have their own privacy policies.",
     },
     {
       title: "Server Logs",
-      body: "Standard web server infrastructure may retain IP-level access logs for security and uptime monitoring. These logs are not analysed for marketing purposes and are rotated regularly in line with industry practice.",
+      body: "Standard web server infrastructure may retain IP-level access logs for security and uptime monitoring. These logs are rotated regularly and are not used for individual user profiling.",
     },
     {
-      title: "External Links",
-      body: "Pages may link to official government portals and third-party sources. Once you leave Arabia Khaleej, their own privacy policies apply. We encourage you to review them.",
+      title: "Transparency & Control",
+      body: "You can control or delete cookies through your browser settings. By using this site, you consent to our use of cookies and third-party partners as described in this policy.",
     },
     {
       title: "Changes to This Policy",
-      body: "We may update this policy as the platform evolves. Material changes will be reflected here with a revised date. Continued use of the site constitutes acceptance of the current policy.",
+      body: "We may update this policy to reflect changes in our services or legal requirements. Material changes will be reflected here with a revised date.",
     },
   ];
 
@@ -58,10 +58,10 @@ export default function PrivacyPage() {
         </div>
         <div>
           <p className="text-xs font-bold uppercase tracking-widest text-brand-gold mb-1">
-            {isRTL ? 'الالتزام بخصوصية المستخدم' : 'Privacy-First Commitment'}
+            {isRTL ? 'الشفافية والخصوصية' : 'Transparency & Privacy'}
           </p>
           <p className="text-sm font-light opacity-70 leading-relaxed">
-            {isRTL ? 'لا حسابات. لا كوكيز. لا متتبعات. إخفاء الهوية بالكامل حسب التصميم.' : 'No accounts. No cookies. No trackers. Full anonymity by design.'}
+            {isRTL ? 'نحن نستخدم كوكيز الإعلانات لتقديم محتوى ذو صلة مع الحفاظ على سرية هويتك.' : 'We use advertising cookies to provide relevant content while maintaining your anonymity.'}
           </p>
         </div>
       </div>

@@ -7,7 +7,10 @@ This document details the external services, data architecture, and SEO strategy
 ## 🛠️ External Services Inventory
 
 ### 1. Official News Aggregation (RSS Feeds)
-The "Press Terminal" fetches real-time news from official state agencies (QNA, WAM, SPA, BNA, ONA).
+The "Press Terminal" fetches real-time news from official state agencies (QNA, WAM, SPA, BNA, ONA). Archive limited to 100 items per language for SEO quality.
+
+### 2. AI Content Generation (Groq)
+Dedicated long-form "Original Insights" (1200+ words) are generated using the Groq API (`llama-3.3-70b-versatile`) to provide unique regional analysis for AdSense authority.
 
 ### 2. Financial & Market Data
 | Service | Data Type | Refresh Rate | API Provider |
@@ -28,6 +31,7 @@ The "Press Terminal" fetches real-time news from official state agencies (QNA, W
 | **Unsplash** | Smart Article Images | Free / Open | Keyword-based Dynamic Link |
 | **Typography** | Apple System Stack | OS Native | -apple-system, SF Pro Display |
 | **Lucide React** | UI Iconography | ISC | NPM Library |
+| **React Markdown** | Long-form Rendering | MIT | NPM Library |
 
 ---
 
@@ -61,6 +65,8 @@ Arabia Khaleej is a **structured knowledge graph** for the GCC region. Every num
 - [x] Unique `<title>` and `<meta description>` per page.
 - [x] OpenGraph images (1200×630) and Twitter cards.
 - [x] Dublin Core metadata implementation.
+- [x] Google AdSense — script integrated, policy aligned.
+- [x] original long-form content — 1000+ word dedicated posts.
 
 ---
-*Last Updated: April 29, 2026*
+*Last Updated: April 30, 2026*

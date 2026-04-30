@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Clock, TrendingUp, UserPlus, Newspaper } from "lucide-react";
+import { Clock, TrendingUp, UserPlus, Newspaper, ShoppingBag } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
 import PrayerLite from "@/components/prayer/PrayerLite";
 import FinanceTicker from "@/components/finance/FinanceTicker";
@@ -46,6 +46,7 @@ export default function HomeClient() {
   const NAV_LINKS = [
     { name: t('prayerTimes'), href: "/prayer", icon: Clock },
     { name: t('marketInsights'), href: "/market-insight", icon: TrendingUp },
+    { name: t('marketplace'), href: "/marketplace", icon: ShoppingBag },
     { name: t('pressTerminal'), href: "/news", icon: Newspaper },
     { name: t('boutiqueEnquiry'), href: "/join", icon: UserPlus },
   ];

@@ -344,7 +344,29 @@ export const translations: Translations = {
   tech: { en: "Tech", ar: "تكنولوجيا" },
   entertainment: { en: "Entertainment", ar: "ترفيه" },
   sports: { en: "Sports", ar: "رياضة" },
-  loadMore: { en: "Discover More", ar: "اكتشف المزيد" }
+  loadMore: { en: "Discover More", ar: "اكتشف المزيد" },
+
+  // Marketplace
+  marketplace: { en: "Marketplace", ar: "السوق" },
+  exclusiveOffers: { en: "Exclusive Offers", ar: "عروض حصرية" },
+  boutiqueMarket: { en: "Boutique Marketplace", ar: "سوق البوتيك" },
+  marketSearch: { en: "Search products and brands...", ar: "البحث عن المنتجات والعلامات التجارية..." },
+  viewOnStore: { en: "View on Store", ar: "عرض في المتجر" },
+  affiliateDisclosure: { 
+    en: "Arabia Khaleej features curated products from trusted regional retailers. We may earn a commission when you purchase through our links.", 
+    ar: "تتميز عربية خليج بمنتجات مختارة من بائعي التجزئة الإقليميين الموثوقين. قد نكسب عمولة عند الشراء من خلال روابطنا." 
+  },
+  categories: { en: "Categories", ar: "الفئات" },
+  fashion: { en: "Fashion", ar: "أزياء" },
+  electronics: { en: "Electronics", ar: "إلكترونيات" },
+  beauty: { en: "Beauty & Grooming", ar: "الجمال والعناية" },
+  homeLifestyle: { en: "Home & Lifestyle", ar: "المنزل وأسلوب الحياة" },
+  wellness: { en: "Wellness", ar: "العافية" },
+  bestSellers: { en: "Best Sellers", ar: "الأكثر مبيعاً" },
+  trendingNow: { en: "Trending Now", ar: "رائج الآن" },
+  trendingThisWeek: { en: "Top 10 Trending This Week", ar: "أفضل 10 منتجات رائجة هذا الأسبوع" },
+  trendingOn: { en: "Top 10 Trending on %s", ar: "أفضل 10 منتجات رائجة على %s" },
+  limitedOffer: { en: "Limited Offer", ar: "عرض محدود" }
 };
 
 interface LanguageContextType {

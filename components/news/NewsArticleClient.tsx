@@ -8,6 +8,7 @@ import Image from "next/image";
 import { getDeterministicFallback } from "@/lib/fallbacks";
 import MobileFAB from "@/components/layout/MobileFAB";
 import { useRouter } from "next/navigation";
+import ReactMarkdown from 'react-markdown';
 
 interface NewsItem {
   id: string;
@@ -20,6 +21,7 @@ interface NewsItem {
   category: 'gcc' | 'expat';
   language: 'en' | 'ar' | 'regional';
   image?: string;
+  content?: string;
 }
 
 export default function NewsArticleClient({ 
@@ -213,9 +215,27 @@ export default function NewsArticleClient({
         {/* Article Content */}
         <div className={`grid grid-cols-1 ${perspectiveMode ? 'lg:grid-cols-2' : ''} gap-12 max-w-none`}>
           <div className="space-y-8">
-            <p className="text-xl sm:text-2xl text-foreground/90 leading-relaxed font-normal">
+            <p className="text-xl sm:text-2xl text-foreground/90 leading-relaxed font-normal italic">
               {article.description}
             </p>
+
+            {article.content && (
+              <div className={`prose prose-invert prose-brand-gold max-w-none mt-12 space-y-6 text-foreground/80 leading-loose ${isRTL ? 'text-right' : 'text-left'}`}>
+                <ReactMarkdown
+                  components={{
+                    h1: ({node, ...props}) => <h1 className="text-3xl font-bold mt-12 mb-6 text-foreground" {...props} />,
+                    h2: ({node, ...props}) => <h2 className="text-2xl font-bold mt-10 mb-5 text-foreground/90" {...props} />,
+                    h3: ({node, ...props}) => <h3 className="text-xl font-bold mt-8 mb-4 text-foreground/80" {...props} />,
+                    p: ({node, ...props}) => <p className="text-lg mb-6 opacity-80" {...props} />,
+                    ul: ({node, ...props}) => <ul className="list-disc pl-6 mb-6 space-y-2 opacity-80" {...props} />,
+                    ol: ({node, ...props}) => <ol className="list-decimal pl-6 mb-6 space-y-2 opacity-80" {...props} />,
+                    li: ({node, ...props}) => <li className="text-lg" {...props} />,
+                  }}
+                >
+                  {article.content}
+                </ReactMarkdown>
+              </div>
+            )}
             
             <div className="glass p-8 rounded-[2rem] border-brand-gold/10 space-y-6">
               <div className="flex items-start gap-4">
