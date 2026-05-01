@@ -163,6 +163,7 @@ export function pageMeta({
       },
     },
     other: {
+      "google-adsense-account": "ca-pub-7212871157824722",
       "geo.region": geo.region || "QA-DA",
       "geo.placename": geo.placename || "Doha, Qatar",
       "geo.position": `${geo.latitude};${geo.longitude}`,
