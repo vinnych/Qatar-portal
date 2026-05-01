@@ -30,8 +30,8 @@ export function toSlug(title: string, url: string): string {
     .slice(0, 80)
     .replace(/-+$/, "");
     
-  // If base resulted in nothing (e.g. only symbols), use "news"
-  const slugBase = base || "news";
+  // If base resulted in nothing (e.g. only symbols), use "insight"
+  const slugBase = base || "insight";
   
   // 6-char hash from url for strong uniqueness in large archives
   let h = 0;

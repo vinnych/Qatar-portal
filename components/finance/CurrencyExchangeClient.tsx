@@ -113,7 +113,7 @@ export default function CurrencyExchangeClient() {
     const url = window.location.href;
     try {
       if (navigator.share) {
-        await navigator.share({ title: "Currency Conversion | Arabia Khaleej", text, url });
+        await navigator.share({ title: t("currencyConversionTitle"), text, url });
       } else {
         await navigator.clipboard.writeText(`${text}\n${url}`);
         setCopied(true);
@@ -150,7 +150,7 @@ export default function CurrencyExchangeClient() {
       <div className="flex flex-col items-center justify-center min-h-screen">
         <div className="w-14 h-14 rounded-full border-2 border-brand-gold/20 border-t-brand-gold animate-spin mb-4" />
         <p className="text-[10px] uppercase font-bold tracking-[0.4em] text-accent animate-pulse">
-          {isRTL ? "جاري تحميل الأسعار..." : "Loading rates..."}
+          {t('loadingRates')}
         </p>
       </div>
     );
@@ -159,7 +159,7 @@ export default function CurrencyExchangeClient() {
   const breadcrumbItems = [
     { name: t("home"), href: "/" },
     { name: t("marketInsights"), href: "/market-insight" },
-    { name: isRTL ? "تحويل العملات" : "Currency Exchange", href: "/currency-exchange" },
+    { name: t("currencyExchange"), href: "/currency-exchange" },
   ];
 
   const renderPicker = (
@@ -178,11 +178,11 @@ export default function CurrencyExchangeClient() {
             <input
               id="currency-search"
               name="currency-search"
-              aria-label={isRTL ? "ابحث عن عملة" : "Search currency"}
+              aria-label={t("searchCurrency")}
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder={isRTL ? "ابحث عن عملة..." : "Search currency..."}
+              placeholder={t("searchCurrency")}
               className={`w-full py-3 ${isRTL ? 'pr-10 pl-4 text-right' : 'pl-10 pr-4'} bg-foreground/5 rounded-2xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-gold/30 border border-transparent focus:border-brand-gold/20 placeholder:text-foreground/30`}
               autoFocus
             />
@@ -199,7 +199,7 @@ export default function CurrencyExchangeClient() {
           {grouped.favList.length > 0 && (
             <div className="px-4 pt-3">
               <p className={`text-[9px] uppercase font-black tracking-[0.3em] text-accent mb-2 ${isRTL ? 'text-right' : ''}`}>
-                ★ {isRTL ? "المفضلة" : "Favorites"}
+                ★ {t("favorites")}
               </p>
               {grouped.favList.map(c => (
                 <CurrencyRow key={`fav-${c.code}`} currency={c} isRTL={isRTL} lang={language} isActive={c.code === currentCode} isFav onToggleFav={() => toggleFavorite(c.code)} onSelect={() => { onSelect(c.code); setSearchQuery(""); }} />
@@ -223,7 +223,7 @@ export default function CurrencyExchangeClient() {
           })}
           {filteredCurrencies.length === 0 && (
             <div className="p-8 text-center">
-              <p className="text-foreground/30 text-sm font-medium">{isRTL ? "لا توجد نتائج" : "No results found"}</p>
+              <p className="text-foreground/30 text-sm font-medium">{t("noResults")}</p>
             </div>
           )}
         </div>
@@ -240,19 +240,19 @@ export default function CurrencyExchangeClient() {
       {/* Header */}
       <div className="w-full mb-12 animate-in fade-in slide-in-from-top-4 duration-1000">
         <p className="text-[10px] tracking-[0.5em] uppercase font-bold text-accent mb-3">
-          {isRTL ? "تحويل العملات" : "Currency Exchange"}
+          {t("currencyExchange")}
         </p>
         <h1 className="text-4xl md:text-5xl font-black serif text-foreground mb-4">
-          {isRTL ? "محوّل العملات" : "Currency Converter"}
+          {t("currencyConverter")}
         </h1>
         <p className="text-foreground/60 max-w-xl text-sm md:text-base leading-relaxed font-medium">
-          {isRTL ? "حوّل بين أكثر من 40 عملة عالمية بأسعار مباشرة. عملات الخليج والعملات الرئيسية وأكثر." : "Convert between 40+ world currencies with live rates. GCC currencies, major pairs, and more."}
+          {t("currencyExchangeDesc")}
         </p>
       </div>
 
       {/* ARIA Live Region for results */}
       <div className="sr-only" aria-live="polite" role="status">
-        {parsedAmount} {fromCode} {isRTL ? "يساوي" : "equals"} {result.toFixed(4)} {toCode}
+        {parsedAmount} {fromCode} {t("equals")} {result.toFixed(4)} {toCode}
       </div>
 
       {/* ═══ MAIN CONVERTER CARD ═══ */}
@@ -261,7 +261,7 @@ export default function CurrencyExchangeClient() {
           {/* From Section */}
           <div className="mb-3">
             <label htmlFor="from-amount" className={`text-[10px] uppercase font-black tracking-[0.3em] text-foreground/40 mb-3 block ${isRTL ? 'text-right' : ''}`}>
-              {isRTL ? "من" : "From"}
+              {t("from")}
             </label>
             <div className={`flex gap-3 items-stretch ${isRTL ? 'flex-row-reverse' : ''}`}>
               {/* Currency Selector */}
@@ -313,7 +313,7 @@ export default function CurrencyExchangeClient() {
               id="swap-currencies"
               onClick={handleSwap}
               className={`relative z-10 w-12 h-12 rounded-2xl gold-gradient text-brand-obsidian flex items-center justify-center hover:scale-110 active:scale-95 transition-all shadow-lg hover:shadow-xl ${isSwapping ? 'animate-spin' : ''}`}
-              aria-label="Swap currencies"
+              aria-label={t('swapCurrencies')}
             >
               <ArrowDownUp size={18} strokeWidth={2.5} />
             </button>
@@ -322,7 +322,7 @@ export default function CurrencyExchangeClient() {
           {/* To Section */}
           <div className="mb-6">
             <label className={`text-[10px] uppercase font-black tracking-[0.3em] text-foreground/40 mb-3 block ${isRTL ? 'text-right' : ''}`}>
-              {isRTL ? "إلى" : "To"}
+              {t("to")}
             </label>
             <div className={`flex gap-3 items-stretch ${isRTL ? 'flex-row-reverse' : ''}`}>
               <div ref={toRef} className="relative">
@@ -366,13 +366,13 @@ export default function CurrencyExchangeClient() {
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <button onClick={handleShare} className="p-2 rounded-xl hover:bg-foreground/5 transition-all text-foreground/30 hover:text-accent" aria-label="Share result">
+              <button onClick={handleShare} className="p-2 rounded-xl hover:bg-foreground/5 transition-all text-foreground/30 hover:text-accent" aria-label={t('shareResult')}>
                 <Share2 size={14} />
               </button>
-              <button onClick={handleCopy} className="p-2 rounded-xl hover:bg-foreground/5 transition-all text-foreground/30 hover:text-accent" aria-label="Copy result">
+              <button onClick={handleCopy} className="p-2 rounded-xl hover:bg-foreground/5 transition-all text-foreground/30 hover:text-accent" aria-label={t('copyResult')}>
                 {copied ? <Check size={14} className="text-green-500" /> : <Copy size={14} />}
               </button>
-              <button onClick={() => fetchRates(true)} className={`p-2 rounded-xl hover:bg-foreground/5 transition-all text-foreground/30 hover:text-accent ${refreshing ? 'animate-spin' : ''}`} aria-label="Refresh rates">
+              <button onClick={() => fetchRates(true)} className={`p-2 rounded-xl hover:bg-foreground/5 transition-all text-foreground/30 hover:text-accent ${refreshing ? 'animate-spin' : ''}`} aria-label={t('refreshRates')}>
                 <RefreshCw size={14} />
               </button>
             </div>
@@ -383,7 +383,7 @@ export default function CurrencyExchangeClient() {
       {/* ═══ QUICK AMOUNTS ═══ */}
       <div className="w-full max-w-2xl mb-12 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
         <p className={`text-[10px] uppercase font-black tracking-[0.3em] text-foreground/30 mb-4 ${isRTL ? 'text-right' : ''}`}>
-          {isRTL ? "تحويلات سريعة" : "Quick Conversions"}
+          {t("quickConversions")}
         </p>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           {quickAmounts.map(amt => (
@@ -409,7 +409,7 @@ export default function CurrencyExchangeClient() {
             <div className="w-8 h-8 rounded-xl bg-brand-gold/10 flex items-center justify-center text-accent">
               <Globe size={16} />
             </div>
-            <p className="text-sm font-black">{isRTL ? "سعر الصرف المعكوس" : "Inverse Rate"}</p>
+            <p className="text-sm font-black">{t("inverseRate")}</p>
           </div>
           <div className={`flex items-center justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
             <p className="text-foreground/50 text-sm font-medium">1 {toCode}</p>
@@ -421,7 +421,7 @@ export default function CurrencyExchangeClient() {
       {/* ═══ GCC RATE CARDS ═══ */}
       <div className="w-full max-w-4xl mb-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-500">
         <p className={`text-[10px] uppercase font-black tracking-[0.3em] text-accent mb-6 ${isRTL ? 'text-right' : ''}`}>
-          {isRTL ? "أسعار عملات الخليج" : "GCC Currency Rates"}
+          {t("gccCurrencyRates")}
         </p>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
           {currencies.filter(c => c.region === "gcc").map(c => (
@@ -433,7 +433,7 @@ export default function CurrencyExchangeClient() {
               <span className="text-2xl mb-2 block">{c.flag}</span>
               <p className="text-[10px] font-black uppercase tracking-widest text-foreground/40 mb-1">{c.code}</p>
               <p className="text-lg font-black tabular-nums group-hover:text-accent transition-colors">{c.rate.toFixed(3)}</p>
-              <p className="text-[8px] font-bold text-foreground/20 uppercase tracking-wider mt-1">vs USD</p>
+              <p className="text-[8px] font-bold text-foreground/20 uppercase tracking-wider mt-1">{t('vsUSD')}</p>
             </button>
           ))}
         </div>
@@ -445,19 +445,19 @@ export default function CurrencyExchangeClient() {
           <div className="flex items-center justify-center gap-2 mb-4">
             <Clock size={10} className="text-foreground/30" />
             <p className="text-[9px] font-bold text-foreground/30 uppercase tracking-widest">
-              {isRTL ? "آخر تحديث:" : "Last updated:"} {new Date(lastUpdated).toLocaleString()}
+              {t("lastUpdatedColon")} {new Date(lastUpdated).toLocaleString()}
             </p>
           </div>
         )}
         <p className="text-[11px] text-foreground/40 font-bold uppercase tracking-[0.3em] leading-loose">
-          {isRTL ? "الأسعار لأغراض إعلامية فقط. تحقق من المؤسسات المالية المحلية للأسعار الرسمية." : "Rates for informational purposes only. Verify with local financial institutions for official rates."}
+          {t("ratesInfoOnly")}
         </p>
       </div>
 
       {/* Back */}
       <div className="mt-8">
         <Link href="/market-insight" className="text-[11px] font-bold uppercase tracking-[0.4em] text-accent hover:tracking-[0.6em] transition-all">
-          {isRTL ? "رؤى السوق ←" : "← Market Insights"}
+          {isRTL ? `← ${t('marketInsights')}` : `← ${t('marketInsights')}`}
         </Link>
       </div>
     </div>

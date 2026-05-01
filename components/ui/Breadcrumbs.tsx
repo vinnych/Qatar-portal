@@ -13,14 +13,18 @@ interface BreadcrumbsProps {
   isRTL?: boolean;
 }
 
+import { useLanguage } from "@/lib/i18n";
+
 /**
  * Visual Breadcrumbs component for SEO and UX.
  * Pairs with BreadcrumbSchema (JSON-LD) in StructuredData.tsx.
  */
 export default function Breadcrumbs({ items, isRTL }: BreadcrumbsProps) {
+  const { t } = useLanguage();
+
   return (
     <nav
-      aria-label="Breadcrumb"
+      aria-label={t('breadcrumb')}
       className="flex mb-8 text-[10px] font-black uppercase tracking-[0.2em]"
     >
       <ol className="flex items-center gap-2 text-foreground/40">

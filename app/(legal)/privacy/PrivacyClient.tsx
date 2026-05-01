@@ -7,28 +7,28 @@ export default function PrivacyPage() {
 
   const sections = [
     {
-      title: "No Personal Account Data",
-      body: "Arabia Khaleej does not require user accounts or sign-up flows. We do not store or process personally identifiable information (PII) like names or addresses in our internal databases.",
+      title: t('ppSection1Title'),
+      body: t('ppSection1Body'),
     },
     {
-      title: "Cookies and Advertising",
-      body: "We use cookies to improve your experience and serve relevant advertisements through Google AdSense. Google uses cookies to serve ads based on a user's previous visits to this website or other websites. You may opt out of personalized advertising by visiting Google's Ads Settings.",
+      title: t('ppSection2Title'),
+      body: t('ppSection2Body'),
     },
     {
-      title: "Third-Party Partners",
-      body: "We partner with Google AdSense to provide regional advertising. These third-party vendors use cookies to serve ads based on your interests. We also link to official government portals which have their own privacy policies.",
+      title: t('ppSection3Title'),
+      body: t('ppSection3Body'),
     },
     {
-      title: "Server Logs",
-      body: "Standard web server infrastructure may retain IP-level access logs for security and uptime monitoring. These logs are rotated regularly and are not used for individual user profiling.",
+      title: t('ppSection4Title'),
+      body: t('ppSection4Body'),
     },
     {
-      title: "Transparency & Control",
-      body: "You can control or delete cookies through your browser settings. By using this site, you consent to our use of cookies and third-party partners as described in this policy.",
+      title: t('ppSection5Title'),
+      body: t('ppSection5Body'),
     },
     {
-      title: "Changes to This Policy",
-      body: "We may update this policy to reflect changes in our services or legal requirements. Material changes will be reflected here with a revised date.",
+      title: t('ppSection6Title'),
+      body: t('ppSection6Body'),
     },
   ];
 
@@ -44,10 +44,7 @@ export default function PrivacyPage() {
         </h1>
         <div className={`w-16 h-[2px] bg-gradient-to-r ${isRTL ? 'from-transparent to-brand-gold mr-auto ml-0' : 'from-brand-gold to-transparent'} rounded-full mb-8`} />
         <p className={`text-base sm:text-lg font-light leading-relaxed opacity-70 max-w-xl ${isRTL ? 'text-right' : ''}`}>
-          {isRTL 
-            ? "لقد بنينا عربية خليج لتُقرأ، لا لتُحصد. خصوصيتك ليست ميزة - إنها وضع افتراضي."
-            : "We built Arabia Khaleej to be read, not to harvest. Your privacy is not a feature — it is a default."
-          }
+          {t('privacyDesc')}
         </p>
       </header>
 
@@ -58,10 +55,10 @@ export default function PrivacyPage() {
         </div>
         <div>
           <p className="text-xs font-bold uppercase tracking-widest text-brand-gold mb-1">
-            {isRTL ? 'الشفافية والخصوصية' : 'Transparency & Privacy'}
+            {t('transparencyNotice')}
           </p>
           <p className="text-sm font-light opacity-70 leading-relaxed">
-            {isRTL ? 'نحن نستخدم كوكيز الإعلانات لتقديم محتوى ذو صلة مع الحفاظ على سرية هويتك.' : 'We use advertising cookies to provide relevant content while maintaining your anonymity.'}
+            {t('privacyDisclaimer')}
           </p>
         </div>
       </div>

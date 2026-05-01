@@ -71,6 +71,8 @@ export async function generateMetadata({
   });
 }
 
+import { getT } from "@/lib/i18n-server";
+
 export default async function CountryPrayerPage({
   params,
 }: {
@@ -80,12 +82,13 @@ export default async function CountryPrayerPage({
   const country = getCountryBySlug(countrySlug);
   if (!country) notFound();
 
+  const t = await getT();
   const meta = COUNTRY_META[countrySlug] ?? { nameAr: country.name, capitalAr: country.capital, code: "QA" };
 
   const breadcrumbItems = [
-    { name: "Home", item: "/" },
-    { name: "Prayer Times", item: "/prayer" },
-    { name: country.name, item: `/prayer/${country.slug}` },
+    { name: t('home'), item: "/" },
+    { name: t('prayerTimes'), item: "/prayer" },
+    { name: t(countrySlug === 'saudi-arabia' ? 'saudiArabia' : countrySlug as any), item: `/prayer/${country.slug}` },
   ];
 
   const geo = {

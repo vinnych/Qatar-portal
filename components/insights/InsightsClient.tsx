@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { ExternalLink, RefreshCw, AlertCircle, Share2, CheckCircle2 } from "lucide-react";
+import { ExternalLink, RefreshCw, Share2, CheckCircle2 } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
 import Link from "next/link";
 import Image from "next/image";
@@ -19,7 +19,6 @@ interface InsightItem {
   category: string;
   language: 'en' | 'ar' | 'regional';
   image?: string;
-  isPremium?: boolean;
 }
 
 export default function InsightsClient() {
@@ -46,7 +45,7 @@ export default function InsightsClient() {
       if (!res.ok) throw new Error('Network response was not ok');
       const data = await res.json();
       if (data.status === 'success') {
-        setInsights(data.news); // the API still returns { news: [] }
+        setInsights(data.insights);
       } else {
         setError(true);
       }
@@ -104,7 +103,7 @@ export default function InsightsClient() {
             onClick={fetchInsights}
             disabled={loading}
             className="flex items-center gap-2 px-6 py-3 rounded-full glass border-brand-gold/15 hover:border-brand-gold/35 active:scale-95 transition-all duration-150"
-            aria-label="Refresh Insights"
+            aria-label={t('refreshInsights')}
           >
             <RefreshCw size={14} className={`${loading ? 'animate-spin' : ''} text-accent`} />
             <span className="text-xs font-bold uppercase tracking-widest text-foreground/70">{loading ? t('processing') : t('refresh')}</span>
@@ -124,11 +123,11 @@ export default function InsightsClient() {
       {!loading && insights.length > 0 && (
         <div className="mb-20 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-1000">
           <div className="flex items-center gap-4">
-            <h2 className="text-[10px] font-black uppercase tracking-[0.5em] text-brand-gold">Featured Insights</h2>
+            <h2 className="text-[10px] font-black uppercase tracking-[0.5em] text-brand-gold">{t('featuredInsights')}</h2>
             <div className="h-px flex-1 bg-brand-gold/10" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {insights.filter(n => n.isPremium).slice(0, 2).map((item, idx) => (
+            {insights.slice(0, 2).map((item, idx) => (
               <Link
                 key={`top-${item.id}-${idx}`}
                 href={`/insights/${item.slug}`}
@@ -145,7 +144,7 @@ export default function InsightsClient() {
                 <div className="absolute bottom-0 left-0 right-0 p-10 space-y-4">
                   <div className="flex items-center gap-3">
                     <span className="px-3 py-1 rounded-full bg-brand-gold text-brand-obsidian text-[8px] font-black uppercase tracking-widest">
-                      {t('premium') || 'Premium'}
+                      {t('premium')}
                     </span>
                   </div>
                   <h3 className="text-2xl sm:text-3xl font-black text-white leading-tight group-hover:text-brand-gold transition-colors duration-500">
@@ -182,9 +181,7 @@ export default function InsightsClient() {
               <Link
                 key={item.id + idx}
                 href={`/insights/${item.slug}`}
-                className={`group relative glass p-0 rounded-[2.5rem] border-brand-gold/10 hover:border-brand-gold/30 active:scale-[0.98] transition-all duration-500 flex flex-col h-full overflow-hidden select-none shadow-xl hover:shadow-2xl ${
-                  item.isPremium ? 'ring-1 ring-brand-gold/20' : ''
-                }`}
+                className="group relative glass p-0 rounded-[2.5rem] border-brand-gold/10 hover:border-brand-gold/30 active:scale-[0.98] transition-all duration-500 flex flex-col h-full overflow-hidden select-none shadow-xl hover:shadow-2xl ring-1 ring-brand-gold/20"
               >
                 {/* Premium Reflection Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-transparent pointer-events-none z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
@@ -208,40 +205,38 @@ export default function InsightsClient() {
                     <button 
                       onClick={(e) => handleShare(e, item)}
                       className="w-10 h-10 rounded-full glass border-white/20 flex items-center justify-center text-white hover:bg-brand-gold hover:text-brand-obsidian transition-all shadow-xl"
-                      aria-label="Share Article"
+                      aria-label={t('shareArticle')}
                     >
                       {sharingId === item.id ? <CheckCircle2 size={18} /> : <Share2 size={18} />}
                     </button>
                   </div>
 
-                    {/* Premium Badge */}
-                    {item.isPremium && (
-                      <div className="absolute top-6 left-6 z-20">
-                        <div className="px-4 py-1.5 rounded-full bg-brand-gold text-brand-obsidian text-xs font-bold uppercase tracking-[0.2em] shadow-lg flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-brand-obsidian animate-pulse" />
-                          {language === 'ar' ? 'مميز' : 'Premium'}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="p-8 flex flex-col flex-1 relative z-20">
-                    <h2 className={`text-lg sm:text-2xl font-bold text-foreground leading-tight group-hover:text-brand-gold transition-colors duration-500 line-clamp-3 flex-1 ${
-                      item.language === 'regional' ? 'font-serif-hi' : 'font-sans'
-                    }`}>
-                      {item.title}
-                    </h2>
-                    
-                    <div className="flex items-center justify-between mt-8 pt-6 border-t border-brand-gold/10">
-                      <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/50 flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-brand-gold/50" />
-                        {new Date(item.pubDate).toLocaleDateString(undefined, { day: '2-digit', month: 'short', year: 'numeric' })}
-                      </span>
-                      <div className="w-11 h-11 rounded-2xl bg-brand-gold/5 flex items-center justify-center group-hover:bg-brand-gold group-hover:text-brand-obsidian transition-all duration-500 shadow-inner">
-                        <ExternalLink size={18} className="opacity-40 group-hover:opacity-100" />
-                      </div>
+                  {/* Premium Badge */}
+                  <div className="absolute top-6 left-6 z-20">
+                    <div className="px-4 py-1.5 rounded-full bg-brand-gold text-brand-obsidian text-xs font-bold uppercase tracking-[0.2em] shadow-lg flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-brand-obsidian animate-pulse" />
+                      {t('premium')}
                     </div>
                   </div>
+                </div>
+
+                <div className="p-8 flex flex-col flex-1 relative z-20">
+                  <h2 className={`text-lg sm:text-2xl font-bold text-foreground leading-tight group-hover:text-brand-gold transition-colors duration-500 line-clamp-3 flex-1 ${
+                    item.language === 'regional' ? 'font-serif-hi' : 'font-sans'
+                  }`}>
+                    {item.title}
+                  </h2>
+                  
+                  <div className="flex items-center justify-between mt-8 pt-6 border-t border-brand-gold/10">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/50 flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-brand-gold/50" />
+                      {new Date(item.pubDate).toLocaleDateString(undefined, { day: '2-digit', month: 'short', year: 'numeric' })}
+                    </span>
+                    <div className="w-11 h-11 rounded-2xl bg-brand-gold/5 flex items-center justify-center group-hover:bg-brand-gold group-hover:text-brand-obsidian transition-all duration-500 shadow-inner">
+                      <ExternalLink size={18} className="opacity-40 group-hover:opacity-100" />
+                    </div>
+                  </div>
+                </div>
               </Link>
             ))}
           </div>
@@ -252,7 +247,7 @@ export default function InsightsClient() {
                 onClick={() => setDisplayCount(prev => prev + 12)}
                 className="group px-10 py-4 rounded-full border border-brand-gold/20 text-[11px] font-bold uppercase tracking-[0.3em] text-foreground/60 hover:bg-brand-gold hover:text-brand-obsidian hover:border-brand-gold active:scale-95 transition-all duration-500 shadow-xl"
               >
-                {t('loadMore') || "Discover More"}
+                {t('loadMore')}
               </button>
             </div>
           )}

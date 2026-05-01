@@ -7,24 +7,24 @@ export default function DisclaimerPage() {
 
   const points = [
     {
-      title: "Not an Official Source",
-      body: "Arabia Khaleej is an unofficial hobbyist project. It is not affiliated with, endorsed by, or sponsored by any government body, ministry, municipality, or official institution in the GCC or elsewhere.",
+      title: t('discSection1Title'),
+      body: t('discSection1Body'),
     },
     {
-      title: "Informational Purposes Only",
-      body: "All content is published for general guidance. It does not constitute legal, immigration, financial, medical, or professional advice. Regulations, fees, and procedures change; always confirm critical information directly with the relevant authority.",
+      title: t('discSection2Title'),
+      body: t('discSection2Body'),
     },
     {
-      title: "Accuracy & Completeness",
-      body: "While we make reasonable efforts to ensure content is accurate at the time of writing, we cannot guarantee that every detail remains current. Arabia Khaleej makes no representation or warranty, express or implied, regarding the accuracy, completeness, or fitness for a particular purpose of any information published here.",
+      title: t('discSection3Title'),
+      body: t('discSection3Body'),
     },
     {
-      title: "No Liability",
-      body: "Arabia Khaleej and its contributors accept no liability for any loss, damage, inconvenience, or harm arising from reliance on information published on this site. Use of this site is entirely at your own risk.",
+      title: t('discSection4Title'),
+      body: t('discSection4Body'),
     },
     {
-      title: "Trademarks & References",
-      body: "Any trademarks, service marks, or government names referenced on this site remain the property of their respective owners. Their mention is purely for informational context and does not imply endorsement or affiliation.",
+      title: t('discSection5Title'),
+      body: t('discSection5Body'),
     },
   ];
 
@@ -39,11 +39,8 @@ export default function DisclaimerPage() {
           {t('disclaimerTitle')}
         </h1>
         <div className={`w-16 h-[2px] bg-gradient-to-r ${isRTL ? 'from-transparent to-brand-gold mr-auto ml-0' : 'from-brand-gold to-transparent'} rounded-full mb-8`} />
-        <p className="text-base sm:text-lg font-light leading-relaxed opacity-70 max-w-xl">
-          {isRTL 
-            ? "يرجى القراءة قبل الاعتماد على أي معلومات تجدها هنا. نحن صادقون بشأن ما نحن عليه - وما لسنا عليه."
-            : "Please read before relying on any information you find here. We are honest about what we are — and what we are not."
-          }
+        <p className={`text-base sm:text-lg font-light leading-relaxed opacity-70 max-w-xl ${isRTL ? 'text-right' : ''}`}>
+          {t('disclaimerDesc')}
         </p>
       </header>
 
@@ -51,24 +48,10 @@ export default function DisclaimerPage() {
       <div className={`glass rounded-2xl px-8 py-6 mb-10 border border-brand-gold/20 relative overflow-hidden ${isRTL ? 'text-right' : ''}`}>
         <div className="absolute inset-0 bg-brand-gold/3 pointer-events-none" />
         <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-gold/70 mb-2">
-          {isRTL ? 'تنبيه هام' : 'Important Notice'}
+          {t('importantNotice')}
         </p>
         <p className="text-sm font-light leading-relaxed opacity-75">
-          {isRTL ? (
-            <>
-              عربية خليج هو مشروع هواة - وليس بوابة حكومية أو مكتب محاماة أو خدمة استشارية. يتم توفير جميع المعلومات 
-              <span className="font-semibold text-brand-gold/80 mx-1">"كما هي"</span> 
-              للإرشاد فقط. تحقق من كل شيء من المصادر الرسمية قبل اتخاذ أي إجراء.
-            </>
-          ) : (
-            <>
-              Arabia Khaleej is a premier regional reference — not a government portal, law
-              firm, or advisory service. All information is provided{" "}
-              <span className="font-semibold text-brand-gold/80">"as-is"</span> for
-              guidance only. Verify everything with official sources before taking
-              action.
-            </>
-          )}
+          {t('disclaimerWarning')}
         </p>
       </div>
 

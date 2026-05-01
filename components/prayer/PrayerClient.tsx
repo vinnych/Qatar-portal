@@ -313,7 +313,7 @@ export default function PrayerClient({ initialCity }: PrayerClientProps) {
                       
                       {/* Active Label (Mobile only) */}
                       {isActive && (
-                        <span className="absolute bottom-2 text-[6px] font-black uppercase tracking-widest opacity-40">{isRTL ? 'الحالي' : 'Active'}</span>
+                        <span className="absolute bottom-2 text-[6px] font-black uppercase tracking-widest opacity-40">{t('active')}</span>
                       )}
                     </div>
                   );
@@ -334,7 +334,7 @@ export default function PrayerClient({ initialCity }: PrayerClientProps) {
       {/* Back to Home */}
       <div className="mt-16 flex items-center justify-center">
         <Link href="/" className="text-[11px] font-bold uppercase tracking-[0.4em] text-accent hover:tracking-[0.6em] transition-all min-h-[44px] flex items-center justify-center px-4">
-          {isRTL ? 'الرئيسية ←' : '← Home'}
+          {isRTL ? `← ${t('home')}` : `← ${t('home')}`}
         </Link>
       </div>
     </div>

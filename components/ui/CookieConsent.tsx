@@ -40,8 +40,11 @@ export default function CookieConsent() {
             </h3>
             <p className="text-[10px] font-medium text-foreground/50 leading-tight">
               {language === 'ar' 
-                ? 'نستخدم ملفات تعريف الارتباط لضمان أمن البيانات.' 
-                : 'We use cookies to ensure regional data security.'}
+                ? 'نستخدم ملفات تعريف الارتباط لضمان أمن البيانات وتحليل الزيارات.' 
+                : 'We use cookies for data security, analytics, and targeted insights.'}
+              <a href="/privacy" className="ml-1 text-brand-gold hover:underline">
+                {language === 'ar' ? 'اعرف أكثر' : 'Learn more'}
+              </a>
             </p>
           </div>
         </div>

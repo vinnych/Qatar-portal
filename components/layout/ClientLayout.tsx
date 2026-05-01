@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import MobileNav from "./MobileNav";
 import { motion, AnimatePresence } from "framer-motion";
+import AdUnit, { AD_SLOTS } from "@/components/ui/AdUnit";
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const { language, t, isRTL } = useLanguage();
@@ -30,7 +31,9 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       </AnimatePresence>
       
       <MobileNav />
-      
+
+      <AdUnit slot={AD_SLOTS.footer} className="w-full max-w-5xl mx-auto px-4" />
+
       <footer className="p-10 border-t border-brand-gold/15 flex flex-wrap justify-center gap-6 text-xs md:text-sm font-black uppercase tracking-widest mb-32 md:mb-0 relative overflow-hidden">
         {/* Subtle decorative glow for the footer */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-brand-gold/30 to-transparent" />
@@ -38,30 +41,37 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
         <Link 
           href="/about" 
           className="px-6 py-2.5 rounded-full glass border-brand-gold/20 hover:border-brand-gold/60 text-foreground/40 hover:text-brand-gold transition-all hover:scale-105 active:scale-95 shadow-md hover:shadow-xl focus-visible:ring-2 focus-visible:ring-brand-gold outline-none"
-          aria-label="Learn about Arabia Khaleej"
+          aria-label={t('ariaLearn')}
         >
           {t('about')}
         </Link>
         <Link 
           href="/privacy" 
           className="px-6 py-2.5 rounded-full glass border-brand-gold/20 hover:border-brand-gold/60 text-foreground/40 hover:text-brand-gold transition-all hover:scale-105 active:scale-95 shadow-md hover:shadow-xl focus-visible:ring-2 focus-visible:ring-brand-gold outline-none"
-          aria-label="View Privacy Policy"
+          aria-label={t('ariaPrivacy')}
         >
           {t('privacy')}
         </Link>
         <Link 
           href="/terms" 
           className="px-6 py-2.5 rounded-full glass border-brand-gold/20 hover:border-brand-gold/60 text-foreground/40 hover:text-brand-gold transition-all hover:scale-105 active:scale-95 shadow-md hover:shadow-xl focus-visible:ring-2 focus-visible:ring-brand-gold outline-none"
-          aria-label="Read Terms of Service"
+          aria-label={t('ariaTerms')}
         >
           {t('terms')}
         </Link>
         <Link 
           href="/disclaimer" 
           className="px-6 py-2.5 rounded-full glass border-brand-gold/20 hover:border-brand-gold/60 text-foreground/40 hover:text-brand-gold transition-all hover:scale-105 active:scale-95 shadow-md hover:shadow-xl focus-visible:ring-2 focus-visible:ring-brand-gold outline-none"
-          aria-label="Read Legal Disclaimer"
+          aria-label={t('ariaDisclaimer')}
         >
           {t('disclaimer')}
+        </Link>
+        <Link 
+          href="/contact" 
+          className="px-6 py-2.5 rounded-full glass border-brand-gold/20 hover:border-brand-gold/60 text-foreground/40 hover:text-brand-gold transition-all hover:scale-105 active:scale-95 shadow-md hover:shadow-xl focus-visible:ring-2 focus-visible:ring-brand-gold outline-none"
+          aria-label={t('ariaContact')}
+        >
+          {t('contact')}
         </Link>
       </footer>
     </div>

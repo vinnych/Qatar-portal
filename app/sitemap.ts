@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next';
 import { SITE_URL } from '@/lib/seo';
-import { getAllNewsSlugs } from '@/lib/insights';
+import { getAllInsightSlugs } from '@/lib/insights';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const countries = ['qatar', 'uae', 'saudi-arabia', 'kuwait', 'oman', 'bahrain'];
@@ -27,6 +27,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/terms`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.3 },
     { url: `${SITE_URL}/disclaimer`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.3 },
     { url: `${SITE_URL}/transparency`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.3 },
+    { url: `${SITE_URL}/contact`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.3 },
   ];
 
   // 2. Prayer Times (Country-level)
@@ -68,29 +69,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }));
 
-  // 5. Dynamic News Routes (Deduplicated & Capped)
-  let newsRoutes: MetadataRoute.Sitemap = [];
+  // 5. Dynamic Insights Routes (Deduplicated & Capped)
+  let insightRoutes: MetadataRoute.Sitemap = [];
   try {
-    const allNewsSlugs = await getAllNewsSlugs();
+    const allInsightSlugs = await getAllInsightSlugs();
     
-    // Deduplicate by slug to prevent "thin" duplicate entries in different languages
-    // We prioritize keeping both if they are distinct, but here we'll ensure 
-    // each slug only appears once as a primary URL, with the other as an alternate.
-    const uniqueSlugs = new Map<string, typeof allNewsSlugs[0]>();
-    allNewsSlugs.forEach(item => {
-      // If we have both, we prefer the English one as primary in the sitemap for better global indexing
+    // Deduplicate by slug
+    const uniqueSlugs = new Map<string, typeof allInsightSlugs[0]>();
+    allInsightSlugs.forEach(item => {
       if (!uniqueSlugs.has(item.slug) || item.lang === 'en') {
         uniqueSlugs.set(item.slug, item);
       }
     });
 
-    // Cap the archive at 500 items to avoid GSC "Sitemap Bloat" which leads to 
-    // "Discovered - currently not indexed" for new sites.
-    const sortedNews = Array.from(uniqueSlugs.values())
+    // Capping for performance
+    const sortedInsights = Array.from(uniqueSlugs.values())
       .sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime())
       .slice(0, 500);
 
-    newsRoutes = sortedNews.map(item => ({
+    insightRoutes = sortedInsights.map(item => ({
       url: `${SITE_URL}/insights/${item.slug}${item.lang === 'ar' ? '?lang=ar' : ''}`,
       lastModified: new Date(item.pubDate),
       changeFrequency: 'monthly',
@@ -103,17 +100,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }
     }));
   } catch (e) {
-    console.error('Sitemap news generation error:', e);
+    console.error('Sitemap insights generation error:', e);
   }
 
   // Combine everything
-  // We use a Set to avoid duplicate URLs if they occur
   const allRoutes = [
     ...staticRoutes, 
     ...prayerRoutes, 
     ...countryRoutes, 
     ...marketRoutes, 
-    ...newsRoutes
+    ...insightRoutes
   ];
 
   return allRoutes;

@@ -1,31 +1,30 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { NewsItem } from "@/lib/insights";
+import { InsightItem } from "@/lib/insights";
 import { useLanguage } from "@/lib/i18n";
-import { Calendar, ChevronLeft, ExternalLink, Globe, Newspaper, Share2, Clock, AlertCircle, Languages, RefreshCw } from "lucide-react";
+import { Calendar, ChevronLeft, Globe, Share2, Clock, AlertCircle, Languages, RefreshCw } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { getDeterministicFallback } from "@/lib/fallbacks";
 import MobileFAB from "@/components/layout/MobileFAB";
 import { useRouter } from "next/navigation";
 import ReactMarkdown from 'react-markdown';
-
-
+import AdUnit, { AD_SLOTS } from "@/components/ui/AdUnit";
 
 export default function InsightArticleClient({ 
   initialArticle, 
-  moreNews = [] 
+  moreInsights = [] 
 }: { 
-  initialArticle: NewsItem, 
-  moreNews?: NewsItem[] 
+  initialArticle: InsightItem, 
+  moreInsights?: InsightItem[] 
 }) {
   const { t, isRTL, language } = useLanguage();
   const router = useRouter();
   const [imgError, setImgError] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [perspectiveMode, setPerspectiveMode] = useState(false);
-  const [translation, setTranslation] = useState<NewsItem | null>(null);
+  const [translation, setTranslation] = useState<InsightItem | null>(null);
   const [loadingTranslation, setLoadingTranslation] = useState(false);
   const article = initialArticle;
 
@@ -46,8 +45,8 @@ export default function InsightArticleClient({
       try {
         const res = await fetch(`/api/insights?slug=${article.slug}&lang=${targetLang}`);
         const data = await res.json();
-        if (data.status === 'success' && data.news?.[0]) {
-          setTranslation(data.news[0]);
+        if (data.status === 'success' && data.insights?.[0]) {
+          setTranslation(data.insights[0]);
         }
       } catch (e) { console.error("Translation fetch failed"); }
       finally { setLoadingTranslation(false); }
@@ -133,7 +132,7 @@ export default function InsightArticleClient({
         >
           {loadingTranslation ? <RefreshCw size={16} className="animate-spin" /> : <Languages size={16} />}
           <span className="text-[10px] font-black uppercase tracking-widest">
-            {perspectiveMode ? (isRTL ? 'إغلاق المنظور' : 'Close Perspective') : (isRTL ? 'عرض المنظور الإنجليزي' : 'Perspective Mode (AR)')}
+            {perspectiveMode ? t('closePerspective') : (isRTL ? t('perspectiveModeEN') : t('perspectiveModeAR'))}
           </span>
         </button>
       </div>
@@ -142,11 +141,7 @@ export default function InsightArticleClient({
         {/* Header Metadata */}
         <div className="space-y-6">
           <div className="flex flex-wrap items-center gap-4">
-            <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border ${
-              article.category === 'expat' 
-                ? 'bg-accent/10 border-accent/20 text-accent' 
-                : 'bg-brand-gold/10 border-brand-gold/20 text-brand-gold'
-            }`}>
+            <span className="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border bg-brand-gold/10 border-brand-gold/20 text-brand-gold">
               {article.source}
             </span>
             <div className="flex items-center gap-2 text-foreground/40 text-[10px] font-bold uppercase tracking-widest">
@@ -178,7 +173,7 @@ export default function InsightArticleClient({
               </button>
               {copied && (
                 <div className="absolute bottom-full right-0 mb-2 px-3 py-1 bg-accent text-brand-obsidian text-[10px] font-bold uppercase tracking-widest rounded-lg animate-in fade-in slide-in-from-bottom-1">
-                  {language === 'ar' ? 'تم نسخ الرابط' : 'Link Copied'}
+                  {t('linkCopied')}
                 </div>
               )}
             </div>
@@ -201,6 +196,9 @@ export default function InsightArticleClient({
           </div>
         )}
 
+        {/* Mid-Article Ad */}
+        <AdUnit slot={AD_SLOTS.article} className="w-full" />
+
         {/* Article Content */}
         <div className={`grid grid-cols-1 ${perspectiveMode ? 'lg:grid-cols-2' : ''} gap-12 max-w-none`}>
           <div className="space-y-8">
@@ -212,7 +210,7 @@ export default function InsightArticleClient({
               <div className={`prose prose-invert prose-brand-gold max-w-none mt-12 space-y-6 text-foreground/80 leading-loose ${isRTL ? 'text-right' : 'text-left'}`}>
                 <ReactMarkdown
                   components={{
-                    h1: ({node, ...props}) => <h1 className="text-3xl font-bold mt-12 mb-6 text-foreground" {...props} />,
+                    h1: ({node, ...props}) => <h2 className="text-3xl font-bold mt-12 mb-6 text-foreground" {...props} />,
                     h2: ({node, ...props}) => <h2 className="text-2xl font-bold mt-10 mb-5 text-foreground/90" {...props} />,
                     h3: ({node, ...props}) => <h3 className="text-xl font-bold mt-8 mb-4 text-foreground/80" {...props} />,
                     p: ({node, ...props}) => <p className="text-lg mb-6 opacity-80" {...props} />,
@@ -223,29 +221,6 @@ export default function InsightArticleClient({
                 >
                   {article.content}
                 </ReactMarkdown>
-              </div>
-            )}
-            
-            {!article.isPremium && (
-              <div className="glass p-8 rounded-[2rem] border-brand-gold/10 space-y-6">
-                <div className="flex items-start gap-4">
-                  <Newspaper className="text-brand-gold shrink-0" size={24} />
-                  <div>
-                    <h3 className="text-lg font-bold text-foreground mb-2">{t('readMore')}</h3>
-                    <p className="text-sm text-foreground/50 mb-6 leading-relaxed">
-                      {t('newsDisclaimer')}
-                    </p>
-                    <Link 
-                      href={article.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-3 bg-brand-gold text-brand-obsidian px-8 py-4 rounded-2xl text-xs font-black uppercase tracking-widest hover:scale-105 transition-transform"
-                    >
-                      <span>{t('officialSource')}</span>
-                      <ExternalLink size={16} />
-                    </Link>
-                  </div>
-                </div>
               </div>
             )}
           </div>
@@ -262,7 +237,7 @@ export default function InsightArticleClient({
                     <p className="text-lg leading-relaxed opacity-80">{translation.description}</p>
                   </div>
                 ) : (
-                  <p className="text-sm italic opacity-40">No translation available for this article.</p>
+                  <p className="text-sm italic opacity-40">{t('translationUnavailable')}</p>
                 )}
               </div>
             </div>
@@ -273,24 +248,24 @@ export default function InsightArticleClient({
       {/* Footer Disclaimer */}
       <div className="mt-24 pt-12 border-t border-white/5">
         
-        {/* More News Section - Crucial for GSC internal linking authority */}
-        {moreNews.length > 0 && (
+        {/* More Insights Section */}
+        {moreInsights.length > 0 && (
           <div className="mb-24">
             <h2 className="text-2xl font-bold mb-8 opacity-60 uppercase tracking-widest text-center">
-              {language === 'ar' ? 'المزيد من الرؤى' : 'More Insights'}
+              {t('moreInsights')}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {moreNews.map((news) => (
+              {moreInsights.map((insight) => (
                 <Link 
-                  key={news.id} 
-                  href={`/insights/${news.slug}${language === 'ar' ? '?lang=ar' : ''}`}
+                  key={insight.id} 
+                  href={`/insights/${insight.slug}${language === 'ar' ? '?lang=ar' : ''}`}
                   className="glass overflow-hidden rounded-3xl border-white/5 hover:border-brand-gold/30 transition-all group flex flex-col"
                 >
-                  {news.image && (
+                  {insight.image && (
                     <div className="relative w-full aspect-video overflow-hidden">
                       <Image 
-                        src={news.image} 
-                        alt={news.title}
+                        src={insight.image} 
+                        alt={insight.title}
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-110"
                       />
@@ -299,10 +274,10 @@ export default function InsightArticleClient({
                   )}
                   <div className="p-6">
                     <p className="text-[10px] font-black uppercase tracking-widest text-brand-gold mb-3 opacity-60">
-                      {news.source}
+                      {insight.source}
                     </p>
                     <h3 className="text-lg font-bold leading-snug group-hover:text-accent transition-colors line-clamp-2">
-                      {news.title}
+                      {insight.title}
                     </h3>
                   </div>
                 </Link>

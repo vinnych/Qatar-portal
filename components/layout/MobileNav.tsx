@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLanguage } from "@/lib/i18n";
-import { Home, Newspaper, TrendingUp, Clock, UserPlus } from "lucide-react";
+import { Home, Sparkles, TrendingUp, Clock, UserPlus } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function MobileNav() {
@@ -24,7 +24,7 @@ export default function MobileNav() {
     {
       label: t("pressTerminal"),
       href: "/insights",
-      icon: Newspaper,
+      icon: Sparkles,
       isPrimary: true,
     },
     {

@@ -81,7 +81,7 @@ export default function MarketInsightClient() {
             : 'bg-red-500/10 border-red-500/20 text-red-500'
           }`}>
             <span className={`w-1 h-1 rounded-full ${isMarketOpen ? 'bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]' : 'bg-red-500'}`} />
-            {isMarketOpen ? (language === 'ar' ? 'الأسواق مفتوحة' : 'Markets Open') : (language === 'ar' ? 'الأسواق مغلقة' : 'Markets Closed')}
+            {isMarketOpen ? t('marketsOpen') : t('marketsClosed')}
           </div>
         </div>
         <h1 className="text-4xl md:text-5xl font-black serif text-foreground mb-6">
@@ -107,7 +107,7 @@ export default function MarketInsightClient() {
                   <h2 className="text-xl font-black serif">{t('stockMarkets')}</h2>
                   <div className="flex items-center gap-2 mt-0.5">
                     <p className="text-[8px] uppercase font-black tracking-[0.2em] text-foreground/30">
-                      Updated {data ? new Date(data.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '--:--'}
+                      {t('updatedLabel').replace('%s', data ? new Date(data.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '--:--')}
                     </p>
                     <span className="w-1 h-1 rounded-full bg-foreground/10" />
                     <p className="text-[8px] uppercase font-bold tracking-[0.1em] text-accent/50 italic">
@@ -119,7 +119,7 @@ export default function MarketInsightClient() {
               <div className="flex items-center gap-2" aria-live="polite">
                 <div className={`w-2 h-2 rounded-full ${isMarketOpen ? 'bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]' : 'bg-red-500'}`} />
                 <span className="text-[9px] uppercase font-bold tracking-widest text-foreground/40">
-                  {isMarketOpen ? t('marketsLive') : (language === 'ar' ? 'جلسة مغلقة' : 'Closed Session')}
+                  {isMarketOpen ? t('marketsLive') : t('closedSession')}
                 </span>
               </div>
             </div>
@@ -214,7 +214,7 @@ export default function MarketInsightClient() {
                   </div>
                   <div className={isRTL ? 'text-left' : 'text-right'}>
                     <p className="text-sm font-black tabular-nums">{curr.rate.toFixed(3)}</p>
-                    <p className="text-[9px] uppercase font-bold text-foreground/30 tracking-tighter">vs 1 USD</p>
+                    <p className="text-[9px] uppercase font-bold text-foreground/30 tracking-tighter">{t('vs1USD')}</p>
                   </div>
                 </div>
               ))}
@@ -230,7 +230,7 @@ export default function MarketInsightClient() {
                 <div className="w-1.5 h-1.5 rounded-full bg-accent/30" />
               </div>
               <Link href="/currency-exchange" className="flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-brand-gold/10 hover:bg-brand-gold/20 border border-brand-gold/20 hover:border-brand-gold/40 text-accent text-[10px] font-black uppercase tracking-widest transition-all hover:scale-105 active:scale-95">
-                {isRTL ? 'تحويل العملات' : 'Currency Converter'}
+                {t('currencyConverter')}
                 <ArrowUpRight size={12} strokeWidth={3} />
               </Link>
             </div>
@@ -267,7 +267,7 @@ export default function MarketInsightClient() {
       {/* Navigation */}
       <div className="mt-12">
         <Link href="/" className="text-[11px] font-bold uppercase tracking-[0.4em] text-accent hover:tracking-[0.6em] transition-all">
-          {isRTL ? 'الرئيسية ←' : '← Home'}
+          {isRTL ? `← ${t('home')}` : `← ${t('home')}`}
         </Link>
       </div>
     </div>

@@ -8,43 +8,43 @@ export default function TermsPage() {
   const clauses = [
     {
       number: "01",
-      title: "Acceptance",
-      body: "By accessing or using Arabia Khaleej you agree to be bound by these Terms. If you do not agree, please discontinue use immediately. Your continued use after any revision constitutes acceptance of the updated Terms.",
+      title: t('tosSection1Title'),
+      body: t('tosSection1Body'),
     },
     {
       number: "02",
-      title: "Informational Use Only",
-      body: "All content published on Arabia Khaleej is provided for general informational purposes only. Nothing on this site constitutes legal, financial, immigration, or professional advice of any kind. Always verify information with the relevant official authority before acting on it.",
+      title: t('tosSection2Title'),
+      body: t('tosSection2Body'),
     },
     {
       number: "03",
-      title: "No Warranties",
-      body: "Arabia Khaleej is provided on an \"as-is\" and \"as-available\" basis without any warranty, express or implied. We make no representations regarding the accuracy, completeness, or timeliness of any content.",
+      title: t('tosSection3Title'),
+      body: t('tosSection3Body'),
     },
     {
       number: "04",
-      title: "Limitation of Liability",
-      body: "To the fullest extent permitted by applicable law, Arabia Khaleej and its maintainers shall not be liable for any direct, indirect, incidental, or consequential damages arising from your use of, or inability to use, this site or its content.",
+      title: t('tosSection4Title'),
+      body: t('tosSection4Body'),
     },
     {
       number: "05",
-      title: "Intellectual Property",
-      body: "All original content, design, and code on Arabia Khaleej is the property of its respective creators. Reproduction or redistribution for commercial purposes without explicit written permission is prohibited.",
+      title: t('tosSection5Title'),
+      body: t('tosSection5Body'),
     },
     {
       number: "06",
-      title: "Third-Party Links",
-      body: "This site may link to external government portals, official databases, and third-party resources. We do not control those sites and accept no responsibility for their content, availability, or privacy practices.",
+      title: t('tosSection6Title'),
+      body: t('tosSection6Body'),
     },
     {
       number: "07",
-      title: "Governing Law",
-      body: "These Terms are governed by and construed in accordance with applicable laws. Any disputes arising from use of the site shall be subject to the jurisdiction agreed upon by the parties involved.",
+      title: t('tosSection7Title'),
+      body: t('tosSection7Body'),
     },
     {
       number: "08",
-      title: "Changes to Terms",
-      body: "We reserve the right to revise these Terms at any time. Changes take effect immediately upon publication. It is your responsibility to review these Terms periodically.",
+      title: t('tosSection8Title'),
+      body: t('tosSection8Body'),
     },
   ];
 
@@ -59,11 +59,8 @@ export default function TermsPage() {
           {t('termsConditions')}
         </h1>
         <div className={`w-16 h-[2px] bg-gradient-to-r ${isRTL ? 'from-transparent to-brand-gold mr-auto ml-0' : 'from-brand-gold to-transparent'} rounded-full mb-8`} />
-        <p className="text-base sm:text-lg font-light leading-relaxed opacity-70 max-w-xl">
-          {isRTL 
-            ? "شروط لغة مبسطة لمنصة صادقة. اقرأها - إنها أقصر مما تتوقع."
-            : "Plain-language terms for an honest platform. Read on — it is shorter than you expect."
-          }
+        <p className={`text-base sm:text-lg font-light leading-relaxed opacity-70 max-w-xl ${isRTL ? 'text-right' : ''}`}>
+          {t('termsDesc')}
         </p>
       </header>
 

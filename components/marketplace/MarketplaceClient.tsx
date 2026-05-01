@@ -46,7 +46,7 @@ export default function MarketplaceClient() {
   }, []);
 
   const categories = [
-    { id: "all", label: isRTL ? "الكل" : "All" },
+    { id: "all", label: t("all") },
     { id: "electronics", label: t("electronics") },
     { id: "fashion", label: t("fashion") },
     { id: "beauty", label: t("beauty") },
@@ -102,7 +102,7 @@ export default function MarketplaceClient() {
             )}
           </div>
           <p className="text-lg text-foreground/60 max-w-md">
-            {t("exclusiveOffers")} — {isRTL ? 'مختارات متميزة من أفضل المتاجر الإقليمية' : 'Curated excellence from the region\'s top retailers.'}
+            {t("exclusiveOffers")} — {t("noonExcellence")}
           </p>
         </div>
 
@@ -210,7 +210,7 @@ export default function MarketplaceClient() {
                               <span className="text-xs font-black">{product.rating}</span>
                             </div>
                             <span className="text-[8px] font-bold text-foreground/30 uppercase">
-                              {product.reviews.toLocaleString()} reviews
+                              {product.reviews.toLocaleString()} {t('reviewsCount')}
                             </span>
                           </div>
                         </div>
@@ -343,7 +343,7 @@ export default function MarketplaceClient() {
             <Search size={40} />
           </div>
           <p className="text-xl font-bold text-foreground/40 uppercase tracking-widest">
-            {isRTL ? 'لا توجد منتجات مطابقة' : 'No products found'}
+            {t("noMatchingProducts")}
           </p>
         </div>
       )}

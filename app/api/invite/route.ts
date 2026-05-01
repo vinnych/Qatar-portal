@@ -22,7 +22,9 @@ export async function POST(request: Request) {
       return NextResponse.json({ status: 'error', message: 'Invalid name' }, { status: 400 });
     }
 
-    const res = await fetch("https://arabiakhaleej-contact.asishchilakapati.workers.dev", {
+    const workerUrl = process.env.CONTACT_WORKER_URL || "https://arabiakhaleej-contact.asishchilakapati.workers.dev";
+    
+    const res = await fetch(workerUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, name }),

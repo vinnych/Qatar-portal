@@ -5,11 +5,11 @@ import StructuredData, { BreadcrumbSchema } from "@/components/seo/StructuredDat
 
 export const metadata = pageMeta({
   title: `GCC Economic Outlook & Regional Stability Analysis | ${SITE_NAME}`,
-  titleAr: `التوقعات الاقتصادية الخليجية وتحليل الاستقرار الإقليمي | ${SITE_NAME}`,
+  titleAr: `Ø§Ù„ØªÙˆÙ‚Ø¹Ø§Øª Ø§Ù„Ø§Ù‚ØªØµØ§Ø¯ÙŠØ© Ø§Ù„Ø®Ù„ÙŠØ¬ÙŠØ© ÙˆØªØ­Ù„ÙŠÙ„ Ø§Ù„Ø§Ø³ØªÙ‚Ø±Ø§Ø± Ø§Ù„Ø¥Ù‚Ù„ÙŠÙ…ÙŠ | ${SITE_NAME}`,
   description:
     "In-depth analysis of GCC regional economic stability, energy resilience, non-oil sector growth, and equity market outlook for investors and residents.",
   descriptionAr:
-    "تحليل معمق للاستقرار الاقتصادي الإقليمي الخليجي ومرونة الطاقة ونمو القطاع غير النفطي وتوقعات سوق الأسهم للمستثمرين والمقيمين.",
+    "ØªØ­Ù„ÙŠÙ„ Ù…Ø¹Ù…Ù‚ Ù„Ù„Ø§Ø³ØªÙ‚Ø±Ø§Ø± Ø§Ù„Ø§Ù‚ØªØµØ§Ø¯ÙŠ Ø§Ù„Ø¥Ù‚Ù„ÙŠÙ…ÙŠ Ø§Ù„Ø®Ù„ÙŠØ¬ÙŠ ÙˆÙ…Ø±ÙˆÙ†Ø© Ø§Ù„Ø·Ø§Ù‚Ø© ÙˆÙ†Ù…Ùˆ Ø§Ù„Ù‚Ø·Ø§Ø¹ ØºÙŠØ± Ø§Ù„Ù†ÙØ·ÙŠ ÙˆØªÙˆÙ‚Ø¹Ø§Øª Ø³ÙˆÙ‚ Ø§Ù„Ø£Ø³Ù‡Ù… Ù„Ù„Ù…Ø³ØªØ«Ù…Ø±ÙŠÙ† ÙˆØ§Ù„Ù…Ù‚ÙŠÙ…ÙŠÙ†.",
   path: "/market-insight/details",
   keywords: [
     "GCC economy",
@@ -20,24 +20,28 @@ export const metadata = pageMeta({
     "UAE growth",
     "energy resilience",
     "non-oil sector",
-    "اقتصاد الخليج",
-    "استقرار إقليمي",
+    "Ø§Ù‚ØªØµØ§Ø¯ Ø§Ù„Ø®Ù„ÙŠØ¬",
+    "Ø§Ø³ØªÙ‚Ø±Ø§Ø± Ø¥Ù‚Ù„ÙŠÙ…ÙŠ",
   ],
   type: "article",
   datePublished: "2024-01-01T00:00:00Z",
 });
 
-export default function SentimentDetailsPage() {
+import { getT, getServerLanguage } from "@/lib/i18n-server";
+
+export default async function SentimentDetailsPage() {
+  const t = await getT();
+  const lang = await getServerLanguage();
+  const isRTL = lang === 'ar';
   const breadcrumbItems = [
-    { name: "Home", item: "/" },
-    { name: "Market Insight", item: "/market-insight" },
-    { name: "Economic Outlook", item: "/market-insight/details" },
+    { name: t('home'), item: "/" },
+    { name: t('marketInsights'), item: "/market-insight" },
+    { name: t('economicOutlook'), item: "/market-insight/details" },
   ];
 
   const articleData = {
-    headline: "GCC Regional Stability with Positive Outlook",
-    description:
-      "GCC markets continue to show resilience amid global volatility, supported by strong energy prices and non-oil sector growth.",
+    headline: t('sentimentTitle'),
+    description: t('sentimentDesc'),
     author: { "@type": "Organization", name: SITE_NAME },
     publisher: { "@type": "Organization", name: SITE_NAME },
     datePublished: "2024-01-01T00:00:00Z",
@@ -57,10 +61,10 @@ export default function SentimentDetailsPage() {
       <div className="w-full mb-8">
         <Link
           href="/market-insight"
-          className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-accent hover:translate-x-[-4px] transition-transform"
+          className={`inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-accent hover:translate-x-[-4px] transition-transform ${isRTL ? 'flex-row-reverse' : ''}`}
         >
-          <ArrowLeft size={14} />
-          Back to Overview
+          <ArrowLeft size={14} className={isRTL ? 'rotate-180' : ''} />
+          {t('backToOverview')}
         </Link>
       </div>
 
@@ -70,11 +74,10 @@ export default function SentimentDetailsPage() {
         </div>
 
         <p className="text-[10px] tracking-[0.6em] uppercase font-black text-accent mb-6">
-          Regional Analysis
+          {t('regionalAnalysis')}
         </p>
         <h1 className="text-4xl md:text-6xl font-black serif text-foreground mb-12 leading-tight">
-          Stability in a <br />
-          <span className="text-brand-gold">Global Shift</span>
+          {t('stabilityGlobalShift')}
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
@@ -82,22 +85,18 @@ export default function SentimentDetailsPage() {
             <div className="w-10 h-10 rounded-2xl bg-brand-gold/10 flex items-center justify-center text-accent">
               <ShieldCheck size={20} />
             </div>
-            <h2 className="text-xl font-black serif">Energy Resilience</h2>
+            <h2 className="text-xl font-black serif">{t('energyResilience')}</h2>
             <p className="text-sm text-foreground/60 leading-relaxed font-medium">
-              Sustained energy prices provide a robust fiscal buffer for GCC
-              nations, enabling continued investment in infrastructure and Vision
-              2030-style diversification projects.
+              {t('energyResilienceDesc')}
             </p>
           </div>
           <div className="space-y-4">
             <div className="w-10 h-10 rounded-2xl bg-brand-gold/10 flex items-center justify-center text-accent">
               <Zap size={20} />
             </div>
-            <h2 className="text-xl font-black serif">Non-Oil Growth</h2>
+            <h2 className="text-xl font-black serif">{t('nonOilGrowth')}</h2>
             <p className="text-sm text-foreground/60 leading-relaxed font-medium">
-              The acceleration of tourism, tech, and manufacturing sectors in
-              Saudi Arabia and the UAE is creating new alpha opportunities beyond
-              traditional energy exports.
+              {t('nonOilGrowthDesc')}
             </p>
           </div>
         </div>
@@ -106,20 +105,20 @@ export default function SentimentDetailsPage() {
         <div className="mb-16 p-8 md:p-12 glass rounded-[2.5rem] border-brand-gold/20 bg-brand-gold/5 relative overflow-hidden group">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10">
             <div>
-              <h3 className="text-xs font-black uppercase tracking-[0.4em] text-accent mb-2">Regional Intelligence</h3>
-              <h2 className="text-2xl font-black serif">Stability Index <span className="text-brand-gold">2026</span></h2>
+              <h3 className="text-xs font-black uppercase tracking-[0.4em] text-accent mb-2">{t('regionalIntelligence')}</h3>
+              <h2 className="text-2xl font-black serif">{t('stabilityIndex')} <span className="text-brand-gold">2026</span></h2>
             </div>
             <div className="px-5 py-2 rounded-xl bg-brand-gold text-brand-obsidian text-[10px] font-black uppercase tracking-widest shadow-lg">
-              Current Rating: AAA-
+              {t('currentRatingColon')} AAA-
             </div>
           </div>
 
           <div className="space-y-10">
             {[
-              { label: "Fiscal Buffer", value: 92, color: "bg-brand-gold" },
-              { label: "Diversification Speed", value: 78, color: "bg-accent" },
-              { label: "Digital Infrastructure", value: 88, color: "bg-brand-gold" },
-              { label: "Regional Integration", value: 72, color: "bg-accent" }
+              { label: t("fiscalBuffer"), value: 92, color: "bg-brand-gold" },
+              { label: t("diversificationSpeed"), value: 78, color: "bg-accent" },
+              { label: t("digitalInfrastructure"), value: 88, color: "bg-brand-gold" },
+              { label: t("regionalIntegration"), value: 72, color: "bg-accent" }
             ].map((metric, i) => (
               <div key={i} className="space-y-3">
                 <div className="flex justify-between items-end">
@@ -145,12 +144,10 @@ export default function SentimentDetailsPage() {
 
         <div className="p-8 rounded-3xl bg-foreground/5 border border-foreground/10 mb-12">
           <h3 className="text-xs font-black uppercase tracking-[0.3em] text-foreground/40 mb-4">
-            Outlook Summary
+            {t('outlookSummary')}
           </h3>
           <p className="text-lg serif italic text-foreground/80 leading-relaxed">
-            "The GCC remains a safe haven for capital seeking stability and
-            structural growth. We maintain a positive outlook for the regional
-            equity markets through 2025."
+            "{t('outlookSummaryBody')}"
           </p>
         </div>
 
@@ -172,9 +169,10 @@ export default function SentimentDetailsPage() {
           href="/"
           className="text-[11px] font-bold uppercase tracking-[0.4em] text-accent hover:tracking-[0.6em] transition-all"
         >
-          ← Return Home
+          {isRTL ? `â† ${t('returnHome')}` : `â† ${t('returnHome')}`}
         </Link>
       </div>
     </div>
   );
 }
+

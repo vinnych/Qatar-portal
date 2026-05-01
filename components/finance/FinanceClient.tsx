@@ -50,7 +50,7 @@ export default function FinanceClient() {
     <div className={`flex flex-col items-center justify-start min-h-screen pt-20 pb-20 px-4 relative ${isRTL ? 'font-serif-ar' : ''}`}>
       {/* Header */}
       <div className="mb-16 animate-in fade-in slide-in-from-top-4 duration-1000">
-        <h1 className="sr-only">GCC Finance, Market Insights & Currency Exchange Rates</h1>
+        <h1 className="sr-only">{t('financeSrOnly')}</h1>
         <p className="text-xs tracking-[0.6em] uppercase font-bold text-accent mb-4 text-center">{t('marketInsights')}</p>
         <p className="text-2xl font-black serif text-foreground text-center" aria-hidden="true">
           {t('gccFinanceCurrency')}
@@ -77,7 +77,7 @@ export default function FinanceClient() {
               
               <div className={`flex items-end justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
                 <div className={isRTL ? 'text-right' : ''}>
-                  <p className="text-[9px] uppercase font-bold tracking-tighter text-foreground/30 mb-1">vs 1 USD</p>
+                  <p className="text-[9px] uppercase font-bold tracking-tighter text-foreground/30 mb-1">{t('vs1USD')}</p>
                   <p className="text-3xl font-black tabular-nums tracking-tighter">
                     {rates ? rates[curr.code]?.toFixed(3) : "..."}
                   </p>

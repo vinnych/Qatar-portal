@@ -35,7 +35,11 @@ export class NoonProvider implements MarketplaceProvider {
     const token = await this.generateToken();
 
     if (!token || !channelId) {
-      console.warn("Noon credentials missing or invalid. Returning fallback data.");
+      if (process.env.NODE_ENV === 'production') {
+        console.error("CRITICAL: Noon credentials missing in PRODUCTION. Marketplace is using stale fallback data.");
+      } else {
+        console.warn("Noon credentials missing or invalid. Returning fallback data.");
+      }
       return this.getFallbackData();
     }
 
@@ -79,6 +83,42 @@ export class NoonProvider implements MarketplaceProvider {
   private getFallbackData(): AffiliateProduct[] {
     return [
       {
+        id: 'noon-iphone-15-pro-max',
+        nameEn: 'iPhone 15 Pro Max (256GB, Titanium)',
+        nameAr: 'أيفون 15 برو ماكس (256 جيجابايت، تيتانيوم)',
+        descriptionEn: 'The ultimate iPhone with aerospace-grade titanium design and A17 Pro chip.',
+        descriptionAr: 'أقوى أيفون بتصميم من التيتانيوم وشريحة A17 برو.',
+        price: 4699,
+        currency: 'AED',
+        category: 'electronics',
+        image: 'https://images.unsplash.com/photo-1696446701796-da61225697cc?auto=format&fit=crop&q=80&w=800',
+        rating: 4.9,
+        reviews: 1240,
+        affiliateUrl: 'https://www.noon.com/uae-en/iphone-15-pro-max-256gb-natural-titanium-5g-with-facetime-international-specs/N53432431A/p/',
+        retailer: 'Noon.com',
+        isBestSeller: true,
+        isTrending: true,
+        trendingRank: 1
+      },
+      {
+        id: 'noon-samsung-s24-ultra',
+        nameEn: 'Samsung Galaxy S24 Ultra (512GB)',
+        nameAr: 'سامسونج جالاكسي S24 ألترا (512 جيجابايت)',
+        descriptionEn: 'The new era of mobile AI. Titanium exterior and 200MP camera.',
+        descriptionAr: 'عصر جديد من الذكاء الاصطناعي للهواتف المحمولة. هيكل تيتانيوم وكاميرا 200 ميجابكسل.',
+        price: 4299,
+        currency: 'AED',
+        category: 'electronics',
+        image: 'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=800',
+        rating: 4.8,
+        reviews: 850,
+        affiliateUrl: 'https://www.noon.com/uae-en/galaxy-s24-ultra-5g-dual-sim-titanium-gray-12gb-ram-512gb-storage-middle-east-version/N70035252A/p/',
+        retailer: 'Noon.com',
+        isBestSeller: true,
+        isTrending: true,
+        trendingRank: 2
+      },
+      {
         id: 'noon-dyson-v15',
         nameEn: 'Dyson V15 Detect Vacuum',
         nameAr: 'مكنسة دايسون V15 ديتكت',
@@ -92,7 +132,24 @@ export class NoonProvider implements MarketplaceProvider {
         reviews: 850,
         affiliateUrl: 'https://www.noon.com/saudi-en/v15-detect-cordless-vacuum-cleaner/N51833543A/p/',
         retailer: 'Noon.com',
-        trendingRank: 1
+        trendingRank: 3
+      },
+      {
+        id: 'noon-ps5-slim',
+        nameEn: 'PlayStation 5 Slim Console',
+        nameAr: 'منصة بلاي ستيشن 5 سليم',
+        descriptionEn: 'Experience lightning-fast loading with an ultra-high speed SSD.',
+        descriptionAr: 'استمتع بتحميل فائق السرعة مع محرك أقراص SSD فائق السرعة.',
+        price: 1849,
+        currency: 'AED',
+        category: 'electronics',
+        image: 'https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&q=80&w=800',
+        rating: 4.9,
+        reviews: 3200,
+        affiliateUrl: 'https://www.noon.com/uae-en/playstation-5-console-slim/N70034421A/p/',
+        retailer: 'Noon.com',
+        isBestSeller: true,
+        trendingRank: 4
       }
     ];
   }

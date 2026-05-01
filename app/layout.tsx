@@ -20,7 +20,7 @@ import CookieConsent from "@/components/ui/CookieConsent";
 export const metadata = pageMeta({
   title: "Arabia Khaleej — The GCC Standard",
   titleAr: "عربية خليج — المعيار الخليجي",
-  description: "The definitive reference for a refined GCC experience.",
+  description: SITE_DESCRIPTION,
   descriptionAr: "المرجع النهائي لتجربة خليجية متميزة.",
   path: "/",
 });
@@ -63,22 +63,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           gtag('js', new Date());
           gtag('config', 'G-WRXQ5H9Z7K');
         `}</Script>
-        {/* Google AdSense */}
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7212871157824722"
-          crossOrigin="anonymous"
-          strategy="lazyOnload"
-        />
+        <OrganizationSchema />
+        <WebSiteSchema />
       </head>
       <body className="font-sans min-h-screen flex flex-col antialiased">
         <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-6 focus:py-3 focus:bg-brand-gold focus:text-brand-obsidian focus:rounded-2xl focus:font-bold focus:shadow-2xl transition-all">
           Skip to content
         </a>
         <div className="fluid-gold-bg" />
-        <Providers initialLanguage={initialLanguage}>
-          <OrganizationSchema />
-          <WebSiteSchema />
+        <Providers initialLanguage={initialLanguage} nonce={nonce}>
           <Header />
           <ClientLayout>
             <main id="main-content">

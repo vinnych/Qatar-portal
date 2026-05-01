@@ -3,12 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Clock, TrendingUp, UserPlus, Newspaper, ShoppingBag } from "lucide-react";
+import { Clock, TrendingUp, UserPlus, Sparkles, ShoppingBag } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
 import PrayerLite from "@/components/prayer/PrayerLite";
 import FinanceTicker from "@/components/finance/FinanceTicker";
 import PublicSurvey from "@/components/insights/PublicSurvey";
 import { motion, AnimatePresence } from "framer-motion";
+import AdUnit, { AD_SLOTS } from "@/components/ui/AdUnit";
 
 export default function HomeClient() {
   const { t, isRTL } = useLanguage();
@@ -47,7 +48,7 @@ export default function HomeClient() {
     { name: t('prayerTimes'), href: "/prayer", icon: Clock },
     { name: t('marketInsights'), href: "/market-insight", icon: TrendingUp },
     { name: t('marketplace'), href: "/marketplace", icon: ShoppingBag },
-    { name: t('pressTerminal'), href: "/insights", icon: Newspaper },
+    { name: t('pressTerminal'), href: "/insights", icon: Sparkles },
     { name: t('boutiqueEnquiry'), href: "/join", icon: UserPlus },
   ];
 
@@ -68,7 +69,7 @@ export default function HomeClient() {
         <div className="relative w-48 sm:w-[400px] h-24 sm:h-36 mx-auto mb-6">
           <Image 
             src="/logo-premium-gold.png" 
-            alt="Arabia Khaleej Logo" 
+            alt={`${t('siteName')} Logo — ${t('siteSlogan')}`} 
             fill 
             sizes="(max-width: 768px) 192px, 512px"
             className="object-contain logo-shadow"
@@ -105,8 +106,11 @@ export default function HomeClient() {
         </div>
       </nav>
 
+      {/* Between-Sections Ad */}
+      <AdUnit slot={AD_SLOTS.home} className="w-full max-w-5xl mt-12" />
+
       {/* Regional Guides Section */}
-      <motion.div 
+      <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -177,7 +181,7 @@ export default function HomeClient() {
           <div className="flex items-center gap-6 w-full max-w-lg">
             <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-brand-gold/40 to-transparent" />
             <span className="text-xs font-bold text-brand-gold/60 uppercase tracking-[0.5em] whitespace-nowrap">
-              {isRTL ? 'المشاركة' : 'Engagement'}
+              {t('engagement')}
             </span>
             <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-brand-gold/40 to-transparent" />
           </div>

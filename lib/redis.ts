@@ -2,7 +2,7 @@ import { Redis } from '@upstash/redis';
 
 /**
  * Arabia Khaleej Redis Client
- * Used for transient caching of news and market data.
+ * Used for transient caching of insights and market data.
  * This aligns with our 'No Permanent Database' legal strategy.
  */
 const redisUrl = process.env.UPSTASH_REDIS_REST_URL;
@@ -60,8 +60,8 @@ export async function rateLimit(ip: string, limit: number = 10, windowSeconds: n
 
 // Cache durations (in seconds)
 export const CACHE_TIMES = {
-  NEWS: 3600, // 1 hour
-  NEWS_ARCHIVE: 2592000, // 30 days
+  INSIGHTS: 3600, // 1 hour
+  INSIGHTS_ARCHIVE: 2592000, // 30 days
   MARKET: 1800, // 30 minutes
   FX: 1800, // 30 minutes
 };

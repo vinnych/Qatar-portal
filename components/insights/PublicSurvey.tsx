@@ -86,7 +86,7 @@ const MOCK_SURVEYS: Record<string, Survey[]> = {
 };
 
 export default function PublicSurvey() {
-  const { language, isRTL } = useLanguage();
+  const { language, isRTL, t } = useLanguage();
   const surveys = MOCK_SURVEYS[language as keyof typeof MOCK_SURVEYS] || MOCK_SURVEYS.en;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [votedIds, setVotedIds] = useState<Record<string, string>>({});
@@ -101,7 +101,12 @@ export default function PublicSurvey() {
       if (vote) savedVotes[s.id] = vote;
     });
     setVotedIds(savedVotes);
-  }, [language]);
+    
+    // Safety: Reset index if current index is out of bounds for the new language list
+    if (currentIndex >= surveyData.length) {
+      setCurrentIndex(0);
+    }
+  }, [language, currentIndex]);
 
   const handleVote = (optionId: string) => {
     if (votedIds[currentSurvey.id]) return;
@@ -125,7 +130,7 @@ export default function PublicSurvey() {
               <TrendingUp size={22} />
             </div>
             <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-gold">
-              {language === 'ar' ? 'استطلاع الرأي العام' : 'Public Sentiment'}
+              {t('publicSurvey')}
             </h2>
           </div>
           <div className="flex items-center gap-4">
@@ -136,7 +141,7 @@ export default function PublicSurvey() {
                 className="flex items-center gap-2 text-green-500 font-bold text-[9px] uppercase tracking-widest"
               >
                 <CheckCircle2 size={14} />
-                {language === 'ar' ? 'تم التصويت' : 'Vote Recorded'}
+                {t('voteRecorded')}
               </motion.div>
             )}
             <div className="flex items-center gap-1">
@@ -213,11 +218,11 @@ export default function PublicSurvey() {
         <div className="mt-12 pt-8 border-t border-brand-gold/10 flex flex-wrap items-center justify-between gap-6 text-[10px] font-black uppercase tracking-[0.2em] text-foreground/40">
           <div className="flex items-center gap-3">
             <Users size={14} className="text-brand-gold/60" />
-            <span>{currentSurvey.totalVotes.toLocaleString()} {language === 'ar' ? 'مشارك' : 'Global Participants'}</span>
+            <span>{currentSurvey.totalVotes.toLocaleString()} {t('globalParticipants')}</span>
           </div>
           <div className="flex items-center gap-3">
             <BarChart3 size={14} className="text-brand-gold/60" />
-            <span className="animate-pulse">{language === 'ar' ? 'تحليلات في الوقت الفعلي' : 'Real-time Intelligence'}</span>
+            <span className="animate-pulse">{t('realTimeIntelligence')}</span>
           </div>
         </div>
       </div>

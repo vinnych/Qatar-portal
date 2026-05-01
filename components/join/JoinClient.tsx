@@ -37,7 +37,7 @@ export default function JoinClient() {
       {/* Header */}
       <div className="mb-16 animate-reveal text-center">
         <h1 className="text-xs tracking-[0.6em] uppercase font-bold text-brand-gold mb-4">
-          {isRTL ? 'تواصل' : 'Contact'}
+          {t('contact')}
         </h1>
         <p className="text-4xl font-black serif text-foreground tracking-tight">{t('boutiqueEnquiry')}</p>
         <div className="w-12 h-1 bg-brand-gold/30 mx-auto mt-6 rounded-full" />
@@ -71,7 +71,7 @@ export default function JoinClient() {
                   name="full-name"
                   ref={nameRef}
                   type="text"
-                  placeholder={isRTL ? 'اسمك بالكامل...' : 'Your Full Name...'}
+                  placeholder={t('yourFullName')}
                   className={`w-full bg-white/5 dark:bg-black/20 border border-brand-gold/10 rounded-3xl px-8 py-5 text-sm focus:outline-none focus:border-brand-gold focus:ring-4 focus:ring-brand-gold/5 transition-all shadow-inner group-hover:border-brand-gold/30 ${isRTL ? 'text-right' : ''}`}
                 />
               </div>
@@ -86,7 +86,7 @@ export default function JoinClient() {
                   name="email-address"
                   ref={emailRef}
                   type="email"
-                  placeholder={isRTL ? 'عنوان بريدك الإلكتروني...' : 'Professional Email Address...'}
+                  placeholder={t('professionalEmail')}
                   className={`w-full bg-white/5 dark:bg-black/20 border border-brand-gold/10 rounded-3xl px-8 py-5 text-sm focus:outline-none focus:border-brand-gold focus:ring-4 focus:ring-brand-gold/5 transition-all shadow-inner group-hover:border-brand-gold/30 ${isRTL ? 'text-right' : ''}`}
                   required
                 />
@@ -97,13 +97,13 @@ export default function JoinClient() {
               className="w-full gold-gradient text-brand-obsidian font-black text-[10px] uppercase tracking-[0.4em] py-6 rounded-3xl hover:scale-[1.02] hover:shadow-glow active:scale-[0.98] transition-all disabled:opacity-50 shadow-2xl mt-6 relative overflow-hidden group"
             >
               <span className="relative z-10">
-                {inviteStatus === "sending" ? (isRTL ? 'جاري الإرسال...' : 'Transmitting...') : t('submit')}
+                {inviteStatus === "sending" ? t('transmitting') : t('submit')}
               </span>
               <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 skew-x-12" />
             </button>
             {inviteStatus === "error" && (
               <p className="text-center text-[9px] text-red-500/80 font-black tracking-[0.3em] uppercase mt-6 animate-pulse">
-                {isRTL ? 'حدث خطأ في النظام. يرجى المحاولة لاحقاً.' : 'System Error. Please try again later.'}
+                {t('systemError')}
               </p>
             )}
           </form>
@@ -114,7 +114,7 @@ export default function JoinClient() {
       <div className="mt-16 animate-reveal delay-1000">
         <Link href="/" className="group flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.5em] text-brand-gold hover:text-brand-accent transition-all">
           <span className={`transition-transform duration-300 ${isRTL ? 'group-hover:translate-x-2' : 'group-hover:-translate-x-2'}`}>
-            {isRTL ? 'العودة للرئيسية ←' : '← Return Home'}
+            {isRTL ? `← ${t('returnHome')}` : `← ${t('returnHome')}`}
           </span>
         </Link>
       </div>

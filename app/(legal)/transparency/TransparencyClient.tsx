@@ -39,13 +39,13 @@ export default function TransparencyPage() {
       icon: Info
     },
     {
-      title: "Regulatory Compliance",
-      desc: "We adhere to all local digital regulations and ensure that our platform serves as a positive contributor to the regional digital ecosystem.",
+      title: t('regCompliance'),
+      desc: t('regComplianceDesc'),
       icon: Scale
     },
     {
-      title: "Global Standards",
-      desc: "Our data practices follow international best practices for information accuracy and source attribution.",
+      title: t('globalStandards'),
+      desc: t('globalStandardsDesc'),
       icon: Globe
     }
   ];
@@ -115,10 +115,10 @@ export default function TransparencyPage() {
       <div className="glass p-10 rounded-[2.5rem] border-brand-gold/20 text-center relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-gold to-transparent opacity-50" />
         <h3 className="text-2xl font-black mb-4 uppercase tracking-widest text-accent">
-          Regulatory Inquiry
+          {t('regInquiry')}
         </h3>
         <p className="text-foreground/70 mb-8 max-w-2xl mx-auto italic">
-          We welcome dialogue with regional regulatory bodies. For official inquiries, please use our primary communication channel.
+          {t('regInquiryDesc')}
         </p>
         <a 
           href="/join" 

@@ -1,8 +1,9 @@
 import { pageMeta } from "@/lib/seo";
-import { NewsArticleSchema, BreadcrumbSchema, WebPageSchema } from "@/components/seo/StructuredData";
+import { InsightArticleSchema, BreadcrumbSchema, WebPageSchema } from "@/components/seo/StructuredData";
 import InsightArticleClient from "@/components/insights/InsightArticleClient";
 import { notFound } from "next/navigation";
-import { getArticleBySlug, getUnifiedNews, NewsItem } from "@/lib/insights";
+import { getArticleBySlug, getUnifiedInsights, InsightItem } from "@/lib/insights";
+import { getT } from "@/lib/i18n-server";
 
 // Use direct server-side data access for performance and GSC reliability
 export const dynamic = 'force-dynamic';
@@ -61,12 +62,13 @@ export default async function InsightArticlePage({
   }
 
   // Improved Internal Linking: Fetch related insights to keep crawlers moving
-  const moreInsights = await getUnifiedNews({ lang, limit: 6 });
-  const filteredMoreInsights = moreInsights.filter((n: NewsItem) => n.slug !== resolvedParams.slug).slice(0, 4);
+  const moreInsights = await getUnifiedInsights({ lang, limit: 6 });
+  const filteredMoreInsights = moreInsights.filter((n: InsightItem) => n.slug !== resolvedParams.slug).slice(0, 4);
 
+  const t = await getT();
   const breadcrumbs = [
-    { name: "Home", item: "/" },
-    { name: "Insights", item: "/insights" },
+    { name: t('home'), item: "/" },
+    { name: t('insights'), item: "/insights" },
     { name: article.title, item: `/insights/${resolvedParams.slug}` }
   ];
 
@@ -75,7 +77,7 @@ export default async function InsightArticlePage({
   return (
     <main className="min-h-screen pt-20">
       {/* SEO Schemas */}
-      <NewsArticleSchema 
+      <InsightArticleSchema 
         title={article.title}
         description={article.description}
         image={article.image}
@@ -92,7 +94,7 @@ export default async function InsightArticlePage({
         datePublished={article.pubDate}
       />
 
-      <InsightArticleClient initialArticle={article} moreNews={filteredMoreInsights} />
+      <InsightArticleClient initialArticle={article} moreInsights={filteredMoreInsights} />
     </main>
   );
 }

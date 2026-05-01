@@ -1,5 +1,5 @@
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/seo";
-import { headers } from "next/headers";
+import Script from "next/script";
 
 interface StructuredDataProps {
   type: string;
@@ -7,9 +7,7 @@ interface StructuredDataProps {
   id?: string;
 }
 
-export default async function StructuredData({ type, data, id }: StructuredDataProps) {
-  const nonce = (await headers()).get('x-nonce') || undefined;
-  
+export default function StructuredData({ type, data, id }: StructuredDataProps) {
   const schema: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": type,
@@ -17,10 +15,14 @@ export default async function StructuredData({ type, data, id }: StructuredDataP
     ...data,
   };
 
+  const schemaId = id
+    ? `schema-${id.replace(/[^a-zA-Z0-9]/g, '-')}`
+    : `schema-${type}`;
+
   return (
-    <script
+    <Script
+      id={schemaId}
       type="application/ld+json"
-      nonce={nonce}
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />
   );
@@ -146,8 +148,8 @@ export function WebPageSchema({
   return <StructuredData type="WebPage" data={data} />;
 }
 
-// ─── NewsArticle ─────────────────────────────────────────────────────────────
-export function NewsArticleSchema({
+// ─── InsightArticle ───────────────────────────────────────────────────────────
+export function InsightArticleSchema({
   title,
   description,
   image,
@@ -195,7 +197,7 @@ export function NewsArticleSchema({
       "@id": `${SITE_URL}${url}`,
     },
   };
-  return <StructuredData type="NewsArticle" data={data} />;
+  return <StructuredData type="Article" data={data} />;
 }
 
 // ─── BreadcrumbList ───────────────────────────────────────────────────────────

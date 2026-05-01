@@ -1,18 +1,18 @@
-import { pageMeta } from "@/lib/seo";
+﻿import { pageMeta, SITE_DESCRIPTION, SITE_DESCRIPTION_AR } from "@/lib/seo";
 import {
   DatasetSchema,
   WebPageSchema,
   FAQSchema,
 } from "@/components/seo/StructuredData";
 import HomeClient from "@/components/home/HomeClient";
+import { translations } from "@/lib/i18n-data";
+import { getServerLanguage } from "@/lib/i18n-server";
 
 export const metadata = pageMeta({
-  title: "Arabia Khaleej | The GCC Standard — Regional Intelligence Portal",
-  titleAr: "عربية خليج | المعيار الخليجي — بوابة الاستخبارات الإقليمية",
-  description:
-    "The definitive GCC reference: accurate Islamic prayer times for Qatar, UAE, Saudi Arabia, Kuwait, Oman & Bahrain. Live gold rates, GCC stock indices, and sovereign country guides.",
-  descriptionAr:
-    "المرجع الخليجي النهائي: مواقيت الصلاة الإسلامية لقطر والإمارات والسعودية والكويت وعمان والبحرين. أسعار الذهب المباشرة ومؤشرات الأسهم الخليجية وأدلة الدول.",
+  title: "Arabia Khaleej | The GCC Standard â€” Regional Intelligence Portal",
+  titleAr: "Ø¹Ø±Ø¨ÙŠØ© Ø®Ù„ÙŠØ¬ | Ø§Ù„Ù…Ø¹ÙŠØ§Ø± Ø§Ù„Ø®Ù„ÙŠØ¬ÙŠ â€” Ø¨ÙˆØ§Ø¨Ø© Ø§Ù„Ø§Ø³ØªØ®Ø¨Ø§Ø±Ø§Øª Ø§Ù„Ø¥Ù‚Ù„ÙŠÙ…ÙŠØ©",
+  description: SITE_DESCRIPTION,
+  descriptionAr: SITE_DESCRIPTION_AR,
   path: "/",
   keywords: [
     "Arabia Khaleej", "GCC guide", "Gulf Cooperation Council",
@@ -20,55 +20,55 @@ export const metadata = pageMeta({
     "Qatar guide", "UAE guide", "Saudi Arabia guide",
     "Kuwait guide", "Oman guide", "Bahrain guide",
     "expat GCC", "GCC regional intelligence",
-    "عربية خليج", "دليل الخليج", "مواقيت الصلاة", "أسعار الذهب",
-    "مجلس التعاون الخليجي",
+    "Ø¹Ø±Ø¨ÙŠØ© Ø®Ù„ÙŠØ¬", "Ø¯Ù„ÙŠÙ„ Ø§Ù„Ø®Ù„ÙŠØ¬", "Ù…ÙˆØ§Ù‚ÙŠØª Ø§Ù„ØµÙ„Ø§Ø©", "Ø£Ø³Ø¹Ø§Ø± Ø§Ù„Ø°Ù‡Ø¨",
+    "Ù…Ø¬Ù„Ø³ Ø§Ù„ØªØ¹Ø§ÙˆÙ† Ø§Ù„Ø®Ù„ÙŠØ¬ÙŠ",
   ],
 });
 
-export default function Home() {
+import { getT } from "@/lib/i18n-server";
+
+export default async function Home() {
+  const lang = await getServerLanguage();
+  const t = await getT();
+  
   const faqQuestions = [
     {
-      question: "What is Arabia Khaleej?",
-      answer:
-        "Arabia Khaleej is an independent regional intelligence platform for the Gulf Cooperation Council (GCC). It provides accurate Islamic prayer times, live GCC market data (stocks, gold, currencies), and in-depth country guides for Qatar, UAE, Saudi Arabia, Kuwait, Oman, and Bahrain.",
+      question: translations.faqWhatIsTitle[lang],
+      answer: translations.faqWhatIsBody[lang],
     },
     {
-      question: "Which countries does Arabia Khaleej cover?",
-      answer:
-        "Arabia Khaleej covers all six GCC member states: Qatar, United Arab Emirates, Saudi Arabia, Kuwait, Sultanate of Oman, and Kingdom of Bahrain.",
+      question: translations.faqCountriesTitle[lang],
+      answer: translations.faqCountriesBody[lang],
     },
     {
-      question: "Does Arabia Khaleej have prayer times?",
-      answer:
-        "Yes. Arabia Khaleej provides daily Fajr, Sunrise, Dhuhr, Asr, Maghrib, and Isha prayer times for Doha, Dubai, Riyadh, Kuwait City, Muscat, and Manama — calculated using the Umm Al-Qura University method.",
+      question: translations.faqPrayerTitle[lang],
+      answer: translations.faqPrayerBody[lang],
     },
     {
-      question: "Does Arabia Khaleej support Arabic?",
-      answer:
-        "Yes. Arabia Khaleej is fully bilingual in English and Arabic, with RTL (right-to-left) layout support, Arabic typography (Amiri font), and bilingual metadata for all GCC Arabic locales.",
+      question: translations.faqBilingualTitle[lang],
+      answer: translations.faqBilingualBody[lang],
     },
     {
-      question: "What GCC market data does Arabia Khaleej provide?",
-      answer:
-        "Arabia Khaleej provides live data for major GCC stock indices (Tadawul/TASI, ADX, DFM, QE Index, Boursa Kuwait), gold spot price (XAU/USD), Brent crude oil, and all six GCC currency exchange rates versus the US Dollar.",
+      question: translations.faqMarketTitle[lang],
+      answer: translations.faqMarketBody[lang],
     },
   ];
 
   return (
     <>
       <WebPageSchema
-        name="Arabia Khaleej — The GCC Standard"
-        description="The definitive independent reference for the Gulf Cooperation Council. Prayer times, market data, and country guides for all 6 GCC states."
+        name={t("homeSchemaName")}
+        description={t("homeSchemaDesc")}
         url="/"
       />
       <DatasetSchema
-        name="Arabia Khaleej GCC Regional Intelligence"
-        description="Comprehensive structured data platform covering Islamic prayer schedules, GCC equity market indices, gold and commodity prices, GCC currency exchange rates, and sovereign country profiles for Qatar, UAE, Saudi Arabia, Kuwait, Oman, and Bahrain."
+        name={t("homeDatasetName")}
+        description={t("homeDatasetDesc")}
         url="/"
         keywords={[
           "GCC", "prayer times", "gold rates", "stock markets", "currencies",
           "Qatar", "UAE", "Saudi Arabia", "Kuwait", "Oman", "Bahrain",
-          "مجلس التعاون", "مواقيت الصلاة", "أسعار الذهب",
+          "Ù…Ø¬Ù„Ø³ Ø§Ù„ØªØ¹Ø§ÙˆÙ†", "Ù…ÙˆØ§Ù‚ÙŠØª Ø§Ù„ØµÙ„Ø§Ø©", "Ø£Ø³Ø¹Ø§Ø± Ø§Ù„Ø°Ù‡Ø¨",
         ]}
       />
       <FAQSchema questions={faqQuestions} />
@@ -76,3 +76,4 @@ export default function Home() {
     </>
   );
 }
+

@@ -6,6 +6,7 @@ import {
   DatasetSchema,
   WebPageSchema,
 } from "@/components/seo/StructuredData";
+import { getT } from "@/lib/i18n-server";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -138,11 +139,22 @@ export async function generateMetadata({ params }: Props) {
 export default async function Page({ params }: Props) {
   const { slug } = await params;
   const info = COUNTRY_INFO[slug] ?? COUNTRY_INFO["qatar"];
+  const t = await getT();
 
   const breadcrumbItems = [
-    { name: "Home", item: "/" },
-    { name: "Countries", item: "/#countries" },
-    { name: info.name, item: `/countries/${slug}` },
+    { name: t('home'), item: "/" },
+    { name: t('countries'), item: "/#countries" },
+    { 
+      name: t(
+        slug === 'saudi-arabia' ? 'saudiArabia' : 
+        slug === 'united-arab-emirates' ? 'uae' : 
+        slug === 'qatar' ? 'qatar' : 
+        slug === 'kuwait' ? 'kuwait' : 
+        slug === 'oman' ? 'oman' : 
+        slug === 'bahrain' ? 'bahrain' : slug
+      ), 
+      item: `/countries/${slug}` 
+    },
   ];
 
   return (

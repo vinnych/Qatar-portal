@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
-import { redis } from '@/lib/redis';
-import { getUnifiedNews, getArticleBySlug } from '@/lib/insights';
+import { getUnifiedInsights, getArticleBySlug } from '@/lib/insights';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -17,14 +16,14 @@ export async function GET(request: Request) {
     if (slug) {
       const article = await getArticleBySlug(slug, lang);
       return article 
-        ? NextResponse.json({ status: 'success', news: [article] }) 
+        ? NextResponse.json({ status: 'success', insights: [article] }) 
         : NextResponse.json({ status: 'error', message: 'Not found' }, { status: 404 });
     }
 
-    const finalNews = await getUnifiedNews({ lang, category, limit });
-    return NextResponse.json({ status: 'success', count: finalNews.length, news: finalNews });
+    const finalInsights = await getUnifiedInsights({ lang, category, limit });
+    return NextResponse.json({ status: 'success', count: finalInsights.length, insights: finalInsights });
   } catch (error) {
     console.error('API Error:', error);
-    return NextResponse.json({ status: 'error', news: [] }, { status: 500 });
+    return NextResponse.json({ status: 'error', insights: [] }, { status: 500 });
   }
 }

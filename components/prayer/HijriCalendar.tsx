@@ -19,7 +19,7 @@ interface HijriDate {
 }
 
 // Robust local Hijri conversion algorithm (Kuwaiti/Civil)
-function getLocalHijriDate(date: Date): string {
+function getLocalHijriDate(date: Date, t: (k: string) => string): string {
   const m = date.getMonth() + 1;
   const y = date.getFullYear();
   const d = date.getDate();
@@ -34,8 +34,8 @@ function getLocalHijriDate(date: Date): string {
   const hd = l - Math.floor((709 * hm) / 24);
   const hy = 30 * n + j - 30;
 
-  const months = ["Muharram", "Safar", "Rabi' al-Awwal", "Rabi' al-Thani", "Jumada al-Ula", "Jumada al-Akhira", "Rajab", "Sha'ban", "Ramadan", "Shawwal", "Dhu al-Qi'dah", "Dhu al-Hijjah"];
-  return `${hd} ${months[hm - 1]} ${hy}`;
+  const months = ["muharram", "safar", "rabiAlAwwal", "rabiAlThani", "jumadaAlUla", "jumadaAlAkhira", "rajab", "shaban", "ramadan", "shawwal", "dhuAlQidah", "dhuAlHijjah"];
+  return `${hd} ${t(months[hm - 1])} ${hy}`;
 }
 
 export default function HijriCalendar({ 
@@ -51,14 +51,14 @@ export default function HijriCalendar({
 }) {
   const [calendar, setCalendar] = useState<HijriDate[]>([]);
   const [loading, setLoading] = useState(false);
-  const { language } = useLanguage();
+  const { t, language, isRTL } = useLanguage();
 
   useEffect(() => {
     if (!isOpen) return;
 
     const timeFormatter = (d: Date) => d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
-    const gregFormatter = new Intl.DateTimeFormat("en-US", { day: "numeric", month: "short" });
-    const dayFormatter = new Intl.DateTimeFormat("en-US", { weekday: "long" });
+    const gregFormatter = new Intl.DateTimeFormat(language === 'ar' ? 'ar-EG' : 'en-US', { day: "numeric", month: "short" });
+    const dayFormatter = new Intl.DateTimeFormat(language === 'ar' ? 'ar-EG' : 'en-US', { weekday: "long" });
     const abortController = new AbortController();
 
     async function fetchHijriDates() {
@@ -93,9 +93,17 @@ export default function HijriCalendar({
           let hijri = "";
           if (data && data.code === 200) {
             const dayData = data.data.find((d: any) => parseInt(d.gregorian.day) === date.getDate());
-            hijri = dayData ? `${dayData.hijri.day} ${dayData.hijri.month.en} ${dayData.hijri.year}` : getLocalHijriDate(date);
+            if (dayData) {
+              const monthKey = dayData.hijri.month.en.toLowerCase().replace(/[^a-z]/g, '');
+              // Try to find a matching key
+              const months = ["muharram", "safar", "rabiAlAwwal", "rabiAlThani", "jumadaAlUla", "jumadaAlAkhira", "rajab", "shaban", "ramadan", "shawwal", "dhuAlQidah", "dhuAlHijjah"];
+              const matchedKey = months.find(m => m.toLowerCase().includes(monthKey.substring(0, 4)));
+              hijri = `${dayData.hijri.day} ${matchedKey ? t(matchedKey) : dayData.hijri.month.en} ${dayData.hijri.year}`;
+            } else {
+              hijri = getLocalHijriDate(date, t);
+            }
           } else {
-            hijri = getLocalHijriDate(date);
+            hijri = getLocalHijriDate(date, t);
           }
 
           finalDates.push({
@@ -116,7 +124,7 @@ export default function HijriCalendar({
           finalDates.push({
             day: dayFormatter.format(date),
             gregorian: gregFormatter.format(date),
-            hijri: getLocalHijriDate(date),
+            hijri: getLocalHijriDate(date, t),
             timings: {
               Fajr: timeFormatter(prayerTimes.fajr),
               Dhuhr: timeFormatter(prayerTimes.dhuhr),
@@ -136,12 +144,12 @@ export default function HijriCalendar({
 
     fetchHijriDates();
     return () => abortController.abort();
-  }, [isOpen, lat, lng]);
+  }, [isOpen, lat, lng, t, language]);
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
+    <div className={`fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300 ${isRTL ? 'font-serif-ar' : ''}`}>
       <div 
         role="dialog"
         aria-modal="true"
@@ -150,8 +158,8 @@ export default function HijriCalendar({
       >
         <button 
           onClick={onClose}
-          className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-accent transition-all hover:rotate-90 z-10"
-          aria-label={language === 'ar' ? "إغلاق" : "Close"}
+          className={`absolute top-6 ${isRTL ? 'left-6' : 'right-6'} p-2 rounded-full bg-white/10 hover:bg-white/20 text-accent transition-all hover:rotate-90 z-10`}
+          aria-label={t('close')}
         >
           <X size={20} />
         </button>
@@ -161,8 +169,8 @@ export default function HijriCalendar({
             <CalendarIcon size={24} />
           </div>
           <div>
-            <h3 id="hijri-calendar-title" className="text-[11px] font-black uppercase tracking-[0.4em] text-accent mb-1">{language === 'ar' ? 'التقويم' : 'Calendar'}</h3>
-            <p className="text-xl font-black serif text-foreground">{language === 'ar' ? 'جدول الصلاة والتقويم الهجري - 7 أيام' : '7-Day Hijri & Prayer Schedule'}</p>
+            <h3 id="hijri-calendar-title" className="text-[11px] font-black uppercase tracking-[0.4em] text-accent mb-1">{t('calendar')}</h3>
+            <p className="text-xl font-black serif text-foreground">{t('hijriSchedule')}</p>
           </div>
         </div>
 
@@ -179,7 +187,7 @@ export default function HijriCalendar({
               <div className="flex items-center justify-between mb-4">
                 <div className="flex flex-col">
                   <span className={`text-[10px] font-black uppercase tracking-widest ${idx === 0 ? "text-accent" : "text-foreground/40"}`}>
-                    {date.day} {idx === 0 && "(Today)"}
+                    {date.day} {idx === 0 && `(${t('today')})`}
                   </span>
                   <span className="text-xs font-bold text-foreground/60">{date.gregorian}</span>
                 </div>
@@ -191,7 +199,7 @@ export default function HijriCalendar({
               <div className="grid grid-cols-5 gap-2 pt-3 border-t border-brand-gold/10">
                 {date.timings && Object.entries(date.timings).map(([name, time]) => (
                   <div key={name} className="flex flex-col items-center">
-                    <span className="text-[8px] uppercase font-bold text-accent/60 tracking-tighter mb-1">{name}</span>
+                    <span className="text-[8px] uppercase font-bold text-accent/60 tracking-tighter mb-1">{t(name.toLowerCase())}</span>
                     <span className="text-[11px] font-black tabular-nums text-foreground/80">{time}</span>
                   </div>
                 ))}
@@ -208,9 +216,9 @@ export default function HijriCalendar({
         <div className="mt-8 pt-6 border-t border-brand-gold/10 flex items-center justify-between text-[10px] text-foreground/30 font-bold uppercase tracking-[0.2em]">
           <div className="flex items-center gap-2">
             <Clock size={12} />
-            <span>Umm Al-Qura Unified</span>
+            <span>{t('ummAlQuraUnified')}</span>
           </div>
-          <span>ARABIA KHALEEJ PORTAL</span>
+          <span>{t('portalBranding')}</span>
         </div>
       </div>
     </div>
