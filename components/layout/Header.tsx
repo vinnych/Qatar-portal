@@ -39,7 +39,6 @@ export default function Header() {
           {[
             { name: t('prayerTimes'), href: "/prayer" },
             { name: t('marketInsights'), href: "/market-insight" },
-            { name: t('marketplace'), href: "/marketplace" },
             { name: t('pressTerminal'), href: "/insights" },
           ].map((item) => (
             <Link

@@ -3,7 +3,6 @@ import { generateGCCInsight, generateTrendingTopics } from '@/lib/ai';
 import { redis, CACHE_TIMES } from '@/lib/redis';
 import { toSlug } from '@/lib/utils';
 import { InsightItem } from '@/lib/insights';
-import { getMarketplaceProducts } from '@/lib/marketplace/service';
 import { getRelevantImage } from '@/lib/images';
 
 function cleanAIContent(content: string): string {
@@ -56,7 +55,7 @@ async function generateBatch(lang: 'en' | 'ar', type: 'gcc' | 'international', t
       const title = firstLine.length > 10 ? firstLine : `${item.country}: ${item.topic}`;
       const slug = toSlug(title, `${type === 'gcc' ? 'v' : 'int'}-${Date.now()}`);
 
-      // Fetch a relevant image from Unsplash based on the topic
+      // Fetch a relevant image from Pexels (with Unsplash/fallback chain) based on the topic
       const imageSearchQuery = `${item.topic} ${item.country}`;
       const imageUrl = await getRelevantImage(imageSearchQuery, slug);
 
@@ -111,12 +110,6 @@ export async function GET(request: Request) {
   console.log(`Starting Daily Automation [${targetType || 'all'}:${targetLang || 'all'}]...`);
 
   try {
-    // 1. Dedicated Marketplace Refresh
-    if (searchParams.get('action') === 'marketplace') {
-      console.log("Refreshing Marketplace...");
-      await getMarketplaceProducts(true);
-      return NextResponse.json({ success: true, action: 'marketplace_refreshed' });
-    }
 
     // 2. Master Digest — sequential to stay within Vercel Hobby 30s edge limit
     if (searchParams.get('action') === 'master-digest') {

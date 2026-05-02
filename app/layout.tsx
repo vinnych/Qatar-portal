@@ -53,6 +53,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="dns-prefetch" href="https://va.vercel-scripts.com" />
         <OrganizationSchema nonce={nonce} />
         <WebSiteSchema nonce={nonce} />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7212871157824722"
+          crossOrigin="anonymous"
+          nonce={nonce}
+        />
       </head>
       <body className="font-sans min-h-screen flex flex-col antialiased">
         <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-6 focus:py-3 focus:bg-brand-gold focus:text-brand-obsidian focus:rounded-2xl focus:font-bold focus:shadow-2xl transition-all">
@@ -80,13 +86,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           gtag('js', new Date());
           gtag('config', 'G-WRXQ5H9Z7K');
         `}</Script>
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7212871157824722"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-          nonce={nonce}
-        />
       </body>
     </html>
   );

@@ -157,19 +157,6 @@ export const translations: Translations = {
     ar: "طريقة الحساب: جامعة أم القرى، مكة المكرمة" 
   },
 
-  // Marketplace
-
-  boutiqueMarket: { en: "Boutique Marketplace", ar: "سوق البوتيك" },
-  exclusiveOffers: { en: "Exclusive regional offers", ar: "عروض إقليمية حصرية" },
-  marketSearch: { en: "Search premium products...", ar: "ابحث عن منتجات متميزة..." },
-  viewOnStore: { en: "View on Store", ar: "عرض في المتجر" },
-  bestSellers: { en: "Best Sellers", ar: "الأكثر مبيعاً" },
-  trendingNow: { en: "Trending Now", ar: "رائج الآن" },
-  affiliateDisclosure: { 
-    en: "Arabia Khaleej is a premium boutique portal. We curate exceptional products from regional leaders like Noon.com. When you purchase through our links, we may earn a commission at no extra cost to you.", 
-    ar: "عربية خليج هي بوابة بوتيك متميزة. نحن ننسق منتجات استثنائية من قادة إقليميين مثل نون. عندما تشتري من خلال روابطنا، قد نربح عمولة دون أي تكلفة إضافية عليك." 
-  },
-  trendingOn: { en: "Trending on %s", ar: "رائج في %s" },
 
   // Common UI
   processing: { en: "Processing", ar: "جاري المعالجة" },
@@ -238,11 +225,6 @@ export const translations: Translations = {
     en: "We use Google Analytics to understand traffic patterns and improve content relevance. These tools collect anonymous data such as page views and session duration.", 
     ar: "نحن نستخدم Google Analytics لفهم أنماط الحركة وتحسين ملاءمة المحتوى. تجمع هذه الأدوات بيانات مجهولة الهوية مثل مشاهدات الصفحة ومدة الجلسة." 
   },
-  ppSection5Title: { en: "Affiliate Disclosure", ar: "إفصاح الروابط التابعة" },
-  ppSection5Body: { 
-    en: "Our marketplace features curated products from partners like Noon.com. We may earn a commission from qualifying purchases, which supports our independent editorial mission.", 
-    ar: "يتميز سوقنا بمنتجات مختارة من شركاء مثل نون. قد نربح عمولة من المشتريات المؤهلة، مما يدعم مهمتنا التحريرية المستقلة." 
-  },
   ppSection6Title: { en: "Your Rights", ar: "حقوقك" },
   ppSection6Body: { 
     en: "You have the right to access, correct, or request the deletion of any personal information you have shared with us through our contact forms or join requests.", 
@@ -292,11 +274,6 @@ export const translations: Translations = {
   discSection3Body: { 
     en: "Financial market data, including stock indices, gold prices, and exchange rates, are provided for reference only. Arabia Khaleej is not a financial advisor. Always consult with a professional before making investment decisions.", 
     ar: "يتم توفير بيانات السوق المالية، بما في ذلك مؤشرات الأسهم وأسعار الذهب وأسعار الصرف، كمرجع فقط. عربية خليج ليست مستشاراً مالياً. استشر دائماً متخصصاً قبل اتخاذ قرارات الاستثمار." 
-  },
-  discSection4Title: { en: "Affiliate Disclosure", ar: "إفصاح الروابط التابعة" },
-  discSection4Body: { 
-    en: "Arabia Khaleej participates in affiliate marketing programs. This means we may earn a commission on sales of products featured on our marketplace, at no additional cost to our readers.", 
-    ar: "تشارك عربية خليج في برامج التسويق بالعمولة. هذا يعني أننا قد نربح عمولة على مبيعات المنتجات المعروضة في سوقنا، دون أي تكلفة إضافية لقرائنا." 
   },
   discSection5Title: { en: "Trademarks", ar: "العلامات التجارية" },
   discSection5Body: { 
@@ -447,8 +424,6 @@ export const translations: Translations = {
   calendar: { en: "Calendar", ar: "التقويم" },
   hijriSchedule: { en: "7-Day Hijri & Prayer Schedule", ar: "جدول الصلاة والتقويم الهجري - 7 أيام" },
   all: { en: "All", ar: "الكل" },
-  noonExcellence: { en: "Curated excellence exclusively from Noon.com.", ar: "مختارات متميزة حصرياً من نون." },
-  noMatchingProducts: { en: "No matching products found", ar: "لا توجد منتجات مطابقة" },
   email: { en: "Email", ar: "البريد الإلكتروني" },
   hq: { en: "HQ", ar: "المقر الرئيسي" },
   status: { en: "Status", ar: "الحالة" },

@@ -84,7 +84,7 @@ The Art of Performance in the GCC is no longer a silent beauty; it is a loud, vi
       source: "Arabia Khaleej Premium",
       category: "gcc",
       language: "en",
-      image: "/images/insights/neom.png",
+      image: "/images/insights/sustainable-luxury.png",
       tags: ["economy", "vision2030", "technology", "sustainability"],
       content: `# The Line: Redefining Urban Living in the Heart of Tabuk
 
@@ -138,7 +138,7 @@ As the first sections of The Line begin to rise from the sands of Tabuk, the wor
       source: "Arabia Khaleej Premium",
       category: "gcc",
       language: "en",
-      image: "/images/insights/uae-mars.png",
+      image: "/images/insights/tech-leader.png",
       tags: ["technology", "space", "innovation"],
       content: `# Beyond the Horizon: The UAE's Journey to the Red Planet
 
@@ -193,7 +193,7 @@ For the UAE, the journey to Mars was never the destination—it was the beginnin
       source: "Arabia Khaleej Premium",
       category: "gcc",
       language: "en",
-      image: "/images/insights/qatar-sports.png",
+      image: "/images/insights/future-sports.png",
       tags: ["sports", "legacy", "tourism"],
       content: `# The Sports Capital: Qatar's Legacy Post-2022
 
@@ -301,7 +301,7 @@ Today, as you walk through the Aspire Zone or visit the shores of Lusail, you do
       source: "عربية خليج بريميوم",
       category: "gcc",
       language: "ar",
-      image: "/images/insights/neom.png",
+      image: "/images/insights/sustainable-luxury.png",
       tags: ["economy", "vision2030", "technology", "sustainability"],
       content: `# ذا لاين: إعادة تعريف الحياة الحضرية في قلب تبوك
 
@@ -355,7 +355,7 @@ Today, as you walk through the Aspire Zone or visit the shores of Lusail, you do
       source: "عربية خليج بريميوم",
       category: "gcc",
       language: "ar",
-      image: "/images/insights/uae-mars.png",
+      image: "/images/insights/tech-leader.png",
       tags: ["technology", "space", "innovation"],
       content: `# ما وراء الأفق: مهمة الإمارات لاستكشاف المريخ
 
@@ -410,7 +410,7 @@ Today, as you walk through the Aspire Zone or visit the shores of Lusail, you do
       source: "عربية خليج بريميوم",
       category: "gcc",
       language: "ar",
-      image: "/images/insights/qatar-sports.png",
+      image: "/images/insights/future-sports.png",
       tags: ["sports", "legacy", "tourism"],
       content: `# عاصمة الرياضة: إرث قطر ما بعد 2022
 
