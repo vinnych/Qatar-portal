@@ -53,11 +53,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="dns-prefetch" href="https://va.vercel-scripts.com" />
         <OrganizationSchema nonce={nonce} />
         <WebSiteSchema nonce={nonce} />
-        <script
+        <Script
+          id="adsense-init"
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7212871157824722"
           crossOrigin="anonymous"
           nonce={nonce}
+          strategy="afterInteractive"
         />
       </head>
       <body className="font-sans min-h-screen flex flex-col antialiased">

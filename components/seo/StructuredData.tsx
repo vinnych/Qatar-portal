@@ -1,3 +1,4 @@
+import Script from "next/script";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/seo";
 
 interface StructuredDataProps {
@@ -16,10 +17,10 @@ export default function StructuredData({ type, data, id, nonce }: StructuredData
   };
 
   return (
-    <script
+    <Script
+      id={`schema-${type}-${id || type.toLowerCase()}`}
       type="application/ld+json"
       nonce={nonce}
-      suppressHydrationWarning
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />
   );
